@@ -34,10 +34,11 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 import { useApp } from '@/pinia/modules/app'
 
+const API_URL = import.meta.env.VITE_BASE_API
 const service = axios.create({
-  baseURL: '/',
+  baseURL: API_URL,
   timeout: 10000,
-  withCredentials: true,
+  // withCredentials: true,
 })
 
 // 拦截请求

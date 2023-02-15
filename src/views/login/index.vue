@@ -13,10 +13,10 @@
   <div class="login">
     <el-form class="form" :model="model" :rules="rules" ref="loginForm">
       <h1 class="title">Vue3 Element Admin</h1>
-      <el-form-item prop="userName">
+      <el-form-item prop="username">
         <el-input
           class="text"
-          v-model="model.userName"
+          v-model="model.username"
           prefix-icon="User"
           clearable
           :placeholder="$t('login.username')"
@@ -117,8 +117,8 @@ export default defineComponent({
         state.loginForm.validate(async valid => {
           if (valid) {
             state.loading = true
-            const { code, data, message } = await Login(state.model)
-            if (+code === 200) {
+            const { success, token, message } = await Login(state.model)
+            if (success) {
               ctx.$message.success({
                 message: ctx.$t('login.loginsuccess'),
                 duration: 1000,
@@ -134,7 +134,7 @@ export default defineComponent({
               } else {
                 router.push('/')
               }
-              useApp().initToken(data)
+              useApp().initToken(token)
             } else {
               ctx.$message.error(message)
             }

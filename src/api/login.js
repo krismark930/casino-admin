@@ -14,7 +14,7 @@ import request from '@/utils/request'
 // 登录接口
 export const Login = data => {
   return request({
-    url: '/api/login',
+    url: '/api/admin/login',
     method: 'post',
     data,
   })
@@ -22,8 +22,18 @@ export const Login = data => {
 
 // 获取登录用户信息
 export const GetUserinfo = () => {
-  return request({
-    url: '/api/userinfo',
-    method: 'get',
-  })
+  // return request({
+  //   url: '/api/admin/user',
+  //   method: 'get',
+  // })
+  return {
+    code: 200,
+    message: '获取用户信息成功',
+    data: {
+      id: 1,
+      name: 'zhangsan',
+      'role|1': ['admin', 'visitor'], // 随机返回一个角色admin或visitor
+      avatar: "@image('48x48', '#fb0a2a')",
+    },
+  }
 }
