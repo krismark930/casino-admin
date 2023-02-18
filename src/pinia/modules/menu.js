@@ -10,7 +10,17 @@
  * @Donate: https://huzhushan.gitee.io/vue3-element-admin/donate/
  */
 import { defineStore } from 'pinia'
-import { fixedRoutes, asyncRoutes } from '@/router'
+import {
+  fixedRoutes,
+  asyncRoutes,
+  systemSettingRoutes,
+  sportsBettingRoutes,
+  lotteryRoutes,
+  accountRoutes,
+  paymentsRoutes,
+  analyticsRoutes,
+  systemlogsRoutes,
+} from '@/router'
 import { GetMenus } from '@/api/menu'
 import router from '@/router'
 import { ref } from 'vue'
@@ -94,7 +104,17 @@ export const useMenus = defineStore('menu', () => {
       filterRoutes.forEach(route => router.addRoute(route))
 
       // 生成菜单
-      const menus = getFilterMenus([...fixedRoutes, ...filterRoutes])
+      const menus = getFilterMenus([
+        ...fixedRoutes,
+        ...filterRoutes,
+        ...systemSettingRoutes,
+        ...sportsBettingRoutes,
+        ...lotteryRoutes,
+        ...accountRoutes,
+        ...paymentsRoutes,
+        ...analyticsRoutes,
+        ...systemlogsRoutes,
+      ])
       setMenus(menus)
     }
   }

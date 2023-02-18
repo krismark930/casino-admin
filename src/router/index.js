@@ -33,12 +33,32 @@ import login from './modules/login'
 import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
-
+import systemSetting from './modules/system-setting'
+import sportsBetting from './modules/sports-betting'
+import lottery from './modules/lottery'
+import account from './modules/account'
+import payment from './modules/payment'
+import analytics from './modules/analytics'
+import systemlog from './modules/systemlog'
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
 // 动态菜单
 export const asyncRoutes = [...test]
+// system setting
+export const systemSettingRoutes = [...systemSetting]
+// sports betting
+export const sportsBettingRoutes = [...sportsBetting]
+// lottery
+export const lotteryRoutes = [...lottery]
+// account
+export const accountRoutes = [...account]
+// payment
+export const paymentsRoutes = [...payment]
+// analytics
+export const analyticsRoutes = [...analytics]
+// systemlog
+export const systemlogsRoutes = [...systemlog]
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -51,6 +71,13 @@ const router = createRouter({
     ...login,
     ...lock,
     ...fixedRoutes,
+    ...systemSettingRoutes,
+    ...sportsBettingRoutes,
+    ...lotteryRoutes,
+    ...accountRoutes,
+    ...paymentsRoutes,
+    ...analyticsRoutes,
+    ...systemlogsRoutes,
     ...error,
   ],
   scrollBehavior(to, from, savedPosition) {
