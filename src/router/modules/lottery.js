@@ -9,7 +9,7 @@ export default [
     meta: {
       title: 'menu.lotterys',
     },
-    icon: 'setting',
+    icon: 'Orange',
     children: [
       {
         path: '/mark-sixs',

@@ -10,7 +10,7 @@ export default [
     meta: {
       title: 'menu.analytics',
     },
-    icon: 'setting',
+    icon: 'Platform',
     children: [
       {
         path: '/earnings',

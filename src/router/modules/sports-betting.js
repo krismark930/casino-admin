@@ -22,7 +22,7 @@ export default [
     meta: {
       title: 'menu.sportsBetting',
     },
-    icon: 'Setting',
+    icon: 'Trophy',
     children: [
       {
         path: '/league-managements',

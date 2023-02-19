@@ -13,7 +13,7 @@ export default [
     meta: {
       title: 'menu.payments',
     },
-    icon: 'setting',
+    icon: 'Money',
     children: [
       {
         path: '/payment-methods',

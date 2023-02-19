@@ -16,7 +16,7 @@ export default [
     meta: {
       title: 'menu.accounts',
     },
-    icon: 'setting',
+    icon: 'User',
     children: [
       {
         path: '/sub-accounts',

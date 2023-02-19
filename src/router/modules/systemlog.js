@@ -8,7 +8,7 @@ export default [
     meta: {
       title: 'menu.systemLogs',
     },
-    icon: 'setting',
+    icon: 'Document',
     children: [
       {
         path: '/system-logs',
