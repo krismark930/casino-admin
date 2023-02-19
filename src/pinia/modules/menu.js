@@ -11,7 +11,6 @@
  */
 import { defineStore } from 'pinia'
 import {
-  fixedRoutes,
   systemSettingRoutes,
   sportsBettingRoutes,
   lotteryRoutes,
@@ -86,7 +85,6 @@ export const useMenus = defineStore('menu', () => {
   const generateMenus = async () => {
     // 生成菜单
     const menus = getFilterMenus([
-      ...fixedRoutes,
       ...systemSettingRoutes,
       ...sportsBettingRoutes,
       ...lotteryRoutes,
