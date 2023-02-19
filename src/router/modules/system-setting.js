@@ -11,7 +11,7 @@ const DataRefreshs = () =>
 
 export default [
   {
-    path: '/',
+    path: '/system-setting',
     component: Layout,
     name: 'system-setting',
     meta: {
