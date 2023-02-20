@@ -1,8 +1,13 @@
 <template>
   <el-table :data="tableData" class="sysmaintain-table">
-    <el-table-column prop="sysmain" label="System Maintaince">
+    <el-table-column prop="sysmain" label="System Maintaince" width="200">
       <template #default="scope">
-        <el-input v-model="scope.row.sysmain" type="textarea" :rows="15" />
+        <el-switch v-model="scope.row.sysmain" />
+      </template>
+    </el-table-column>
+    <el-table-column prop="maintenance" label="Maintenance Notification">
+      <template #default="scope">
+        <el-input v-model="scope.row.maintenance" autocomplete="off" />
       </template>
     </el-table-column>
     <el-table-column label="" width="100">
@@ -16,10 +21,10 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-
 const tableData = [
   {
-    sysmain: ' ',
+    sysmain: true,
+    maintenance: ' ',
   },
 ]
 </script>

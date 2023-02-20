@@ -20,8 +20,14 @@
   <TurnServices />
   <h3>Homepage Notification</h3>
   <HomeNotification />
+  <h3>Simple Version</h3>
+  <SimpleVersion />
   <h3>System Maintaince</h3>
   <SystemMaintaince />
+  <h3>Monitor Members</h3>
+  <MonitorMember />
+  <h3>BlackList</h3>
+  <BlackList />
 </template>
 
 <script lang="ts" setup>
@@ -30,7 +36,10 @@ import type { TabsPaneContext } from 'element-plus'
 import UrlTable from './UrlTable.vue';
 import TurnServices from './TurnServices.vue'
 import HomeNotification from './HomeNotification.vue';
+import SimpleVersion from './SimpleVersion.vue';
 import SystemMaintaince from './SystemMaintaince.vue';
+import MonitorMember from './MonitorMembers.vue'
+import BlackList from './BlackList.vue';
 const activeName = ref('first')
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
