@@ -1,22 +1,24 @@
 <template>
-  <el-table :data="tableData" class="turnservice-table">
-    <el-table-column prop="service" label="Service"></el-table-column>
-    <el-table-column prop="status" label="Status" width="200">
-      <template #default="scope">
-        <el-switch v-model="scope.row.status" />
-      </template>
-    </el-table-column>
-    <el-table-column label="Operations" width="200">
-      <template #default="scope">
-        <el-button
-          size="small"
-          @click="handleSave(scope.row.service, scope.row.status)"
-        >
-          Save
-        </el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div class="turnservice-wrapper">
+    <el-table :data="tableData" class="turnservice-table">
+      <el-table-column prop="service" label="Service"></el-table-column>
+      <el-table-column prop="status" label="Status" width="200">
+        <template #default="scope">
+          <el-switch v-model="scope.row.status" />
+        </template>
+      </el-table-column>
+      <el-table-column label="Operations" width="200">
+        <template #default="scope">
+          <el-button
+            size="small"
+            @click="handleSave(scope.row.service, scope.row.status)"
+          >
+            Save
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script setup>
@@ -63,6 +65,10 @@ const tableData = [
 </script>
 
 <style lang="scss" scoped>
+.turnservice-wrapper {
+  padding-left: 50px;
+  padding-right: 80px;
+}
 .turnservice-table {
   width: 100%;
 }
