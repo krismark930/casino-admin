@@ -64,8 +64,6 @@
   </div>
 </template>
 <script>
-import { Delete } from '@element-plus/icons-vue'
-
 export default {
   data() {
     return {
@@ -105,7 +103,6 @@ export default {
       console.log(id)
     },
   },
-  components: { Delete },
 }
 </script>
 
