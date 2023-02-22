@@ -26,7 +26,7 @@
       :data="onlineData"
       style="width: 100%;"
       border
-      header-align="right"
+      header-align="center"
       stripe
     >
       <el-table-column type="index" label="#"></el-table-column>

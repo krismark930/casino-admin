@@ -7,6 +7,12 @@
 <script>
 import Content from './content.vue'
 import OnlineData from './onlineData.vue'
+import { addBackToTop } from 'vanilla-back-to-top'
+addBackToTop({
+  diameter: 40,
+  backgroundColor: 'white',
+  textColor: '#409eff',
+})
 export default {
   components: {
     Content,

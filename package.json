@@ -22,6 +22,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "pinia": "^2.0.14",
+    "vanilla-back-to-top": "^7.2.1",
     "vue": "3.2.33",
     "vue-router": "^4.0.5",
     "vuex": "^4.0.0"

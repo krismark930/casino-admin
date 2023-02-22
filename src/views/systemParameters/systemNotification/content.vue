@@ -24,9 +24,9 @@
       </el-form-item>
       <el-form-item label="发布时间">
         <el-date-picker
-          v-model="publishTime"
-          type="date"
-          placeholder="选择日期"
+          v-model="formData.publishTime"
+          type="datetime"
+          placeholder="Select date and time"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="选项" prop="title">
