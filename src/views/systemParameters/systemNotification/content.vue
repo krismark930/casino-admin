@@ -5,18 +5,21 @@
       <el-form-item label="内容" prop="title">
         <el-form-item>
           <el-input
+            clearable
             v-model="formData.language.zh"
             placeholder="简体"
           ></el-input>
         </el-form-item>
         <el-form-item style="margin-left: 10px;">
           <el-input
+            clearable
             v-model="formData.language.cn"
             placeholder="繁体"
           ></el-input>
         </el-form-item>
         <el-form-item style="margin-left: 10px;">
           <el-input
+            clearable
             v-model="formData.language.en"
             placeholder="英文"
           ></el-input>
@@ -38,7 +41,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary">确定</el-button>
-        <el-button type="default">取消</el-button>
+        <el-button type="danger">取消</el-button>
       </el-form-item>
     </el-form>
   </div>

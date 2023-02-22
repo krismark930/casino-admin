@@ -30,23 +30,33 @@
       stripe
     >
       <el-table-column type="index" label="#"></el-table-column>
-      <el-table-column prop="time" label="日期"></el-table-column>
+      <!-- <el-table-column prop="time" label="日期"></el-table-column> -->
+      <el-table-column label="日期" width="180">
+        <template #default="scope">
+          <div style="display: flex; align-items: center">
+            <el-icon><timer /></el-icon>
+            <span style="margin-left: 10px">{{ scope.row.time }}</span>
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column prop="zh" label="简体信息"></el-table-column>
       <el-table-column prop="cn" label="繁体信息"></el-table-column>
       <el-table-column prop="en" label="英文信息"></el-table-column>
       <el-table-column fixed="right" label="功能" width="120">
-        <el-button-group>
-          <el-button
-            type="primary"
-            icon="edit"
-            @click="editOnlineData(scope.$index)"
-          ></el-button>
-          <el-button
-            type="primary"
-            icon="delete"
-            @click="deleteOnlineData(scope.row.id, scope.$index)"
-          ></el-button>
-        </el-button-group>
+        <template #default="scope">
+          <el-button-group>
+            <el-button
+              type="primary"
+              icon="edit"
+              @click="editOnlineData(scope.$index, scope.row)"
+            ></el-button>
+            <el-button
+              type="primary"
+              icon="delete"
+              @click="deleteOnlineData(scope.$index, scope.row)"
+            ></el-button>
+          </el-button-group>
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -107,13 +117,13 @@ export default {
     }
   },
   methods: {
-    editOnlineData(id) {
-      console.log(id)
+    editOnlineData(index, row) {
+      console.log(index, row)
     },
-    deleteOnlineData(id) {
-      console.log(id)
+    deleteOnlineData(index, row) {
+      console.log(index, row)
     },
   },
 }
 </script>
-<style></style>
+<style lang="scss" scoped></style>
