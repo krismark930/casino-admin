@@ -36,7 +36,6 @@
 
 import { createApp } from 'vue'
 import App from './App.vue'
-
 const app = createApp(App)
 
 // 引入element-plus
@@ -47,11 +46,10 @@ import './assets/style/element-variables.scss'
 import i18n from '@/i18n'
 
 // 全局注册element-plus/icons-vue
-import * as ICONS from '@element-plus/icons-vue'
-Object.entries(ICONS).forEach(([key, component]) => {
-  // app.component(key === 'PieChart' ? 'PieChartIcon' : key, component)
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
-})
+}
 
 // 引入路由
 import router from './router'

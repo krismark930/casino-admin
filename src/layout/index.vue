@@ -41,7 +41,7 @@
       <div class="top">
         <topbar />
         <menus mode="horizontal" v-if="isMenusShow && isHorizontalMenu" />
-        <tagsbar />
+        <!-- <tagsbar /> -->
         <breadcrumbs
           v-if="isBreadcrumbsShow"
           @on-breadcrumbs-change="handleBreadcrumbsChange"
@@ -58,7 +58,7 @@ import { defineComponent, ref, computed } from 'vue'
 import Sidebar from './components/Sidebar/index.vue'
 import Topbar from './components/Topbar/index.vue'
 import Menus from './components/Sidebar/Menus.vue'
-import Tagsbar from './components/Tagsbar/index.vue'
+//import Tagsbar from './components/Tagsbar/index.vue'
 import Breadcrumbs from './components/Topbar/Breadcrumbs.vue'
 import Content from './components/Content/index.vue'
 import { useResizeHandler } from './hooks/useResizeHandler'
@@ -71,7 +71,7 @@ export default defineComponent({
     Sidebar,
     Topbar,
     Menus,
-    Tagsbar,
+    //Tagsbar,
     Breadcrumbs,
     Content,
   },
