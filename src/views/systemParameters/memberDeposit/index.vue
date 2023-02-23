@@ -224,7 +224,7 @@ export default {
 
 .statistic-card {
   height: 100%;
-  padding: 20px;
+  padding-left: 20px;
   border-radius: 4px;
   background-color: var(--el-bg-color-overlay);
 }
@@ -236,7 +236,6 @@ export default {
   flex-wrap: wrap;
   font-size: 12px;
   color: var(--el-text-color-regular);
-  margin-top: 16px;
 }
 
 .statistic-footer .footer-item {
