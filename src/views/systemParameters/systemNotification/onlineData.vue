@@ -29,8 +29,7 @@
       header-align="center"
       stripe
     >
-      <el-table-column type="index" label="#"></el-table-column>
-      <!-- <el-table-column prop="time" label="日期"></el-table-column> -->
+      <el-table-column type="index" label="#" />
       <el-table-column label="日期" width="180">
         <template #default="scope">
           <div style="display: flex; align-items: center">
@@ -39,9 +38,9 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="zh" label="简体信息"></el-table-column>
-      <el-table-column prop="cn" label="繁体信息"></el-table-column>
-      <el-table-column prop="en" label="英文信息"></el-table-column>
+      <el-table-column property="zh" label="简体信息" />
+      <el-table-column property="cn" label="繁体信息" />
+      <el-table-column property="en" label="英文信息" />
       <el-table-column fixed="right" label="功能" width="120">
         <template #default="scope">
           <el-button-group>
