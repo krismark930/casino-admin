@@ -10,7 +10,7 @@
       header-align="center"
       stripe
     >
-      <el-table-column property="serialNumber" label="编号" width="120" />
+      <el-table-column type="index" label="编号" width="120" />
       <el-table-column property="name" label="名字" width="180" />
       <el-table-column label="日期" width="180">
         <template #default="scope">
@@ -45,7 +45,6 @@ export default {
       systemInformation: [
         {
           id: 1,
-          serialNumber: 'aaaaa1234',
           name: '2021-04-28',
           time: '2021-04-28',
           content: '测试',
@@ -57,7 +56,6 @@ export default {
         },
         {
           id: 2,
-          serialNumber: 'aaaaa1234',
           name: '2021-04-28',
           time: '2021-04-28',
           content: '测试',
@@ -69,7 +67,6 @@ export default {
         },
         {
           id: 3,
-          serialNumber: 'aaaaa1234',
           name: '2021-04-28',
           time: '2021-04-28',
           content: '测试',
