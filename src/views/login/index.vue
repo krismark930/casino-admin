@@ -1,6 +1,6 @@
 <!--
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Date: 2021-04-20 11:06:21
  * @LastEditors: huzhushan@126.com
  * @LastEditTime: 2022-09-27 18:24:27
@@ -78,7 +78,7 @@ export default defineComponent({
       state.rules = getRules()
     })
     const getRules = () => ({
-      userName: [
+      username: [
         {
           required: true,
           message: ctx.$t('login.rules-username'),
@@ -101,7 +101,7 @@ export default defineComponent({
     })
     const state = reactive({
       model: {
-        userName: 'admin',
+        username: 'admin',
         password: '123456',
       },
       rules: getRules(),
