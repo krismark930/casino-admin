@@ -18,10 +18,19 @@ export default {
   // system setting
   systemSetting: 'System Setting',
   systemParameters: 'System Parameters',
-  notifications: 'Notifications',
+  systemNotifications: 'System Notifications',
   systemSmss: 'System SMS',
-  systemMessages: 'System Message',
-  dataRefreshs: 'Data Refresh',
+  systemInformation: 'System Information',
+  memberDeposit: 'Member Deposit',
+  memberWithdrawal: 'Member Withdrawal',
+  dailyAccount: 'Daily Account',
+  AGconveresionRecord: 'AG Conversion Record',
+  OGconveresionRecord: 'OG Conversion Record',
+  BBconveresionRecord: 'BB Conversion Record',
+  MGconveresionRecord: 'MG Conversion Record',
+  PTconveresionRecord: 'PT Conversion Record',
+  chessconveresionRecord: 'Chess Conversion Record',
+  memberInformation: 'Member Information',
 
   //sports betting
   sportsBetting: 'Sports Betting',

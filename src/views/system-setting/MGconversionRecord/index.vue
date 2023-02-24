@@ -2,7 +2,7 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
   >
-    <h3>MG转换记录</h3>
+    <h3>{{ $t('menu.MGconveresionRecord') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="关键字查找">
         <el-input

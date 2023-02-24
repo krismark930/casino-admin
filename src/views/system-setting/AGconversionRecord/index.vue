@@ -2,7 +2,7 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
   >
-    <h3>BB转换记录</h3>
+    <h3>{{ $t('menu.AGconveresionRecord') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="关键字查找">
         <el-input
@@ -16,7 +16,7 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="BBconversionRecordData"
+      :data="AGconversionRecordData"
       style="width: 100%;"
       border
       header-align="center"
@@ -43,7 +43,7 @@
           <el-button
             type="primary"
             icon="delete"
-            @click="deleteBBData(scope.$index, scope.row)"
+            @click="deleteAGData(scope.$index, scope.row)"
           ></el-button>
         </template>
       </el-table-column>
@@ -60,7 +60,7 @@ export default {
       formData: {
         keyword: '',
       },
-      BBconversionRecordData: [
+      AGconversionRecordData: [
         {
           id: 1,
           accountNumber: 'aa123',
@@ -98,7 +98,7 @@ export default {
     }
   },
   methods: {
-    deleteBBData(index, row) {
+    deleteAGData(index, row) {
       console.log(index, row)
     },
   },

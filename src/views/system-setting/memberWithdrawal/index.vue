@@ -2,35 +2,17 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
   >
-    <h3>每日账务</h3>
+    <h3>{{ $t('menu.memberWithdrawal') }}</h3>
     <el-form :inline="true" :model="formData">
-      <el-form-item label="">
-        <el-date-picker
-          v-model="formData.daterange"
-          type="daterange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
-      </el-form-item>
-      <el-form-item label="会员帐号">
+      <el-form-item label="关键字查找">
         <el-input
           clearable
-          v-model="formData.memberAccount"
+          v-model="formData.keyword"
           placeholder=""
         ></el-input>
       </el-form-item>
-      <el-form-item label="代理商">
-        <el-select v-model="formData.agent" placeholder="Select type">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="类型">
-        <el-select v-model="formData.type" placeholder="Select type">
+        <el-select v-model="formData.option" placeholder="Select type">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -106,7 +88,7 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="dailyAccountData"
+      :data="memberWithdrawalData"
       style="width: 100%;"
       border
       header-align="center"
@@ -125,17 +107,17 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="contactNumber" label="联系电话" />
+      <el-table-column property="remark" label="备注" />
       <el-table-column property="bankofDeposit" label="开户银行" />
       <el-table-column property="bankAccount" label="银行账号" />
-      <el-table-column property="name" label="用户名" />
+      <el-table-column property="name" label="姓名" />
       <el-table-column property="orderNumber" label="定单号" />
       <el-table-column fixed="right" label="操作" width="70">
         <template #default="scope">
           <el-button
             type="primary"
             icon="delete"
-            @click="deleteDailyAccountData(scope.$index, scope.row)"
+            @click="deleteWithdrawalData(scope.$index, scope.row)"
           ></el-button>
         </template>
       </el-table-column>
@@ -150,12 +132,10 @@ export default {
   data() {
     return {
       formData: {
-        daterange: '',
-        memberAccount: '',
-        agent: '',
-        type: '',
+        keyword: '',
+        option: '',
       },
-      dailyAccountData: [
+      memberWithdrawalData: [
         {
           id: 1,
           accountNumber: 'aa123',
@@ -163,7 +143,7 @@ export default {
           balanceBefore: '2598.36',
           balanceAfter: '2636.1',
           datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
+          remark: '测试会员',
           bankofDeposit: '微信',
           bankAccount: '彩票返水',
           name: '测试会员',
@@ -176,7 +156,7 @@ export default {
           balanceBefore: '2598.36',
           balanceAfter: '2636.1',
           datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
+          remark: '测试会员',
           bankofDeposit: '微信',
           bankAccount: '彩票返水',
           name: '测试会员',
@@ -189,7 +169,7 @@ export default {
           balanceBefore: '2598.36',
           balanceAfter: '2636.1',
           datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
+          remark: '测试会员',
           bankofDeposit: '微信',
           bankAccount: '彩票返水',
           name: '测试会员',
@@ -221,7 +201,7 @@ export default {
     }
   },
   methods: {
-    deleteDailyAccountData(index, row) {
+    deleteWithdrawalData(index, row) {
       console.log(index, row)
     },
   },
