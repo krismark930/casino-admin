@@ -1,6 +1,6 @@
 <template>
   <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center;">
-    <h3>系统短信</h3>
+    <h3>{{ $t('menu.systemSmss') }}</h3>
     <el-form :model="formData" label-width="100px">
       <el-form-item label="帐号">
         <el-input
