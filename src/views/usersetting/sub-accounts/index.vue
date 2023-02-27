@@ -27,16 +27,29 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :page-sizes="[20, 40, 80, 100]"
-      :small="small"
-      :disabled="disabled"
-      :background="background"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="200"
-    />
+
+    <div>
+      <el-form-item label="Sort By">
+        <el-select placeholder="Account">
+          <el-option label="Account" value="account" />
+          <el-option label="Add Date" value="adddate" />
+        </el-select>
+        <el-select placeholder="Ascending">
+          <el-option label="Ascending(From small to big)" value="account" />
+          <el-option label="Descending(From big to small)" value="descending" />
+        </el-select>
+      </el-form-item>
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[20, 40, 80, 100]"
+        :small="small"
+        :disabled="disabled"
+        :background="background"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="200"
+      ></el-pagination>
+    </div>
   </el-card>
 </template>
 <script setup>
