@@ -36,18 +36,20 @@ export default {
   memberInformation: '会员信息',
   // sports betting
   sportsBetting: '体育博弈',
-  leagueManagements: '联盟限制',
-  dataManagements: '数据操盘',
+  allianceRestrictions: '联盟限制',
+  dataRefresh: '数据刷新',
+  sportsEvent: '体育赛事',
+  dataManipulation: '数据操盘',
   checkScores: '审核比分',
   checkScores2: '审核比分2',
-  diceBettings: '滚球注单',
+  liveBetting: '滚球注单',
   championBettings: '冠军注单',
   searchBettings: '查询注单',
 
   //lottery
-  lotterys: '彩票',
+  lotterys: '彩票管理',
   markSixs: '六合彩管理',
-  timelyColor2: '时时彩2',
+  alwaysColor2: '时时彩2',
 
   //account
   accounts: '账户',
@@ -73,4 +75,9 @@ export default {
   reports: '报表',
   //System Log
   systemLogs: '系统日志',
+
+  //user setting
+  userSetting: '用户设置',
+  subAccount: '子账号',
+  agency: '代理商',
 }

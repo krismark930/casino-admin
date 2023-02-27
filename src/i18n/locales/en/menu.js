@@ -37,18 +37,20 @@ export default {
 
   //sports betting
   sportsBetting: 'Sports Betting',
-  leagueManagements: 'League Management',
-  dataManagements: 'Data Management',
+  allianceRestrictions: 'Alliance Restrictions',
+  dataRefresh: 'Data Refresh',
+  sportsEvent: 'Sports Event',
+  dataManipulation: 'Data Manipulation',
   checkScores: 'Check Scores',
   checkScores2: 'Check Scores2',
-  diceBettings: 'Dice Betting',
-  championBettings: 'Champion Betting',
-  searchBettings: 'Search Betting',
+  liveBetting: 'Live Betting',
+  championBettings: 'Champion Bet Slip',
+  searchBettings: 'Search Bet Slip',
 
   //lottery
-  lotterys: 'Lottery',
+  lotterys: 'Lottery Management',
   markSixs: 'Mark Six',
-  timelyColor2: 'Timely Color 2',
+  alwaysColor2: 'Always Color 2',
 
   //account
   accounts: 'Account',
@@ -74,4 +76,9 @@ export default {
   reports: 'Report',
   //System Log
   systemLogs: 'System Log',
+
+  //user setting
+  userSetting: 'User Setting',
+  subAccount: 'Sub Account',
+  agency: 'Agency',
 }

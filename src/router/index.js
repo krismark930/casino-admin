@@ -34,6 +34,7 @@ import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
 import systemSetting from './modules/system-setting'
+import userSetting from './modules/user-setting'
 import sportsBetting from './modules/sports-betting'
 import lottery from './modules/lottery'
 import account from './modules/account'
@@ -47,6 +48,8 @@ export const fixedRoutes = [...home]
 export const asyncRoutes = [...test]
 // system setting
 export const systemSettingRoutes = [...systemSetting]
+// user setting
+export const userSettingRoutes = [...userSetting]
 // sports betting
 export const sportsBettingRoutes = [...sportsBetting]
 // lottery
@@ -72,6 +75,7 @@ const router = createRouter({
     ...lock,
     ...fixedRoutes,
     ...systemSettingRoutes,
+    ...userSettingRoutes,
     ...sportsBettingRoutes,
     ...lotteryRoutes,
     ...accountRoutes,
