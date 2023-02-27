@@ -1,7 +1,11 @@
 <template>
   <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center;">
     <h3>{{ $t('menu.systemSmss') }}</h3>
-    <el-form :model="formData" label-width="100px">
+    <el-form
+      :model="formData"
+      label-width="100px"
+      style="width: 600px; display: inline-block;"
+    >
       <el-form-item label="帐号">
         <el-input
           v-model="formData.accountNumber"
@@ -20,7 +24,7 @@
           v-model="formData.message"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item style="display: inline-flex;">
         <el-button type="primary">确定</el-button>
         <el-button type="danger">取消</el-button>
       </el-form-item>
