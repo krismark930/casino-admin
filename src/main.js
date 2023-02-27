@@ -77,8 +77,16 @@ Object.values(Directives).forEach(fn => fn(app))
 import useErrorHandler from './error-log'
 useErrorHandler(app)
 
+import { addBackToTop } from 'vanilla-back-to-top'
+addBackToTop({
+  diameter: 40,
+  backgroundColor: 'white',
+  textColor: '#409eff',
+})
+
 app
   .use(i18n)
+  .use(addBackToTop)
   .use(ElementPlus)
   .use(pinia)
   .use(router)
