@@ -1,6 +1,12 @@
 <template>
   <el-card shadow="never">
-    <el-table :data="tableData" class="sub-account-wrapper">
+    <el-table
+      :data="tableData"
+      class="sub-account-wrapper"
+      border
+      header-align="center"
+      stripe
+    >
       <el-table-column
         prop="accountNumber"
         label="Account Number"
@@ -8,6 +14,8 @@
       />
       <el-table-column prop="password" label="Password" width="180" />
       <el-table-column prop="Name" label="Name" width="180" />
+      <el-table-column prop="Date" label="Date" width="180" />
+
       <el-table-column prop="Status" label="Status" width="180" />
       <el-table-column label="Function" align="right">
         <template #default="scope">
@@ -42,26 +50,41 @@
       <el-pagination
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
-        :page-sizes="[20, 40, 80, 100]"
+        :page-sizes="[10, 20, 30]"
         :small="small"
         :disabled="disabled"
         :background="background"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="200"
+        :total="30"
       ></el-pagination>
     </div>
   </el-card>
 </template>
 <script setup>
 import { ref } from 'vue'
-const pageSize = ref(20)
+const pageSize = ref(10)
 const currentPage = ref(1)
 const tableData = [
   {
-    accountNumber: '',
-    password: '',
-    Name: '',
-    Status: '',
+    accountNumber: 'admin666',
+    password: '113355aa',
+    Name: 'admin666',
+    Date: '2018-09-15 20:40:49',
+    Status: 'enable',
+  },
+  {
+    accountNumber: 'admin666',
+    password: '113355aa',
+    Name: 'admin666',
+    Date: '2018-09-15 20:40:49',
+    Status: 'enable',
+  },
+  {
+    accountNumber: 'admin666',
+    password: '113355aa',
+    Name: 'admin666',
+    Date: '2018-09-15 20:40:49',
+    Status: 'enable',
   },
 ]
 </script>
@@ -69,5 +92,6 @@ const tableData = [
 .sub-account-wrapper {
   width: 100%;
   max-height: 250px;
+  margin: 10px 0px;
 }
 </style>
