@@ -37,7 +37,6 @@ export default {
   subAccounts: 'Sub Account',
   agents: 'Agent',
   vips: 'VIP',
-  vip2s: 'VIP2',
 
   //sports betting
   sportsBetting: 'Sports Betting',

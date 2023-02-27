@@ -1,1 +1,60 @@
-<template>this page is sub account page</template>
+<template>
+  <el-card shadow="never">
+    <el-table :data="tableData" class="sub-account-wrapper">
+      <el-table-column
+        prop="accountNumber"
+        label="Account Number"
+        width="180"
+      />
+      <el-table-column prop="password" label="Password" width="180" />
+      <el-table-column prop="Name" label="Name" width="180" />
+      <el-table-column prop="Status" label="Status" width="180" />
+      <el-table-column label="Function" align="right">
+        <template #default="scope">
+          <el-button link type="primary" size="small">
+            Modify
+          </el-button>
+          <el-button link type="warning" size="small">
+            Deactivate
+          </el-button>
+          <br />
+          <el-button link type="success" size="small">
+            Permission
+          </el-button>
+          <el-button link type="danger" size="small">
+            Delete
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      v-model:current-page="currentPage"
+      v-model:page-size="pageSize"
+      :page-sizes="[20, 40, 80, 100]"
+      :small="small"
+      :disabled="disabled"
+      :background="background"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="200"
+    />
+  </el-card>
+</template>
+<script setup>
+import { ref } from 'vue'
+const pageSize = ref(20)
+const currentPage = ref(1)
+const tableData = [
+  {
+    accountNumber: '',
+    password: '',
+    Name: '',
+    Status: '',
+  },
+]
+</script>
+<style lang="scss" scoped>
+.sub-account-wrapper {
+  width: 100%;
+  max-height: 250px;
+}
+</style>

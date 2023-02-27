@@ -37,7 +37,6 @@ export default {
   subAccounts: '子账户',
   agents: '代理商',
   vips: '会员',
-  vip2s: '会员2',
 
   // sports betting
   sportsBetting: '体育博弈',
