@@ -32,6 +32,13 @@ export default {
   chessconveresionRecord: 'Chess Conversion Record',
   memberInformation: 'Member Information',
 
+  //user setting
+  userSettings: 'User Settings',
+  subAccounts: 'Sub Account',
+  agents: 'Agent',
+  vips: 'VIP',
+  vip2s: 'VIP2',
+
   //sports betting
   sportsBetting: 'Sports Betting',
   leagueManagements: 'League Management',
@@ -46,17 +53,6 @@ export default {
   lotterys: 'Lottery',
   markSixs: 'Mark Six',
   timelyColor2: 'Timely Color 2',
-
-  //account
-  accounts: 'Account',
-  subAccounts: 'Sub Account',
-  companys: 'Company',
-  shareHolders: 'Shareholder',
-  generalAgents: 'General Agent',
-  agents: 'Agent',
-  vips: 'VIP',
-  vip2s: 'VIP2',
-  onlines: 'Online',
 
   //payment
   payments: 'Payment',

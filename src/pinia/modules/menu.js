@@ -12,14 +12,13 @@
 import { defineStore } from 'pinia'
 import {
   systemSettingRoutes,
+  userSettingRoutes,
   sportsBettingRoutes,
   lotteryRoutes,
-  accountRoutes,
   paymentsRoutes,
   analyticsRoutes,
   systemlogsRoutes,
 } from '@/router'
-import router from '@/router'
 import { ref } from 'vue'
 
 export const useMenus = defineStore('menu', () => {
@@ -86,9 +85,9 @@ export const useMenus = defineStore('menu', () => {
     // 生成菜单
     const menus = getFilterMenus([
       ...systemSettingRoutes,
+      ...userSettingRoutes,
       ...sportsBettingRoutes,
       ...lotteryRoutes,
-      ...accountRoutes,
       ...paymentsRoutes,
       ...analyticsRoutes,
       ...systemlogsRoutes,
