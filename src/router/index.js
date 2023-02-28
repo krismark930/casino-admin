@@ -37,6 +37,7 @@ import systemSetting from './modules/system-setting'
 import userSetting from './modules/user-setting'
 import sportsBetting from './modules/sports-betting'
 import lottery from './modules/lottery'
+import humanManagement from './modules/humanManagement'
 import payment from './modules/payment'
 import analytics from './modules/analytics'
 import systemlog from './modules/systemlog'
@@ -53,6 +54,8 @@ export const userSettingRoutes = [...userSetting]
 export const sportsBettingRoutes = [...sportsBetting]
 // lottery
 export const lotteryRoutes = [...lottery]
+//humanmanagement
+export const humanManagementRoutes = [...humanManagement]
 // payment
 export const paymentsRoutes = [...payment]
 // analytics
@@ -75,6 +78,7 @@ const router = createRouter({
     ...userSettingRoutes,
     ...sportsBettingRoutes,
     ...lotteryRoutes,
+    ...humanManagementRoutes,
     ...paymentsRoutes,
     ...analyticsRoutes,
     ...systemlogsRoutes,

@@ -15,6 +15,7 @@ import {
   userSettingRoutes,
   sportsBettingRoutes,
   lotteryRoutes,
+  humanManagementRoutes,
   paymentsRoutes,
   analyticsRoutes,
   systemlogsRoutes,
@@ -88,8 +89,8 @@ export const useMenus = defineStore('menu', () => {
       ...userSettingRoutes,
       ...sportsBettingRoutes,
       ...lotteryRoutes,
+      ...humanManagementRoutes,
       ...paymentsRoutes,
-      ...analyticsRoutes,
       ...systemlogsRoutes,
     ])
     setMenus(menus)
