@@ -16,6 +16,15 @@ export default [
     icon: 'Money',
     children: [
       {
+        path: '/cash-systems',
+        name: 'cash-systems',
+        component: CashSystems,
+        meta: {
+          title: 'menu.cashSystems',
+          affix: true,
+        },
+      },
+      {
         path: '/payment-methods',
         name: 'payment-methods',
         component: PaymentMethods,
@@ -33,24 +42,15 @@ export default [
           affix: true,
         },
       },
-      {
-        path: '/alipay-transfers',
-        name: 'alipay-transfers',
-        component: AlipayTransfers,
-        meta: {
-          title: 'menu.alipayTransfers',
-          affix: true,
-        },
-      },
-      {
-        path: '/cash-systems',
-        name: 'cash-systems',
-        component: CashSystems,
-        meta: {
-          title: 'menu.cashSystems',
-          affix: true,
-        },
-      },
+      // {
+      //   path: '/alipay-transfers',
+      //   name: 'alipay-transfers',
+      //   component: AlipayTransfers,
+      //   meta: {
+      //     title: 'menu.alipayTransfers',
+      //     affix: true,
+      //   },
+      // },
     ],
   },
 ]

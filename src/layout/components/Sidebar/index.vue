@@ -18,11 +18,11 @@
  *                                //.-~~~-~_--~- |-------~~~~~~~~
  *                                       //.-~~~--\
  *                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * 
+ *
  *                               神兽保佑            永无BUG
- * 
- * @Descripttion: 
- * @version: 
+ *
+ * @Descripttion:
+ * @version:
  * @Date: 2021-04-20 11:06:21
  * @LastEditors: huzhushan@126.com
  * @LastEditTime: 2022-09-27 18:45:07
@@ -76,7 +76,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .left {
-  width: 210px;
+  width: 250px;
   background: $menuBg;
   transition: all 0.3s;
   overflow: hidden;
