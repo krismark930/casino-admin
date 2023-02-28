@@ -37,10 +37,12 @@ import systemSetting from './modules/system-setting'
 import userSetting from './modules/user-setting'
 import sportsBetting from './modules/sports-betting'
 import lottery from './modules/lottery'
-import humanManagement from './modules/humanManagement'
+import account from './modules/account'
 import payment from './modules/payment'
 import analytics from './modules/analytics'
 import systemlog from './modules/systemlog'
+import humanManagement from './modules/humanManagement'
+import statistics from './modules/statistics'
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
@@ -56,8 +58,12 @@ export const sportsBettingRoutes = [...sportsBetting]
 export const lotteryRoutes = [...lottery]
 //humanmanagement
 export const humanManagementRoutes = [...humanManagement]
+// account
+export const accountRoutes = [...account]
 // payment
 export const paymentsRoutes = [...payment]
+//Statistics
+export const statisticsRoutes = [...statistics]
 // analytics
 export const analyticsRoutes = [...analytics]
 // systemlog
@@ -79,7 +85,9 @@ const router = createRouter({
     ...sportsBettingRoutes,
     ...lotteryRoutes,
     ...humanManagementRoutes,
+    ...accountRoutes,
     ...paymentsRoutes,
+    ...statisticsRoutes,
     ...analyticsRoutes,
     ...systemlogsRoutes,
     ...error,
