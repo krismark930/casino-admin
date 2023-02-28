@@ -34,6 +34,7 @@ export default {
   PTconveresionRecord: 'PT转换记录',
   chessconveresionRecord: '开元棋牌转换记录',
   memberInformation: '会员信息',
+
   // sports betting
   sportsBetting: '体育博弈',
   allianceRestrictions: '联盟限制',
@@ -50,17 +51,6 @@ export default {
   lotterys: '彩票管理',
   markSixs: '六合彩管理',
   alwaysColor2: '时时彩2',
-
-  //account
-  accounts: '账户',
-  subAccounts: '子账户',
-  companys: '公司',
-  shareHolders: '股东',
-  generalAgents: '总代理',
-  agents: '代理商',
-  vips: '会员',
-  vip2s: '会员2',
-  onlines: '在线人数',
 
   //payment
   payments: '支付管理',

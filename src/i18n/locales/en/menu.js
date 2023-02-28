@@ -52,17 +52,6 @@ export default {
   markSixs: 'Mark Six',
   alwaysColor2: 'Always Color 2',
 
-  //account
-  accounts: 'Account',
-  subAccounts: 'Sub Account',
-  companys: 'Company',
-  shareHolders: 'Shareholder',
-  generalAgents: 'General Agent',
-  agents: 'Agent',
-  vips: 'VIP',
-  vip2s: 'VIP2',
-  onlines: 'Online',
-
   //payment
   payments: 'Payment',
   paymentMethods: 'Payment method',
