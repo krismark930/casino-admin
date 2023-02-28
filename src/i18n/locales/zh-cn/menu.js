@@ -63,7 +63,7 @@ export default {
   onlines: '在线人数',
 
   //payment
-  payments: '支付管理',
+  payments: '支付设置',
   paymentMethods: '支付方式',
   bankTransfers: '银行汇款',
   alipayTransfers: '余额宝',
@@ -80,4 +80,22 @@ export default {
   userSetting: '用户设置',
   subAccount: '子账号',
   agency: '代理商',
+
+  //Human Management
+  humanManagement: '真人管理',
+  queryBetSlip: '查询注单',
+  queryBetSlipK: '查询注单（开元棋牌',
+  queryBetSlipF: '查询注单（捕鱼王)',
+  report: '报表',
+  reportK: '报表（开元棋牌',
+  reportF: '报表（捕鱼王)',
+  rebate: '一键反水',
+  systemSettings: '系统设置',
+
+  //Statistics
+  statistics: '统计',
+  dailyAccounts: '每日账务',
+  dividendDetails: '分红明细',
+  systemLog: '系统日志（登录日志)',
+  numberofUserOnline: '在线人数',
 }

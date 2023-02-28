@@ -15,8 +15,10 @@ import {
   userSettingRoutes,
   sportsBettingRoutes,
   lotteryRoutes,
+  humanManagementRoutes,
   accountRoutes,
   paymentsRoutes,
+  statisticsRoutes,
   analyticsRoutes,
   systemlogsRoutes,
 } from '@/router'
@@ -90,10 +92,12 @@ export const useMenus = defineStore('menu', () => {
       ...userSettingRoutes,
       ...sportsBettingRoutes,
       ...lotteryRoutes,
-      ...accountRoutes,
+      ...humanManagementRoutes,
+      // ...accountRoutes,
       ...paymentsRoutes,
-      ...analyticsRoutes,
-      ...systemlogsRoutes,
+      ...statisticsRoutes,
+      // ...analyticsRoutes,
+      // ...systemlogsRoutes,
     ])
     setMenus(menus)
   }
