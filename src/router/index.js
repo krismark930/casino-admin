@@ -57,8 +57,6 @@ export const sportsBettingRoutes = [...sportsBetting]
 export const lotteryRoutes = [...lottery]
 //humanmanagement
 export const humanManagementRoutes = [...humanManagement]
-// account
-export const accountRoutes = [...account]
 // payment
 export const paymentsRoutes = [...payment]
 //Statistics
@@ -84,7 +82,6 @@ const router = createRouter({
     ...sportsBettingRoutes,
     ...lotteryRoutes,
     ...humanManagementRoutes,
-    ...accountRoutes,
     ...paymentsRoutes,
     ...statisticsRoutes,
     ...analyticsRoutes,

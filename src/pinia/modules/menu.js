@@ -16,7 +16,6 @@ import {
   sportsBettingRoutes,
   lotteryRoutes,
   humanManagementRoutes,
-  accountRoutes,
   paymentsRoutes,
   statisticsRoutes,
   analyticsRoutes,
