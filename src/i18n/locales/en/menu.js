@@ -52,9 +52,20 @@ export default {
   markSixs: 'Mark Six',
   alwaysColor2: 'Always Color 2',
 
+  //account
+  accounts: 'Account',
+  subAccounts: 'Sub Account',
+  companys: 'Company',
+  shareHolders: 'Shareholder',
+  generalAgents: 'General Agent',
+  agents: 'Agent',
+  vips: 'VIP',
+  vip2s: 'VIP2',
+  onlines: 'Online',
+
   //payment
-  payments: 'Payment',
-  paymentMethods: 'Payment method',
+  payments: 'Payment Settings',
+  paymentMethods: 'Payment Method',
   bankTransfers: 'Bank Transfer',
   alipayTransfers: 'Alipay Transfer',
   cashSystems: 'Cash System',
@@ -70,4 +81,22 @@ export default {
   userSetting: 'User Setting',
   subAccount: 'Sub Account',
   agency: 'Agency',
+
+  //Human Mangement
+  humanManagement: 'Human Management',
+  queryBetSlip: 'Query Bet Slip',
+  queryBetSlipK: 'Query Bet Slip (Kaiyuan Chess)',
+  queryBetSlipF: 'Query Bet Slip (Fishing King)',
+  report: 'Report',
+  reportK: 'Report (Kaiyuan Chess)',
+  reportF: 'Report (Fishing King)',
+  rebate: 'One-click Rebate',
+  systemSettings: 'System Settings',
+
+  //Statistics
+  statistics: 'Statistics',
+  dailyAccounts: 'Daily Accounts',
+  dividendDetails: 'Dividend Details',
+  systemLog: 'System Log(login log)',
+  numberofUserOnline: 'Number of User Online',
 }

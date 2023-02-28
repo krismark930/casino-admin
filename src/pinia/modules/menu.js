@@ -16,10 +16,13 @@ import {
   sportsBettingRoutes,
   lotteryRoutes,
   humanManagementRoutes,
+  accountRoutes,
   paymentsRoutes,
+  statisticsRoutes,
   analyticsRoutes,
   systemlogsRoutes,
 } from '@/router'
+import router from '@/router'
 import { ref } from 'vue'
 
 export const useMenus = defineStore('menu', () => {
@@ -90,8 +93,11 @@ export const useMenus = defineStore('menu', () => {
       ...sportsBettingRoutes,
       ...lotteryRoutes,
       ...humanManagementRoutes,
+      // ...accountRoutes,
       ...paymentsRoutes,
-      ...systemlogsRoutes,
+      ...statisticsRoutes,
+      // ...analyticsRoutes,
+      // ...systemlogsRoutes,
     ])
     setMenus(menus)
   }
