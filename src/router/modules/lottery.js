@@ -1,6 +1,6 @@
 const Layout = () => import('@/layout/index.vue')
 const MarkSixs = () => import('@/views/lottery/mark-sixs/index.vue')
-const TimelyColors = () => import('@/views/lottery/timely-colors/index.vue')
+const AlwaysColors = () => import('@/views/lottery/alwaysColors/index.vue')
 export default [
   {
     path: '/lottery',
@@ -21,11 +21,11 @@ export default [
         },
       },
       {
-        path: '/timely-colors',
-        component: TimelyColors,
-        name: 'timely-colors',
+        path: '/alwaysColors',
+        component: AlwaysColors,
+        name: 'alwaysColors',
         meta: {
-          title: 'menu.timelyColor2',
+          title: 'menu.alwaysColor2',
           affix: true,
         },
       },

@@ -34,7 +34,7 @@ import lock from './modules/lock'
 import home from './modules/home'
 import test from './modules/test'
 import systemSetting from './modules/system-setting'
-import usersetting from './modules/usersetting'
+import userSetting from './modules/user-setting'
 import sportsBetting from './modules/sports-betting'
 import lottery from './modules/lottery'
 import payment from './modules/payment'
@@ -48,7 +48,7 @@ export const asyncRoutes = [...test]
 // system setting
 export const systemSettingRoutes = [...systemSetting]
 // user setting
-export const userSettingRoutes = [...usersetting]
+export const userSettingRoutes = [...userSetting]
 // sports betting
 export const sportsBettingRoutes = [...sportsBetting]
 // lottery

@@ -20,7 +20,10 @@ export default {
   systemParameters: 'System Parameters',
   systemNotifications: 'System Notifications',
   systemSmss: 'System SMS',
-  systemInformation: 'System Information',
+  member: 'Member',
+  conversionRecords: 'Conversion Records',
+  basicDataSettings: 'Basic Data Settings',
+  memberContactInformation: 'Member Contact Information',
   memberDeposit: 'Member Deposit',
   memberWithdrawal: 'Member Withdrawal',
   dailyAccount: 'Daily Account',
@@ -32,26 +35,22 @@ export default {
   chessconveresionRecord: 'Chess Conversion Record',
   memberInformation: 'Member Information',
 
-  //user setting
-  userSettings: 'User Settings',
-  subAccounts: 'Sub Account',
-  agents: 'Agent',
-  vips: 'VIP',
-
   //sports betting
   sportsBetting: 'Sports Betting',
-  leagueManagements: 'League Management',
-  dataManagements: 'Data Management',
+  allianceRestrictions: 'Alliance Restrictions',
+  dataRefresh: 'Data Refresh',
+  sportsEvent: 'Sports Event',
+  dataManipulation: 'Data Manipulation',
   checkScores: 'Check Scores',
   checkScores2: 'Check Scores2',
-  diceBettings: 'Dice Betting',
-  championBettings: 'Champion Betting',
-  searchBettings: 'Search Betting',
+  liveBetting: 'Live Betting',
+  championBettings: 'Champion Bet Slip',
+  searchBettings: 'Search Bet Slip',
 
   //lottery
-  lotterys: 'Lottery',
+  lotterys: 'Lottery Management',
   markSixs: 'Mark Six',
-  timelyColor2: 'Timely Color 2',
+  alwaysColor2: 'Always Color 2',
 
   //payment
   payments: 'Payment',
@@ -66,4 +65,9 @@ export default {
   reports: 'Report',
   //System Log
   systemLogs: 'System Log',
+
+  //user setting
+  userSetting: 'User Setting',
+  subAccount: 'Sub Account',
+  agency: 'Agency',
 }

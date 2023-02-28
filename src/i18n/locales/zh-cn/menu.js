@@ -20,7 +20,10 @@ export default {
   systemParameters: '系统参数',
   systemNotifications: '系统公告',
   systemSmss: '系统短信',
-  systemInformation: '系统消息',
+  member: '会员',
+  conversionRecords: '转换记录',
+  basicDataSettings: '基本资料设定',
+  memberContactInformation: '会员信息',
   memberDeposit: '会员存款',
   memberWithdrawal: '会员提款',
   dailyAccount: '每日账务',
@@ -32,26 +35,22 @@ export default {
   chessconveresionRecord: '开元棋牌转换记录',
   memberInformation: '会员信息',
 
-  //user settings
-  userSettings: '用户设置',
-  subAccounts: '子账户',
-  agents: '代理商',
-  vips: '会员',
-
   // sports betting
   sportsBetting: '体育博弈',
-  leagueManagements: '联盟限制',
-  dataManagements: '数据操盘',
+  allianceRestrictions: '联盟限制',
+  dataRefresh: '数据刷新',
+  sportsEvent: '体育赛事',
+  dataManipulation: '数据操盘',
   checkScores: '审核比分',
   checkScores2: '审核比分2',
-  diceBettings: '滚球注单',
+  liveBetting: '滚球注单',
   championBettings: '冠军注单',
   searchBettings: '查询注单',
 
   //lottery
-  lotterys: '彩票',
+  lotterys: '彩票管理',
   markSixs: '六合彩管理',
-  timelyColor2: '时时彩2',
+  alwaysColor2: '时时彩2',
 
   //payment
   payments: '支付管理',
@@ -66,4 +65,9 @@ export default {
   reports: '报表',
   //System Log
   systemLogs: '系统日志',
+
+  //user setting
+  userSetting: '用户设置',
+  subAccount: '子账号',
+  agency: '代理商',
 }

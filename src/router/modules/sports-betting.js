@@ -1,18 +1,19 @@
 const Layout = () => import('@/layout/index.vue')
-const LeagueManagements = () =>
-  import('@/views/sports-betting/league-managements/index.vue')
-const DataManagements = () =>
-  import('@/views/sports-betting/data-managements/index.vue')
+const AllianceRestrictions = () =>
+  import('@/views/sports-betting/allianceRestrictions/index.vue')
+const DataRefresh = () => import('@/views/sports-betting/dataRefresh/index.vue')
+const DataManipulation = () =>
+  import('@/views/sports-betting/dataManipulation/index.vue')
 const CheckScores = () =>
   import('@/views/sports-betting/check-scores/index.vue')
 const CheckScores2 = () =>
   import('@/views/sports-betting/check-scores2/index.vue')
-const DiceBettings = () =>
-  import('@/views/sports-betting/dice-bettings/index.vue')
-const ChampionBettings = () =>
-  import('@/views/sports-betting/champion-bettings/index.vue')
+const LiveBetting = () => import('@/views/sports-betting/liveBetting/index.vue')
 const SearchBettings = () =>
   import('@/views/sports-betting/search-bettings/index.vue')
+const ChampionBettings = () =>
+  import('@/views/sports-betting/champion-bettings/index.vue')
+const SportsEvent = () => import('@/views/sports-betting/sportsEvent/index.vue')
 
 export default [
   {
@@ -25,20 +26,29 @@ export default [
     icon: 'Trophy',
     children: [
       {
-        path: '/league-managements',
-        name: 'league-managements',
-        component: LeagueManagements,
+        path: '/allianceRestrictions',
+        name: 'allianceRestrictions',
+        component: AllianceRestrictions,
         meta: {
-          title: 'menu.leagueManagements',
+          title: 'menu.allianceRestrictions',
           affix: true,
         },
       },
       {
-        path: '/data-managements',
-        name: 'data-managements',
-        component: DataManagements,
+        path: '/dataRefresh',
+        name: 'dataRefresh',
+        component: DataRefresh,
         meta: {
-          title: 'menu.dataManagements',
+          title: 'menu.dataRefresh',
+          affix: true,
+        },
+      },
+      {
+        path: '/dataManipulation',
+        name: 'DataManipulation',
+        component: DataManipulation,
+        meta: {
+          title: 'menu.dataManipulation',
           affix: true,
         },
       },
@@ -61,11 +71,20 @@ export default [
         },
       },
       {
-        path: '/dice-bettings',
-        name: 'dice-bettings',
-        component: DiceBettings,
+        path: '/liveBetting',
+        name: 'liveBetting',
+        component: LiveBetting,
         meta: {
-          title: 'menu.diceBettings',
+          title: 'menu.liveBetting',
+          affix: true,
+        },
+      },
+      {
+        path: '/search-bettings',
+        name: 'search-bettings',
+        component: SearchBettings,
+        meta: {
+          title: 'menu.searchBettings',
           affix: true,
         },
       },
@@ -79,11 +98,11 @@ export default [
         },
       },
       {
-        path: '/search-bettings',
-        name: 'search-bettings',
-        component: SearchBettings,
+        path: '/sportsEvent',
+        name: 'sportsEvent',
+        component: SportsEvent,
         meta: {
-          title: 'menu.searchBettings',
+          title: 'menu.sportsEvent',
           affix: true,
         },
       },

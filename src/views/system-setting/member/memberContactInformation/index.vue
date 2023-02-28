@@ -2,7 +2,7 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
   >
-    <h3>{{ $t('menu.systemInformation') }}</h3>
+    <h3>{{ $t('menu.memberContactInformation') }}</h3>
     <el-table
       :data="systemInformation"
       style="width: 100%;"
