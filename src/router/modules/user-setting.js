@@ -32,8 +32,8 @@ export default [
         },
       },
       {
-        path: '/member',
-        name: 'member',
+        path: '/userMember',
+        name: 'userMember',
         component: Member,
         meta: {
           title: 'menu.member',
