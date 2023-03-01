@@ -30,7 +30,7 @@
           <br />
           <el-space :size="5" spacer=":">
             <el-icon size="mid"><Unlock /></el-icon>
-            <span>{{ scope.row.credentialInfo.username }}</span>
+            <span>{{ scope.row.credentialInfo.password }}</span>
           </el-space>
         </template>
       </el-table-column>
