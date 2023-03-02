@@ -1,7 +1,5 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
-  >
+  <div style="text-align: center;">
     <el-form :inline="true" :model="formData">
       <el-form-item label="线上数据－公告管理"></el-form-item>
       <el-form-item>

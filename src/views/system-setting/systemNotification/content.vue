@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center;">
+  <div style="text-align: center;">
     <h3>{{ $t('menu.systemNotifications') }}</h3>
     <el-form :model="formData" label-width="100px" inline="true">
       <el-form-item label="内容" prop="title">
