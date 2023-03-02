@@ -1,9 +1,9 @@
 <template>
   <el-card shadow="never">
-    <el-row>
+    <el-row style="justify-content: space-between;">
       <el-col :span="12">
         <el-row style="justify-content: space-between;">
-          <el-col :span="12">
+          <el-col :span="12" style="text-align: justify; padding-top: 7px">
             <b1>Inquiry of bets [2023021 issue]</b1>
           </el-col>
           <el-col :span="12">
@@ -23,26 +23,32 @@
           </el-col>
         </el-row>
       </el-col>
-      <el-button :icon="Printer">
-        Print
+      <el-button>
+        Printer
+        <el-icon><Printer /></el-icon>
       </el-button>
     </el-row>
-    <el-table
-      :data="tableData"
-      class="betslip-wrapper"
-      header-align="center"
-      stripe
-    >
-      <el-table-column prop="serialnumber" label="Serial Number" />
-      <el-table-column prop="shareholder" label="Shareholder" />
-      <el-table-column prop="betnumber" label="Number of Bets" />
-      <el-table-column prop="betamount" label="Bet Amount" />
-      <el-table-column prop="realInvestment" label="Real Investment" />
-      <el-table-column prop="companyaccounted" label="Company accounted for" />
-      <el-table-column prop="shareholders" label="Shareholders" />
-      <el-table-column prop="totalagent" label="Total Agent Accounted for" />
-      <el-table-column prop="agentaccounted" label="Agent Accounted for" />
-    </el-table>
+    <el-scrollbar>
+      <el-table
+        :data="tableData"
+        class="betslip-wrapper"
+        header-align="center"
+        stripe
+      >
+        <el-table-column prop="serialnumber" label="Serial Number" />
+        <el-table-column prop="shareholder" label="Shareholder" />
+        <el-table-column prop="betnumber" label="Number of Bets" />
+        <el-table-column prop="betamount" label="Bet Amount" />
+        <el-table-column prop="realInvestment" label="Real Investment" />
+        <el-table-column
+          prop="companyaccounted"
+          label="Company accounted for"
+        />
+        <el-table-column prop="shareholders" label="Shareholders" />
+        <el-table-column prop="totalagent" label="Total Agent Accounted for" />
+        <el-table-column prop="agentaccounted" label="Agent Accounted for" />
+      </el-table>
+    </el-scrollbar>
     <el-form :model="form" label-width="20%">
       <el-row>
         <el-col :span="6">

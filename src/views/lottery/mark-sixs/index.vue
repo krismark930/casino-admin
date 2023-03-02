@@ -26,7 +26,9 @@
     <el-tab-pane label="Bet Slip Query" name="betslip">
       <BetslipQuery />
     </el-tab-pane>
-    <el-tab-pane label="Total Bill" name="totalbill"></el-tab-pane>
+    <el-tab-pane label="Total Bill" name="totalbill">
+      <TotalBill />
+    </el-tab-pane>
     <el-tab-pane label="Quit" name="quit"></el-tab-pane>
   </el-tabs>
 </template>
@@ -39,7 +41,7 @@ import MemberManagement from './MemberManagement/index.vue'
 import Report from './Report/index.vue'
 import BetslipQuery from './BetSlipQuery/index.vue'
 import OddSetting from './OddSetting/index.vue'
-
+import TotalBill from './TotalBill/index.vue'
 const activeName = ref('handicap')
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)

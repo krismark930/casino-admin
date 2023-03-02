@@ -71,7 +71,7 @@
           <table class="lottery-ball-number">
             <thead>
               <th style="width: 50%;">Flat 1</th>
-              <th style="width: 50%;">operate</th>
+              <th style="width: 50%;">Operate</th>
             </thead>
             <tbody>
               <tr>
