@@ -1,6 +1,6 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <b1>Special A Odds Setting</b1>
+    <h3>Special A Odds Setting</h3>
     <div class="flex">
       <el-button size="small">
         All titles

@@ -19,10 +19,9 @@
     <el-tab-pane label="Report" name="report">
       <Report />
     </el-tab-pane>
-    <el-tab-pane
-      label="System Maintenance"
-      name="systemMaintenance"
-    ></el-tab-pane>
+    <el-tab-pane label="System Maintenance" name="systemMaintenance">
+      <SystemMaintenance />
+    </el-tab-pane>
     <el-tab-pane label="Bet Slip Query" name="betslip">
       <BetslipQuery />
     </el-tab-pane>
@@ -42,6 +41,7 @@ import Report from './Report/index.vue'
 import BetslipQuery from './BetSlipQuery/index.vue'
 import OddSetting from './OddSetting/index.vue'
 import TotalBill from './TotalBill/index.vue'
+import SystemMaintenance from './SystemMaintenance/index.vue'
 const activeName = ref('handicap')
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)

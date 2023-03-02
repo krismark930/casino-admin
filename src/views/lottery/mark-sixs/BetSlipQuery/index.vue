@@ -4,7 +4,7 @@
       <el-col :span="12">
         <el-row style="justify-content: space-between;">
           <el-col :span="12" style="text-align: justify; padding-top: 7px">
-            <b1>Inquiry of bets [2023021 issue]</b1>
+            <h3>Inquiry of bets [2023021 issue]</h3>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Choose the number of periods:">
