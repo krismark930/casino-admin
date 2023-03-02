@@ -24,12 +24,24 @@
     <div v-if="activeType == 'Special code'">
       <SpecialCode />
     </div>
-    <div v-if="activeType == 'Zhengte'"></div>
-    <div v-if="activeType == 'Positive cod'"></div>
-    <div v-if="activeType == 'Positive code 1-6'"></div>
-    <div v-if="activeType == 'Pass'"></div>
-    <div v-if="activeType == 'Consecutive code'"></div>
-    <div v-if="activeType == 'Half wave'"></div>
+    <div v-if="activeType == 'Zhengte'">
+      <Zhengte />
+    </div>
+    <div v-if="activeType == 'Positive code'">
+      <PositiveCode />
+    </div>
+    <div v-if="activeType == 'Positive code 1-6'">
+      <PositiveCode16 />
+    </div>
+    <div v-if="activeType == 'Pass'">
+      <Pass />
+    </div>
+    <div v-if="activeType == 'Consecutive code'">
+      <ConsecutiveCode />
+    </div>
+    <div v-if="activeType == 'Half wave'">
+      <HalfWave />
+    </div>
     <div v-if="activeType == 'One Xiao Zhengte mantissa'"></div>
     <div v-if="activeType == 'Five elements'"></div>
     <div v-if="activeType == 'Special & He Xiao'"></div>
@@ -42,6 +54,12 @@
 </template>
 <script lang="ts" setup>
 import SpecialCode from './SpecialCode.vue'
+import Zhengte from './Zhengte.vue'
+import PositiveCode from './PositiveCode.vue'
+import PositiveCode16 from './PositiveCode16.vue'
+import Pass from './Pass.vue'
+import ConsecutiveCode from './ConsecutiveCode.vue'
+import HalfWave from './HalfWave.vue'
 
 import { ref, reactive } from 'vue'
 

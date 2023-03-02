@@ -1,20 +1,14 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <h3>Special A Odds Setting</h3>
+    <b1>Positive Aces Odds Setting</b1>
     <div class="flex">
       <el-button size="small">
-        All titles
-      </el-button>
-      <el-button size="small">
-        Open all
+        <el-icon><Plus /></el-icon>
+        Positive A
       </el-button>
       <el-button size="small">
         <el-icon><Plus /></el-icon>
-        Special A
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Special B
+        Positive B
       </el-button>
     </div>
   </el-row>
@@ -158,98 +152,27 @@ const setting = reactive({
 const others = ref([
   [
     {
-      number: 'one',
+      number: 'total bill',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'big',
+      number: 'total double',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'combined order',
+      number: 'General',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'red wave',
-      odds: 2.55,
-      bet: 0,
-    },
-    {
-      number: 'blue wave',
-      odds: 2.65,
-      bet: 0,
-    },
-  ],
-  [
-    {
-      number: 'pair',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'Small',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'double',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'green wave',
+      number: 'total small',
       odds: 2.65,
       bet: 0,
     },
     {
       buttons: ['submit', '重置'],
-    },
-  ],
-  [
-    {
-      number: 'poultry',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'the beast',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'big tail',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'small tail',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'Big order',
-      odds: 3.5,
-      bet: 0,
-    },
-  ],
-  [
-    {
-      number: 'Small order',
-      odds: 3.5,
-      bet: 0,
-    },
-    {
-      number: 'big double',
-      odds: 3.5,
-      bet: 0,
-    },
-    {
-      number: 'little pair',
-      odds: 3.5,
-      bet: 0,
     },
   ],
 ])

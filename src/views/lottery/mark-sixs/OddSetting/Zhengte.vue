@@ -1,20 +1,30 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <h3>Special A Odds Setting</h3>
+    <b1>Positive 1 Special Odds Setting</b1>
     <div class="flex">
       <el-button size="small">
-        All titles
-      </el-button>
-      <el-button size="small">
-        Open all
+        <el-icon><Plus /></el-icon>
+        Positive 1 special
       </el-button>
       <el-button size="small">
         <el-icon><Plus /></el-icon>
-        Special A
+        Positive 2 Te
       </el-button>
       <el-button size="small">
         <el-icon><Plus /></el-icon>
-        Special B
+        Positive 3 Te
+      </el-button>
+      <el-button size="small">
+        <el-icon><Plus /></el-icon>
+        Positive 4 Te
+      </el-button>
+      <el-button size="small">
+        <el-icon><Plus /></el-icon>
+        Positive 5 Te
+      </el-button>
+      <el-button size="small">
+        <el-icon><Plus /></el-icon>
+        Positive 6 Te
       </el-button>
     </div>
   </el-row>
@@ -210,45 +220,13 @@ const others = ref([
   ],
   [
     {
-      number: 'poultry',
+      number: 'Heda',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'the beast',
+      number: 'together small',
       odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'big tail',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'small tail',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'Big order',
-      odds: 3.5,
-      bet: 0,
-    },
-  ],
-  [
-    {
-      number: 'Small order',
-      odds: 3.5,
-      bet: 0,
-    },
-    {
-      number: 'big double',
-      odds: 3.5,
-      bet: 0,
-    },
-    {
-      number: 'little pair',
-      odds: 3.5,
       bet: 0,
     },
   ],
