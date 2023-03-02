@@ -1,6 +1,70 @@
 <template>
   <el-card shadow="never">
-    <b1>Agency Management</b1>
+    <el-row style="margin-bottom: 1.5rem; font-size: 20px;">
+      <el-col>
+        <h4>Agency Management</h4>
+      </el-col>
+    </el-row>
+    <el-row class="hidden-lg-and-up" style="margin-bottom: 1rem;">
+      <el-col>
+        <el-descriptions border :column="1">
+          <el-descriptions-item label="Data Added :">
+            <el-tag size="small" type="success">
+              The new account is less than a month old
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="Account Status :">
+            <el-tag size="small" type="danger">Disabled</el-tag>
+          </el-descriptions-item>
+        </el-descriptions>
+      </el-col>
+    </el-row>
+    <el-row justify="space-between">
+      <el-col :lg="16" :xs="24">
+        <el-form label-width="150px">
+          <el-form-item label="Select General Agent">
+            <el-select placeholder="All">
+              <el-option label="All" value="all" />
+              <el-option label="cdm888===chen general agency" value="cdm888" />
+            </el-select>
+            <el-select placeholder="Ascending">
+              <el-option label="Ascending(From small to big)" value="account" />
+              <el-option
+                label="Descending(From big to small)"
+                value="descending"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Way">
+            <el-select placeholder="Date added">
+              <el-option label="Agent Account" value="agentAccount" />
+              <el-option label="Agency Name" value="agencyName" />
+              <el-option label="Date added" value="dateAdded" />
+            </el-select>
+            <el-select placeholder="All">
+              <el-option label="All" value="allway" />
+              <el-option label="Enable" value="enable" />
+              <el-option label="Freeze" value="freeze" />
+              <el-option label="Disabled" value="disabled" />
+              <el-option label="Have Bets" value="havebets" />
+              <el-option label="Today Recharge" value="todayRecharge" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </el-col>
+      <el-col :lg="8" class="hidden-md-and-down">
+        <el-descriptions border :column="1">
+          <el-descriptions-item label="Data Added :">
+            <el-tag size="small" type="success">
+              The new account is less than a month old
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item label="Account Status :">
+            <el-tag size="small" type="danger">Disabled</el-tag>
+          </el-descriptions-item>
+        </el-descriptions>
+      </el-col>
+    </el-row>
     <el-table
       :data="tableData"
       class="agents-wrapper"
@@ -61,58 +125,25 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-row :gutter="20">
-      <el-form-item label="Select General Agent">
-        <el-select placeholder="All">
-          <el-option label="All" value="all" />
-          <el-option label="cdm888===chen general agency" value="cdm888" />
-        </el-select>
-        <el-select placeholder="Ascending">
-          <el-option label="Ascending(From small to big)" value="account" />
-          <el-option label="Descending(From big to small)" value="descending" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Way">
-        <el-select placeholder="Date added">
-          <el-option label="Agent Account" value="agentAccount" />
-          <el-option label="Agency Name" value="agencyName" />
-          <el-option label="Date added" value="dateAdded" />
-        </el-select>
-        <el-select placeholder="All">
-          <el-option label="All" value="allway" />
-          <el-option label="Enable" value="enable" />
-          <el-option label="Freeze" value="freeze" />
-          <el-option label="Disabled" value="disabled" />
-          <el-option label="Have Bets" value="havebets" />
-          <el-option label="Today Recharge" value="todayRecharge" />
-        </el-select>
-      </el-form-item>
-    </el-row>
-    <el-pagination
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :page-sizes="[10, 20, 30]"
-      :small="small"
-      :disabled="disabled"
-      :background="background"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="30"
-      style="padding-bottom: 20px;"
-    ></el-pagination>
-    <el-descriptions>
-      <el-descriptions-item label="Data Added :">
-        <el-tag size="small" type="success">
-          The new account is less than a month old
-        </el-tag>
-      </el-descriptions-item>
-      <el-descriptions-item label="Account Status :">
-        <el-tag size="small" type="danger">Disabled</el-tag>
-      </el-descriptions-item>
-    </el-descriptions>
+
+    <div style="display: flex; justify-content: center">
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30]"
+        :small="small"
+        :disabled="disabled"
+        :background="background"
+        layout="total, sizes, prev, pager, next"
+        :total="30"
+        style="padding-bottom: 20px;"
+      ></el-pagination>
+    </div>
   </el-card>
 </template>
 <script setup>
 import { ref } from 'vue'
+import 'element-plus/theme-chalk/display.css'
 const pageSize = ref(10)
 const currentPage = ref(1)
 const tableData = [
