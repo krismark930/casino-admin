@@ -11,11 +11,7 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总盈利
-                  <el-tooltip
-                    effect="dark"
-                    content="Total profit"
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content="利润总额" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />
                     </el-icon>
@@ -25,7 +21,7 @@
             </el-statistic>
             <div class="statistic-footer">
               <div class="footer-item">
-                <span>month on month</span>
+                <span>逐月</span>
                 <span class="green">
                   24%
                   <el-icon>
@@ -42,11 +38,7 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   彩金
-                  <el-tooltip
-                    effect="dark"
-                    content="Total winnings"
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content="总奖金" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />
                     </el-icon>
@@ -56,7 +48,7 @@
             </el-statistic>
             <div class="statistic-footer">
               <div class="footer-item">
-                <span>month on month</span>
+                <span>逐月</span>
                 <span class="red">
                   12%
                   <el-icon>
@@ -73,11 +65,7 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   佣金
-                  <el-tooltip
-                    effect="dark"
-                    content="Total commission"
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content="总佣金" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />
                     </el-icon>
@@ -87,7 +75,7 @@
             </el-statistic>
             <div class="statistic-footer">
               <div class="footer-item">
-                <span>month on month</span>
+                <span>逐月</span>
                 <span class="green">
                   24%
                   <el-icon>
@@ -101,7 +89,7 @@
       </div>
       <div>
         <el-form-item label="選擇代理商">
-          <el-select v-model="formData.agent" placeholder="Select type">
+          <el-select v-model="formData.agent" placeholder="">
             <el-option
               v-for="item in options"
               :key="item.value"

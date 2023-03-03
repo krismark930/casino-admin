@@ -29,7 +29,7 @@
         <el-form-item label="注单日期">
           <el-date-picker
             v-model="formData.betDate"
-            placeholder="Select bet date"
+            placeholder=""
             value-format="YYYY-MM-DD"
             style="width: 150px;"
           ></el-date-picker>

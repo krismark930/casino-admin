@@ -29,7 +29,7 @@
         <el-date-picker
           v-model="formData.publishTime"
           type="datetime"
-          placeholder="Select date and time"
+          placeholder="选择日期和时间"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="选项" prop="title">

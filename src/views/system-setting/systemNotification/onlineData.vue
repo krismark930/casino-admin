@@ -3,7 +3,7 @@
     <el-form :inline="true" :model="formData">
       <el-form-item label="线上数据－公告管理"></el-form-item>
       <el-form-item>
-        <el-select v-model="formData.option" placeholder="Select type">
+        <el-select v-model="formData.option" placeholder="">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -16,7 +16,7 @@
         <el-date-picker
           v-model="formData.date"
           type="date"
-          placeholder="Select date"
+          placeholder=""
         ></el-date-picker>
       </el-form-item>
     </el-form>
