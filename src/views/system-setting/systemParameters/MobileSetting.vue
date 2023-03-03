@@ -69,6 +69,9 @@ const mobileSettingForm = reactive({
   padding-left: 50px;
   padding-right: 80px;
 }
+h5 {
+  margin-top: 0;
+}
 .mobilesetting-form {
   width: 100%;
 }

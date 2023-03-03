@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
+          <th colspan="3">type</th>
           <th>Odds/Title</th>
           <th>current odds</th>
           <th>bet amount</th>
@@ -12,8 +12,13 @@
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>half wave</td>
+            <td>five elements</td>
             <td>{{ item.type }}</td>
+            <td>
+              <template v-for="(ball, j) in item.balls" :key="j">
+                <el-badge :value="ball"></el-badge>
+              </template>
+            </td>
             <td>
               <div
                 style="display: flex; column-gap: 10px; justify-content: center;"
@@ -55,111 +60,38 @@ import { ref } from 'vue'
 
 const data = ref([
   {
-    type: 'red list',
-    odds: 5.7,
-    currentOdds: 5.7,
+    type: 'Money',
+    balls: [12, 13, 20, 21, 28, 29, 42, 43],
+    odds: 4.7,
+    currentOdds: 4.7,
     betAmount: 0,
   },
   {
-    type: 'red double',
-    odds: 5.7,
-    currentOdds: 5.7,
+    type: 'wood',
+    balls: [2, 3, 10, 11, 24, 25, 32, 33, 40, 41],
+    odds: 4.3,
+    currentOdds: 4.3,
     betAmount: 0,
   },
   {
-    type: 'red big',
-    odds: 5.7,
-    currentOdds: 5.7,
+    type: 'water',
+    balls: [1, 8, 9, 16, 17, 30, 31, 38, 39, 46, 47],
+    odds: 4.3,
+    currentOdds: 4.3,
     betAmount: 0,
   },
   {
-    type: 'red small',
-    odds: 5.7,
-    currentOdds: 5.7,
+    type: 'fire',
+    balls: [4, 5, 18, 19, 26, 27, 34, 35, 48, 49],
+    odds: 4.3,
+    currentOdds: 4.3,
     betAmount: 0,
   },
   {
-    type: 'green sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green big',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green small',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'big blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'little blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red order',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue pair',
-    odds: 5.7,
-    currentOdds: 5.7,
+    type: 'soil',
+    balls: [6, 7, 14, 15, 22, 23, 36, 37, 44, 45],
+    odds: 4.3,
+    currentOdds: 4.3,
     betAmount: 0,
   },
 ])

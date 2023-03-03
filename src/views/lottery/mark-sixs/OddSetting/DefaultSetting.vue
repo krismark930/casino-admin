@@ -1,32 +1,12 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <h4>Positive 1 Special Odds Setting</h4>
-    <div class="flex">
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 1 special
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 2 Te
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 3 Te
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 4 Te
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 5 Te
-      </el-button>
-      <el-button size="small">
-        <el-icon><Plus /></el-icon>
-        Positive 6 Te
-      </el-button>
-    </div>
+    <h6 style="margin-bottom: 0; margin-top: 5px;">Special A Odds Setting</h6>
+    <el-form-item label="Activity zone" style="margin-bottom: 0;">
+      <el-select v-model="select" placeholder="please select your zone">
+        <el-option label="Zone one" value="shanghai" />
+        <el-option label="Zone two" value="beijing" />
+      </el-select>
+    </el-form-item>
   </el-row>
   <el-scrollbar>
     <el-row class="scrollbar-flex-content">
@@ -35,9 +15,7 @@
           <tr>
             <template v-for="l in 5" :key="l">
               <th>Number</th>
-              <th>Odds/Title</th>
               <th>Odds</th>
-              <th>Total amount bet</th>
             </template>
           </tr>
         </thead>
@@ -47,19 +25,12 @@
               <template v-if="n + (m - 1) * 10 < 50">
                 <td>{{ n + (m - 1) * 10 }}</td>
                 <td>
-                  <div style="display: flex; column-gap: 10px;">
-                    <div>
-                      <el-input-number
-                        v-model="setting.odds"
-                        size="small"
-                        controls-position="right"
-                      />
-                    </div>
-                    <div><el-checkbox size="small" /></div>
-                  </div>
+                  <el-input-number
+                    v-model="setting.odds"
+                    size="small"
+                    controls-position="right"
+                  />
                 </td>
-                <td>{{ setting.odds }}</td>
-                <td>{{ setting.bet }}</td>
               </template>
               <template v-else>
                 <td></td>
@@ -74,19 +45,12 @@
               <template v-if="!item.buttons">
                 <td>{{ item.number }}</td>
                 <td>
-                  <div style="display: flex; column-gap: 10px;">
-                    <div>
-                      <el-input-number
-                        v-model="item.odds"
-                        size="small"
-                        controls-position="right"
-                      />
-                    </div>
-                    <div><el-checkbox size="small" /></div>
-                  </div>
+                  <el-input-number
+                    v-model="item.odds"
+                    size="small"
+                    controls-position="right"
+                  />
                 </td>
-                <td>{{ item.odds }}</td>
-                <td>{{ item.bet }}</td>
               </template>
               <template v-else>
                 <td colspan="4">
@@ -220,13 +184,45 @@ const others = ref([
   ],
   [
     {
-      number: 'Heda',
+      number: 'poultry',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'together small',
+      number: 'the beast',
       odds: 1.98,
+      bet: 0,
+    },
+    {
+      number: 'big tail',
+      odds: 1.98,
+      bet: 0,
+    },
+    {
+      number: 'small tail',
+      odds: 1.98,
+      bet: 0,
+    },
+    {
+      number: 'Big order',
+      odds: 3.5,
+      bet: 0,
+    },
+  ],
+  [
+    {
+      number: 'Small order',
+      odds: 3.5,
+      bet: 0,
+    },
+    {
+      number: 'big double',
+      odds: 3.5,
+      bet: 0,
+    },
+    {
+      number: 'little pair',
+      odds: 3.5,
       bet: 0,
     },
   ],
@@ -302,6 +298,8 @@ const options = ref([
 
 const reduce = ref('1')
 const radio1 = ref('1')
+
+const select = ref('shanghai')
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;

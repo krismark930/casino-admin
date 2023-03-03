@@ -1,6 +1,6 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <b1>Positive Aces Odds Setting</b1>
+    <h4>Positive Aces Odds Setting</h4>
     <div class="flex">
       <el-button size="small">
         <el-icon><Plus /></el-icon>

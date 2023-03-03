@@ -11,7 +11,9 @@
     <el-tab-pane label="Odds Setting" name="oddSetting">
       <OddSetting />
     </el-tab-pane>
-    <el-tab-pane label="Instant Bet Slip" name="instantBet"></el-tab-pane>
+    <el-tab-pane label="Instant Bet Slip" name="instantBet">
+      <InstantBet />
+    </el-tab-pane>
     <el-tab-pane label="Go fly" name="gofly"></el-tab-pane>
     <el-tab-pane label="Member" name="member">
       <MemberManagement />
@@ -40,6 +42,7 @@ import MemberManagement from './MemberManagement/index.vue'
 import Report from './Report/index.vue'
 import BetslipQuery from './BetSlipQuery/index.vue'
 import OddSetting from './OddSetting/index.vue'
+import InstantBet from './InstantBet/index.vue'
 import TotalBill from './TotalBill/index.vue'
 import SystemMaintenance from './SystemMaintenance/index.vue'
 const activeName = ref('handicap')

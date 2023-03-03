@@ -42,14 +42,30 @@
     <div v-if="activeType == 'Half wave'">
       <HalfWave />
     </div>
-    <div v-if="activeType == 'One Xiao Zhengte mantissa'"></div>
-    <div v-if="activeType == 'Five elements'"></div>
-    <div v-if="activeType == 'Special & He Xiao'"></div>
-    <div v-if="activeType == 'Zodiac connected'"></div>
-    <div v-if="activeType == 'Mantissa connected'"></div>
-    <div v-if="activeType == 'Miss all'"></div>
-    <div v-if="activeType == 'Default setting'"></div>
-    <div v-if="activeType == 'Restore odds'"></div>
+    <div v-if="activeType == 'One Xiao Zhengte mantissa'">
+      <OneXiao />
+    </div>
+    <div v-if="activeType == 'Five elements'">
+      <FiveElements />
+    </div>
+    <div v-if="activeType == 'Special & He Xiao'">
+      <Special />
+    </div>
+    <div v-if="activeType == 'Zodiac connected'">
+      <Zodiac />
+    </div>
+    <div v-if="activeType == 'Mantissa connected'">
+      <Mantissa />
+    </div>
+    <div v-if="activeType == 'Miss all'">
+      <MissAll />
+    </div>
+    <div v-if="activeType == 'Default setting'">
+      <DefaultSetting />
+    </div>
+    <div v-if="activeType == 'Restore odds'">
+      <RestoreOdds />
+    </div>
   </el-card>
 </template>
 <script lang="ts" setup>
@@ -60,6 +76,14 @@ import PositiveCode16 from './PositiveCode16.vue'
 import Pass from './Pass.vue'
 import ConsecutiveCode from './ConsecutiveCode.vue'
 import HalfWave from './HalfWave.vue'
+import OneXiao from './OneXiao.vue'
+import FiveElements from './FiveElements.vue'
+import Special from './Special.vue'
+import Zodiac from './Zodiac.vue'
+import Mantissa from './Mantissa.vue'
+import MissAll from './MissAll.vue'
+import DefaultSetting from './DefaultSetting.vue'
+import RestoreOdds from './RestoreOdds.vue'
 
 import { ref, reactive } from 'vue'
 

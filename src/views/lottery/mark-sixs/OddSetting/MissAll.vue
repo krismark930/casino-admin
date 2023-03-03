@@ -1,6 +1,6 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <h4>Positive 1 Special Odds Setting</h4>
+    <b1>Positive 1 Special Odds Setting</b1>
     <div class="flex">
       <el-button size="small">
         <el-icon><Plus /></el-icon>
@@ -62,41 +62,11 @@
                 <td>{{ setting.bet }}</td>
               </template>
               <template v-else>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </template>
-            </template>
-          </tr>
-          <tr v-for="(other, index) in others" :key="index">
-            <template v-for="(item, i) in other" :key="i">
-              <template v-if="!item.buttons">
-                <td>{{ item.number }}</td>
-                <td>
-                  <div style="display: flex; column-gap: 10px;">
-                    <div>
-                      <el-input-number
-                        v-model="item.odds"
-                        size="small"
-                        controls-position="right"
-                      />
-                    </div>
-                    <div><el-checkbox size="small" /></div>
-                  </div>
+                <td colspan="2">
+                  <el-button size="small" type="primary">submit</el-button>
                 </td>
-                <td>{{ item.odds }}</td>
-                <td>{{ item.bet }}</td>
-              </template>
-              <template v-else>
-                <td colspan="4">
-                  <el-button
-                    size="small"
-                    v-for="(btn, key) in item.buttons"
-                    :key="key"
-                  >
-                    {{ btn }}
-                  </el-button>
+                <td colspan="2">
+                  <el-button size="small" type="primary">重置</el-button>
                 </td>
               </template>
             </template>
@@ -161,76 +131,9 @@
 import { ref, reactive } from 'vue'
 
 const setting = reactive({
-  odds: 48.8,
+  odds: 2,
   bet: 0,
 })
-
-const others = ref([
-  [
-    {
-      number: 'one',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'big',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'combined order',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'red wave',
-      odds: 2.55,
-      bet: 0,
-    },
-    {
-      number: 'blue wave',
-      odds: 2.65,
-      bet: 0,
-    },
-  ],
-  [
-    {
-      number: 'pair',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'Small',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'double',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'green wave',
-      odds: 2.65,
-      bet: 0,
-    },
-    {
-      buttons: ['submit', '重置'],
-    },
-  ],
-  [
-    {
-      number: 'Heda',
-      odds: 1.98,
-      bet: 0,
-    },
-    {
-      number: 'together small',
-      odds: 1.98,
-      bet: 0,
-    },
-  ],
-])
 
 const options = ref([
   [

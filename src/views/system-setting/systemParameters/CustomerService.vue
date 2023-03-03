@@ -31,7 +31,7 @@
       <el-table-column label="" width="100">
         <template #default="scope">
           <el-button
-            size="small"
+            type="primary"
             @click="handleSubmit(scope.row.customerServices)"
           >
             Submit

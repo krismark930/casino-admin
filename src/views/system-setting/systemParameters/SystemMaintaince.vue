@@ -13,7 +13,7 @@
       </el-table-column>
       <el-table-column label="" width="100">
         <template #default="scope">
-          <el-button size="small" @click="handleSubmit(scope.row.sysmain)">
+          <el-button type="primary" @click="handleSubmit(scope.row.sysmain)">
             Submit
           </el-button>
         </template>

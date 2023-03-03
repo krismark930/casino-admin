@@ -12,7 +12,7 @@
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>half wave</td>
+            <td>teshaw</td>
             <td>{{ item.type }}</td>
             <td>
               <div
@@ -54,114 +54,18 @@
 import { ref } from 'vue'
 
 const data = ref([
-  {
-    type: 'red list',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red big',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red small',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green big',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green small',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'big blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'little blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red order',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
+  { type: 'mouse', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'Tiger', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'dragon', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'horse', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'monkey', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'dog', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'ox', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'rabbit', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'snake', odds: 9.6, currentOdds: 9.6, betAmount: 0 },
+  { type: 'sheep', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'chicken', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: 'pig', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
 ])
 </script>
 <style lang="scss" scoped>
