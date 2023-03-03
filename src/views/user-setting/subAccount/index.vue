@@ -1,15 +1,23 @@
 <template>
   <el-card shadow="never">
-    <el-row>
+    <el-row :gutter="20">
       <el-form-item label="Sort By">
-        <el-select placeholder="Account">
-          <el-option label="Account" value="account" />
-          <el-option label="Add Date" value="adddate" />
-        </el-select>
-        <el-select placeholder="Ascending">
-          <el-option label="Ascending(From small to big)" value="account" />
-          <el-option label="Descending(From big to small)" value="descending" />
-        </el-select>
+        <el-col :span="11">
+          <el-select placeholder="Account">
+            <el-option label="Account" value="account" />
+            <el-option label="Add Date" value="adddate" />
+          </el-select>
+        </el-col>
+        <el-col :span="1"></el-col>
+        <el-col :span="12">
+          <el-select placeholder="Ascending">
+            <el-option label="Ascending(From small to big)" value="account" />
+            <el-option
+              label="Descending(From big to small)"
+              value="descending"
+            />
+          </el-select>
+        </el-col>
       </el-form-item>
     </el-row>
     <el-scrollbar>
@@ -47,18 +55,8 @@
         </el-table-column>
       </el-table>
     </el-scrollbar>
-
-    <div style="justify-content:center;display:flex;">
-      <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 30]"
-        :small="small"
-        :disabled="disabled"
-        :background="background"
-        layout="total, sizes, prev, pager, next"
-        :total="30"
-      ></el-pagination>
+    <div style="display: flex; justify-content: center">
+      <el-pagination background layout="prev, pager, next" :total="100" />
     </div>
   </el-card>
 </template>

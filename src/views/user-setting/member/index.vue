@@ -69,98 +69,97 @@
         </el-descriptions>
       </el-col>
     </el-row>
-    <el-table
-      :data="tableData"
-      class="member-wrapper"
-      border
-      header-align="center"
-      stripe
-    >
-      <el-table-column
-        prop="agencyaccount"
-        label="Agency Account"
-        width="150"
-      />
-      <el-table-column prop="loginAccount" label="Login Account" width="125" />
-      <el-table-column
-        prop="memberAccount"
-        label="Member Account"
-        width="140"
-      />
-      <el-table-column
-        prop="availableQuota"
-        label="Available Quota"
-        width="140"
-      />
-      <el-table-column prop="credits" label="Credits" width="80" />
-      <el-table-column
-        prop="memberhandicap"
-        label="Member Handicap"
-        width="150"
-      />
-      <el-table-column prop="dateAdded" label="Date Added" width="110" />
-      <el-table-column
-        prop="accountStatus"
-        label="Account Status"
-        width="130"
-      />
-      <el-table-column prop="online" label="Online" width="80" />
-      <el-table-column label="Function" v-if="memberLayout === 'Normal Member'">
-        <template #default="scope">
-          <el-button link type="primary" size="small">
-            Modify
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Detailed Setting
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Deactivate
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Freeze
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Kick Line
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Delete Transfer
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Statistics
-          </el-button>
-          <br />
-          <el-button link type="primary" size="small">
-            Log
-          </el-button>
-        </template>
-      </el-table-column>
-      <el-table-column label="Function" v-else>
-        <template #default="scope">
-          <el-button link type="primary" size="small">
-            Revise
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <el-scrollbar height="400px">
+      <el-table
+        :data="tableData"
+        class="member-wrapper"
+        border
+        header-align="center"
+        stripe
+      >
+        <el-table-column
+          prop="agencyaccount"
+          label="Agency Account"
+          width="150"
+        />
+        <el-table-column
+          prop="loginAccount"
+          label="Login Account"
+          width="125"
+        />
+        <el-table-column
+          prop="memberAccount"
+          label="Member Account"
+          width="140"
+        />
+        <el-table-column
+          prop="availableQuota"
+          label="Available Quota"
+          width="140"
+        />
+        <el-table-column prop="credits" label="Credits" width="80" />
+        <el-table-column
+          prop="memberhandicap"
+          label="Member Handicap"
+          width="150"
+        />
+        <el-table-column prop="dateAdded" label="Date Added" width="110" />
+        <el-table-column
+          prop="accountStatus"
+          label="Account Status"
+          width="130"
+        />
+        <el-table-column prop="online" label="Online" width="80" />
+        <el-table-column
+          label="Function"
+          v-if="memberLayout === 'Normal Member'"
+        >
+          <template #default="scope">
+            <el-button link type="primary" size="small">
+              Modify
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Detailed Setting
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Deactivate
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Freeze
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Kick Line
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Delete Transfer
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Statistics
+            </el-button>
+            <br />
+            <el-button link type="primary" size="small">
+              Log
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="Function" v-else>
+          <template #default="scope">
+            <el-button link type="primary" size="small">
+              Revise
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-scrollbar>
 
     <div style="display: flex; justify-content: center">
-      <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 30]"
-        :small="small"
-        :disabled="disabled"
-        :background="background"
-        layout="total, sizes, prev, pager, next"
-        :total="30"
-        style="padding-bottom: 20px;"
-      ></el-pagination>
+      <el-pagination background layout="prev, pager, next" :total="100" />
     </div>
   </el-card>
 </template>
@@ -208,7 +207,6 @@ const tableData = [
 <style lang="scss" scoped>
 .member-wrapper {
   width: 100%;
-  max-height: 500px;
   margin: 10px 0px;
 }
 </style>

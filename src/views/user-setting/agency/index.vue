@@ -127,17 +127,7 @@
     </el-table>
 
     <div style="display: flex; justify-content: center">
-      <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 30]"
-        :small="small"
-        :disabled="disabled"
-        :background="background"
-        layout="total, sizes, prev, pager, next"
-        :total="30"
-        style="padding-bottom: 20px;"
-      ></el-pagination>
+      <el-pagination background layout="prev, pager, next" :total="100" />
     </div>
   </el-card>
 </template>
