@@ -24,8 +24,12 @@
     <div v-if="activeName == '单期限额'">
       <SingleTermQuota />
     </div>
-    <div v-if="activeName == '退水默认设置'"></div>
-    <div v-if="activeName == '数据备份'"></div>
+    <div v-if="activeName == '退水默认设置'">
+      <BackWaterSetting />
+    </div>
+    <div v-if="activeName == '数据备份'">
+      <DataBackup />
+    </div>
   </el-card>
 </template>
 <script lang="ts" setup>
@@ -35,6 +39,8 @@ import WebsiteSetting from './WebsiteSetting.vue'
 import OddDiffSetting from './OddDiffSetting.vue'
 import AutoPrecipitation from './AutoPrecipitation.vue'
 import SingleTermQuota from './SingleTermQuota.vue'
+import BackWaterSetting from './BackWaterSetting.vue'
+import DataBackup from './DataBackup.vue'
 const activeName = ref('网站设置')
 </script>
 <style scss="scope"></style>

@@ -1,4 +1,30 @@
 <template>
+  <el-row style="justify-content: space-between; margin-bottom: 10px;">
+    <h6 style="margin-bottom: 0;">Er Xiao Lianzhong</h6>
+    <div class="flex">
+      <el-button size="small">
+        Er Xiao Lianzhong
+      </el-button>
+      <el-button size="small">
+        San Xiao Lianzhong
+      </el-button>
+      <el-button size="small">
+        Si Xiao Lianzhong
+      </el-button>
+      <el-button size="small">
+        Five Xiao Lianzhong
+      </el-button>
+      <el-button size="small">
+        Er Xiaolian missed
+      </el-button>
+      <el-button size="small">
+        Three consecutive misses
+      </el-button>
+      <el-button size="small">
+        four consecutive misses
+      </el-button>
+    </div>
+  </el-row>
   <el-row style="margin-bottom: 10px;">
     <table>
       <thead>
@@ -12,7 +38,7 @@
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>half wave</td>
+            <td>Er Xiao Lianzhong</td>
             <td>{{ item.type }}</td>
             <td>
               <div
@@ -54,114 +80,18 @@
 import { ref } from 'vue'
 
 const data = ref([
-  {
-    type: 'red list',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red big',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'red small',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green big',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'green small',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue sheet',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue double',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'big blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'little blue',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red order',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Red pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'Green pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue bill',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
-  {
-    type: 'blue pair',
-    odds: 5.7,
-    currentOdds: 5.7,
-    betAmount: 0,
-  },
+  { type: 'mouse', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'Tiger', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'dragon', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'horse', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'monkey', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'dog', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'ox', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'rabbit', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'snake', odds: 3.8, currentOdds: 3.8, betAmount: 0 },
+  { type: 'sheep', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'chicken', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: 'pig', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
 ])
 </script>
 <style lang="scss" scoped>

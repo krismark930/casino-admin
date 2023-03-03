@@ -233,6 +233,7 @@ table {
   th,
   td {
     border: $table-border;
+    text-align: center;
   }
 }
 

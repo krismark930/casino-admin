@@ -95,7 +95,7 @@
     </el-button>
   </el-row>
 </template>
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
 
 const data = ref([
