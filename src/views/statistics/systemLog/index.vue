@@ -21,7 +21,7 @@
         </el-form-item>
         <el-form-item label="日期">
           <el-date-picker
-            placeholder="Select date"
+            placeholder=""
             v-model="formData.date"
             style="width: 150px;"
           />

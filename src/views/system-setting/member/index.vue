@@ -5,16 +5,16 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="Member Deposit" name="first">
+      <el-tab-pane label="会员存款" name="first">
         <MemberDeposit />
       </el-tab-pane>
-      <el-tab-pane label="Member Withdrawal" name="second">
+      <el-tab-pane label="会员提款" name="second">
         <MemberWithdrawal />
       </el-tab-pane>
-      <el-tab-pane label="Member Information" name="third">
+      <el-tab-pane label="会员信息" name="third">
         <MemberInformation />
       </el-tab-pane>
-      <el-tab-pane label="Member Contact Information" name="fourth">
+      <el-tab-pane label="会员联系方式" name="fourth">
         <MemberContactInformation />
       </el-tab-pane>
     </el-tabs>

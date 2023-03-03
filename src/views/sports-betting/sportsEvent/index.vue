@@ -5,25 +5,25 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="Football" name="first">
+      <el-tab-pane label="足球" name="first">
         <Football />
       </el-tab-pane>
-      <el-tab-pane label="Basketball" name="second">
+      <el-tab-pane label="篮球" name="second">
         <Basketball />
       </el-tab-pane>
-      <el-tab-pane label="Baseball" name="third">
+      <el-tab-pane label="棒球" name="third">
         <Baseball />
       </el-tab-pane>
-      <el-tab-pane label="Tennis" name="fourth">
+      <el-tab-pane label="网球" name="fourth">
         <Tennis />
       </el-tab-pane>
-      <el-tab-pane label="Volleyball" name="fifth">
+      <el-tab-pane label="排球" name="fifth">
         <Volleyball />
       </el-tab-pane>
-      <el-tab-pane label="Other" name="sixth">
+      <el-tab-pane label="其它" name="sixth">
         <Other />
       </el-tab-pane>
-      <el-tab-pane label="Result" name="seventh">
+      <el-tab-pane label="结果" name="seventh">
         <Result />
       </el-tab-pane>
     </el-tabs>

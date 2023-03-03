@@ -18,14 +18,14 @@
       <el-form-item label="日期时间">
         <el-date-picker
           v-model="formData.datetime"
-          placeholder="Select date and time"
+          placeholder="选择日期和时间"
           type="datetime"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="开赛时间">
         <el-date-picker
           v-model="formData.startDateTime"
-          placeholder="Select date and time"
+          placeholder="选择日期和时间"
           type="datetime"
         ></el-date-picker>
       </el-form-item>

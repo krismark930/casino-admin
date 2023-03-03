@@ -73,7 +73,7 @@ export default env => {
       },
     },
     server: {
-      port: 8000,
+      port: 3006,
       open: true,
       proxy: {
         '/api': {

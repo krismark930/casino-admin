@@ -6,7 +6,7 @@
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="类别">
-          <el-select v-model="formData.option1" placeholder="Select type">
+          <el-select v-model="formData.option1" placeholder="">
             <el-option
               v-for="item in options1"
               :key="item.value"
@@ -16,7 +16,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="查看方式">
-          <el-select v-model="formData.option2" placeholder="Select type">
+          <el-select v-model="formData.option2" placeholder="">
             <el-option
               v-for="item in options2"
               :key="item.value"
@@ -28,7 +28,7 @@
         <el-form-item label="比赛日期">
           <el-date-picker
             v-model="formData.gameDate"
-            placeholder="Select game date"
+            placeholder=""
             value-format="YYYY-MM-DD"
           ></el-date-picker>
         </el-form-item>
@@ -39,7 +39,7 @@
       </div>
       <div>
         <el-form-item label="选择联盟">
-          <el-select v-model="formData.option3" placeholder="Select type">
+          <el-select v-model="formData.option3" placeholder="">
             <el-option
               v-for="item in options3"
               :key="item.value"

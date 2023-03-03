@@ -11,11 +11,7 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总存款
-                  <el-tooltip
-                    effect="dark"
-                    content="Total amount of deposit"
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content="入金总额" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />
                     </el-icon>
@@ -25,7 +21,7 @@
             </el-statistic>
             <div class="statistic-footer">
               <div class="footer-item">
-                <span>than yesterday</span>
+                <span>比昨天</span>
                 <span class="green">
                   24%
                   <el-icon>
@@ -42,11 +38,7 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总提款
-                  <el-tooltip
-                    effect="dark"
-                    content="Total amount of withdraw"
-                    placement="top"
-                  >
+                  <el-tooltip effect="dark" content="取款总额" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />
                     </el-icon>
@@ -56,7 +48,7 @@
             </el-statistic>
             <div class="statistic-footer">
               <div class="footer-item">
-                <span>month on month</span>
+                <span>逐月</span>
                 <span class="red">
                   12%
                   <el-icon>
@@ -85,7 +77,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="代理商">
-          <el-select v-model="formData.agent" placeholder="Select type">
+          <el-select v-model="formData.agent" placeholder="">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -95,7 +87,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select v-model="formData.type" placeholder="Select type">
+          <el-select v-model="formData.type" placeholder="">
             <el-option
               v-for="item in options"
               :key="item.value"
