@@ -1,7 +1,7 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('instantbet.title') }}[{{ selectedPeriod }}期]
+      {{ $t('instantbet.positiveTitle') }}[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">

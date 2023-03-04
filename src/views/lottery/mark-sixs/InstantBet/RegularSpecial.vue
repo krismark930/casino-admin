@@ -1,7 +1,7 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('instantbet.title') }}[{{ selectedPeriod }}期]
+      {{ $t('instantbet.regularTitle') }}[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
@@ -97,18 +97,16 @@
               </template>
               <template v-else>
                 <template v-if="n + (m - 1) * rowNum == recordNum">
-                  <td :colspan="colNum">
-                    {{ $t('instantbet.bettingTotal') }}: 0
-                  </td>
+                  <td :colspan="colNum">{{ $t('instantbet.totalBet') }}: 0</td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum == recordNum + 1">
                   <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmount') }}: 0
+                    {{ $t('instantbet.totalriskvalue') }}: 0
                   </td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum == recordNum + 2">
                   <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmountOfFlight') }}: 0
+                    {{ $t('instantbet.totalAmountFlight') }}: 0
                   </td>
                 </template>
               </template>
@@ -156,7 +154,7 @@ const setting = reactive({
 })
 
 const selectedPeriod = ref('2023021')
-const valueAtRisk = ref('3')
+const valueAtRisk = ref('50')
 const backWater = ref('10')
 const rowNum = 13
 const blockNum = 4

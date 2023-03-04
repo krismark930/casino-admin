@@ -14,7 +14,9 @@
     <el-tab-pane label="Instant Bet Slip" name="instantBet">
       <InstantBet />
     </el-tab-pane>
-    <el-tab-pane label="Go fly" name="gofly"></el-tab-pane>
+    <el-tab-pane label="Go fly" name="gofly">
+      <GoFly />
+    </el-tab-pane>
     <el-tab-pane label="Member" name="member">
       <MemberManagement />
     </el-tab-pane>
@@ -45,6 +47,8 @@ import OddSetting from './OddSetting/index.vue'
 import InstantBet from './InstantBet/index.vue'
 import TotalBill from './TotalBill/index.vue'
 import SystemMaintenance from './SystemMaintenance/index.vue'
+import GoFly from './GoFly/index.vue'
+
 const activeName = ref('handicap')
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
