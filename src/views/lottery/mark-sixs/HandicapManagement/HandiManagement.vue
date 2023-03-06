@@ -1,77 +1,13 @@
 <template>
-  <!-- <el-form :model="form" label-width="250px">
-        <el-row>
-            <el-col :lg="12" :sm="24">
-                <el-form-item label="Lottery Ball Number:" style="align-items: center;">
-                    <el-descriptions
-                        direction="vertical"
-                        :column="2"
-                        border
-                        class="lotteryBall-class"
-                    >
-                    <el-descriptions-item label="Flat1">
-                        <el-input placeholder="0" />
-                    </el-descriptions-item>
-                    <el-descriptions-item :span="2" label="Operate">
-                        <el-button type="primary" size="small">
-                            Lottery
-                        </el-button>
-                    </el-descriptions-item>
-                    <el-descriptions-item label="Warning">
-                        如果还未到开奖，这里数据请保持为0！
-                    </el-descriptions-item>
-                    </el-descriptions>
-                </el-form-item>
-                
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col :lg="12" :sm="24">
-                <el-form-item label="Number of Issues">
-                    <el-input v-model="form.number" />
-                </el-form-item>
-            </el-col>
-            <el-col :lg="12" :sm="24">
-                <el-form-item label="Draw Time">
-                    <el-input v-model="form.drawTime" />
-                </el-form-item>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col :lg="12" :sm="24">
-                <el-form-item label="Total Closing">
-                    <el-button type="primary" size="small">
-                        Opening...
-                    </el-button>
-                </el-form-item>
-            </el-col>
-            <el-col :lg="12" :sm="24">
-                <el-form-item label="Total Auto-sealing Time">
-                    <el-input v-model="form.autosealing" />
-                </el-form-item>
-            </el-col>
-        </el-row>
-        <el-form-item label="Automatic Opening Time">
-            <div style="display: flex; column-gap: 10px;">
-                <el-input v-model="form.autoOpeningtime"/>
-                <el-radio v-model="warning">
-                    (是否充许自动开盘)*(如果开始设成了自动开盘，那自动开盘后这勾会自动变成不打勾！)
-                </el-radio>
-            </div>
-        </el-form-item>
-        <el-form-item label="Positive Code Automatic Sealing Time">
-            <el-input v-model="form.positiveCode" />
-        </el-form-item>
-    </el-form> -->
   <el-form :model="form">
     <table class="handicap-setting">
       <tr>
-        <th>Lottery ball number:</th>
+        <th>开奖球号：</th>
         <td colspan="3">
           <table class="lottery-ball-number">
             <thead>
-              <th style="width: 50%;">Flat 1</th>
-              <th style="width: 50%;">Operate</th>
+              <th style="width: 50%;">平1</th>
+              <th style="width: 50%;">操作</th>
             </thead>
             <tbody>
               <tr>
@@ -80,14 +16,13 @@
                 </td>
                 <td>
                   <el-button>
-                    lottery
+                    开奖
                   </el-button>
                 </td>
               </tr>
               <tr>
                 <td colspan="2" style="color: red;">
-                  If the lottery has not yet come, please keep the data here as
-                  0!
+                  如果还未到开奖，这里数据请保持为0！
                 </td>
               </tr>
             </tbody>
@@ -96,13 +31,13 @@
       </tr>
       <tr>
         <th>
-          Number of Issues:
+          期数：
         </th>
         <td>
           <el-input v-model="form.number" />
         </td>
         <th>
-          Draw time:
+          开奖时间：
         </th>
         <td>
           <el-input v-model="form.drawTime" />
@@ -110,22 +45,22 @@
       </tr>
       <tr>
         <th>
-          Total closing:
+          总封盘：
         </th>
         <td>
           <el-button>
-            Closing...
+            正在封盘中...
           </el-button>
         </td>
         <th>
-          Total auto-sealing time:
+          总自动封盘时间:
         </th>
         <td>
           <el-input v-model="form.autosealing" />
         </td>
       </tr>
       <tr>
-        <th>Automatic opening time:</th>
+        <th>自动开盘时间：</th>
         <td colspan="3">
           <div style="display: flex; width: 100%; column-gap: 10px;">
             <el-input v-model="form.autoOpeningtime" style="flex: 0 1 auto;" />
@@ -136,30 +71,30 @@
         </td>
       </tr>
       <tr>
-        <th>Special code:</th>
+        <th>特码：</th>
         <td>
           <el-radio-group v-model="form.specialRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
-        <th>Special code automatic sealing time:</th>
+        <th>特码自动封盘时间：</th>
         <td>
           <el-input v-model="form.specialCode" />
         </td>
       </tr>
       <tr>
         <th>
-          Zheng Te:
+          正特：
         </th>
         <td>
           <el-radio-group v-model="form.zhengteRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
         <th rowspan="8">
-          Positive code automatic sealing time:
+          正码自动封盘时间：
         </th>
         <td rowspan="8">
           <el-input v-model="form.positiveCode" />
@@ -167,78 +102,78 @@
       </tr>
       <tr>
         <th>
-          Positive code:
+          正码：
         </th>
         <td>
           <el-radio-group v-model="form.positiveCodeRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          Five elements:
+          五行：
         </th>
         <td>
           <el-radio-group v-model="form.fiveElementsRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          Pass:
+          过关：
         </th>
         <td>
           <el-radio-group v-model="form.passRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          even code:
+          连码：
         </th>
         <td>
           <el-radio-group v-model="form.evenCodeRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          Zodiac/Zodiac:
+          生肖/正特尾：
         </th>
         <td>
           <el-radio-group v-model="form.zodiacRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          Half-wave/half-half-wave/Zhengxiao seven-color wave:
+          半波/半半波/正肖七色波：
         </th>
         <td>
           <el-radio-group v-model="form.waveRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
       <tr>
         <th>
-          Head and tail numbers:
+          头尾数：
         </th>
         <td>
           <el-radio-group v-model="form.headTailNumberRadio" class="ml-4">
-            <el-radio label="1" size="large">Seal up</el-radio>
-            <el-radio label="2" size="large">Open</el-radio>
+            <el-radio label="1" size="large">封</el-radio>
+            <el-radio label="2" size="large">开</el-radio>
           </el-radio-group>
         </td>
       </tr>
@@ -246,7 +181,7 @@
         <th></th>
         <td colspan="3">
           <el-button>
-            Save line
+            保存盘口
           </el-button>
         </td>
       </tr>
@@ -255,11 +190,11 @@
     <table class="handicap-history">
       <thead>
         <tr>
-          <th>Default lottery period</th>
-          <th>Draw time</th>
-          <th>Automatic opening time</th>
-          <th>Automatic closing time</th>
-          <th>Operate</th>
+          <th>预设开奖期数</th>
+          <th>开奖时间</th>
+          <th>自动开盘时间</th>
+          <th>自动封盘时间</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -271,7 +206,7 @@
           <td>
             <el-button size="small">
               <el-icon><Setting /></el-icon>
-              Setup
+              设置
             </el-button>
           </td>
         </tr>
@@ -283,7 +218,7 @@
           <td>
             <el-button size="small">
               <el-icon><Setting /></el-icon>
-              Setup
+              设置
             </el-button>
           </td>
         </tr>
@@ -295,7 +230,7 @@
           <td>
             <el-button size="small">
               <el-icon><Setting /></el-icon>
-              Setup
+              设置
             </el-button>
           </td>
         </tr>

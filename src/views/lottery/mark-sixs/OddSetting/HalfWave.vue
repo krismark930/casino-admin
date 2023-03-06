@@ -3,16 +3,16 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>Odds/Title</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>half wave</td>
+            <td>半波</td>
             <td>{{ item.type }}</td>
             <td>
               <div
@@ -37,13 +37,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -55,109 +55,109 @@ import { ref } from 'vue'
 
 const data = ref([
   {
-    type: 'red list',
+    type: '红单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'red double',
+    type: '红双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'red big',
+    type: '红大',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'red small',
+    type: '红小',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'green sheet',
+    type: '绿单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'green double',
+    type: '绿双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'green big',
+    type: '绿大',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'green small',
+    type: '绿小',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'blue sheet',
+    type: '蓝单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'blue double',
+    type: '蓝双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'big blue',
+    type: '蓝大',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'little blue',
+    type: '蓝小',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'Red order',
+    type: '红合单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'Red pair',
+    type: '红合双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'Green bill',
+    type: '绿合单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'Green pair',
+    type: '绿合双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'blue bill',
+    type: '蓝合单',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,
   },
   {
-    type: 'blue pair',
+    type: '蓝合双',
     odds: 5.7,
     currentOdds: 5.7,
     betAmount: 0,

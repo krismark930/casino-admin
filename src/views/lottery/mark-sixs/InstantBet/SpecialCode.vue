@@ -1,11 +1,11 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('instantbet.title') }}[{{ selectedPeriod }}期]
+      {{ $t('lottery.title') }}[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
-        <el-form-item :label="$t('instantbet.chooseNumberOfPeriods')">
+        <el-form-item :label="$t('lottery.chooseNumberOfPeriods')">
           <el-select
             placeholder="第2023021期"
             v-model="selectedPeriod"
@@ -19,61 +19,61 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('instantbet.valueAtRisk')">
+        <el-form-item :label="$t('lottery.valueAtRisk')">
           <el-input v-model="valueAtRisk" style="width: 80px" />
         </el-form-item>
-        <el-form-item :label="$t('instantbet.backWater')">
+        <el-form-item :label="$t('lottery.backWater')">
           <el-input v-model="backWater" style="width: 80px" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="Search" @click="handleSearch">
-            {{ $t('instantbet.flyCalc') }}
+            {{ $t('lottery.flyCalc') }}
           </el-button>
         </el-form-item>
       </el-form>
     </el-col>
     <el-col class="button-group">
       <el-button size="small">
-        {{ $t('instantbet.topThree') }}
+        {{ $t('lottery.topThree') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.topFive') }}
+        {{ $t('lottery.topFive') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.topTen') }}
+        {{ $t('lottery.topTen') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.topFifteen') }}
+        {{ $t('lottery.topFifteen') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.all') }}
+        {{ $t('lottery.all') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.single') }}
+        {{ $t('lottery.single') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.double') }}
+        {{ $t('lottery.double') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.large') }}
+        {{ $t('lottery.large') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.small') }}
+        {{ $t('lottery.small') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.red') }}
+        {{ $t('lottery.red') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.blue') }}
+        {{ $t('lottery.blue') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.green') }}
+        {{ $t('lottery.green') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.combinedOrder') }}
+        {{ $t('lottery.combinedOrder') }}
       </el-button>
       <el-button size="small">
-        {{ $t('instantbet.combinedPair') }}
+        {{ $t('lottery.combinedPair') }}
       </el-button>
     </el-col>
   </el-row>
@@ -83,12 +83,12 @@
         <thead>
           <tr>
             <template v-for="l in 4" :key="l">
-              <th>Number</th>
-              <th>Odds</th>
-              <th>Lump sum</th>
-              <th>Expected profit</th>
-              <th>Fly away</th>
-              <th>Completed</th>
+              <th>{{ $t('lottery.number') }}</th>
+              <th>{{ $t('lottery.odds') }}</th>
+              <th>{{ $t('lottery.lumpSum') }}</th>
+              <th>{{ $t('lottery.expectedProfit') }}</th>
+              <th>{{ $t('lottery.flyAway') }}</th>
+              <th>{{ $t('lottery.completed') }}</th>
               <th style="width: 10px;"></th>
             </template>
           </tr>
@@ -109,18 +109,14 @@
               </template>
               <template v-else>
                 <template v-if="n + (m - 1) * rowNum == recordNum">
-                  <td :colspan="colNum">
-                    {{ $t('instantbet.bettingTotal') }}: 0
-                  </td>
+                  <td :colspan="colNum">{{ $t('lottery.bettingTotal') }}: 0</td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum == recordNum + 1">
-                  <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmount') }}: 0
-                  </td>
+                  <td :colspan="colNum">{{ $t('lottery.totalAmount') }}: 0</td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum == recordNum + 2">
                   <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmountOfFlight') }}: 0
+                    {{ $t('lottery.totalAmountOfFlight') }}: 0
                   </td>
                 </template>
               </template>
@@ -130,12 +126,12 @@
         <thead>
           <tr>
             <template v-for="l in blockNum" :key="l">
-              <th>Number</th>
-              <th>Odds</th>
-              <th>Lump sum</th>
-              <th>Expected profit</th>
-              <th>Fly away</th>
-              <th>Completed</th>
+              <th>{{ $t('lottery.number') }}</th>
+              <th>{{ $t('lottery.odds') }}</th>
+              <th>{{ $t('lottery.lumpSum') }}</th>
+              <th>{{ $t('lottery.expectedProfit') }}</th>
+              <th>{{ $t('lottery.flyAway') }}</th>
+              <th>{{ $t('lottery.completed') }}</th>
               <th style="width: 10px;"></th>
             </template>
           </tr>
@@ -156,18 +152,14 @@
               </template>
               <template v-else>
                 <template v-if="n + (m - 1) * rowNum2 == recordNum2">
-                  <td :colspan="colNum">
-                    {{ $t('instantbet.bettingTotal') }}: 0
-                  </td>
+                  <td :colspan="colNum">{{ $t('lottery.bettingTotal') }}: 0</td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum2 == recordNum2 + 1">
-                  <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmount') }}: 0
-                  </td>
+                  <td :colspan="colNum">{{ $t('lottery.totalAmount') }}: 0</td>
                 </template>
                 <template v-if="n + (m - 1) * rowNum2 == recordNum2 + 2">
                   <td :colspan="colNum">
-                    {{ $t('instantbet.totalAmountOfFlight') }}: 0
+                    {{ $t('lottery.totalAmountOfFlight') }}: 0
                   </td>
                 </template>
               </template>

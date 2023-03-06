@@ -5,37 +5,47 @@
       style="justify-content: space-between;flex-wrap: nowrap;"
     >
       <el-row>
-        <el-col :span="7">
-          <el-form-item label="ShareHolder">
-            <el-select placeholder="All">
-              <el-option label="All" value="allShareholder" />
+        <el-col :span="6">
+          <el-form-item label="股东">
+            <el-select placeholder="全部">
+              <el-option label="全部" value="allShareholder" />
               <el-option label="bdm000" value="bdm000" />
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="7">
-          <el-form-item label="Total Generation">
-            <el-select placeholder="All">
-              <el-option label="All" value="allGeneration" />
+          <el-form-item label="总代">
+            <el-select placeholder="全部">
+              <el-option label="全部" value="allGeneration" />
               <el-option label="cdm000" value="cdm000" />
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="7">
-          <el-form-item label="Derry">
-            <el-select placeholder="All">
-              <el-option label="All" value="allGeneration" />
+          <el-form-item label="代里">
+            <el-select placeholder="全部">
+              <el-option label="全部" value="allGeneration" />
             </el-select>
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-form-item label="会员账号：">
+          <el-input>
+            <template #prepend>
+              <el-icon><Search /></el-icon>
+            </template>
+          </el-input>
+        </el-form-item>
+        <el-button>确定搜索</el-button>
+      </el-row>
       <div class="flex">
-        <el-button type="primary">All Member</el-button>
-        <el-button type="success">Turn on</el-button>
-        <el-button type="danger">Prohibit</el-button>
-        <el-button type="warning">Add Member</el-button>
+        <el-button type="primary">所有会员</el-button>
+        <el-button type="success">开启</el-button>
+        <el-button type="danger">禁止</el-button>
+        <el-button type="warning">添加会员</el-button>
       </div>
     </el-row>
     <el-table
@@ -44,24 +54,24 @@
       header-align="center"
       stripe
     >
-      <el-table-column prop="serialNumber" label="SerialNumber" />
-      <el-table-column prop="account" label="Account" />
-      <el-table-column prop="name" label="Name" />
-      <el-table-column prop="creditLimit" label="Credit Limit/Balance" />
-      <el-table-column prop="acting" label="Acting" />
-      <el-table-column prop="generalGerneration" label="General Generation" />
-      <el-table-column prop="shareholder" label="ShareHolder" />
-      <el-table-column prop="generationpercent" label="Generation%" />
-      <el-table-column prop="total" label="Total%" />
-      <el-table-column prop="share" label="share%" />
-      <el-table-column prop="company" label="company%" />
-      <el-table-column prop="type" label="Type" />
-      <el-table-column label="Situation">
+      <el-table-column prop="serialNumber" label="序号" />
+      <el-table-column prop="account" label="账号" />
+      <el-table-column prop="name" label="姓名" />
+      <el-table-column prop="creditLimit" label="信用额度/余额" />
+      <el-table-column prop="acting" label="代理" />
+      <el-table-column prop="generalGerneration" label="总代" />
+      <el-table-column prop="shareholder" label="股东" />
+      <el-table-column prop="generationpercent" label="代%" />
+      <el-table-column prop="total" label="总%" />
+      <el-table-column prop="share" label="股%" />
+      <el-table-column prop="company" label="公司%" />
+      <el-table-column prop="type" label="类型" />
+      <el-table-column label="状况">
         <el-checkbox size="large"></el-checkbox>
       </el-table-column>
-      <el-table-column prop="registration" label="Registration Time" />
-      <el-table-column prop="logins" label="Logins" />
-      <el-table-column label="Operate" width="120">
+      <el-table-column prop="registration" label="注册时间" />
+      <el-table-column prop="logins" label="登录次数" />
+      <el-table-column label="操作" width="120">
         <template #default="scope">
           <el-button-group>
             <el-button icon="edit" type="primary"></el-button>
@@ -74,7 +84,7 @@
       <el-pagination background layout="prev, pager, next" :total="100" />
     </div>
     <el-button style="float:right;" type="success">
-      Refresh
+      刷新
     </el-button>
   </el-card>
 </template>

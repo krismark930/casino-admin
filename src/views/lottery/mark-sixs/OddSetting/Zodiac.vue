@@ -3,22 +3,25 @@
     <h6 style="margin-bottom: 0;">two tails</h6>
     <div class="flex">
       <el-button size="small">
-        two tails
+        二肖连中
       </el-button>
       <el-button size="small">
-        three tails
+        三肖连中
       </el-button>
       <el-button size="small">
-        Four tails in a row
+        四肖连中
       </el-button>
       <el-button size="small">
-        two tails missed
+        五肖连中
       </el-button>
       <el-button size="small">
-        three tails missed
+        二肖连不中
       </el-button>
       <el-button size="small">
-        four tails missed
+        三肖连不中
+      </el-button>
+      <el-button size="small">
+        四肖连不中
       </el-button>
     </div>
   </el-row>
@@ -26,10 +29,10 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>Odds/Title</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
@@ -60,13 +63,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置

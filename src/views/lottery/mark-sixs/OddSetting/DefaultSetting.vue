@@ -1,10 +1,10 @@
 <template>
   <el-row style="display: flex; justify-content: space-between;">
-    <h6 style="margin-bottom: 0; margin-top: 5px;">Special A Odds Setting</h6>
-    <el-form-item label="Activity zone" style="margin-bottom: 0;">
-      <el-select v-model="select" placeholder="please select your zone">
-        <el-option label="Zone one" value="shanghai" />
-        <el-option label="Zone two" value="beijing" />
+    <h6 style="margin-bottom: 0; margin-top: 5px;">特A 赔率设置</h6>
+    <el-form-item label="选择项目" style="margin-bottom: 0;">
+      <el-select v-model="select" placeholder="特A">
+        <el-option label="特A" value="shanghai" />
+        <el-option label="特B" value="beijing" />
       </el-select>
     </el-form-item>
   </el-row>
@@ -14,8 +14,8 @@
         <thead>
           <tr>
             <template v-for="l in 5" :key="l">
-              <th>Number</th>
-              <th>Odds</th>
+              <th>号码</th>
+              <th>赔率</th>
             </template>
           </tr>
         </thead>
@@ -80,15 +80,15 @@
             <template v-if="item == 'submitComponent'">
               <td colspan="4">
                 <el-radio-group v-model="reduce">
-                  <el-radio label="reduce" />
-                  <el-radio label="add" />
+                  <el-radio label="减" />
+                  <el-radio label="加" />
                 </el-radio-group>
                 <el-input
                   style="margin-bottom: 5px;"
                   placeholder="Please input"
                   :value="0.5"
                 />
-                <el-button size="small" type="primary">Send out</el-button>
+                <el-button size="small" type="primary">送出</el-button>
                 <el-button size="small" type="primary">取消</el-button>
               </td>
             </template>
@@ -101,24 +101,24 @@
     </el-row>
   </el-scrollbar>
   <el-row>
-    <el-form-item label="Unified modification:">
+    <el-form-item label="统一修改">
       <el-radio-group v-model="radio1">
-        <el-radio label="1" size="large">One</el-radio>
-        <el-radio label="2" size="large">Pair</el-radio>
-        <el-radio label="3" size="large">big</el-radio>
-        <el-radio label="4" size="large">small</el-radio>
-        <el-radio label="5" size="large">red wave</el-radio>
-        <el-radio label="6" size="large">green wave</el-radio>
-        <el-radio label="7" size="large">blue wave</el-radio>
-        <el-radio label="0" size="large">All</el-radio>
+        <el-radio label="1" size="large">单</el-radio>
+        <el-radio label="2" size="large">双</el-radio>
+        <el-radio label="3" size="large">大</el-radio>
+        <el-radio label="4" size="large">小</el-radio>
+        <el-radio label="5" size="large">红波</el-radio>
+        <el-radio label="6" size="large">绿波</el-radio>
+        <el-radio label="7" size="large">蓝波</el-radio>
+        <el-radio label="0" size="large">全部</el-radio>
       </el-radio-group>
     </el-form-item>
   </el-row>
   <el-row>
-    <el-form-item label="Odds" style="margin-right: 10px;">
+    <el-form-item label="赔率" style="margin-right: 10px;">
       <el-input :value="0" />
     </el-form-item>
-    <el-button>unified modification</el-button>
+    <el-button>统一修改</el-button>
   </el-row>
 </template>
 <script lang="ts" setup>
@@ -132,96 +132,96 @@ const setting = reactive({
 const others = ref([
   [
     {
-      number: 'one',
+      number: '单',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'big',
+      number: '大',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'combined order',
+      number: '合单',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'red wave',
+      number: '红波',
       odds: 2.55,
       bet: 0,
     },
     {
-      number: 'blue wave',
+      number: '蓝波',
       odds: 2.65,
       bet: 0,
     },
   ],
   [
     {
-      number: 'pair',
+      number: '双',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'Small',
+      number: '小',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'double',
+      number: '合双',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'green wave',
+      number: '绿波',
       odds: 2.65,
       bet: 0,
     },
     {
-      buttons: ['submit', '重置'],
+      buttons: ['提交', '重置'],
     },
   ],
   [
     {
-      number: 'poultry',
+      number: '家禽',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'the beast',
+      number: '野兽',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'big tail',
+      number: '尾大',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'small tail',
+      number: '尾小',
       odds: 1.98,
       bet: 0,
     },
     {
-      number: 'Big order',
+      number: '大单',
       odds: 3.5,
       bet: 0,
     },
   ],
   [
     {
-      number: 'Small order',
+      number: '小单',
       odds: 3.5,
       bet: 0,
     },
     {
-      number: 'big double',
+      number: '大双',
       odds: 3.5,
       bet: 0,
     },
     {
-      number: 'little pair',
+      number: '小双',
       odds: 3.5,
       bet: 0,
     },
@@ -230,67 +230,67 @@ const others = ref([
 
 const options = ref([
   [
-    'mouse',
-    'ox',
-    'Tiger',
-    'rabbit',
-    'dragon',
-    'snake',
-    'horse',
-    'sheep',
-    'monkey',
-    'chicken',
-    'dog',
-    'pig',
+    '鼠',
+    '牛',
+    '虎',
+    '兔',
+    '龙',
+    '蛇',
+    '马',
+    '羊',
+    '猴',
+    '鸡',
+    '狗',
+    '猪',
     '',
     '',
     '',
   ],
   [
-    'red list',
-    'red double',
-    'red big',
-    'red small',
-    'blue sheet',
-    'blue double',
-    'big blue',
-    'little blue',
-    'green list',
-    'Green double',
-    'green big',
-    'green small',
-    'red wave',
-    'blue wave',
-    'green wave',
+    '红单',
+    '红双',
+    '红大',
+    '红小',
+    '蓝单',
+    '蓝双',
+    '蓝大',
+    '蓝小',
+    '绿单',
+    '绿双',
+    '绿大',
+    '绿小',
+    '红波',
+    '蓝波',
+    '绿波',
   ],
   [
-    'odd number',
-    'double number',
-    'large',
-    'small',
-    'combined order',
-    'double',
+    '单号',
+    '双号',
+    '大号',
+    '小号',
+    '合单',
+    '合双',
     '',
-    '0 heads',
-    '1 head',
-    '2 heads',
-    '3 heads',
-    '4 heads',
+    '0 头',
+    '1 头',
+    '2 头',
+    '3 头',
+    '4 头',
     '',
     '',
     '',
   ],
   [
-    '0 end',
-    '1 tail',
-    '2 tails',
-    '3 tails',
-    '4 tails',
-    '5 tails',
-    '6 tails',
-    '7 tails',
-    '8 tails',
-    '9 tails',
+    '0 尾',
+    '1 尾',
+    '2 尾',
+    '3 尾',
+    '4 尾',
+    '5 尾',
+    '6 尾',
+    '7 尾',
+    '8 尾',
+    '9 尾',
     '',
     'submitComponent',
   ],
