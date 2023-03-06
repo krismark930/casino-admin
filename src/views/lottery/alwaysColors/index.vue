@@ -17,6 +17,15 @@
       <el-tab-pane label="限额管理" name="fourth">
         <QuotaManagement />
       </el-tab-pane>
+      <el-tab-pane label="彩票结果管理" name="fisth">
+        <ResultsManagement />
+      </el-tab-pane>
+      <el-tab-pane label="彩票赔率管理" name="sixth">
+        <OddsManagement />
+      </el-tab-pane>
+      <el-tab-pane label="一键返水" name="seventh">
+        <OnekeyRebate />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -27,6 +36,9 @@ import ManageHome from '@/views/lottery/alwaysColors/manageHome/index.vue'
 import ReportDetails from '@/views/lottery/alwaysColors/reportDetails/index.vue'
 import ColorSettings from '@/views/lottery/alwaysColors/colorSettings/index.vue'
 import QuotaManagement from '@/views/lottery/alwaysColors/quotaManagement/index.vue'
+import ResultsManagement from '@/views/lottery/alwaysColors/resultsManagement/index.vue'
+import OddsManagement from '@/views/lottery/alwaysColors/oddsManagement/index.vue'
+import OnekeyRebate from '@/views/lottery/alwaysColors/onekeyRebate/index.vue'
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event)
