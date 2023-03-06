@@ -3,10 +3,10 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>Odds/Title</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
@@ -37,13 +37,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -55,154 +55,154 @@ import { ref } from 'vue'
 
 const data = ref([
   {
-    type1: 'One Xiao',
-    type2: 'mouse',
+    type1: '一肖',
+    type2: '鼠',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'Tiger',
+    type1: '一肖',
+    type2: '虎',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'dragon',
+    type1: '一肖',
+    type2: '龙',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'horse',
+    type1: '一肖',
+    type2: '马',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'monkey',
+    type1: '一肖',
+    type2: '猴',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'dog',
+    type1: '一肖',
+    type2: '狗',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'ox',
+    type1: '一肖',
+    type2: '牛',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'rabbit',
+    type1: '一肖',
+    type2: '兔',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'snake',
+    type1: '一肖',
+    type2: '蛇',
     odds: 1.77,
     currentOdds: 1.77,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'sheep',
+    type1: '一肖',
+    type2: '羊',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'chicken',
+    type1: '一肖',
+    type2: '鸡',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'One Xiao',
-    type2: 'pig',
+    type1: '一肖',
+    type2: '猪',
     odds: 2.01,
     currentOdds: 2.01,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '0',
     odds: 2.0,
     currentOdds: 2.0,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '1',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '2',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '3',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '4',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '5',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '6',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '7',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '8',
     odds: 1.8,
     currentOdds: 1.8,
     betAmount: 0,
   },
   {
-    type1: 'Normal mantissa',
+    type1: '正特尾数',
     type2: '9',
     odds: 1.8,
     currentOdds: 1.8,

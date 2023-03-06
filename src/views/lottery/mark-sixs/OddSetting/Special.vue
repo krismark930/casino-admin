@@ -3,16 +3,16 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>Odds/Title</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>teshaw</td>
+            <td>特肖</td>
             <td>{{ item.type }}</td>
             <td>
               <div
@@ -37,13 +37,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -54,18 +54,18 @@
 import { ref } from 'vue'
 
 const data = ref([
-  { type: 'mouse', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'Tiger', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'dragon', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'horse', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'monkey', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'dog', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'ox', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'rabbit', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'snake', odds: 9.6, currentOdds: 9.6, betAmount: 0 },
-  { type: 'sheep', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'chicken', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
-  { type: 'pig', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '鼠', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '虎', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '龙', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '马', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '猴', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '狗', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '牛', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '兔', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '蛇', odds: 9.6, currentOdds: 9.6, betAmount: 0 },
+  { type: '羊', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '鸡', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '猪', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
 ])
 </script>
 <style lang="scss" scoped>

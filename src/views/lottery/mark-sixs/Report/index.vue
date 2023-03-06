@@ -1,44 +1,31 @@
 <template>
   <el-form :model="form" label-width="20%">
-    <el-form-item label="Betting Type:">
-      <el-select v-model="form.bettingType" placeholder="-----All-----">
-        <el-option label="Special code: Special A" value="specialA" />
-        <el-option label="Special code: Special B" value="specialB" />
-        <el-option label="Positive code: Positive A" value="positiveA" />
-        <el-option label="Positive code: Positive B" value="positiveB" />
-        <el-option
-          label="Positive special: Positive 1 Special"
-          value="positive1"
-        />
-        <el-option
-          label="Positive special: Positive 2 Special"
-          value="positive2"
-        />
-        <el-option
-          label="Positive special: Positive 3 Special"
-          value="positive3"
-        />
-        <el-option
-          label="Positive special: Positive 4 Special"
-          value="positive4"
-        />
-        <el-option
-          label="Positive special: Positive 5 Special"
-          value="positive5"
-        />
-        <el-option
-          label="Positive special: Positive 6 Special"
-          value="positive6"
-        />
-        <el-option label="Positive 1-6: Positive Code 1" value="pcode1" />
-        <el-option label="Positive 1-6: Positive Code 2" value="pcode2" />
-        <el-option label="Positive 1-6: Positive Code 3" value="pcode3" />
-        <el-option label="Positive 1-6: Positive Code 4" value="pcode4" />
-        <el-option label="Positive 1-6: Positive Code 5" value="pcode5" />
-        <el-option label="Positive 1-6: Positive Code 6" value="pcode6" />
+    <el-form-item label="投注品种:">
+      <el-select v-model="form.bettingType" placeholder="-----全部-----">
+        <el-option label="特码：特A" value="specialA" />
+        <el-option label="特码：特B" value="specialB" />
+        <el-option label="正码：正A" value="positiveA" />
+        <el-option label="正码：正B" value="positiveB" />
+        <el-option label="正特：正1特" value="Positive 1 Special" />
+        <el-option label="正特：正2特" value="Positive 2 Special" />
+        <el-option label="正特：正3特" value="Positive 3 Special" />
+        <el-option label="正特：正4特" value="Positive 4 Special" />
+        <el-option label="正特：正5特" value="Positive 5 Special" />
+        <el-option label="正特：正1特" value="positive1" />
+        <el-option label="正特：正2特" value="positive2" />
+        <el-option label="正特：正3特" value="positive3" />
+        <el-option label="正特：正4特" value="positive4" />
+        <el-option label="正特：正5特" value="positive5" />
+        <el-option label="正特：正6特" value="positive6" />
+        <el-option label="正1-6：正码1" value="pcode1" />
+        <el-option label="正1-6：正码2" value="pcode2" />
+        <el-option label="正1-6：正码3" value="pcode3" />
+        <el-option label="正1-6：正码4" value="pcode4" />
+        <el-option label="正1-6：正码5" value="pcode5" />
+        <el-option label="正1-6：正码6" value="pcode6" />
       </el-select>
     </el-form-item>
-    <el-form-item label="Date range:">
+    <el-form-item label="日期区间:">
       <el-col :span="11">
         <el-date-picker
           v-model="form.date1"
@@ -55,7 +42,7 @@
         />
       </el-col>
     </el-form-item>
-    <el-form-item label="Choose the number of periods:" style="color:red">
+    <el-form-item label="选择期数:" style="color:red">
       <el-select v-model="form.periodNumber" placeholder="Check by time">
         <el-option label="Issue 20201003" value="issue20201003" />
         <el-option label="Issue 20201003" value="issue20201003" />
@@ -71,15 +58,13 @@
         <el-option label="Issue 20201003" value="issue20201003" />
         <el-option label="Issue 20201003" value="issue20201003" />
       </el-select>
-      (The dates above will not be valid if an issue is selected!)
+      (如果选择了期数,上面的日期将无效！)
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">Inquire</el-button>
+      <el-button type="primary" @click="onSubmit">查询</el-button>
     </el-form-item>
     <el-col :span="16" style="float:right;">
-      Operation Tips: If you want to inquire by time when you select the period,
-      please select [Search by time], if you select the period, you will not
-      inquire by time! .
+      操作提示：如果想按时间来查询选择期数时，请选择[按时间来查]，如果选择了期数将不按时间来查询！.
     </el-col>
   </el-form>
 </template>

@@ -9,13 +9,13 @@
       show-summary
       fit
     >
-      <el-table-column label="General Order">
-        <el-table-column prop="serialNumber" label="SerialNumber" />
-        <el-table-column prop="date" label="Date" />
-        <el-table-column prop="period" label="Period" />
-        <el-table-column prop="amount" label="Amount" />
-        <el-table-column prop="commission" label="Commission" />
-        <el-table-column prop="result" label="Result" />
+      <el-table-column label="总底单 ">
+        <el-table-column prop="serialNumber" label="序号" />
+        <el-table-column prop="date" label="日期" />
+        <el-table-column prop="period" label="期数" />
+        <el-table-column prop="amount" label="金额" />
+        <el-table-column prop="commission" label="佣金" />
+        <el-table-column prop="result" label="结果" />
       </el-table-column>
     </el-table>
   </el-form>
@@ -30,7 +30,7 @@ const getSummaries = (param) => {
   const sums = []
   columns.forEach((column, index) => {
     if (index === 1) {
-      sums[index] = 'Subtotal'
+      sums[index] = '小计'
       return
     }
     else if(index !== 0 && index !==1) {

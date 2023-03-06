@@ -2,27 +2,27 @@
   <el-form v-model="form">
     <el-row :gutter="10">
       <el-col :span="10">
-        <el-form-item label="Number of Issues:">
+        <el-form-item label="期数：">
           <el-input v-model="form.numberOfIssues" />
         </el-form-item>
       </el-col>
       <el-col :span="6">
         <el-button>
-          Confirm search
+          确定搜索
         </el-button>
       </el-col>
       <el-col :span="8">
         <el-button>
           <el-icon><Plus /></el-icon>
-          All issues
+          所有期数
         </el-button>
         <el-button>
           <el-icon><Plus /></el-icon>
-          Show
+          显示
         </el-button>
         <el-button>
           <el-icon><Plus /></el-icon>
-          Hide
+          隐藏
         </el-button>
       </el-col>
     </el-row>
@@ -30,29 +30,29 @@
   <table class="historical-lottery">
     <thead>
       <tr>
-        <th colspan="2">Mark Six</th>
+        <th colspan="2">六合彩</th>
         <td colspan="12"></td>
       </tr>
       <tr>
         <th rowspan="2" style="width: 10px;">
           <el-checkbox size="large" />
         </th>
-        <th rowspan="2">Period</th>
-        <th rowspan="2">Draw time</th>
-        <th colspan="7">Lottery ball number</th>
-        <th rowspan="2">Chinese Zodiac</th>
-        <th rowspan="2">Whether to draw a prize</th>
-        <th rowspan="2">State</th>
-        <th rowspan="2">Operate</th>
+        <th rowspan="2">期数</th>
+        <th rowspan="2">开奖时间</th>
+        <th colspan="7">开奖球号</th>
+        <th rowspan="2">生肖</th>
+        <th rowspan="2">是否开奖</th>
+        <th rowspan="2">状态</th>
+        <th rowspan="2">操作</th>
       </tr>
       <tr>
-        <th>Flat1</th>
-        <th>Flat2</th>
-        <th>Flat3</th>
-        <th>Flat4</th>
-        <th>Flat5</th>
-        <th>Flat6</th>
-        <th>Special code</th>
+        <th>平1</th>
+        <th>平2</th>
+        <th>平3</th>
+        <th>平4</th>
+        <th>平5</th>
+        <th>平6</th>
+        <th>特码</th>
       </tr>
     </thead>
     <tbody>
@@ -116,19 +116,19 @@
           <div style="display: flex;">
             <el-button size="small">
               <el-icon><Setting /></el-icon>
-              Settlement
+              结算
             </el-button>
             <el-button size="small" type="success">
               <el-icon><Setting /></el-icon>
-              Revise
+              修改
             </el-button>
             <el-button size="small" type="warning">
               <el-icon><Setting /></el-icon>
-              Recover
+              恢复
             </el-button>
             <el-button size="small" type="danger">
               <el-icon><CloseBold /></el-icon>
-              Delete
+              删除
             </el-button>
           </div>
         </td>
@@ -139,21 +139,16 @@
     <div>
       <el-button type="danger" size="small">
         <el-icon><CloseBold /></el-icon>
-        Delete selected periods
+        删除选定期数
       </el-button>
       <el-button type="primary" size="small">
         <el-icon><RefreshRight /></el-icon>
-        To refresh
+        刷新
       </el-button>
     </div>
-    <el-pagination
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :page-sizes="[10, 20, 30, 40]"
-      :small="true"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="400"
-    />
+  </div>
+  <div style="display: flex; justify-content: center">
+    <el-pagination background layout="prev, pager, next" :total="100" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -179,8 +174,8 @@ const tableData = [
       flat6: 21,
       specialCode: 19,
     },
-    chineseZodiac: 'Rat Monkey Snake Dragon Monkey + Snake',
-    drawPrize: 'Has been drawn',
+    chineseZodiac: '狗鼠猴蛇龙猴+蛇	',
+    drawPrize: '已开奖',
   },
 ]
 </script>

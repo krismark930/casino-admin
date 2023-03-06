@@ -1,11 +1,11 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('instantbet.title') }}[{{ selectedPeriod }}期]
+      {{ $t('lottery.title') }}[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
-        <el-form-item :label="$t('instantbet.chooseNumberOfPeriods')">
+        <el-form-item :label="$t('lottery.chooseNumberOfPeriods')">
           <el-select
             placeholder="第2023021期"
             v-model="selectedPeriod"

@@ -3,14 +3,14 @@
     <table>
       <thead>
         <tr>
-          <th>restore odds</th>
+          <th>还原赔率</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
             <el-button size="small">
-              Restore Default Odds
+              还原默认赔率
             </el-button>
           </td>
         </tr>
@@ -18,8 +18,7 @@
     </table>
   </el-row>
   <el-row style="justify-content: flex-end;">
-    Tips: Please be careful to restore, once restored, the operation will not be
-    restored.
+    提示：请小心还原,一但还原本操作将无法恢复.
   </el-row>
 </template>
 <script lang="ts" setup></script>

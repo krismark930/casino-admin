@@ -3,10 +3,10 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>odds</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
@@ -82,13 +82,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -100,21 +100,21 @@ import { ref } from 'vue'
 
 const data = ref([
   {
-    type: 'Erquan Middle School',
+    type: '二全中',
     odds: 65.0,
     currentOdds: 65.0,
     betAmount: 0,
   },
   {
-    type: 'Second special',
+    type: '二中特',
     childs: [
       {
-        subType: 'Zhongte',
+        subType: '中特',
         odds: 35.0,
         currentOdds: 35.0,
       },
       {
-        subType: 'middle two',
+        subType: '中二',
         odds: 50.0,
         currentOdds: 50.0,
       },
@@ -122,27 +122,27 @@ const data = ref([
     betAmount: 0,
   },
   {
-    type: 'special string',
+    type: '特串',
     odds: 160.0,
     currentOdds: 160.0,
     betAmount: 0,
   },
   {
-    type: 'Sanquan Middle School',
+    type: '三全中',
     odds: 650.0,
     currentOdds: 650.0,
     betAmount: 0,
   },
   {
-    type: '3 out of 2',
+    type: '三中二',
     childs: [
       {
-        subType: 'middle two',
+        subType: '中二',
         odds: 20.0,
         currentOdds: 20.0,
       },
       {
-        subType: 'middle three',
+        subType: '中三',
         odds: 105.0,
         currentOdds: 105.0,
       },
@@ -150,7 +150,7 @@ const data = ref([
     betAmount: 0,
   },
   {
-    type: 'Four in one',
+    type: '四中一',
     odds: 1.95,
     currentOdds: 1.95,
     betAmount: 0,

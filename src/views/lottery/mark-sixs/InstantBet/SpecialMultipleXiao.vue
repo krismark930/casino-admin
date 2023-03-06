@@ -1,11 +1,11 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('instantbet.TeshawTitle') }}[{{ selectedPeriod }}期]
+      {{ $t('lottery.TeshawTitle') }}[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
-        <el-form-item :label="$t('instantbet.chooseNumberOfPeriods')">
+        <el-form-item :label="$t('lottery.chooseNumberOfPeriods')">
           <el-select
             placeholder="第2023021期"
             v-model="selectedPeriod"
@@ -19,15 +19,15 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('instantbet.maximumloss')">
+        <el-form-item :label="$t('lottery.maximumloss')">
           <el-input v-model="maximumLoss" style="width: 80px" />
         </el-form-item>
-        <el-form-item :label="$t('instantbet.backWater')">
+        <el-form-item :label="$t('lottery.backWater')">
           <el-input v-model="backWater" style="width: 80px" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="Search" @click="handleSearch">
-            {{ $t('instantbet.flyCalc') }}
+            {{ $t('lottery.flyCalc') }}
           </el-button>
         </el-form-item>
       </el-form>

@@ -4,10 +4,10 @@
       <el-col :span="12">
         <el-row style="justify-content: space-between;">
           <el-col :span="12" style="text-align: justify; padding-top: 7px">
-            <h3>Inquiry of bets [2023021 issue]</h3>
+            <h3>注单查询[ 2023021 期]</h3>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Choose the number of periods:">
+            <el-form-item label="选择期数">
               <el-select placeholder="Issue 20201003">
                 <el-option label="Issue 20201003" value="issue20201003" />
                 <el-option label="Issue 2023021" value="issue2023021" />
@@ -24,7 +24,7 @@
         </el-row>
       </el-col>
       <el-button>
-        Printer
+        打印
         <el-icon><Printer /></el-icon>
       </el-button>
     </el-row>
@@ -35,64 +35,60 @@
         header-align="center"
         stripe
       >
-        <el-table-column prop="serialnumber" label="Serial Number" />
-        <el-table-column prop="shareholder" label="Shareholder" />
-        <el-table-column prop="betnumber" label="Number of Bets" />
-        <el-table-column prop="betamount" label="Bet Amount" />
-        <el-table-column prop="realInvestment" label="Real Investment" />
-        <el-table-column
-          prop="companyaccounted"
-          label="Company accounted for"
-        />
-        <el-table-column prop="shareholders" label="Shareholders" />
-        <el-table-column prop="totalagent" label="Total Agent Accounted for" />
-        <el-table-column prop="agentaccounted" label="Agent Accounted for" />
+        <el-table-column prop="serialnumber" label="序号" />
+        <el-table-column prop="shareholder" label="股东" />
+        <el-table-column prop="betnumber" label="注数" />
+        <el-table-column prop="betamount" label="下注金额" />
+        <el-table-column prop="realInvestment" label="实投" />
+        <el-table-column prop="companyaccounted" label="公司占成" />
+        <el-table-column prop="shareholders" label="股东占成" />
+        <el-table-column prop="totalagent" label="总代占成" />
+        <el-table-column prop="agentaccounted" label="代理占成" />
       </el-table>
     </el-scrollbar>
     <el-form :model="form" label-width="20%">
       <el-row>
         <el-col :span="6">
-          <el-form-item label="Betting Type:">
-            <el-select v-model="form.bettingType" placeholder="All">
-              <el-option label="Special code: Special A" value="specialA" />
-              <el-option label="Special code: Special B" value="specialB" />
-              <el-option label="Positive code: Positive A" value="positiveA" />
-              <el-option label="Positive code: Positive B" value="positiveB" />
-              <el-option
-                label="Positive special: Positive 1 Special"
-                value="positive1"
-              />
-              <el-option
-                label="Positive special: Positive 2 Special"
-                value="positive2"
-              />
-              <el-option
-                label="Positive special: Positive 3 Special"
-                value="positive3"
-              />
-              <el-option
-                label="Positive special: Positive 4 Special"
-                value="positive4"
-              />
-              <el-option
-                label="Positive special: Positive 5 Special"
-                value="positive5"
-              />
-              <el-option
-                label="Positive special: Positive 6 Special"
-                value="positive6"
-              />
-              <el-option label="Positive 1-6: Positive Code 1" value="pcode1" />
-              <el-option label="Positive 1-6: Positive Code 2" value="pcode2" />
-              <el-option label="Positive 1-6: Positive Code 3" value="pcode3" />
-              <el-option label="Positive 1-6: Positive Code 4" value="pcode4" />
-              <el-option label="Positive 1-6: Positive Code 5" value="pcode5" />
-              <el-option label="Positive 1-6: Positive Code 6" value="pcode6" />
+          <el-form-item label="查询种类：">
+            <el-row>
+              <el-col :span="16">
+                <el-select placeholder="-----全部-----">
+                  <el-option label="-全部-"></el-option>
+                  <el-option label="会员账号"></el-option>
+                  <el-option label="下注单号"></el-option>
+                  <el-option label="下注盘类"></el-option>
+                </el-select>
+              </el-col>
+              <el-col :span="8">
+                <el-input></el-input>
+              </el-col>
+            </el-row>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="投注品种：">
+            <el-select v-model="form.bettingType" placeholder="-----全部-----">
+              <el-option label="特码：特A" value="specialA" />
+              <el-option label="特码：特B" value="specialB" />
+              <el-option label="正码：正A" value="positiveA" />
+              <el-option label="正码：正B" value="positiveB" />
+              <el-option label="正特：正1特" value="positive1" />
+              <el-option label="正特：正2特" value="positive2" />
+              <el-option label="正特：正3特" value="positive3" />
+              <el-option label="正特：正4特" value="positive4" />
+              <el-option label="正特：正5特" value="positive5" />
+              <el-option label="正特：正6特" value="positive6" />
+              <el-option label="正1-6：正码1" value="pcode1" />
+              <el-option label="正1-6：正码2" value="pcode2" />
+              <el-option label="正1-6：正码3" value="pcode3" />
+              <el-option label="正1-6：正码4" value="pcode4" />
+              <el-option label="正1-6：正码5" value="pcode5" />
+              <el-option label="正1-6：正码6" value="pcode6" />
             </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Date range:">
+          <el-form-item label="日期区间：">
             <el-col :span="11">
               <el-date-picker
                 v-model="form.date1"
@@ -111,8 +107,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="Choose the number of periods:" style="color:red">
-            <el-select v-model="form.periodNumber" placeholder="Check by time">
+          <el-form-item label="选择期数：" style="color:red">
+            <el-select v-model="form.periodNumber" placeholder="按时间来查">
               <el-option label="Issue 20201003" value="issue20201003" />
               <el-option label="Issue 20201003" value="issue20201003" />
               <el-option label="Issue 20201003" value="issue20201003" />
@@ -130,7 +126,7 @@
           </el-form-item>
         </el-col>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">Inquire</el-button>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
       </el-row>
     </el-form>

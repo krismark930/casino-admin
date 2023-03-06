@@ -1,27 +1,24 @@
 <template>
   <el-row style="justify-content: space-between; margin-bottom: 10px;">
-    <h6 style="margin-bottom: 0;">Er Xiao Lianzhong</h6>
+    <h6 style="margin-bottom: 0;">二尾连中</h6>
     <div class="flex">
       <el-button size="small">
-        Er Xiao Lianzhong
+        二尾连中
       </el-button>
       <el-button size="small">
-        San Xiao Lianzhong
+        三尾连中
       </el-button>
       <el-button size="small">
-        Si Xiao Lianzhong
+        四尾连中
       </el-button>
       <el-button size="small">
-        Five Xiao Lianzhong
+        二尾连不中
       </el-button>
       <el-button size="small">
-        Er Xiaolian missed
+        三尾连不中
       </el-button>
       <el-button size="small">
-        Three consecutive misses
-      </el-button>
-      <el-button size="small">
-        four consecutive misses
+        四尾连不中
       </el-button>
     </div>
   </el-row>
@@ -29,16 +26,16 @@
     <table>
       <thead>
         <tr>
-          <th colspan="2">type</th>
-          <th>Odds/Title</th>
-          <th>current odds</th>
-          <th>bet amount</th>
+          <th colspan="2">类型</th>
+          <th>赔率</th>
+          <th>当前赔率</th>
+          <th>下注金额</th>
         </tr>
       </thead>
       <tbody>
         <template v-for="(item, i) in data" :key="i">
           <tr>
-            <td>Er Xiao Lianzhong</td>
+            <td>二尾连中</td>
             <td>{{ item.type }}</td>
             <td>
               <div
@@ -63,13 +60,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率减少
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -80,18 +77,18 @@
 import { ref } from 'vue'
 
 const data = ref([
-  { type: 'mouse', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'Tiger', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'dragon', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'horse', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'monkey', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'dog', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'ox', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'rabbit', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'snake', odds: 3.8, currentOdds: 3.8, betAmount: 0 },
-  { type: 'sheep', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'chicken', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
-  { type: 'pig', odds: 4.2, currentOdds: 4.2, betAmount: 0 },
+  { type: '鼠', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '虎', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '龙', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '马', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '猴', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '狗', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '牛', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '兔', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '蛇', odds: 9.6, currentOdds: 9.6, betAmount: 0 },
+  { type: '羊', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '鸡', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
+  { type: '猪', odds: 10.6, currentOdds: 10.6, betAmount: 0 },
 ])
 </script>
 <style lang="scss" scoped>

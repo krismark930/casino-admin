@@ -6,13 +6,13 @@
           <table>
             <thead>
               <tr>
-                <th colspan="4">Plus size {{ id }}</th>
+                <th colspan="4">正码 {{ id }}</th>
               </tr>
               <tr>
-                <th>Number</th>
-                <th>odds</th>
-                <th>current odds</th>
-                <th>total amount bet</th>
+                <th>号码</th>
+                <th>赔率/封号</th>
+                <th>赔率</th>
+                <th>下注总额</th>
               </tr>
             </thead>
             <tbody>
@@ -41,13 +41,13 @@
   </el-row>
   <el-row>
     <el-button size="small">
-      odds increase
+      赔率增加
     </el-button>
     <el-button size="small">
-      odds reduction
+      赔率增加
     </el-button>
     <el-button size="small">
-      submit
+      提交
     </el-button>
     <el-button size="small">
       重置
@@ -59,37 +59,79 @@ import { ref } from 'vue'
 
 const data = ref([
   {
-    number: 'one',
+    number: '大',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
   },
   {
-    number: 'pair',
+    number: '小',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
   },
   {
-    number: 'Small',
+    number: '单',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
   },
   {
-    number: 'red wave',
+    number: '双',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
   },
   {
-    number: 'green wave',
+    number: '红波',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
   },
   {
-    number: 'blue wave',
+    number: '绿波',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '蓝波',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '合大',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '合小',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '合单',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '合双',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '尾大',
+    odds: 1.92,
+    currentOdds: 1.92,
+    totalAmountBet: 0,
+  },
+  {
+    number: '尾小',
     odds: 1.92,
     currentOdds: 1.92,
     totalAmountBet: 0,
