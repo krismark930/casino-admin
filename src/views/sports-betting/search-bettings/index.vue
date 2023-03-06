@@ -149,6 +149,7 @@ export default {
         sortOption: '',
         ballOption: '',
         counter: '180',
+        timeOption: '',
       },
       searchBettingData: [
         {
@@ -304,6 +305,32 @@ export default {
         {
           value: '下半場單雙',
           label: '下半場單雙',
+        },
+      ],
+      timeOptions: [
+        {
+          value: '10',
+          label: '10秒',
+        },
+        {
+          value: '30',
+          label: '30秒',
+        },
+        {
+          value: '60',
+          label: '60秒',
+        },
+        {
+          value: '90',
+          label: '90秒',
+        },
+        {
+          value: '120',
+          label: '120秒',
+        },
+        {
+          value: '180',
+          label: '180秒',
         },
       ],
     }

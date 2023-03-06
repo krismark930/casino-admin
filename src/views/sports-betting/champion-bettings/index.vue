@@ -2,7 +2,7 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
   >
-    <h3>{{ $t('menu.championBettings') }}</h3>
+    <h3>{{ 'menu.championBettings' }}</h3>
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="">
@@ -102,6 +102,7 @@ export default {
   data() {
     return {
       formData: {
+        timeOption: '',
         keyword: '',
         betStatusOption: '',
         counter: '180',
@@ -162,6 +163,32 @@ export default {
         {
           value: '>=10000',
           label: '>=10000',
+        },
+      ],
+      timeOptions: [
+        {
+          value: '10',
+          label: '10秒',
+        },
+        {
+          value: '30',
+          label: '30秒',
+        },
+        {
+          value: '60',
+          label: '60秒',
+        },
+        {
+          value: '90',
+          label: '90秒',
+        },
+        {
+          value: '120',
+          label: '120秒',
+        },
+        {
+          value: '180',
+          label: '180秒',
         },
       ],
     }
