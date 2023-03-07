@@ -2,19 +2,19 @@
   <el-card shadow="never">
     <el-row style="margin-bottom: 1.5rem; font-size: 20px;">
       <el-col>
-        <h4>Agency Management</h4>
+        <h4>代理商管理</h4>
       </el-col>
     </el-row>
     <el-row class="hidden-lg-and-up" style="margin-bottom: 1rem;">
       <el-col>
         <el-descriptions border :column="1">
-          <el-descriptions-item label="Data Added :">
+          <el-descriptions-item label="新增日期:">
             <el-tag size="small" type="success">
-              The new account is less than a month old
+              新增帐号未满一个月
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="Account Status :">
-            <el-tag size="small" type="danger">Disabled</el-tag>
+          <el-descriptions-item label="帐号状况:">
+            <el-tag size="small" type="danger">停用</el-tag>
           </el-descriptions-item>
         </el-descriptions>
       </el-col>
@@ -22,45 +22,42 @@
     <el-row justify="space-between">
       <el-col :lg="16" :xs="24">
         <el-form label-width="150px">
-          <el-form-item label="Select General Agent">
-            <el-select placeholder="All">
-              <el-option label="All" value="all" />
-              <el-option label="cdm888===chen general agency" value="cdm888" />
+          <el-form-item label="选择总代理:">
+            <el-select placeholder="全部">
+              <el-option label="全部" value="all" />
+              <el-option label="cdm888===全部" value="cdm888" />
             </el-select>
-            <el-select placeholder="Ascending">
-              <el-option label="Ascending(From small to big)" value="account" />
-              <el-option
-                label="Descending(From big to small)"
-                value="descending"
-              />
+            <el-select placeholder="升冥(由小到大)">
+              <el-option label="升冥(由小到大)" value="account" />
+              <el-option label="降冥(由大到小)" value="descending" />
             </el-select>
           </el-form-item>
-          <el-form-item label="Way">
-            <el-select placeholder="Date added">
-              <el-option label="Agent Account" value="agentAccount" />
-              <el-option label="Agency Name" value="agencyName" />
-              <el-option label="Date added" value="dateAdded" />
+          <el-form-item label="方式:">
+            <el-select placeholder="新增日期">
+              <el-option label="代理商帐号" value="agentAccount" />
+              <el-option label="代理商名称" value="agencyName" />
+              <el-option label="新增日期" value="dateAdded" />
             </el-select>
-            <el-select placeholder="All">
-              <el-option label="All" value="allway" />
-              <el-option label="Enable" value="enable" />
-              <el-option label="Freeze" value="freeze" />
-              <el-option label="Disabled" value="disabled" />
-              <el-option label="Have Bets" value="havebets" />
-              <el-option label="Today Recharge" value="todayRecharge" />
+            <el-select placeholder="全部">
+              <el-option label="全部" value="allway" />
+              <el-option label="启用" value="enable" />
+              <el-option label="冻结" value="freeze" />
+              <el-option label="停用" value="disabled" />
+              <el-option label="有投注" value="havebets" />
+              <el-option label="今日充值" value="todayRecharge" />
             </el-select>
           </el-form-item>
         </el-form>
       </el-col>
       <el-col :lg="8" class="hidden-md-and-down">
         <el-descriptions border :column="1">
-          <el-descriptions-item label="Data Added :">
+          <el-descriptions-item label="新增日期:">
             <el-tag size="small" type="success">
-              The new account is less than a month old
+              新增帐号未满一个月
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="Account Status :">
-            <el-tag size="small" type="danger">Disabled</el-tag>
+          <el-descriptions-item label="帐号状况:">
+            <el-tag size="small" type="danger">停用</el-tag>
           </el-descriptions-item>
         </el-descriptions>
       </el-col>
@@ -72,55 +69,35 @@
       header-align="center"
       stripe
     >
-      <el-table-column
-        prop="agentaccount"
-        label="General Agent Account"
-        width="180"
-      />
-      <el-table-column prop="loginAccount" label="Login Account" width="125" />
-      <el-table-column
-        prop="agencyAccount"
-        label="Agency Account"
-        width="140"
-      />
-      <el-table-column
-        prop="availableAccount"
-        label="Available Account"
-        width="150"
-      />
-      <el-table-column prop="credits" label="Credits" width="80" />
-      <el-table-column
-        prop="subOrdinateTotal"
-        label="Subordinate Total"
-        width="150"
-      />
-      <el-table-column prop="addDate" label="Add Date" width="90" />
-      <el-table-column
-        prop="accountStatus"
-        label="Account Status"
-        width="130"
-      />
-      <el-table-column prop="changeOrder" label="Change Order" width="120" />
-      <el-table-column label="Function" width="180">
+      <el-table-column prop="agentaccount" label="总代理帐号" width="180" />
+      <el-table-column prop="loginAccount" label="登陆帐号" width="125" />
+      <el-table-column prop="agencyAccount" label="代理商帐号" width="140" />
+      <el-table-column prop="availableAccount" label="可用額度" width="150" />
+      <el-table-column prop="credits" label="信用额度" width="80" />
+      <el-table-column prop="subOrdinateTotal" label="下级总计" width="150" />
+      <el-table-column prop="addDate" label="新增日期" width="90" />
+      <el-table-column prop="accountStatus" label="帐号状况" width="130" />
+      <el-table-column prop="changeOrder" label="改单" width="120" />
+      <el-table-column label="功能" width="180">
         <template #default="scope">
           <el-button link type="primary" size="small">
-            Modify
+            修改
           </el-button>
           <br />
           <el-button link type="info" size="small">
-            Detailed Setting
+            详细设定
           </el-button>
           <br />
           <el-button link type="warning" size="small">
-            Deactivate
+            停用
           </el-button>
           <br />
           <el-button link type="success" size="small">
-            Freeze
+            冻结
           </el-button>
           <br />
           <el-button link type="danger" size="small">
-            Delete Quota Management
+            额度管理
           </el-button>
         </template>
       </el-table-column>

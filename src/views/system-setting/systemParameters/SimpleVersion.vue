@@ -1,7 +1,7 @@
 <template>
   <div class="simpleversion-wrapper">
     <el-table :data="tableData" class="simpleversion-table">
-      <el-table-column prop="simpleVersion" label="Simple Version Notification">
+      <el-table-column prop="simpleVersion" label="简易版公告">
         <template #default="scope">
           <el-input
             v-model="scope.row.simpleVersion"
@@ -16,7 +16,7 @@
             type="primary"
             @click="handleSubmit(scope.row.simpleVersion)"
           >
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>

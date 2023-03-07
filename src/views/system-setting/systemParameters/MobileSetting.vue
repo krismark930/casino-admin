@@ -6,44 +6,44 @@
       :size="formSize"
       label-width="150px"
     >
-      <el-form-item label="WebSite Title:" prop="webtitle">
+      <el-form-item label="网站标题:" prop="webtitle">
         <el-input v-model="mobileSettingForm.webtitle" />
       </el-form-item>
-      <el-form-item label="WebSite Name:" prop="webname">
+      <el-form-item label="网站名称:" prop="webname">
         <el-input v-model="mobileSettingForm.webname" />
       </el-form-item>
-      <el-form-item label="Announcement:" prop="announcement">
+      <el-form-item label="公告:" prop="announcement">
         <el-input v-model="mobileSettingForm.announcement" />
       </el-form-item>
-      <el-form-item label="Pop-up Box:">
+      <el-form-item label="弹出框:">
         <el-input v-model="mobileSettingForm.popup" type="textarea" />
       </el-form-item>
-      <el-form-item label="WebSite Description:" prop="webdesc">
+      <el-form-item label="网站描述:" prop="webdesc">
         <el-input v-model="mobileSettingForm.webdesc" />
       </el-form-item>
-      <el-form-item label="Keywords:" prop="keywords">
+      <el-form-item label="关键字:" prop="keywords">
         <el-input v-model="mobileSettingForm.keywords" />
       </el-form-item>
-      <el-form-item label="Author:" prop="author">
+      <el-form-item label="作者:" prop="author">
         <el-input v-model="mobileSettingForm.author" class="author" />
         <h5>不建议修改</h5>
       </el-form-item>
-      <el-form-item label="Carousel Pictures:">
+      <el-form-item label="轮播图片:">
         <el-input v-model="mobileSettingForm.caroselpic" type="textarea" />
       </el-form-item>
-      <el-form-item label="Carousel Time:" prop="caroseltime">
+      <el-form-item label="轮播时间:" prop="caroseltime">
         <el-input
           v-model="mobileSettingForm.caroseltime"
           class="carouseltime"
         />
         <h5>毫秒</h5>
       </el-form-item>
-      <el-form-item label="Refresh Time:" prop="refreshtime">
+      <el-form-item label="刷新时间:" prop="refreshtime">
         <el-input v-model="mobileSettingForm.refreshtime" class="refreshtime" />
         <h5>秒</h5>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Submit</el-button>
+        <el-button type="primary" @click="onSubmit">确定</el-button>
       </el-form-item>
     </el-form>
   </div>

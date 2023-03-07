@@ -1,21 +1,18 @@
 <template>
   <el-card shadow="never">
     <el-row :gutter="20">
-      <el-form-item label="Sort By">
+      <el-form-item label="排序">
         <el-col :span="11">
-          <el-select placeholder="Account">
-            <el-option label="Account" value="account" />
-            <el-option label="Add Date" value="adddate" />
+          <el-select placeholder="帐号">
+            <el-option label="帐号" value="account" />
+            <el-option label="新增日期" value="adddate" />
           </el-select>
         </el-col>
         <el-col :span="1"></el-col>
         <el-col :span="12">
-          <el-select placeholder="Ascending">
-            <el-option label="Ascending(From small to big)" value="account" />
-            <el-option
-              label="Descending(From big to small)"
-              value="descending"
-            />
+          <el-select placeholder="升冥(由小到大)">
+            <el-option label="升冥(由小到大)" value="account" />
+            <el-option label="降冥(由大到小)" value="descending" />
           </el-select>
         </el-col>
       </el-form-item>
@@ -28,28 +25,28 @@
         header-align="center"
         stripe
       >
-        <el-table-column prop="accountNumber" label="Account Number" />
-        <el-table-column prop="password" label="Password" />
-        <el-table-column prop="Name" label="Name" />
-        <el-table-column prop="Date" label="Date" />
+        <el-table-column prop="accountNumber" label="帐号" />
+        <el-table-column prop="password" label="密码" />
+        <el-table-column prop="Name" label="名称" />
+        <el-table-column prop="Date" label="日期" />
 
-        <el-table-column prop="Status" label="Status" />
-        <el-table-column label="Function" width="180">
+        <el-table-column prop="Status" label="帐号状况" />
+        <el-table-column label="功能" width="180">
           <template #default="scope">
             <el-button link type="primary" size="small">
-              Modify
+              修改
             </el-button>
             <br />
             <el-button link type="warning" size="small">
-              Deactivate
+              停用
             </el-button>
             <br />
             <el-button link type="success" size="small">
-              Permission
+              权限
             </el-button>
             <br />
             <el-button link type="danger" size="small">
-              Delete
+              删除
             </el-button>
           </template>
         </el-table-column>

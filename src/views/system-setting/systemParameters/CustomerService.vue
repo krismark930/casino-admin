@@ -5,24 +5,24 @@
       class="customerservice-table"
       :cell-style="{ verticalAlign: 'top' }"
     >
-      <el-table-column prop="customerservice1" label="Customer Service URL1">
+      <el-table-column prop="customerservice1" label="客服网址1">
         <template #default="scope">
           <el-input v-model="scope.row.customerservice1" autocomplete="off" />
         </template>
       </el-table-column>
-      <el-table-column prop="customerservice2" label="Customer Service URL2">
+      <el-table-column prop="customerservice2" label="客服网址2">
         <template #default="scope">
           <el-input v-model="scope.row.customerservice2" autocomplete="off" />
           <h5>禁止投注第2节、中场</h5>
         </template>
       </el-table-column>
-      <el-table-column prop="customerservice3" label="Customer Service URL3">
+      <el-table-column prop="customerservice3" label="客服网址3">
         <template #default="scope">
           <el-input v-model="scope.row.customerservice3" autocomplete="off" />
           <h5>禁止投注第3节</h5>
         </template>
       </el-table-column>
-      <el-table-column prop="customerservice4" label="Customer Service URL4">
+      <el-table-column prop="customerservice4" label="客服网址4">
         <template #default="scope">
           <el-input v-model="scope.row.customerservice4" autocomplete="off" />
           <h5>禁止投注第3节，第4节，加时，灰色字体的赛事</h5>
@@ -34,7 +34,7 @@
             type="primary"
             @click="handleSubmit(scope.row.customerServices)"
           >
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>

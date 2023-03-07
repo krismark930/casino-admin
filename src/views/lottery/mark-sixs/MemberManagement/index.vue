@@ -1,52 +1,53 @@
 <template>
   <el-card shadow="never">
-    <el-row
-      class="flex"
-      style="justify-content: space-between;flex-wrap: nowrap;"
-    >
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="股东">
-            <el-select placeholder="全部">
-              <el-option label="全部" value="allShareholder" />
-              <el-option label="bdm000" value="bdm000" />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="1"></el-col>
-        <el-col :span="7">
-          <el-form-item label="总代">
-            <el-select placeholder="全部">
-              <el-option label="全部" value="allGeneration" />
-              <el-option label="cdm000" value="cdm000" />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="1"></el-col>
-        <el-col :span="7">
-          <el-form-item label="代里">
-            <el-select placeholder="全部">
-              <el-option label="全部" value="allGeneration" />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-form-item label="会员账号：">
-          <el-input>
-            <template #prepend>
-              <el-icon><Search /></el-icon>
-            </template>
-          </el-input>
+    <el-row :gutter="10">
+      <el-col :span="3">
+        <el-form-item label="股东">
+          <el-select placeholder="全部">
+            <el-option label="全部" value="allShareholder" />
+            <el-option label="bdm000" value="bdm000" />
+          </el-select>
         </el-form-item>
-        <el-button>确定搜索</el-button>
-      </el-row>
-      <div class="flex">
-        <el-button type="primary">所有会员</el-button>
-        <el-button type="success">开启</el-button>
-        <el-button type="danger">禁止</el-button>
-        <el-button type="warning">添加会员</el-button>
-      </div>
+      </el-col>
+      <el-col :span="3">
+        <el-form-item label="总代">
+          <el-select placeholder="全部">
+            <el-option label="全部" value="allGeneration" />
+            <el-option label="cdm000" value="cdm000" />
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="3">
+        <el-form-item label="代里">
+          <el-select placeholder="全部">
+            <el-option label="全部" value="allGeneration" />
+          </el-select>
+        </el-form-item>
+      </el-col>
+      <el-col :span="6">
+        <el-row :gutter="4">
+          <el-col :span="16">
+            <el-form-item label="会员账号：">
+              <el-input>
+                <template #prepend>
+                  <el-icon><Search /></el-icon>
+                </template>
+              </el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-button>确定搜索</el-button>
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col :span="7">
+        <div class="flex">
+          <el-button type="primary">所有会员</el-button>
+          <el-button type="success">开启</el-button>
+          <el-button type="danger">禁止</el-button>
+          <el-button type="warning">添加会员</el-button>
+        </div>
+      </el-col>
     </el-row>
     <el-table
       :data="tableData"

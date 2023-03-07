@@ -1,7 +1,7 @@
 <template>
   <div class="monitormember-wrapper">
     <el-table :data="tableData" class="monitormember-table">
-      <el-table-column prop="monitormember" label="Monitor Members">
+      <el-table-column prop="monitormember" label="监控会员">
         <template #default="scope">
           <el-input v-model="scope.row.monitormember" autocomplete="off" />
           <h5>
@@ -15,7 +15,7 @@
             type="primary"
             @click="handleSubmit(scope.row.monitormember)"
           >
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>

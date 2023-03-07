@@ -1,7 +1,7 @@
 <template>
   <div class="blacklist-wrapper">
     <el-table :data="tableData" class="blacklist-table">
-      <el-table-column prop="blackList" label="BlackList">
+      <el-table-column prop="blackList" label="坏会员">
         <template #default="scope">
           <h5>坏会员：</h5>
           <el-input v-model="scope.row.badmember" autocomplete="off" />
@@ -17,7 +17,7 @@
       <el-table-column label="" width="100">
         <template #default="scope">
           <el-button type="primary" @click="handleSubmit(scope.row.blackList)">
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>

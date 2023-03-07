@@ -1,7 +1,7 @@
 <template>
   <div class="homenotification-wrapper">
     <el-table :data="tableData" class="homenotification-table">
-      <el-table-column prop="notification" label="Home Notification">
+      <el-table-column prop="notification" label="首页公告">
         <template #default="scope">
           <el-input
             v-model="scope.row.notification"
@@ -16,7 +16,7 @@
             type="primary"
             @click="handleSubmit(scope.row.notification)"
           >
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>
