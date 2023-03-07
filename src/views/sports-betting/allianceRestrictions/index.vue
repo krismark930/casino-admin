@@ -5,7 +5,7 @@
     <h3>{{ $t('menu.allianceRestrictions') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="联盟单注限制 -- 类别">
-        <el-select v-model="formData.option" placeholder="Select type">
+        <el-select v-model="formData.option" placeholder="">
           <el-option
             v-for="item in options"
             :key="item.value"

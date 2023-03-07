@@ -4,106 +4,102 @@
   >
     <h3>{{ $t('menu.dailyAccount') }}</h3>
     <el-form :inline="true" :model="formData">
-      <el-form-item label="">
-        <el-date-picker
-          v-model="formData.daterange"
-          type="daterange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
-      </el-form-item>
-      <el-form-item label="会员帐号">
-        <el-input
-          clearable
-          v-model="formData.memberAccount"
-          placeholder=""
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="代理商">
-        <el-select v-model="formData.agent" placeholder="Select type">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="类型">
-        <el-select v-model="formData.type" placeholder="Select type">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary">确认</el-button>
-      </el-form-item>
-      <el-form-item label="">
-        <div class="statistic-card">
-          <el-statistic precision="2" :value="25960.92">
-            <template #title>
-              <div style="display: inline-flex; align-items: center">
-                总存款
-                <el-tooltip
-                  effect="dark"
-                  content="Total amount of deposit"
-                  placement="top"
-                >
-                  <el-icon style="margin-left: 4px" :size="12">
-                    <Warning />
+      <div>
+        <el-form-item label="">
+          <div class="statistic-card">
+            <el-statistic precision="2" :value="25960.92">
+              <template #title>
+                <div style="display: inline-flex; align-items: center">
+                  总存款
+                  <el-tooltip effect="dark" content="入金总额" placement="top">
+                    <el-icon style="margin-left: 4px" :size="12">
+                      <Warning />
+                    </el-icon>
+                  </el-tooltip>
+                </div>
+              </template>
+            </el-statistic>
+            <div class="statistic-footer">
+              <div class="footer-item">
+                <span>比昨天</span>
+                <span class="green">
+                  24%
+                  <el-icon>
+                    <CaretTop />
                   </el-icon>
-                </el-tooltip>
+                </span>
               </div>
-            </template>
-          </el-statistic>
-          <div class="statistic-footer">
-            <div class="footer-item">
-              <span>than yesterday</span>
-              <span class="green">
-                24%
-                <el-icon>
-                  <CaretTop />
-                </el-icon>
-              </span>
             </div>
           </div>
-        </div>
-      </el-form-item>
-      <el-form-item label="">
-        <div class="statistic-card">
-          <el-statistic precision="2" :value="12346.35">
-            <template #title>
-              <div style="display: inline-flex; align-items: center">
-                总提款
-                <el-tooltip
-                  effect="dark"
-                  content="Total amount of withdraw"
-                  placement="top"
-                >
-                  <el-icon style="margin-left: 4px" :size="12">
-                    <Warning />
+        </el-form-item>
+        <el-form-item label="">
+          <div class="statistic-card">
+            <el-statistic precision="2" :value="12346.35">
+              <template #title>
+                <div style="display: inline-flex; align-items: center">
+                  总提款
+                  <el-tooltip effect="dark" content="取款总额" placement="top">
+                    <el-icon style="margin-left: 4px" :size="12">
+                      <Warning />
+                    </el-icon>
+                  </el-tooltip>
+                </div>
+              </template>
+            </el-statistic>
+            <div class="statistic-footer">
+              <div class="footer-item">
+                <span>逐月</span>
+                <span class="red">
+                  12%
+                  <el-icon>
+                    <CaretBottom />
                   </el-icon>
-                </el-tooltip>
+                </span>
               </div>
-            </template>
-          </el-statistic>
-          <div class="statistic-footer">
-            <div class="footer-item">
-              <span>month on month</span>
-              <span class="red">
-                12%
-                <el-icon>
-                  <CaretBottom />
-                </el-icon>
-              </span>
             </div>
           </div>
-        </div>
-      </el-form-item>
+        </el-form-item>
+      </div>
+      <div>
+        <el-form-item label="">
+          <el-date-picker
+            v-model="formData.daterange"
+            type="daterange"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          />
+        </el-form-item>
+        <el-form-item label="会员帐号">
+          <el-input
+            clearable
+            v-model="formData.memberAccount"
+            placeholder=""
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="代理商">
+          <el-select v-model="formData.agent" placeholder="">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="类型">
+          <el-select v-model="formData.type" placeholder="">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">确认</el-button>
+        </el-form-item>
+      </div>
     </el-form>
     <el-table
       :data="dailyAccountData"

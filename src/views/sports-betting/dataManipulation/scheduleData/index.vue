@@ -5,7 +5,7 @@
     <h3>赛程数据</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="选择联盟">
-        <el-select v-model="formData.option" placeholder="Select type">
+        <el-select v-model="formData.option" placeholder="">
           <el-option
             v-for="item in options"
             :key="item.value"

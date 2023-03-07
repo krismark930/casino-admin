@@ -5,13 +5,13 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="Schedule Data" name="first">
+      <el-tab-pane label="赛程数据" name="first">
         <ScheduleData />
       </el-tab-pane>
-      <el-tab-pane label="Checklist" name="second">
+      <el-tab-pane label="过关注单" name="second">
         <Checklist />
       </el-tab-pane>
-      <el-tab-pane label="Schedule Added" name="third">
+      <el-tab-pane label="足球-赛事新增" name="third">
         <ScheduleAdded />
       </el-tab-pane>
     </el-tabs>

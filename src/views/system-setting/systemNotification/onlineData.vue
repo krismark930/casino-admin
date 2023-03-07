@@ -1,11 +1,9 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
-  >
+  <div style="text-align: center;">
     <el-form :inline="true" :model="formData">
       <el-form-item label="线上数据－公告管理"></el-form-item>
       <el-form-item>
-        <el-select v-model="formData.option" placeholder="Select type">
+        <el-select v-model="formData.option" placeholder="">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -18,7 +16,7 @@
         <el-date-picker
           v-model="formData.date"
           type="date"
-          placeholder="Select date"
+          placeholder=""
         ></el-date-picker>
       </el-form-item>
     </el-form>

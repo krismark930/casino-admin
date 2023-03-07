@@ -30,11 +30,7 @@
             <template #title>
               <div style="display: inline-flex; align-items: center">
                 总存款
-                <el-tooltip
-                  effect="dark"
-                  content="Total amount of deposit"
-                  placement="top"
-                >
+                <el-tooltip effect="dark" content="入金总额" placement="top">
                   <el-icon style="margin-left: 4px" :size="12">
                     <Warning />
                   </el-icon>
@@ -61,11 +57,7 @@
             <template #title>
               <div style="display: inline-flex; align-items: center">
                 总提款
-                <el-tooltip
-                  effect="dark"
-                  content="Total amount of withdraw"
-                  placement="top"
-                >
+                <el-tooltip effect="dark" content="取款总额" placement="top">
                   <el-icon style="margin-left: 4px" :size="12">
                     <Warning />
                   </el-icon>

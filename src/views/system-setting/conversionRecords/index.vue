@@ -5,27 +5,27 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="AG Conversion Record" name="first">
+      <el-tab-pane label="AG转换记录" name="first">
         <MemberDeposit />
         <AGRecord />
       </el-tab-pane>
-      <el-tab-pane label="OG Conversion Record" name="second">
+      <el-tab-pane label="OG转换记录" name="second">
         <MemberWithdrawal />
         <OGRecord />
       </el-tab-pane>
-      <el-tab-pane label="BB Conversion Record" name="third">
+      <el-tab-pane label="BB转换记录" name="third">
         <MemberInformation />
         <BBRecord />
       </el-tab-pane>
-      <el-tab-pane label="MG Conversion Record" name="fourth">
+      <el-tab-pane label="MG转换记录" name="fourth">
         <MemberContactInformation />
         <MGRecord />
       </el-tab-pane>
-      <el-tab-pane label="PT Conversion Record" name="fifth">
+      <el-tab-pane label="PT转换记录" name="fifth">
         <MemberInformation />
         <PTRecord />
       </el-tab-pane>
-      <el-tab-pane label="Chess Conversion Record" name="sixth">
+      <el-tab-pane label="开元棋牌转换记录" name="sixth">
         <MemberContactInformation />
         <ChessRecord />
       </el-tab-pane>

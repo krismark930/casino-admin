@@ -1,5 +1,7 @@
 <template>
-  <div style="padding: 1rem;">
+  <div
+    style="border: 1px solid #eee; padding: 0.75rem; text-align: center; margin: 1rem;"
+  >
     <Content />
     <OnlineData />
   </div>
