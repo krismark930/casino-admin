@@ -26,7 +26,7 @@
             :key="item.id"
             v-model="formData.winningNum[item.id]"
             :placeholder="item.value"
-            style="width: 90px; margin: 5px;"
+            style="width: 100px; margin: 5px;"
           >
             <el-option
               v-for="item in numberOptions"
@@ -57,11 +57,11 @@ export default {
       placeHolder: [
         {
           id: '1',
-          value: '冠军',
+          value: '第一球',
         },
         {
           id: '2',
-          value: '亚军',
+          value: '第二球',
         },
         {
           id: '3',
@@ -95,12 +95,52 @@ export default {
           id: '10',
           value: '第十球',
         },
+        {
+          id: '11',
+          value: '第十一球',
+        },
+        {
+          id: '12',
+          value: '第十二球',
+        },
+        {
+          id: '13',
+          value: '第十三球',
+        },
+        {
+          id: '14',
+          value: '第十四球',
+        },
+        {
+          id: '15',
+          value: '第十五球',
+        },
+        {
+          id: '16',
+          value: '第十六球',
+        },
+        {
+          id: '17',
+          value: '第十七球',
+        },
+        {
+          id: '18',
+          value: '第十八球',
+        },
+        {
+          id: '19',
+          value: '第十九球',
+        },
+        {
+          id: '20',
+          value: '第二十球',
+        },
       ],
     }
   },
   methods: {},
   beforeMount() {
-    for (let i = 1; i < 11; i++) {
+    for (let i = 0; i < 81; i++) {
       this.numberOptions.push({ value: i, label: i })
     }
   },

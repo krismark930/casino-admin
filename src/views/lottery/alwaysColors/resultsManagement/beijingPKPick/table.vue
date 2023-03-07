@@ -91,7 +91,7 @@ export default {
       },
       settingData: [
         {
-          lotteryCategory: '广东十分彩',
+          lotteryCategory: '北京PK拾',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           championNum: '8',
@@ -108,7 +108,7 @@ export default {
           recalculate: '×',
         },
         {
-          lotteryCategory: '广东十分彩',
+          lotteryCategory: '北京PK拾',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           championNum: '8',
@@ -125,7 +125,7 @@ export default {
           recalculate: '×',
         },
         {
-          lotteryCategory: '广东十分彩',
+          lotteryCategory: '北京PK拾',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           championNum: '8',

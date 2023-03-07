@@ -46,11 +46,16 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="num1" label="第一球" align="center" />
-      <el-table-column property="num2" label="第二球" align="center" />
+      <el-table-column property="championNum" label="冠军" align="center" />
+      <el-table-column property="runnerUpNum" label="亚军" align="center" />
       <el-table-column property="num3" label="第三球" align="center" />
       <el-table-column property="num4" label="第四球" align="center" />
-      <el-table-column property="specialNum" label="特别号" align="center" />
+      <el-table-column property="num5" label="第五球" align="center" />
+      <el-table-column property="num6" label="第六球" align="center" />
+      <el-table-column property="num7" label="第七球" align="center" />
+      <el-table-column property="num8" label="第八球" align="center" />
+      <el-table-column property="num9" label="第九名" align="center" />
+      <el-table-column property="num10" label="第十名" align="center" />
       <el-table-column property="settlement" label="结算" align="center" />
       <el-table-column property="recalculate" label="重算" align="center" />
       <el-table-column fixed="right" label="操作" width="120" align="center">
@@ -86,38 +91,53 @@ export default {
       },
       settingData: [
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '澳洲幸运10',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
+          championNum: '8',
+          runnerUpNum: '1',
           num3: '5',
           num4: '2',
-          specialNum: '6',
+          num5: '6',
+          num6: '3',
+          num7: '9',
+          num8: '7',
+          num9: '8',
+          num10: '1',
           settlement: '已结算',
           recalculate: '×',
         },
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '澳洲幸运10',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
+          championNum: '8',
+          runnerUpNum: '1',
           num3: '5',
           num4: '2',
-          specialNum: '6',
+          num5: '6',
+          num6: '3',
+          num7: '9',
+          num8: '7',
+          num9: '8',
+          num10: '1',
           settlement: '已结算',
           recalculate: '×',
         },
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '澳洲幸运10',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
+          championNum: '8',
+          runnerUpNum: '1',
           num3: '5',
           num4: '2',
-          specialNum: '6',
+          num5: '6',
+          num6: '3',
+          num7: '9',
+          num8: '7',
+          num9: '8',
+          num10: '1',
           settlement: '已结算',
           recalculate: '×',
         },

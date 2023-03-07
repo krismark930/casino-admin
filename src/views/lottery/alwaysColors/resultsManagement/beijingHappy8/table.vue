@@ -46,11 +46,19 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="num1" label="第一球" align="center" />
-      <el-table-column property="num2" label="第二球" align="center" />
-      <el-table-column property="num3" label="第三球" align="center" />
-      <el-table-column property="num4" label="第四球" align="center" />
-      <el-table-column property="specialNum" label="特别号" align="center" />
+      <el-table-column
+        v-for="item in tableLabel"
+        :key="item.id"
+        :label="item.value"
+        align="center"
+      >
+        <template #default="scope">{{ scope.row.num[item.id - 1] }}</template>
+      </el-table-column>
+      <el-table-column property="size" label="大小" align="center" />
+      <el-table-column property="singleandDouble" label="单双" align="center" />
+      <el-table-column property="parity" label="奇偶" align="center" />
+      <el-table-column property="upAndDown" label="上下" align="center" />
+      <el-table-column property="sum" label="总和" align="center" />
       <el-table-column property="settlement" label="结算" align="center" />
       <el-table-column property="recalculate" label="重算" align="center" />
       <el-table-column fixed="right" label="操作" width="120" align="center">
@@ -84,40 +92,120 @@ export default {
         lotteryNumber: '',
         date: '',
       },
+      tableLabel: [
+        {
+          id: '1',
+          value: '一',
+        },
+        {
+          id: '2',
+          value: '二',
+        },
+        {
+          id: '3',
+          value: '三',
+        },
+        {
+          id: '4',
+          value: '四',
+        },
+        {
+          id: '5',
+          value: '五',
+        },
+        {
+          id: '6',
+          value: '六',
+        },
+        {
+          id: '7',
+          value: '七',
+        },
+        {
+          id: '8',
+          value: '八',
+        },
+        {
+          id: '9',
+          value: '九',
+        },
+        {
+          id: '10',
+          value: '十',
+        },
+        {
+          id: '11',
+          value: '十一',
+        },
+        {
+          id: '12',
+          value: '十二',
+        },
+        {
+          id: '13',
+          value: '十三',
+        },
+        {
+          id: '14',
+          value: '十四',
+        },
+        {
+          id: '15',
+          value: '十五',
+        },
+        {
+          id: '16',
+          value: '十六',
+        },
+        {
+          id: '17',
+          value: '十七',
+        },
+        {
+          id: '18',
+          value: '十八',
+        },
+        {
+          id: '19',
+          value: '十九',
+        },
+        {
+          id: '20',
+          value: '二十',
+        },
+      ],
       settingData: [
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '北京快乐8',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
-          num3: '5',
-          num4: '2',
-          specialNum: '6',
-          settlement: '已结算',
-          recalculate: '×',
-        },
-        {
-          lotteryCategory: '广西十分彩',
-          lotteryNumber: '20230306038',
-          drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
-          num3: '5',
-          num4: '2',
-          specialNum: '6',
-          settlement: '已结算',
-          recalculate: '×',
-        },
-        {
-          lotteryCategory: '广西十分彩',
-          lotteryNumber: '20230306038',
-          drawTime: '2023-02-21',
-          num1: '8',
-          num2: '0',
-          num3: '5',
-          num4: '2',
-          specialNum: '6',
+          num: [
+            '1',
+            '12',
+            '15',
+            '3',
+            '7',
+            '8',
+            '13',
+            '20',
+            '5',
+            '2',
+            '6',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+            '1',
+          ],
+          size: '',
+          singleandDouble: '',
+          parity: '',
+          upAndDown: '',
+          sum: '',
           settlement: '已结算',
           recalculate: '×',
         },
