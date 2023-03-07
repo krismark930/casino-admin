@@ -1,19 +1,19 @@
 <template>
   <div class="turnservice-wrapper">
     <el-table :data="tableData" class="turnservice-table">
-      <el-table-column prop="service" label="Service"></el-table-column>
-      <el-table-column prop="status" label="Status" width="200">
+      <el-table-column prop="service" label="服务"></el-table-column>
+      <el-table-column prop="status" label="地位" width="200">
         <template #default="scope">
           <el-switch v-model="scope.row.status" />
         </template>
       </el-table-column>
-      <el-table-column label="Operations" width="200">
+      <el-table-column label="功能" width="200">
         <template #default="scope">
           <el-button
             size="small"
             @click="handleSave(scope.row.service, scope.row.status)"
           >
-            Save
+            节省
           </el-button>
         </template>
       </el-table-column>
@@ -34,31 +34,31 @@ const serviceStatus = reactive({
 })
 const tableData = [
   {
-    service: 'Open Registration',
+    service: '开放注册',
     status: true,
   },
   {
-    service: 'AG Platform',
+    service: 'AG平台',
     status: false,
   },
   {
-    service: 'OG Platform',
+    service: 'OG平台',
     status: false,
   },
   {
-    service: 'BBIN Platform',
+    service: 'BBIN平台',
     status: false,
   },
   {
-    service: 'MG Platform',
+    service: 'MG平台',
     status: false,
   },
   {
-    service: 'PT Platform',
+    service: 'PT平台',
     status: false,
   },
   {
-    service: 'Kai Yuan Chess',
+    service: '开元棋牌',
     status: false,
   },
 ]

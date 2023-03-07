@@ -6,37 +6,34 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="Website URL" name="first"></el-tab-pane>
-      <el-tab-pane label="Turn on/off Services" name="second"></el-tab-pane>
-      <el-tab-pane label="Homepage Notification" name="third"></el-tab-pane>
-      <el-tab-pane label="System Maintaince" name="fourth"></el-tab-pane>
-      <el-tab-pane
-        label="Simple Version Notification"
-        name="fifth"
-      ></el-tab-pane>
-      <el-tab-pane label="Monitor Members" name="sixth"></el-tab-pane>
-      <el-tab-pane label="BlackList" name="seventh"></el-tab-pane>
-      <el-tab-pane label="Customer Service Urls" name="eighth"></el-tab-pane>
-      <el-tab-pane label="Mobile Settings" name="ninth"></el-tab-pane>
+      <el-tab-pane label="电脑版网址/手机版网址" name="first"></el-tab-pane>
+      <el-tab-pane label="开放注册" name="second"></el-tab-pane>
+      <el-tab-pane label="首页公告" name="third"></el-tab-pane>
+      <el-tab-pane label="系统维护" name="fourth"></el-tab-pane>
+      <el-tab-pane label="简易版公告" name="fifth"></el-tab-pane>
+      <el-tab-pane label="监控会员" name="sixth"></el-tab-pane>
+      <el-tab-pane label="坏会员" name="seventh"></el-tab-pane>
+      <el-tab-pane label="客服网址" name="eighth"></el-tab-pane>
+      <el-tab-pane label="手机版设置" name="ninth"></el-tab-pane>
     </el-tabs>
 
-    <h3 class="tab-heading" id="first">Website URL</h3>
+    <h3 class="tab-heading" id="first">电脑版网址/手机版网址</h3>
     <UrlTable />
-    <h3 class="tab-heading" id="second">Turn on/off Services</h3>
+    <h3 class="tab-heading" id="second">开放注册</h3>
     <TurnServices />
-    <h3 class="tab-heading" id="third">Homepage Notification</h3>
+    <h3 class="tab-heading" id="third">首页公告</h3>
     <HomeNotification />
-    <h3 class="tab-heading" id="fourth">System Maintaince</h3>
+    <h3 class="tab-heading" id="fourth">系统维护</h3>
     <SystemMaintaince />
-    <h3 class="tab-heading" id="fifth">Simple Version Notification</h3>
+    <h3 class="tab-heading" id="fifth">简易版公告</h3>
     <SimpleVersion />
-    <h3 class="tab-heading" id="sixth">Monitor Members</h3>
+    <h3 class="tab-heading" id="sixth">监控会员</h3>
     <MonitorMember />
-    <h3 class="tab-heading" id="seventh">BlackList</h3>
+    <h3 class="tab-heading" id="seventh">坏会员</h3>
     <BlackList />
-    <h3 class="tab-heading" id="eighth">Customer Service Website URL</h3>
+    <h3 class="tab-heading" id="eighth">客服网址</h3>
     <CustomerService />
-    <h3 class="tab-heading" id="ninth">Mobile Version Setting</h3>
+    <h3 class="tab-heading" id="ninth">手机版设置</h3>
     <MobileSetting />
   </div>
 </template>

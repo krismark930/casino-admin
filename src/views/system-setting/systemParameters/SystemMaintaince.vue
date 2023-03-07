@@ -1,12 +1,12 @@
 <template>
   <div class="sysmaintain-wrapper">
     <el-table :data="tableData" class="sysmaintain-table">
-      <el-table-column prop="sysmain" label="System Maintaince" width="200">
+      <el-table-column prop="sysmain" label="系统维护" width="200">
         <template #default="scope">
           <el-switch v-model="scope.row.sysmain" />
         </template>
       </el-table-column>
-      <el-table-column prop="maintenance" label="Maintenance Notification">
+      <el-table-column prop="maintenance" label="维护公告">
         <template #default="scope">
           <el-input v-model="scope.row.maintenance" autocomplete="off" />
         </template>
@@ -14,7 +14,7 @@
       <el-table-column label="" width="100">
         <template #default="scope">
           <el-button type="primary" @click="handleSubmit(scope.row.sysmain)">
-            Submit
+            确定
           </el-button>
         </template>
       </el-table-column>
