@@ -49,8 +49,10 @@
       <el-table-column property="num1" label="第一球" align="center" />
       <el-table-column property="num2" label="第二球" align="center" />
       <el-table-column property="num3" label="第三球" align="center" />
-      <el-table-column property="num4" label="第四球" align="center" />
-      <el-table-column property="specialNum" label="特别号" align="center" />
+      <el-table-column property="sum" label="总和" align="center" />
+      <el-table-column property="dragonTiger" label="龙虎" align="center" />
+      <el-table-column property="var" label="三连" align="center" />
+      <el-table-column property="span" label="跨度" align="center" />
       <el-table-column property="settlement" label="结算" align="center" />
       <el-table-column property="recalculate" label="重算" align="center" />
       <el-table-column fixed="right" label="操作" width="120" align="center">
@@ -86,38 +88,44 @@ export default {
       },
       settingData: [
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '排列三',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           num1: '8',
           num2: '0',
           num3: '5',
-          num4: '2',
-          specialNum: '6',
+          sum: '21 / 总和小 / 总和单',
+          dragonTiger: '龙',
+          var: '对子',
+          span: '1',
           settlement: '已结算',
           recalculate: '×',
         },
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '排列三',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           num1: '8',
           num2: '0',
           num3: '5',
-          num4: '2',
-          specialNum: '6',
+          sum: '21 / 总和小 / 总和单',
+          dragonTiger: '龙',
+          var: '对子',
+          span: '1',
           settlement: '已结算',
           recalculate: '×',
         },
         {
-          lotteryCategory: '广西十分彩',
+          lotteryCategory: '排列三',
           lotteryNumber: '20230306038',
           drawTime: '2023-02-21',
           num1: '8',
           num2: '0',
           num3: '5',
-          num4: '2',
-          specialNum: '6',
+          sum: '21 / 总和小 / 总和单',
+          dragonTiger: '龙',
+          var: '对子',
+          span: '1',
           settlement: '已结算',
           recalculate: '×',
         },

@@ -58,30 +58,6 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-            <el-select
-              v-model="formData.winningNum4"
-              placeholder="第四球"
-              style="width: 90px;"
-            >
-              <el-option
-                v-for="item in numberOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
-            <el-select
-              v-model="formData.specialNum"
-              placeholder="特别号"
-              style="width: 90px;"
-            >
-              <el-option
-                v-for="item in numberOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
           </el-space>
         </el-form-item>
         <el-form-item label="">
@@ -102,14 +78,12 @@ export default {
         winningNum1: '',
         winningNum2: '',
         winningNum3: '',
-        winningNum4: '',
-        specialNum: '',
       },
       numberOptions: [],
     }
   },
   beforeMount() {
-    for (let i = 1; i < 22; i++) {
+    for (let i = 0; i < 10; i++) {
       this.numberOptions.push({ value: i, label: i })
     }
   },
