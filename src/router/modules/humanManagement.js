@@ -69,7 +69,7 @@ export default [
       },
       {
         path: '/reportF',
-        name: 'reportK',
+        name: 'reportF',
         component: ReportF,
         meta: {
           title: 'menu.reportF',
