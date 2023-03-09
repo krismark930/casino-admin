@@ -1,60 +1,59 @@
 <script lang="ts" setup>
 import { ref, defineProps } from 'vue'
-const combination = [
-  '万',
-  '仟',
-  '佰',
-  '拾',
-  '个',
-  '万仟',
-  '万佰',
-  '万拾',
-  '万个',
-  '仟佰',
-  '仟拾',
-  '仟个',
-  '佰拾',
-  '佰个',
-  '拾个',
-  '前三',
-  '中三',
-  '后三',
-]
 const OddValue = ref('1.95')
 </script>
 <template>
   <el-scrollbar>
     <el-row class="scrollbar-flex-content">
+      <h3 style="padding-top:20px; color:slategrey;">总和</h3>
       <table class="TwoSide-table">
         <thead>
           <tr>
-            <th>组合</th>
-            <th>单</th>
-            <th>双</th>
             <th>大</th>
+            <th>单</th>
+            <th>尾大</th>
+            <th>龙</th>
             <th>小</th>
-            <th>质</th>
-            <th>合</th>
+            <th>双</th>
+            <th>尾小</th>
+            <th>虎</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="n in 18" :key="n">
-            <template v-for="m in 7" :key="m">
+          <tr>
+            <template v-for="m in 8" :key="m">
+              <td>1.95</td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+    </el-row>
+  </el-scrollbar>
+  <el-scrollbar>
+    <el-row class="scrollbar-flex-content">
+      <h3 style="padding-top:20px; color:slategrey;">单码/双面</h3>
+      <table class="TwoSide-table">
+        <thead>
+          <tr>
+            <th>号码</th>
+            <th>大</th>
+            <th>单</th>
+            <th>和单</th>
+            <th>尾大</th>
+            <th>小</th>
+            <th>双</th>
+            <th>和双</th>
+            <th>尾小</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="n in 8" :key="n">
+            <template v-for="m in 9" :key="m">
               <template v-if="m == 1">
-                <td>{{ combination[n - 1] }}</td>
+                <td>第{{ n }}球</td>
               </template>
               <template v-else>
-                <td>
-                  <div style="display: flex; column-gap: 10px;">
-                    <div>
-                      <el-input
-                        v-model="OddValue"
-                        size="small"
-                        controls-position="center"
-                      />
-                    </div>
-                  </div>
-                </td>
+                <td>1.95</td>
               </template>
             </template>
           </tr>

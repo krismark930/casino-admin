@@ -1,49 +1,45 @@
 <template>
-    <el-tabs
-      v-model="activeName"
-      class="demo-tabs"
-      @tab-click="handleClick"
-    >
-        <el-tab-pane label="两面" name="first">
-            <TwoSide />
-        </el-tab-pane>
-        <el-tab-pane label="和数" name="second">
-            <Sum />
-        </el-tab-pane>
-        <el-tab-pane label="和尾数" name="third">
-            <Mantissa />
-        </el-tab-pane>
-        <el-tab-pane label="一字" name="fourth">
-            <OneWord />
-        </el-tab-pane>
-        <el-tab-pane label="二字" name="fisth">
-            <TwoWords />
-        </el-tab-pane>
-        <el-tab-pane label="一字定位" name="sixth">
-            <OneWordPostion />
-        </el-tab-pane>
-        <el-tab-pane label="二字定位" name="seventh">
-            <TwoWordPosition />
-        </el-tab-pane>
-        <el-tab-pane label="组选三" name="eighth">
-            <GroupThree />
-        </el-tab-pane>    
-        <el-tab-pane label="组选六" name="ninth">
-            <GroupSelectSix />
-        </el-tab-pane>    
-        <el-tab-pane label="跨度" name="tenth">
-            <Span />
-        </el-tab-pane>    
-        <el-tab-pane label="总和龙虎和" name="eleventh">
-            <SumDragon />
-        </el-tab-pane>    
-        <el-tab-pane label="豹子顺子" name="tweleves">
-            <Leopard />
-        </el-tab-pane>    
-        <el-tab-pane label="牛牛" name="thirteen">
-            <NiuNiu />
-        </el-tab-pane>
-    </el-tabs>
+  <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+    <el-tab-pane label="两面" name="first">
+      <TwoSide />
+    </el-tab-pane>
+    <el-tab-pane label="和数" name="second">
+      <Sum />
+    </el-tab-pane>
+    <el-tab-pane label="和尾数" name="third">
+      <Mantissa />
+    </el-tab-pane>
+    <el-tab-pane label="一字" name="fourth">
+      <OneWord />
+    </el-tab-pane>
+    <el-tab-pane label="二字" name="fisth">
+      <TwoWords />
+    </el-tab-pane>
+    <el-tab-pane label="一字定位" name="sixth">
+      <OneWordPostion />
+    </el-tab-pane>
+    <el-tab-pane label="二字定位" name="seventh">
+      <TwoWordPosition />
+    </el-tab-pane>
+    <el-tab-pane label="组选三" name="eighth">
+      <GroupThree />
+    </el-tab-pane>
+    <el-tab-pane label="组选六" name="ninth">
+      <GroupSelectSix />
+    </el-tab-pane>
+    <el-tab-pane label="跨度" name="tenth">
+      <Span />
+    </el-tab-pane>
+    <el-tab-pane label="总和龙虎和" name="eleventh">
+      <SumDragon />
+    </el-tab-pane>
+    <el-tab-pane label="豹子顺子" name="tweleves">
+      <Leopard />
+    </el-tab-pane>
+    <el-tab-pane label="牛牛" name="thirteen">
+      <NiuNiu />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 <script lang="ts" setup>
 
@@ -71,7 +67,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 <style lang="scss" scoped>
 .demo-tabs > .el-tabs__content {
-    padding: 32px;
-    color: #6b778c;
-  }
+  padding: 32px;
+  color: #6b778c;
+}
 </style>

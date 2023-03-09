@@ -1,50 +1,50 @@
 <template>
-    <el-tabs
-      v-model="activeName"
-      type="card"
-      class="mantissa-tabs"
-      @tab-click="handleClick"
-    >
-      <el-tab-pane label="前三" name="first">
-        <TopThree />
-      </el-tab-pane>
-      <el-tab-pane label="中三" name="second">
-        <MiddleThree />
-      </el-tab-pane>
-      <el-tab-pane label="后三" name="third">
-        <AfterThree />
-      </el-tab-pane>
-      <el-tab-pane label="万仟" name="fourth">
-        <WanQian />
-      </el-tab-pane>
-      <el-tab-pane label="万佰" name="fivth">
-        <MillionDollar />
-      </el-tab-pane>
-      <el-tab-pane label="万拾" name="six">
-        <WanShi />
-      </el-tab-pane>
-      <el-tab-pane label="万个" name="seventh">
-        <TenThousand />
-      </el-tab-pane>
-      <el-tab-pane label="仟佰" name="eighth">
-        <ThHundred />
-      </el-tab-pane>
-      <el-tab-pane label="仟拾" name="ninth">
-        <ThousandPick />
-      </el-tab-pane>
-      <el-tab-pane label="仟个" name="tenth">
-        <Thousand />
-      </el-tab-pane>
-      <el-tab-pane label="佰拾" name="eleventh">
-        <Hundreds />
-      </el-tab-pane>
-      <el-tab-pane label="佰个" name="twelves">
-        <Hundred />
-      </el-tab-pane>
-      <el-tab-pane label="拾个" name="thirteen">
-        <PickUp />
-      </el-tab-pane>
-    </el-tabs>
+  <el-tabs
+    v-model="activeName"
+    type="card"
+    class="mantissa-tabs"
+    @tab-click="handleClick"
+  >
+    <el-tab-pane label="前三" name="first">
+      <TopThree />
+    </el-tab-pane>
+    <el-tab-pane label="中三" name="second">
+      <MiddleThree />
+    </el-tab-pane>
+    <el-tab-pane label="后三" name="third">
+      <AfterThree />
+    </el-tab-pane>
+    <el-tab-pane label="万仟" name="fourth">
+      <WanQian />
+    </el-tab-pane>
+    <el-tab-pane label="万佰" name="fivth">
+      <MillionDollar />
+    </el-tab-pane>
+    <el-tab-pane label="万拾" name="six">
+      <WanShi />
+    </el-tab-pane>
+    <el-tab-pane label="万个" name="seventh">
+      <TenThousand />
+    </el-tab-pane>
+    <el-tab-pane label="仟佰" name="eighth">
+      <ThHundred />
+    </el-tab-pane>
+    <el-tab-pane label="仟拾" name="ninth">
+      <ThousandPick />
+    </el-tab-pane>
+    <el-tab-pane label="仟个" name="tenth">
+      <Thousand />
+    </el-tab-pane>
+    <el-tab-pane label="佰拾" name="eleventh">
+      <Hundreds />
+    </el-tab-pane>
+    <el-tab-pane label="佰个" name="twelves">
+      <Hundred />
+    </el-tab-pane>
+    <el-tab-pane label="拾个" name="thirteen">
+      <PickUp />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
