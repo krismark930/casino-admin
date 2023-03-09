@@ -1,23 +1,23 @@
 <template>
-    <el-tabs
-      v-model="activeName"
-      type="card"
-      class="mantissa-tabs"
-      @tab-click="handleClick"
-    >
-      <el-tab-pane label="前三" name="first">
-        <TopThree />
-      </el-tab-pane>
-      <el-tab-pane label="中三" name="second">
-        <MiddleThree />
-      </el-tab-pane>
-      <el-tab-pane label="后三" name="third">
-        <AfterThree />
-      </el-tab-pane>
-      <el-tab-pane label="万仟" name="fourth">
-        <AllFive />
-      </el-tab-pane>
-    </el-tabs>
+  <el-tabs
+    v-model="activeName"
+    type="card"
+    class="mantissa-tabs"
+    @tab-click="handleClick"
+  >
+    <el-tab-pane label="前三" name="first">
+      <TopThree />
+    </el-tab-pane>
+    <el-tab-pane label="中三" name="second">
+      <MiddleThree />
+    </el-tab-pane>
+    <el-tab-pane label="后三" name="third">
+      <AfterThree />
+    </el-tab-pane>
+    <el-tab-pane label="万仟" name="fourth">
+      <AllFive />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

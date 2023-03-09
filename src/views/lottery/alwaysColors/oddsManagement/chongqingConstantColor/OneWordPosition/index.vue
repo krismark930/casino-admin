@@ -1,26 +1,26 @@
 <template>
-    <el-tabs
-      v-model="activeName"
-      type="card"
-      class="mantissa-tabs"
-      @tab-click="handleClick"
-    >
-      <el-tab-pane label="万" name="first">
-        <TenThousand />
-      </el-tab-pane>
-      <el-tab-pane label="仟" name="second">
-        <Thousand />
-      </el-tab-pane>
-      <el-tab-pane label="佰" name="third">
-        <Hundred />
-      </el-tab-pane>
-      <el-tab-pane label="拾" name="fourth">
-        <PickUp />
-      </el-tab-pane>
-      <el-tab-pane label="个" name="fivth">
-        <Individual />
-      </el-tab-pane>
-    </el-tabs>
+  <el-tabs
+    v-model="activeName"
+    type="card"
+    class="mantissa-tabs"
+    @tab-click="handleClick"
+  >
+    <el-tab-pane label="万" name="first">
+      <TenThousand />
+    </el-tab-pane>
+    <el-tab-pane label="仟" name="second">
+      <Thousand />
+    </el-tab-pane>
+    <el-tab-pane label="佰" name="third">
+      <Hundred />
+    </el-tab-pane>
+    <el-tab-pane label="拾" name="fourth">
+      <PickUp />
+    </el-tab-pane>
+    <el-tab-pane label="个" name="fivth">
+      <Individual />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
