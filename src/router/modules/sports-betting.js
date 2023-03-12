@@ -8,6 +8,10 @@ const CheckScores = () =>
   import('@/views/sports-betting/check-scores/index.vue')
 const CheckScores2 = () =>
   import('@/views/sports-betting/check-scores2/index.vue')
+const CheckScores2BetSlip = () =>
+  import('@/views/sports-betting/check-scores2/bet-slip.vue')
+const CheckScores2Operate = () =>
+  import('@/views/sports-betting/check-scores2/operation.vue')
 const LiveBetting = () => import('@/views/sports-betting/liveBetting/index.vue')
 const SearchBettings = () =>
   import('@/views/sports-betting/search-bettings/index.vue')
@@ -107,5 +111,22 @@ export default [
         },
       },
     ],
+  },
+]
+
+export const subSportsRoutes = [
+  {
+    path: '/check-scores2/bet-slip/:id',
+    name: 'check-scores2-bet-slip',
+    component: CheckScores2BetSlip,
+    meta: {
+      title: 'menu.checkScores2BetSlip',
+      affix: true,
+    },
+  },
+  {
+    path: '/check-scores2/operate/:id',
+    name: 'check-scores2-operate',
+    component: CheckScores2Operate,
   },
 ]

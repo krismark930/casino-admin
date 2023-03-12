@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n'
+import checkScores from '@/i18n/locales/zh-cn/check-scores2'
 
 const getMessage = modules => {
   return Object.entries(modules).reduce((module, [path, mod]) => {
@@ -17,3 +18,5 @@ export default createI18n({
   legacy: false,
   globalInjection: true,
 })
+
+export { checkScores }

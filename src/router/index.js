@@ -35,7 +35,7 @@ import home from './modules/home'
 import test from './modules/test'
 import systemSetting from './modules/system-setting'
 import userSetting from './modules/user-setting'
-import sportsBetting from './modules/sports-betting'
+import sportsBetting, { subSportsRoutes } from './modules/sports-betting'
 import lottery from './modules/lottery'
 import account from './modules/account'
 import payment from './modules/payment'
@@ -43,6 +43,7 @@ import analytics from './modules/analytics'
 import systemlog from './modules/systemlog'
 import humanManagement from './modules/humanManagement'
 import statistics from './modules/statistics'
+
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
@@ -88,6 +89,8 @@ const router = createRouter({
     ...analyticsRoutes,
     ...systemlogsRoutes,
     ...error,
+
+    ...subSportsRoutes,
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
