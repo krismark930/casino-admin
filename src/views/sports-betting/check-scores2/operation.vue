@@ -80,7 +80,7 @@
       <div style="margin-top: 20px;">
         <el-form-item>
           <el-button type="primary" @click="saveScore">提 交</el-button>
-          <el-button type="danger">清 除</el-button>
+          <el-button type="danger" @click="back">清 除</el-button>
         </el-form-item>
       </div>
     </el-form>
@@ -137,6 +137,9 @@ export default defineComponent({
             state.loading = false
           })
       },
+      back: () => {
+        router.go(-1)
+      }
     })
 
     onBeforeMount(() => {

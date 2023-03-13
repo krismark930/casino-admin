@@ -35,7 +35,7 @@ import home from './modules/home'
 import test from './modules/test'
 import systemSetting from './modules/system-setting'
 import userSetting from './modules/user-setting'
-import sportsBetting, { subSportsRoutes } from './modules/sports-betting'
+import sportsBetting from './modules/sports-betting'
 import lottery from './modules/lottery'
 import account from './modules/account'
 import payment from './modules/payment'
@@ -90,7 +90,6 @@ const router = createRouter({
     ...systemlogsRoutes,
     ...error,
 
-    ...subSportsRoutes,
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

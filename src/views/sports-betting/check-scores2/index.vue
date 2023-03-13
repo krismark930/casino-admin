@@ -1,4 +1,5 @@
 <template>
+  <router-view ></router-view>
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
   >
@@ -168,7 +169,7 @@
       <el-table-column property="show" label="显示" align="center">
         <template #default="scope">
           <span v-if="scope.row.Inball">
-            <el-link href="/check-scores2">开盘</el-link>
+            <el-link href="/check-scores2/operat">开盘</el-link>
           </span>
           <span v-else>
             <p>正常</p>
@@ -193,7 +194,7 @@
 <script>
 import { defineComponent, reactive, toRefs, ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
-import { GetItemDate } from '@/api/sports/check-scores2'
+import { GetItems } from '@/api/sports/check-scores2'
 import ChangeLang from '@/layout/components/Topbar/ChangeLang.vue'
 import { checkScores } from '@/i18n'
 import { formatDate } from '@/utils'
@@ -225,7 +226,7 @@ export default defineComponent({
         }
 
         state.loading = true
-        GetItemDate(state.formData)
+        GetItems(state.formData)
           .then(data => {
             state.bettingRecords = [...data]
             state.loading = false
