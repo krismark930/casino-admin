@@ -78,7 +78,7 @@ export default [
           {
             path: '',
             name: 'check-scores2.home',
-            component: CheckScores2
+            component: CheckScores2,
           },
           {
             path: 'bet-slip/:id',
@@ -86,8 +86,8 @@ export default [
             component: CheckScores2BetSlip,
             meta: {
               title: 'menu.betSlip',
-              affix: true
-            }
+              affix: true,
+            },
           },
           {
             path: 'operate/:id',
@@ -95,10 +95,10 @@ export default [
             component: CheckScores2Operate,
             meta: {
               title: 'menu.operate',
-              affix: true
-            }
+              affix: true,
+            },
           },
-        ]
+        ],
       },
       {
         path: '/liveBetting',

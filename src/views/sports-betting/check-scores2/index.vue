@@ -1,5 +1,5 @@
 <template>
-  <router-view ></router-view>
+  <router-view></router-view>
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
   >

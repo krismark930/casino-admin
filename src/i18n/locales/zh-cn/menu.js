@@ -101,5 +101,5 @@ export default {
 
   // Actions
   betSlip: '注单',
-  operate: '操作'
+  operate: '操作',
 }

@@ -89,7 +89,6 @@ const router = createRouter({
     ...analyticsRoutes,
     ...systemlogsRoutes,
     ...error,
-
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

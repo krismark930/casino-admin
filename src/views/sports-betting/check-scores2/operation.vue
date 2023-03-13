@@ -139,7 +139,7 @@ export default defineComponent({
       },
       back: () => {
         router.go(-1)
-      }
+      },
     })
 
     onBeforeMount(() => {
