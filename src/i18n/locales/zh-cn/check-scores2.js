@@ -38,4 +38,12 @@ export default {
   TEAM_NAMES: '主客队伍',
   HALF_SCORE: '上半进球数',
   TOTAL_SCORE: '全场进球数',
+  BETTING_TIME: '投注时间',
+  USER_NAME: '用户名称',
+  GAME_TYPE: '球赛种类',
+  CONTENT: '內容',
+  BETTING: '投注',
+  ACCOUNT_RESULT: '占成结果',
+  REGRESSION: '退水',
+  ACTUAL_AMOUNT: '实际金额'
 }

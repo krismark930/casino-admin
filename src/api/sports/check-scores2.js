@@ -17,10 +17,18 @@ export const GetItemById = data => {
   })
 }
 
-export const UpdateItem = data => {
+export const CheckScore = data => {
   return request({
-    url: '/api/sport/update_item',
-    method: 'put',
+    url: '/api/sport/check_score',
+    method: 'post',
+    data,
+  })
+}
+
+export const SaveScore = data => {
+  return request({
+    url: '/api/sport/save_score',
+    method: 'post',
     data,
   })
 }

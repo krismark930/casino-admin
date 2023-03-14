@@ -228,6 +228,7 @@ export default defineComponent({
         state.loading = true
         GetItems(state.formData)
           .then(data => {
+            console.log(data)
             state.bettingRecords = [...data]
             state.loading = false
           })

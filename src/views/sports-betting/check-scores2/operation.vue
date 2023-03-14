@@ -4,7 +4,7 @@
   >
     <h3>{{ $t('menu.checkScores2') }}</h3>
 
-    <el-form :inline="true" ref="form">
+    <el-form :inline="true" ref="form" v-if="!step">
       <el-table
         v-loading="loading"
         :data="[item]"
@@ -79,6 +79,133 @@
       </el-table>
       <div style="margin-top: 20px;">
         <el-form-item>
+          <el-button type="primary" @click="checkScore">提 交</el-button>
+          <el-button type="danger" @click="back">清 除</el-button>
+        </el-form-item>
+      </div>
+    </el-form>
+    
+    <el-form :inline="true" ref="form1" v-if="step">
+      <el-table
+        v-loading="loading"
+        :data="scores"
+        style="width: 100%;"
+        border
+        header-align="center"
+        stripe
+      >
+        <el-table-column
+          property="release"
+          label="发布"
+          align="center"
+        >
+          <el-checkbox label="" :indeterminate="false"></el-checkbox>
+        </el-table-column>
+        <el-table-column
+          property="bettingTime"
+          :label="checkScores.BETTING_TIME"
+          align="center"
+        >
+          <template #default="scope">
+            <font color="#cc0000" v-html="scope.row.times"></font>
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="userName"
+          :label="checkScores.HALF_SCORE"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{  scope.row.M_Name }}
+            <br>
+            <font color="#cc0000">{{ scope.row.OpenType }}</font>&nbsp;&nbsp;
+            <font color="#cc0000">{{ scope.row.TurnRate }}</font>
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="gameType"
+          :label="checkScores.USER_NAME"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{ scope.row.Mnu_Soccer + scope.row.BetType + scope.row.Odds }}<br>
+            <font color="#0000cc">{{ scope.row.voucher }}</font>
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="gameType"
+          :label="checkScores.GAME_TYPE"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{ scope.row.Middle }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="content"
+          :label="checkScores.CONTENT"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{  scope.row.BetScore }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="betting"
+          :label="checkScores.BETTING"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{ scope.row.d_point }}/{{ scope.row.c_point }}/{{ scope.row.b_point }}/{{ scope.row.a_point }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="accountResult"
+          :label="checkScores.ACCOUNT_RESULT"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            {{ scope.row.turn }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="regression"
+          :label="checkScores.REGRESSION"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            <p color="red" v-html="scope.row.times"></p>
+          </template>
+        </el-table-column>
+        <el-table-column
+          property="actualAmount"
+          :label="checkScores.ACTUAL_AMOUNT"
+          align="center"
+          width="180"
+        >
+          <template #default="scope">
+            <el-form-item style="margin: 0;">
+              <el-input v-model="scope.row.actual_amount"></el-input>
+              <el-input v-model="scope.row.d_point" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.c_point" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.b_result" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.pay_type" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.memname" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.BetScore" size="8" clearable type="hidden"></el-input>
+              <el-input v-model="scope.row.id" size="8" clearable type="hidden"></el-input>
+            </el-form-item>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div style="margin-top: 20px;">
+        <el-form-item>
           <el-button type="primary" @click="saveScore">提 交</el-button>
           <el-button type="danger" @click="back">清 除</el-button>
         </el-form-item>
@@ -90,7 +217,7 @@
 <script>
 import { defineComponent, reactive, toRefs, ref, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
-import { GetItemById, UpdateItem } from '@/api/sports/check-scores2'
+import { GetItemById, SaveScore, CheckScore } from '@/api/sports/check-scores2'
 import ChangeLang from '@/layout/components/Topbar/ChangeLang.vue'
 import { checkScores } from '@/i18n'
 
@@ -101,10 +228,13 @@ export default defineComponent({
     const router = useRouter()
     const state = reactive({
       id: router.currentRoute._rawValue.params.id,
+      step: 0,
       item: {},
+      scores: [],
       loading: false,
       checkScores,
       form: ref(null),
+      form1: ref(null),
       submit: () => {
         if (state.loading) {
           return
@@ -125,9 +255,26 @@ export default defineComponent({
             state.loading = false
           })
       },
+      checkScore: () => {
+        state.loading = true
+        CheckScore({ id: state.id, item: {...state.item, 'type': 'FT'} })
+          .then(res => {
+            if (res.code == 'settled') {
+              console.log(res.message)
+            } else {
+              state.scores = res
+            }
+            state.step = 1
+            state.loading = false
+          })
+          .catch(err => {
+            console.log(err)
+            state.loading = false
+          })
+      },
       saveScore: () => {
         state.loading = true
-        UpdateItem({ id: state.id, item: state.item })
+        SaveScore({ id: state.id, item: state.item })
           .then(res => {
             if (res.code == 0) console.log(res.message)
             state.loading = false

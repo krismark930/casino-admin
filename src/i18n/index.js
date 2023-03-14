@@ -1,5 +1,6 @@
 import { createI18n } from 'vue-i18n'
 import checkScores from '@/i18n/locales/zh-cn/check-scores2'
+import common from '@/i18n/locales/zh-cn/public'
 
 const getMessage = modules => {
   return Object.entries(modules).reduce((module, [path, mod]) => {
@@ -19,4 +20,4 @@ export default createI18n({
   globalInjection: true,
 })
 
-export { checkScores }
+export { checkScores, common }
