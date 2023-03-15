@@ -99,7 +99,9 @@
           label="发布"
           align="center"
         >
-          <el-checkbox label="" :indeterminate="false"></el-checkbox>
+          <template #default="scope">
+            <el-checkbox label="" :indeterminate="false" v-model="check[scope.row.field_count]"></el-checkbox>
+          </template>
         </el-table-column>
         <el-table-column
           property="bettingTime"
@@ -112,7 +114,7 @@
         </el-table-column>
         <el-table-column
           property="userName"
-          :label="checkScores.HALF_SCORE"
+          :label="checkScores.USER_NAME"
           align="center"
           width="180"
         >
@@ -125,7 +127,7 @@
         </el-table-column>
         <el-table-column
           property="gameType"
-          :label="checkScores.USER_NAME"
+          :label="checkScores.GAME_TYPE"
           align="center"
           width="180"
         >
@@ -135,23 +137,13 @@
           </template>
         </el-table-column>
         <el-table-column
-          property="gameType"
-          :label="checkScores.GAME_TYPE"
-          align="center"
-          width="180"
-        >
-          <template #default="scope">
-            {{ scope.row.Middle }}
-          </template>
-        </el-table-column>
-        <el-table-column
           property="content"
           :label="checkScores.CONTENT"
           align="center"
           width="180"
         >
           <template #default="scope">
-            {{  scope.row.BetScore }}
+            <p v-html="scope.row.Middle"></p>
           </template>
         </el-table-column>
         <el-table-column
@@ -161,7 +153,7 @@
           width="180"
         >
           <template #default="scope">
-            {{ scope.row.d_point }}/{{ scope.row.c_point }}/{{ scope.row.b_point }}/{{ scope.row.a_point }}
+            {{  scope.row.BetScore }}
           </template>
         </el-table-column>
         <el-table-column
@@ -171,7 +163,7 @@
           width="180"
         >
           <template #default="scope">
-            {{ scope.row.turn }}
+            {{ scope.row.d_point }}/{{ scope.row.c_point }}/{{ scope.row.b_point }}/{{ scope.row.a_point }}
           </template>
         </el-table-column>
         <el-table-column
@@ -181,7 +173,7 @@
           width="180"
         >
           <template #default="scope">
-            <p color="red" v-html="scope.row.times"></p>
+            {{ scope.row.turn }}
           </template>
         </el-table-column>
         <el-table-column
@@ -200,6 +192,12 @@
               <el-input v-model="scope.row.memname" size="8" clearable type="hidden"></el-input>
               <el-input v-model="scope.row.BetScore" size="8" clearable type="hidden"></el-input>
               <el-input v-model="scope.row.id" size="8" clearable type="hidden"></el-input>
+              <input :value="scope.row.mb_inball" name="MB_Inball" type="hidden" />
+              <input :value="scope.row.tg_inball" name="TG_Inball" type="hidden" />
+              <input :value="scope.row.mb_inball_v" name="MB_Inball_HR" type="hidden" />
+              <input :value="scope.row.tg_inball_v" name="TG_Inball_HR" type="hidden" />
+              <input :value="scope.row.gtype" name="gtype" type="hidden" />
+              <input :value="scope.row.gid" name="gid" type="hidden" />
             </el-form-item>
           </template>
         </el-table-column>
@@ -231,6 +229,7 @@ export default defineComponent({
       step: 0,
       item: {},
       scores: [],
+      check: [],
       loading: false,
       checkScores,
       form: ref(null),
@@ -256,21 +255,38 @@ export default defineComponent({
           })
       },
       checkScore: () => {
-        state.loading = true
-        CheckScore({ id: state.id, item: {...state.item, 'type': 'FT'} })
-          .then(res => {
-            if (res.code == 'settled') {
-              console.log(res.message)
-            } else {
-              state.scores = res
-            }
-            state.step = 1
-            state.loading = false
-          })
-          .catch(err => {
-            console.log(err)
-            state.loading = false
-          })
+        if (state.item.Score == 0) {
+          if (!confirm('本场赛事已经结算,确定再次结算!')) {
+            router.go(-1)
+            return
+          }
+        }
+        if (state.item.MB_Inball != '' || state.item.TG_Inball != '') {
+          if (!confirm('本场赛事已经有比分，确定重新输入比分?')) {
+            router.go(-1);
+            return
+          }
+        }
+        if (confirm(`主队半场进球数：${state.item.MB_Inball_HR}  主队全场进球数：${state.item.MB_Inball}\n\nn客队半场进球数: ${state.item.TG_Inball_HR}  客队全场进球数：${state.item.TG_Inball}\n\n请确定输入是否正确?`)) {
+          state.loading = true
+          CheckScore({ id: state.id, item: {...state.item, 'type': 'FT'} })
+            .then(res => {
+              if (res.code == 'settled') {
+                console.log(res.message)
+              } else {
+                state.scores = res
+                state.scores.forEach(elem => {
+                  state.check.push(true)
+                })
+              }
+              state.step = 1
+              state.loading = false
+            })
+            .catch(err => {
+              console.log(err)
+              state.loading = false
+            })
+        }
       },
       saveScore: () => {
         state.loading = true
@@ -278,6 +294,7 @@ export default defineComponent({
           .then(res => {
             if (res.code == 0) console.log(res.message)
             state.loading = false
+            router.push('/check-scores2')
           })
           .catch(err => {
             console.log(err)

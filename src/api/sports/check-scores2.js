@@ -17,6 +17,14 @@ export const GetItemById = data => {
   })
 }
 
+export const ShowData = data => {
+  return request({
+    url: '/api/sport/bet_slip',
+    method: 'post',
+    data,
+  })
+}
+
 export const CheckScore = data => {
   return request({
     url: '/api/sport/check_score',

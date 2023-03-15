@@ -168,8 +168,8 @@
 
       <el-table-column property="show" label="显示" align="center">
         <template #default="scope">
-          <span v-if="scope.row.Inball">
-            <el-link href="/check-scores2/operat">开盘</el-link>
+          <span v-if="scope.row.MB_Inball">
+            <el-link href="/check-scores2/operate">开盘</el-link>
           </span>
           <span v-else>
             <p>正常</p>
@@ -179,8 +179,11 @@
 
       <el-table-column property="state" label="状态" align="center">
         <template #default="scope">
-          <el-button type="danger" @click="() => closeBet(scope.row.MID)">
-            注单
+          <el-button type="danger" v-if="scope.row.Open" @click="() => closeBet(scope.row.MID, 0)">
+            开盘
+          </el-button>
+          <el-button tpye="danger" v-else @click="() => closeBet(scope.row.MID, 1)">
+            关盘
           </el-button>
         </template>
       </el-table-column>
@@ -226,7 +229,7 @@ export default defineComponent({
         }
 
         state.loading = true
-        GetItems(state.formData)
+        GetItems({...state.formData, score:0})
           .then(data => {
             console.log(data)
             state.bettingRecords = [...data]
@@ -243,7 +246,7 @@ export default defineComponent({
       toOperation: id => {
         router.push('/check-scores2/operate/' + id)
       },
-      closeBet: id => {},
+      closeBet: (mid, open) => {},
     })
 
     onBeforeMount(() => {
