@@ -98,4 +98,8 @@ export default {
   dividendDetails: '分红明细',
   systemLog: '系统日志（登录日志)',
   numberofUserOnline: '在线人数',
+
+  // Actions
+  betSlip: '注单',
+  operate: '操作',
 }

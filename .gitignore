@@ -25,5 +25,10 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+# Eslint files
+.eslintignore
+.eslintrc.json
+.prettierrc.js
+
 package-lock.json
 yarn.lock

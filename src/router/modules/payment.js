@@ -1,8 +1,8 @@
 const Layout = () => import('@/layout/index.vue')
 const PaymentMethods = () => import('@/views/payment/payment-methods/index.vue')
 const BankTransfers = () => import('@/views/payment/bank-transfers/index.vue')
-const AlipayTransfers = () =>
-  import('@/views/payment/alipay-transfers/index.vue')
+// const AlipayTransfers = () =>
+//   import('@/views/payment/alipay-transfers/index.vue')
 const CashSystems = () => import('@/views/payment/cash-systems/index.vue')
 
 export default [

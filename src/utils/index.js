@@ -72,6 +72,31 @@ export function parseTime(time, cFormat) {
 }
 
 /**
+ * @param {Date} date
+ * @param {string} option
+ * @returns {string}
+ */
+export function formatDate(date, option) {
+  let y = date.getFullYear(),
+    m = date.getMonth() + 1,
+    d = date.getDate()
+
+  y = '' + y
+  if (m < 10) m = '0' + m
+  if (d < 10) d = '0' + d
+
+  if (option) {
+    let newDate = option
+    newDate = newDate.replace('YYYY', y)
+    newDate = newDate.replace('MM', m)
+    newDate = newDate.replace('DD', d)
+    return option
+  } else {
+    return y + '-' + m + '-' + d
+  }
+}
+
+/**
  * @param {number} time
  * @param {string} option
  * @returns {string}

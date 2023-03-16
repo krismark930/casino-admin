@@ -8,12 +8,17 @@ const CheckScores = () =>
   import('@/views/sports-betting/check-scores/index.vue')
 const CheckScores2 = () =>
   import('@/views/sports-betting/check-scores2/index.vue')
+const CheckScores2BetSlip = () =>
+  import('@/views/sports-betting/check-scores2/bet-slip.vue')
+const CheckScores2Operate = () =>
+  import('@/views/sports-betting/check-scores2/operation.vue')
 const LiveBetting = () => import('@/views/sports-betting/liveBetting/index.vue')
 const SearchBettings = () =>
   import('@/views/sports-betting/search-bettings/index.vue')
 const ChampionBettings = () =>
   import('@/views/sports-betting/champion-bettings/index.vue')
 const SportsEvent = () => import('@/views/sports-betting/sportsEvent/index.vue')
+import checkScores2 from '@/i18n/locales/zh-cn/check-scores2'
 
 export default [
   {
@@ -64,11 +69,36 @@ export default [
       {
         path: '/check-scores2',
         name: 'check-scores2',
-        component: CheckScores2,
         meta: {
           title: 'menu.checkScores2',
           affix: true,
         },
+        noChildren: true,
+        children: [
+          {
+            path: '',
+            name: 'check-scores2.home',
+            component: CheckScores2,
+          },
+          {
+            path: 'bet-slip/:id',
+            name: 'check-scores2.bet-slip',
+            component: CheckScores2BetSlip,
+            meta: {
+              title: 'menu.betSlip',
+              affix: true,
+            },
+          },
+          {
+            path: 'operate/:id',
+            name: 'check-scores2.operate',
+            component: CheckScores2Operate,
+            meta: {
+              title: 'menu.operate',
+              affix: true,
+            },
+          },
+        ],
       },
       {
         path: '/liveBetting',

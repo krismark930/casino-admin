@@ -19,4 +19,5 @@ export default {
   enddate: '结束日期',
   starttime: '开始时间',
   endtime: '结束时间',
+  release: '发布'
 }
