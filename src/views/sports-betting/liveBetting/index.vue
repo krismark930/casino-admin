@@ -116,6 +116,7 @@
       border
       header-align="center"
       stripe
+      v-loading="loading"
     >
       <el-table-column label="投注时间" width="180" align="center">
         <template #default="scope">
@@ -127,8 +128,21 @@
       </el-table-column>
       <el-table-column property="userName" label="用户名称" align="center" />
       <el-table-column property="gameType" label="球赛种类" align="center" />
-      <el-table-column property="content" label="內容" align="center" />
-      <el-table-column property="state" label="状态" align="center" />
+      <el-table-column
+        property="content"
+        label="內容"
+        align="center"
+        width="250"
+      >
+        <template #default="scope">
+          <div v-html="scope.row.content"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="state" label="状态" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.state"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="betAmount" label="投注金额" align="center" />
       <el-table-column
         property="winableAmount"
@@ -136,17 +150,28 @@
         align="center"
       />
       <el-table-column property="result" label="结果" align="center" />
-      <el-table-column property="operate" label="操作" align="center" />
-      <el-table-column property="function" label="功能" align="center" />
-      <!-- <el-table-column fixed="right" label="操作" width="70">
-          <template #default="scope">
-            <el-button
-              type="primary"
-              icon="delete"
-              @click="deleteDepositData(scope.$index, scope.row)"
-            ></el-button>
-          </template>
-        </el-table-column> -->
+      <el-table-column property="operate" label="操作" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.operate"></div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        property="function"
+        label="功能"
+        align="center"
+        width="150"
+      >
+        <template #default="scope">
+          <el-select style="width: 130px;">
+            <el-option
+              v-for="item in functionOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="100" />
@@ -154,6 +179,8 @@
   </div>
 </template>
 <script>
+import { GetItems, GetFunctionItems } from '@/api/sports/livebetting'
+
 export default {
   data() {
     return {
@@ -181,6 +208,19 @@ export default {
       liveBettingData: [
         {
           id: 1,
+          betTime: '2023-02-3',
+          userName: '',
+          gameType: '',
+          content: '',
+          state: '',
+          betAmount: '',
+          winableAmount: '',
+          result: '',
+          function: '',
+          operate: '',
+        },
+        {
+          id: 2,
           betTime: '',
           userName: '',
           gameType: '',
@@ -281,11 +321,38 @@ export default {
           label: '其它',
         },
       ],
+      loading: false,
+
+      functionOptions: [
+        {
+          value: '注单处理',
+          label: '注单处理',
+        },
+      ],
     }
+  },
+
+  mounted() {
+    this.getItems()
+    this.getFunctionItems()
   },
   methods: {
     deleteDepositData(index, row) {
       console.log(index, row)
+    },
+
+    getItems() {
+      this.loading = true
+      GetItems().then(data => {
+        this.liveBettingData = [...data]
+        this.loading = false
+      })
+    },
+
+    getFunctionItems() {
+      GetFunctionItems().then(data => {
+        this.functionOptions = [...this.functionOptions, ...data]
+      })
     },
   },
 }
