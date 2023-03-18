@@ -82,11 +82,12 @@
       </div>
     </el-form>
     <el-table
-      :data="liveBettingData"
+      :data="searchBettingData"
       style="width: 100%;"
       border
       header-align="center"
       stripe
+      v-loading="loading"
     >
       <el-table-column property="userName" label="用户名称" align="center" />
       <el-table-column property="minutes" label="分钟数" align="center" />
@@ -106,9 +107,26 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="gameType" label="球赛种类" align="center" />
-      <el-table-column property="content" label="內容" align="center" />
-      <el-table-column property="state" label="状态" align="center" />
+      <el-table-column property="gameType" label="球赛种类" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.gameType"></div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        property="content"
+        label="內容"
+        align="center"
+        width="250"
+      >
+        <template #default="scope">
+          <div v-html="scope.row.content"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="state" label="状态" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.state"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="betAmount" label="投注金额" align="center" />
       <el-table-column
         property="winableAmount"
@@ -120,17 +138,28 @@
         label="会员结果"
         align="center"
       />
-      <el-table-column property="betSlip" label="注单" align="center" />
-      <el-table-column property="function" label="功能" align="center" />
-      <!-- <el-table-column fixed="right" label="操作" width="70">
-          <template #default="scope">
-            <el-button
-              type="primary"
-              icon="delete"
-              @click="deleteDepositData(scope.$index, scope.row)"
-            ></el-button>
-          </template>
-        </el-table-column> -->
+      <el-table-column property="betSlip" label="注单" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.betSlip"></div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        property="function"
+        label="功能"
+        align="center"
+        width="130"
+      >
+        <template #default="scope">
+          <el-select style="width: 110px;">
+            <el-option
+              v-for="item in functionOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="100" />
@@ -138,6 +167,8 @@
   </div>
 </template>
 <script>
+import { GetItems, GetFunctionItems } from '@/api/sports/search-betting'
+
 export default {
   data() {
     return {
@@ -333,11 +364,33 @@ export default {
           label: '180秒',
         },
       ],
+
+      functionOptions: [],
+      loading: false,
     }
+  },
+
+  mounted() {
+    this.getItems()
+    this.getFunctionItems()
   },
   methods: {
     deleteDepositData(index, row) {
       console.log(index, row)
+    },
+
+    getItems() {
+      this.loading = true
+      GetItems().then(data => {
+        this.searchBettingData = [...data]
+        this.loading = false
+      })
+    },
+
+    getFunctionItems() {
+      GetFunctionItems().then(data => {
+        this.functionOptions = [...this.functionOptions, ...data]
+      })
     },
   },
 }
