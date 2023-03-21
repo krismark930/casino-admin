@@ -2,11 +2,11 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
   >
-    <h3>{{ 'menu.championBettings' }}</h3>
+    <h3>{{ $t('menu.championBettings') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="">
-          <el-button type="primary">手动更新</el-button>
+          <el-button type="primary" @click="getItems">手动更新</el-button>
         </el-form-item>
         <el-form-item label="">
           <el-select v-model="formData.timeOption" style="width: 80px;">
@@ -27,10 +27,14 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary">确认</el-button>
+          <el-button type="primary" @click="getItems">确认</el-button>
         </el-form-item>
         <el-form-item label="投注状态">
-          <el-select v-model="formData.betStatusOption" style="width: 80px;">
+          <el-select
+            v-model="formData.betStatusOption"
+            style="width: 80px;"
+            @change="getItems"
+          >
             <el-option
               v-for="item in betStatusOptions"
               :key="item.value"
@@ -47,10 +51,11 @@
       border
       header-align="center"
       stripe
+      v-loading="loading"
     >
       <el-table-column property="userName" label="用户名称" align="center" />
       <el-table-column property="minutes" label="分钟数" align="center" />
-      <el-table-column label="投注时间" width="180" align="center">
+      <el-table-column label="投注时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
@@ -58,7 +63,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="开始时间" width="180" align="center">
+      <el-table-column label="开始时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
@@ -67,8 +72,21 @@
         </template>
       </el-table-column>
       <el-table-column property="gameType" label="球赛种类" align="center" />
-      <el-table-column property="content" label="內容" align="center" />
-      <el-table-column property="state" label="状态" align="center" />
+      <el-table-column
+        property="content"
+        width="200"
+        label="內容"
+        align="center"
+      >
+        <template #default="scope">
+          <div v-html="scope.row.content"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="state" label="状态" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.state"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="betAmount" label="投注金额" align="center" />
       <el-table-column
         property="winableAmount"
@@ -80,8 +98,29 @@
         label="会员结果"
         align="center"
       />
-      <el-table-column property="betSlip" label="注单" align="center" />
-      <el-table-column property="function" label="功能" align="center" />
+      <el-table-column property="betSlip" label="注单" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.betSlip"></div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        property="function"
+        width="180"
+        label="功能"
+        align="center"
+      >
+        <template #default="scope">
+          <el-select style="width: 110px;" v-model="functions[scope.$index]">
+            <el-option
+              v-for="(item, index) in functionOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+              @click="$event => handleClick(scope.row, index)"
+            ></el-option>
+          </el-select>
+        </template>
+      </el-table-column>
       <!-- <el-table-column fixed="right" label="操作" width="70">
           <template #default="scope">
             <el-button
@@ -98,13 +137,125 @@
   </div>
 </template>
 <script>
+import {
+  GetItems,
+  GetFunctionItems,
+  ResumeEvent,
+  CancelEvent,
+  BalanceEvent,
+} from '@/api/sports/champion-betting'
+
+const keyValues = [
+  { key: '', confirmed: '' },
+  {
+    key: 'balance',
+    confirmed: '11',
+  },
+  {
+    key: 'balance',
+    confirmed: '12',
+  },
+  {
+    key: 'balance',
+    confirmed: '15',
+  },
+  {
+    key: 'resume',
+    confirmed: '',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-1',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-2',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-3',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-4',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-5',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-6',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-7',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-8',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-9',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-10',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-11',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-12',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-13',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-14',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-15',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-16',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-17',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-18',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-19',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-20',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-21',
+  },
+]
+
 export default {
   data() {
     return {
       formData: {
         timeOption: '',
         keyword: '',
-        betStatusOption: '',
+        betStatusOption: 'all',
         counter: '180',
       },
       championBettingData: [
@@ -125,23 +276,23 @@ export default {
       ],
       betStatusOptions: [
         {
-          value: '全部',
+          value: 'all',
           label: '全部',
         },
         {
-          value: '有结果',
+          value: 'Y',
           label: '有结果',
         },
         {
-          value: '未有结果',
+          value: 'N',
           label: '未有结果',
         },
         {
-          value: '客户赢钱',
+          value: 'W',
           label: '客户赢钱',
         },
         {
-          value: '赢钱>=500',
+          value: 'W>=500',
           label: '赢钱>=500',
         },
         {
@@ -191,11 +342,101 @@ export default {
           label: '180秒',
         },
       ],
+      functionOptions: [{ value: '注单处理', label: '注单处理' }],
+      functions: [],
+      loading: false,
     }
+  },
+  mounted() {
+    this.getItems()
+    this.getFunctionItems()
   },
   methods: {
     deleteDepositData(index, row) {
       console.log(index, row)
+    },
+    handleClick(item, index) {
+      if (index) {
+        if (keyValues[index].key === 'resume') {
+          if (confirm('确实恢复本场注单吗?')) {
+            ResumeEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('resume event error', err?.response?.data)
+              })
+          }
+        } else if (keyValues[index].key === 'cancel') {
+          if (confirm('确实取消本注单吗?')) {
+            CancelEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('cancel event error', err?.response?.data)
+              })
+          }
+        } else if (keyValues[index].key === 'balance') {
+          if (confirm('确实结算本场注单吗?')) {
+            BalanceEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('balance event error', err?.response?.data)
+              })
+          }
+        }
+      }
+    },
+    getItems() {
+      this.loading = true
+      GetItems({
+        username: this.formData.keyword,
+        result_type: this.formData.betStatusOption,
+        ball: this.formData.ballOption,
+      })
+        .then(data => {
+          this.championBettingData = [...data]
+          this.functions = [...Array(data.length)].map(_ => '注单处理')
+          this.loading = false
+        })
+        .catch(err => {
+          console.error('get items', err)
+          this.loading = false
+        })
+    },
+    getFunctionItems() {
+      GetFunctionItems()
+        .then(data => {
+          this.functionOptions = [...this.functionOptions, ...data]
+        })
+        .catch(err => console.error('get functions error', err))
     },
   },
 }

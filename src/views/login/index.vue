@@ -117,26 +117,30 @@ export default defineComponent({
         state.loginForm.validate(async valid => {
           if (valid) {
             state.loading = true
-            const { success, token, message } = await Login(state.model)
-            if (success) {
-              ctx.$message.success({
-                message: ctx.$t('login.loginsuccess'),
-                duration: 1000,
-              })
+            try {
+              const { success, token, message } = await Login(state.model)
+              if (success) {
+                ctx.$message.success({
+                  message: ctx.$t('login.loginsuccess'),
+                  duration: 1000,
+                })
 
-              const targetPath = decodeURIComponent(route.query.redirect)
-              if (targetPath.startsWith('http')) {
-                // 如果是一个url地址
-                window.location.href = targetPath
-              } else if (targetPath.startsWith('/')) {
-                // 如果是内部路由地址
-                router.push(targetPath)
+                const targetPath = decodeURIComponent(route.query.redirect)
+                if (targetPath.startsWith('http')) {
+                  // 如果是一个url地址
+                  window.location.href = targetPath
+                } else if (targetPath.startsWith('/')) {
+                  // 如果是内部路由地址
+                  router.push(targetPath)
+                } else {
+                  router.push('/')
+                }
+                useApp().initToken(token)
               } else {
-                router.push('/')
+                ctx.$message.error(message)
               }
-              useApp().initToken(token)
-            } else {
-              ctx.$message.error(message)
+            } catch (err) {
+              console.error('login error', err)
             }
             state.loading = false
           }

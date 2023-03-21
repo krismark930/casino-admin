@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 登录接口
 export const GetItems = data => {
   return request({
-    url: '/api/searchbetting/get_items',
+    url: '/api/championbetting/get_items',
     method: 'get',
     params: data,
   })
@@ -11,7 +11,7 @@ export const GetItems = data => {
 
 export const GetFunctionItems = data => {
   return request({
-    url: '/api/searchbetting/get_function_items',
+    url: '/api/championbetting/get_function_items',
     method: 'get',
     // data,
   })
@@ -19,7 +19,7 @@ export const GetFunctionItems = data => {
 
 export const ResumeEvent = data => {
   return request({
-    url: '/api/searchbetting/resume_event',
+    url: '/api/championbetting/resume_event',
     method: 'get',
     params: data,
   })
@@ -27,7 +27,7 @@ export const ResumeEvent = data => {
 
 export const CancelEvent = data => {
   return request({
-    url: '/api/searchbetting/cancel_event',
+    url: '/api/championbetting/cancel_event',
     method: 'get',
     params: data,
   })
@@ -35,7 +35,7 @@ export const CancelEvent = data => {
 
 export const BalanceEvent = data => {
   return request({
-    url: '/api/searchbetting/balance_event',
+    url: '/api/championbetting/balance_event',
     method: 'get',
     params: data,
   })
