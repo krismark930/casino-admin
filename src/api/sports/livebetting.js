@@ -5,7 +5,7 @@ export const GetItems = data => {
   return request({
     url: '/api/livebetting/get_items',
     method: 'get',
-    // data,
+    params: data,
   })
 }
 
@@ -14,5 +14,21 @@ export const GetFunctionItems = data => {
     url: '/api/livebetting/get_function_items',
     method: 'get',
     // data,
+  })
+}
+
+export const ResumeEvent = data => {
+  return request({
+    url: '/api/livebetting/resume_event',
+    method: 'get',
+    params: data,
+  })
+}
+
+export const CancelEvent = data => {
+  return request({
+    url: '/api/livebetting/cancel_event',
+    method: 'get',
+    params: data,
   })
 }

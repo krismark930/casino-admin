@@ -6,10 +6,14 @@
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="">
-          <el-button type="primary">手动更新</el-button>
+          <el-button type="primary" @click="getItems">手动更新</el-button>
         </el-form-item>
         <el-form-item label="">
-          <el-select v-model="formData.timeOption" style="width: 80px;">
+          <el-select
+            v-model="formData.timeOption"
+            style="width: 80px;"
+            @change="getItems"
+          >
             <el-option
               v-for="item in timeOptions"
               :key="item.value"
@@ -17,7 +21,7 @@
               :value="item.value"
             ></el-option>
           </el-select>
-          <span style="margin-left: 10px;">{{ formData.counter + '秒' }}</span>
+          <span style="margin-left: 10px;">{{ timerCount + '秒' }}</span>
         </el-form-item>
         <el-form-item label="会员帐号">
           <el-input
@@ -35,7 +39,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary">确认</el-button>
+          <el-button type="primary" @click="getItems">确认</el-button>
         </el-form-item>
         <el-form-item label="投注状态">
           <el-select v-model="formData.betStatusOption" style="width: 80px;">
@@ -50,7 +54,11 @@
       </div>
       <div>
         <el-form-item>
-          <el-select v-model="formData.sortOption" style="width: 100px;">
+          <el-select
+            v-model="formData.sortOption"
+            style="width: 100px;"
+            @change="getItems"
+          >
             <el-option
               v-for="item in sortOptions"
               :key="item.value"
@@ -60,7 +68,11 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="formData.ballOption" style="width: 80px;">
+          <el-select
+            v-model="formData.ballOption"
+            style="width: 80px;"
+            @change="getItems"
+          >
             <el-option
               v-for="item in ballOptions"
               :key="item.value"
@@ -70,7 +82,11 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="formData.typeOption" style="width: 150px;">
+          <el-select
+            v-model="formData.typeOption"
+            style="width: 150px;"
+            @change="getItems"
+          >
             <el-option
               v-for="item in typeOptions"
               :key="item.value"
@@ -91,7 +107,7 @@
     >
       <el-table-column property="userName" label="用户名称" align="center" />
       <el-table-column property="minutes" label="分钟数" align="center" />
-      <el-table-column label="投注时间" width="180" align="center">
+      <el-table-column label="投注时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
@@ -99,7 +115,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="开始时间" width="180" align="center">
+      <el-table-column label="开始时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
@@ -116,7 +132,7 @@
         property="content"
         label="內容"
         align="center"
-        width="250"
+        width="200"
       >
         <template #default="scope">
           <div v-html="scope.row.content"></div>
@@ -147,15 +163,16 @@
         property="function"
         label="功能"
         align="center"
-        width="130"
+        width="180"
       >
         <template #default="scope">
-          <el-select style="width: 110px;">
+          <el-select style="width: 110px;" v-model="functions[scope.$index]">
             <el-option
-              v-for="item in functionOptions"
+              v-for="(item, index) in functionOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              @click="$event => handleClick(scope.row, index)"
             ></el-option>
           </el-select>
         </template>
@@ -167,20 +184,137 @@
   </div>
 </template>
 <script>
-import { GetItems, GetFunctionItems } from '@/api/sports/search-betting'
+import {
+  GetItems,
+  GetFunctionItems,
+  ResumeEvent,
+  CancelEvent,
+  BalanceEvent,
+} from '@/api/sports/search-betting'
+
+const keyValues = [
+  { key: '', confirmed: '' },
+  {
+    key: 'resume',
+    confirmed: '',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-1',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-2',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-3',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-4',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-5',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-6',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-7',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-8',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-9',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-10',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-11',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-12',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-13',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-14',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-15',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-16',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-17',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-18',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-19',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-20',
+  },
+  {
+    key: 'cancel',
+    confirmed: '-21',
+  },
+  {
+    key: 'balance',
+    confirmed: '11',
+  },
+  {
+    key: 'balance',
+    confirmed: '12',
+  },
+  {
+    key: 'balance',
+    confirmed: '13',
+  },
+  {
+    key: 'balance',
+    confirmed: '14',
+  },
+  {
+    key: 'balance',
+    confirmed: '15',
+  },
+]
 
 export default {
   data() {
     return {
       formData: {
-        betDate: '',
+        betDate: new Date().toISOString().split('T')[0],
         keyword: '',
         typeOption: '',
         betStatusOption: '',
         sortOption: '',
         ballOption: '',
-        counter: '180',
-        timeOption: '',
+        timeOption: 180,
       },
       searchBettingData: [
         {
@@ -200,23 +334,23 @@ export default {
       ],
       betStatusOptions: [
         {
-          value: '全部',
+          value: 'all',
           label: '全部',
         },
         {
-          value: '有结果',
+          value: 'Y',
           label: '有结果',
         },
         {
-          value: '未有结果',
+          value: 'N',
           label: '未有结果',
         },
         {
-          value: '客户赢钱',
+          value: 'W',
           label: '客户赢钱',
         },
         {
-          value: '赢钱>=500',
+          value: 'W>=500',
           label: '赢钱>=500',
         },
         {
@@ -242,132 +376,216 @@ export default {
       ],
       sortOptions: [
         {
-          value: '投注时间',
           label: '投注时间',
+          value: 'BetTime',
         },
         {
-          value: '投注金额',
           label: '投注金额',
+          value: 'Gwin',
         },
         {
-          value: '取消注单',
           label: '取消注单',
+          value: 'Cancel',
         },
         {
-          value: '危险注单',
           label: '危险注单',
+          value: 'Danger',
         },
       ],
       ballOptions: [
         {
-          value: '全部',
+          value: '',
           label: '全部',
         },
         {
-          value: '足球',
+          value: '1',
           label: '足球',
         },
         {
-          value: '篮球',
+          value: '2',
           label: '篮球',
         },
         {
-          value: '棒球',
+          value: '3',
           label: '棒球',
         },
         {
-          value: '网球',
+          value: '4',
           label: '网球',
         },
         {
-          value: '排球',
+          value: '5',
           label: '排球',
         },
         {
-          value: '其它',
+          value: '6',
           label: '其它',
         },
       ],
       typeOptions: [
         {
-          value: '全部',
+          value: '',
           label: '全部',
         },
         {
-          value: '全场獨贏',
+          value: 'M',
           label: '全场獨贏',
         },
         {
-          value: '全场讓球',
+          value: 'R',
           label: '全场讓球',
         },
         {
-          value: '全场大小球',
+          value: 'OU',
           label: '全场大小球',
         },
         {
-          value: '全场單雙',
+          value: 'EO',
           label: '全场單雙',
         },
         {
-          value: '上半場獨贏',
+          value: 'VM',
           label: '上半場獨贏',
         },
         {
-          value: '上半場讓球',
+          value: 'VR',
           label: '上半場讓球',
         },
         {
-          value: '上半場大小',
+          value: 'VOU',
           label: '上半場大小',
         },
         {
-          value: '上半場單雙',
+          value: 'VEO',
           label: '上半場單雙',
         },
         {
-          value: '下半場讓球',
-          label: '下半場讓球',
+          value: 'QR',
+          label: '单节讓球',
         },
         {
-          value: '下半場大小',
-          label: '下半場大小',
+          value: 'QOU',
+          label: '单节大小',
         },
         {
-          value: '下半場單雙',
-          label: '下半場單雙',
+          value: 'QEO',
+          label: '单节單雙',
+        },
+        {
+          value: 'RM',
+          label: '滾球獨贏',
+        },
+        {
+          value: 'RE',
+          label: '滾球讓球',
+        },
+        {
+          value: 'ROU',
+          label: '滾球大小',
+        },
+        {
+          value: 'VRM',
+          label: '滾球上半場獨贏',
+        },
+        {
+          value: 'VRE',
+          label: '滾球上半場讓球',
+        },
+        {
+          value: 'VROU',
+          label: '滾球上半場大小',
+        },
+        {
+          value: 'URE',
+          label: '滾球下半場讓球',
+        },
+        {
+          value: 'UROU',
+          label: '滾球下半場大小球',
+        },
+        {
+          value: 'PD',
+          label: '波膽',
+        },
+        {
+          value: 'VPD',
+          label: '上半場波膽',
+        },
+        {
+          value: 'T',
+          label: '總入球',
+        },
+        {
+          value: 'F',
+          label: '半全場',
+        },
+        {
+          value: 'PC',
+          label: '混合過關',
+        },
+        {
+          value: 'CS',
+          label: '冠軍賽',
         },
       ],
       timeOptions: [
         {
-          value: '10',
+          value: 10,
           label: '10秒',
         },
         {
-          value: '30',
+          value: 30,
           label: '30秒',
         },
         {
-          value: '60',
+          value: 60,
           label: '60秒',
         },
         {
-          value: '90',
+          value: 90,
           label: '90秒',
         },
         {
-          value: '120',
+          value: 120,
           label: '120秒',
         },
         {
-          value: '180',
+          value: 180,
           label: '180秒',
         },
       ],
 
-      functionOptions: [],
+      functionOptions: [{ value: '注单处理', label: '注单处理' }],
+      functions: [],
       loading: false,
+      timerCount: 180,
+      timer: null,
     }
+  },
+
+  watch: {
+    timerCount: {
+      handler(value) {
+        if (value > 0) {
+          this.timer = setTimeout(() => {
+            this.timerCount--
+          }, 1000)
+        } else {
+          this.getItems()
+          this.timerCount = this.formData.timeOption
+        }
+      },
+      immediate: true, // This ensures the watcher is triggered upon creation
+    },
+    'formData.timeOption': {
+      handler(value) {
+        this.restartCountdown()
+      },
+    },
+  },
+
+  beforeUnmount() {
+    clearTimeout(this.timer)
   },
 
   mounted() {
@@ -378,19 +596,104 @@ export default {
     deleteDepositData(index, row) {
       console.log(index, row)
     },
+    restartCountdown() {
+      clearTimeout(this.timer)
+      if (this.timerCount !== this.formData.timeOption) {
+        this.timerCount = this.formData.timeOption
+      } else {
+        this.timer = setTimeout(() => {
+          this.timerCount--
+        }, 1000)
+      }
+    },
+    handleClick(item, index) {
+      if (index) {
+        if (keyValues[index].key === 'resume') {
+          if (confirm('确实恢复本场注单吗?')) {
+            ResumeEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('resume event error', err?.response?.data)
+              })
+          }
+        } else if (keyValues[index].key === 'cancel') {
+          if (confirm('确实取消本注单吗?')) {
+            CancelEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('cancel event error', err?.response?.data)
+              })
+          }
+        } else if (keyValues[index].key === 'balance') {
+          if (confirm('确实结算本场注单吗?')) {
+            BalanceEvent({
+              id: item.id,
+              gid: item.gid,
+              confirmed: keyValues[index].confirmed,
+            })
+              .then(res => {
+                if (res) {
+                  alert(res)
+                }
+                this.getItems()
+              })
+              .catch(err => {
+                alert(err?.response?.data)
+                console.error('balance event error', err?.response?.data)
+              })
+          }
+        }
+      }
+    },
 
     getItems() {
       this.loading = true
-      GetItems().then(data => {
-        this.searchBettingData = [...data]
-        this.loading = false
+      GetItems({
+        m_date: this.formData.betDate,
+        username: this.formData.keyword,
+        result_type: this.formData.betStatusOption,
+        sort: this.formData.sortOption,
+        ball: this.formData.ballOption,
+        type: this.formData.typeOption,
       })
+        .then(data => {
+          this.searchBettingData = [...data]
+          this.loading = false
+          this.functions = [...Array(data.length)].map(_ => '注单处理')
+          this.restartCountdown()
+        })
+        .catch(err => {
+          this.loading = false
+          this.restartCountdown()
+        })
     },
 
     getFunctionItems() {
-      GetFunctionItems().then(data => {
-        this.functionOptions = [...this.functionOptions, ...data]
-      })
+      GetFunctionItems()
+        .then(data => {
+          this.functionOptions = [...this.functionOptions, ...data]
+        })
+        .catch(err => console.error('get function items', err))
     },
   },
 }
