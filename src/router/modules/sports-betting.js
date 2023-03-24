@@ -1,9 +1,15 @@
 const Layout = () => import('@/layout/index.vue')
 const AllianceRestrictions = () =>
   import('@/views/sports-betting/allianceRestrictions/index.vue')
+const AllianceRestrictionsEdit = () =>
+  import('@/views/sports-betting/allianceRestrictions/EditLeague.vue')
 const DataRefresh = () => import('@/views/sports-betting/dataRefresh/index.vue')
 const DataManipulation = () =>
   import('@/views/sports-betting/dataManipulation/index.vue')
+const Retime = () =>
+  import('@/views/sports-betting/dataManipulation/scheduleData/Retime.vue')
+const BetCheck = () =>
+  import('@/views/sports-betting/dataManipulation/scheduleData/BetCheck.vue')
 const CheckScores = () =>
   import('@/views/sports-betting/check-scores/index.vue')
 const CheckScores2 = () =>
@@ -40,6 +46,12 @@ export default [
         },
       },
       {
+        path: '/allianceRestrictions/editLeague/:id',
+        name: 'allianceRestrictions.editLeague',
+        component: AllianceRestrictionsEdit,
+        hidden: true,
+      },
+      {
         path: '/dataRefresh',
         name: 'dataRefresh',
         component: DataRefresh,
@@ -56,6 +68,18 @@ export default [
           title: 'menu.dataManipulation',
           affix: true,
         },
+      },
+      {
+        path: '/dataManipulation/retime/:id/:type',
+        name: 'DataManipulation.Retime',
+        component: Retime,
+        hidden: true,
+      },
+      {
+        path: '/dataManipulation/betcheck/:id/:type',
+        name: 'DataManipulation.BetCheck',
+        component: BetCheck,
+        hidden: true,
       },
       {
         path: '/check-scores',
