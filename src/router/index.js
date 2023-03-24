@@ -43,7 +43,6 @@ import analytics from './modules/analytics'
 import systemlog from './modules/systemlog'
 import humanManagement from './modules/humanManagement'
 import statistics from './modules/statistics'
-
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
