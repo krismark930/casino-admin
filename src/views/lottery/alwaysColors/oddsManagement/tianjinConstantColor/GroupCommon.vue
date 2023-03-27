@@ -2,7 +2,7 @@
 import { ref, defineProps } from 'vue'
 
 defineProps<{
-  setting?: Object
+  setting: Object,
   colNum: Number
 }>()
 </script>

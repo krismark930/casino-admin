@@ -37,7 +37,7 @@ import { useApp } from '@/pinia/modules/app'
 const API_URL = import.meta.env.VITE_BASE_API
 const service = axios.create({
   baseURL: API_URL,
-  timeout: 10000,
+  // timeout: 10000,
   // withCredentials: true,
 })
 
@@ -78,11 +78,11 @@ service.interceptors.response.use(
         // 清除token
         clearToken()
         setTimeout(() => {
-          ElMessage.closeAll()
+          // ElMessage.closeAll()
           try {
-            ElMessage.error(error.response.data.msg)
+            // ElMessage.error(error.response.data.msg)
           } catch (err) {
-            ElMessage.error(error.message)
+            // ElMessage.error(error.message)
           }
         })
         // 代码不要往后执行了
@@ -120,11 +120,11 @@ service.interceptors.response.use(
     }
 
     // console.dir(error) // 可在此进行错误上报
-    ElMessage.closeAll()
+    // ElMessage.closeAll()
     try {
-      ElMessage.error(error.response.data.msg)
+      // ElMessage.error(error.response.data.msg)
     } catch (err) {
-      ElMessage.error(error.message)
+      // ElMessage.error(error.message)
     }
 
     return Promise.reject(error)
