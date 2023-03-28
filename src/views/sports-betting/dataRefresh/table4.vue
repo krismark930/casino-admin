@@ -1,161 +1,81 @@
 <template>
   <el-table
-    :data="dataRefresh1"
+    :data="titleData"
     style="width: 100%; margin-top: 1rem;"
     border
     stripe
+    v-loading="loading"
   >
+    <el-table-column property="title" label="刷新设置" align="center" />
     <el-table-column
-      property="refreshSettings"
-      label="刷新设置"
+      v-for="index in 12"
+      :key="index"
+      :label="labelData[index]"
       align="center"
-    />
-    <el-table-column label="足球比分" align="center">
+    >
       <template #default="scope">
         <el-input
-          v-model="scope.row.footballScore"
+          v-model="userdata[propertyData[scope.$index][index - 1]]"
           placeholder=""
-          :value="scope.row.footballScore"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="足球结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.footballSettlement"
-          placeholder=""
-          :value="scope.row.footballSettlement"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="篮球比分" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.basketballScore"
-          placeholder=""
-          :value="scope.row.basketballScore"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="篮球结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.basketballSettlement"
-          placeholder=""
-          :value="scope.row.basketballSettlement"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="棒球比分" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.baseballScore"
-          placeholder=""
-          :value="scope.row.baseballScore"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="棒球结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.baseballSettlement"
-          placeholder=""
-          :value="scope.row.baseballSettlement"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="网球比分" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.tennisScore"
-          placeholder=""
-          :value="scope.row.tennisScore"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="网球结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.tennisSettlement"
-          placeholder=""
-          :value="scope.row.tennisSettlement"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="排球比分" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.volleyballScore"
-          placeholder=""
-          :value="scope.row.volleyballScore"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="排球结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.volleyballSettlement"
-          placeholder=""
-          :value="scope.row.volleyballSettlement"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="其他比分" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.otherScores"
-          placeholder=""
-          :value="scope.row.otherScores"
-        ></el-input>
-      </template>
-    </el-table-column>
-    <el-table-column label="其他结算" align="center">
-      <template #default="scope">
-        <el-input
-          v-model="scope.row.otherSettlement"
-          placeholder=""
-          :value="scope.row.otherSettlement"
-        ></el-input>
+        />
       </template>
     </el-table-column>
     <el-table-column fixed="right" label="" align="center" width="80px">
-      <template #default="scope">
-        <el-button
-          type="primary"
-          size="small"
-          @click="confirmData(scope.$index, scope.row)"
-        >
-          确定
-        </el-button>
-      </template>
+      <el-button type="primary" size="small" @click="handleClick">
+        确定
+      </el-button>
     </el-table-column>
   </el-table>
 </template>
 <script>
 export default {
+  props: ['initialUserdata', 'loading', 'setData'],
   data() {
     return {
-      dataRefresh1: [
-        {
-          refreshSettings: '结果',
-          footballScore: '3',
-          footballSettlement: '60',
-          basketballScore: '3',
-          basketballSettlement: '65',
-          baseballScore: '4',
-          baseballSettlement: '180',
-          tennisScore: '4',
-          tennisSettlement: '180',
-          volleyballScore: '4',
-          volleyballSettlement: '180',
-          otherScores: '4',
-          otherSettlement: '180',
-        },
+      userdata: { ...this.initialUserdata },
+      titleData: [{ title: '结果' }],
+      labelData: [
+        '刷新设置',
+        '足球比分',
+        '足球结算',
+        '篮球比分',
+        '篮球结算',
+        '棒球比分',
+        '棒球结算',
+        '网球比分',
+        '网球结算',
+        '排球比分',
+        '排球结算',
+        '其他比分',
+        '其他结算',
+      ],
+      propertyData: [
+        [
+          'udp_ft_results',
+          'udp_ft_score',
+          'udp_bk_results',
+          'udp_bk_score',
+          'udp_bs_results',
+          'udp_bs_score',
+          'udp_tn_results',
+          'udp_tn_score',
+          'udp_vb_results',
+          'udp_vb_score',
+          'udp_op_results',
+          'udp_op_score',
+        ],
       ],
     }
   },
+  watch: {
+    initialUserdata(newUserData, oldUserData) {
+      this.userdata = { ...this.initialUserdata }
+    },
+  },
   methods: {
-    confirmData() {},
+    handleClick() {
+      this.setData(this.userdata)
+    },
   },
 }
 </script>

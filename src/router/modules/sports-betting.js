@@ -105,22 +105,15 @@ export default [
             component: CheckScores2,
           },
           {
-            path: 'bet-slip/:id',
+            path: 'bet-slip',
             name: 'check-scores2.bet-slip',
             component: CheckScores2BetSlip,
-            meta: {
-              title: 'menu.betSlip',
-              affix: true,
-            },
+            props: true
           },
           {
             path: 'operate/:id',
             name: 'check-scores2.operate',
             component: CheckScores2Operate,
-            meta: {
-              title: 'menu.operate',
-              affix: true,
-            },
           },
         ],
       },

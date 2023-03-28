@@ -27,7 +27,7 @@ export const ShowData = data => {
 
 export const CheckScore = data => {
   return request({
-    url: '/api/sport/check_score',
+    url: '/api/sport/ft_check_score',
     method: 'post',
     data,
   })

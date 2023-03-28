@@ -6,13 +6,13 @@
       @tab-click="handleClick"
     >
       <el-tab-pane label="赛程数据" name="first">
-        <ScheduleData />
+        <ScheduleData :handleGType="handleGType" />
       </el-tab-pane>
       <el-tab-pane label="过关注单" name="second">
         <Checklist />
       </el-tab-pane>
       <el-tab-pane label="足球-赛事新增" name="third">
-        <ScheduleAdded />
+        <ScheduleAdded :gtype="gtype" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,6 +29,20 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 }
 
 const activeName = ref('first')
+</script>
+<script lang="ts">
+export default {
+  data() {
+    return {
+      gtype: '',
+    }
+  },
+  methods: {
+    handleGType(gtype) {
+      this.gtype = gtype
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
 .parameter-tabs > .el-tabs_content {

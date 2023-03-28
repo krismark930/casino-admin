@@ -1,55 +1,25 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
     <h3>{{ $t('menu.checkScores2') }}</h3>
 
     <el-form :inline="true" ref="form" v-if="!step">
-      <el-table
-        v-loading="loading"
-        :data="[item]"
-        style="width: 100%;"
-        border
-        header-align="center"
-        stripe
-      >
-        <el-table-column
-          property="league"
-          :label="item.M_League"
-          header-align="center"
-        >
-          <el-table-column
-            property="time"
-            :label="checkScores.TIME"
-            align="center"
-          >
+      <el-table v-loading="loading" :data="[item]" style="width: 100%;" border header-align="center" stripe>
+        <el-table-column property="league" :label="item.M_League" header-align="center">
+          <el-table-column property="time" :label="checkScores.TIME" align="center">
             <p>
               {{ item.M_Date }}
               <br />
               {{ item.M_Time }}
             </p>
           </el-table-column>
-          <el-table-column
-            property="teams"
-            :label="checkScores.TEAM_NAMES"
-            align="center"
-          >
-            <div
-              style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-around;"
-            >
+          <el-table-column property="teams" :label="checkScores.TEAM_NAMES" align="center">
+            <div style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-around;">
               <p>{{ item.MB_Team }}</p>
               <p>{{ item.TG_Team }}</p>
             </div>
           </el-table-column>
-          <el-table-column
-            property="halfTimeScore"
-            :label="checkScores.HALF_SCORE"
-            align="center"
-            width="180"
-          >
-            <div
-              style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-between;"
-            >
+          <el-table-column property="halfTimeScore" :label="checkScores.HALF_SCORE" align="center" width="180">
+            <div style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-between;">
               <el-form-item>
                 <el-input-number v-model="item.MB_Inball_HR"></el-input-number>
               </el-form-item>
@@ -58,15 +28,8 @@
               </el-form-item>
             </div>
           </el-table-column>
-          <el-table-column
-            property="fullTimeScore"
-            :label="checkScores.TOTAL_SCORE"
-            align="center"
-            width="180"
-          >
-            <div
-              style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-between;"
-            >
+          <el-table-column property="fullTimeScore" :label="checkScores.TOTAL_SCORE" align="center" width="180">
+            <div style="display: flex; flex-direction: column; align-items: baseline; justify-content: space-between;">
               <el-form-item>
                 <el-input-number v-model="item.MB_Inball"></el-input-number>
               </el-form-item>
@@ -84,104 +47,54 @@
         </el-form-item>
       </div>
     </el-form>
-    
+
     <el-form :inline="true" ref="form1" v-if="step">
-      <el-table
-        v-loading="loading"
-        :data="scores"
-        style="width: 100%;"
-        border
-        header-align="center"
-        stripe
-      >
-        <el-table-column
-          property="release"
-          label="发布"
-          align="center"
-        >
+      <el-table v-loading="loading" :data="scores" style="width: 100%;" border header-align="center" stripe>
+        <el-table-column property="release" label="发布" align="center">
           <template #default="scope">
             <el-checkbox label="" :indeterminate="false" v-model="check[scope.row.field_count]"></el-checkbox>
           </template>
         </el-table-column>
-        <el-table-column
-          property="bettingTime"
-          :label="checkScores.BETTING_TIME"
-          align="center"
-        >
+        <el-table-column property="bettingTime" :label="checkScores.BETTING_TIME" align="center">
           <template #default="scope">
             <font color="#cc0000" v-html="scope.row.times"></font>
           </template>
         </el-table-column>
-        <el-table-column
-          property="userName"
-          :label="checkScores.USER_NAME"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="userName" :label="checkScores.USER_NAME" align="center" width="180">
           <template #default="scope">
-            {{  scope.row.M_Name }}
+            {{ scope.row.M_Name }}
             <br>
             <font color="#cc0000">{{ scope.row.OpenType }}</font>&nbsp;&nbsp;
             <font color="#cc0000">{{ scope.row.TurnRate }}</font>
           </template>
         </el-table-column>
-        <el-table-column
-          property="gameType"
-          :label="checkScores.GAME_TYPE"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="gameType" :label="checkScores.GAME_TYPE" align="center" width="180">
           <template #default="scope">
             {{ scope.row.Mnu_Soccer + scope.row.BetType + scope.row.Odds }}<br>
             <font color="#0000cc">{{ scope.row.voucher }}</font>
           </template>
         </el-table-column>
-        <el-table-column
-          property="content"
-          :label="checkScores.CONTENT"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="content" :label="checkScores.CONTENT" align="center" width="180">
           <template #default="scope">
             <p v-html="scope.row.Middle"></p>
           </template>
         </el-table-column>
-        <el-table-column
-          property="betting"
-          :label="checkScores.BETTING"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="betting" :label="checkScores.BETTING" align="center" width="180">
           <template #default="scope">
-            {{  scope.row.BetScore }}
+            {{ scope.row.BetScore }}
           </template>
         </el-table-column>
-        <el-table-column
-          property="accountResult"
-          :label="checkScores.ACCOUNT_RESULT"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="accountResult" :label="checkScores.ACCOUNT_RESULT" align="center" width="180">
           <template #default="scope">
             {{ scope.row.d_point }}/{{ scope.row.c_point }}/{{ scope.row.b_point }}/{{ scope.row.a_point }}
           </template>
         </el-table-column>
-        <el-table-column
-          property="regression"
-          :label="checkScores.REGRESSION"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="regression" :label="checkScores.REGRESSION" align="center" width="180">
           <template #default="scope">
             {{ scope.row.turn }}
           </template>
         </el-table-column>
-        <el-table-column
-          property="actualAmount"
-          :label="checkScores.ACTUAL_AMOUNT"
-          align="center"
-          width="180"
-        >
+        <el-table-column property="actualAmount" :label="checkScores.ACTUAL_AMOUNT" align="center" width="180">
           <template #default="scope">
             <el-form-item style="margin: 0;">
               <el-input v-model="scope.row.actual_amount"></el-input>
@@ -255,6 +168,7 @@ export default defineComponent({
           })
       },
       checkScore: () => {
+        console.log("ok");
         if (state.item.Score == 0) {
           if (!confirm('本场赛事已经结算,确定再次结算!')) {
             router.go(-1)
@@ -269,7 +183,7 @@ export default defineComponent({
         }
         if (confirm(`主队半场进球数：${state.item.MB_Inball_HR}  主队全场进球数：${state.item.MB_Inball}\n\nn客队半场进球数: ${state.item.TG_Inball_HR}  客队全场进球数：${state.item.TG_Inball}\n\n请确定输入是否正确?`)) {
           state.loading = true
-          CheckScore({ id: state.id, item: {...state.item, 'type': 'FT'} })
+          CheckScore({ id: state.id, item: { ...state.item, 'type': 'FT' } })
             .then(res => {
               if (res.code == 'settled') {
                 console.log(res.message)

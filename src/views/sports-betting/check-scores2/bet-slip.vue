@@ -1,16 +1,7 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
     <h3>{{ $t('menu.checkScores2') }}</h3>
-    <el-table
-      v-loading="loading"
-      :data="result"
-      style="width: 100%;"
-      border
-      header-align="center"
-      stripe
-    >
+    <el-table v-loading="loading" :data="report" style="width: 100%;" border header-align="center" stripe>
       <el-table-column property="bettingTime" label="投注时间" align="center">
         <template #default="scope">
           <p v-html="scope.row.bettimes"></p>
@@ -19,7 +10,7 @@
       <el-table-column property="userName" label="用户名称" align="center">
         <template #default="scope">
           {{ scope.row.M_Name }}<br>
-					<font color="#cc0000">
+          <font color="#cc0000">
             {{ scope.row.OpenType }}&nbsp;&nbsp;{{ scope.row.TurnRate }}
           </font>
         </template>
@@ -43,9 +34,9 @@
           {{ scope.row.betscore }}
         </template>
       </el-table-column>
-      <el-table-column property="memberResult" label="会员结果" align="right">
+      <el-table-column property="memberreport" label="会员结果" align="right">
         <template #default="scope">
-          {{ scope.row.M_Result }}
+          {{ scope.row.M_report }}
         </template>
       </el-table-column>
       <el-table-column property="operate" label="操作" align="center">
@@ -56,10 +47,7 @@
       <el-table-column property="function" label="功能" align="center">
         <template #default="scope">
           <el-select value-key="" placeholder="注单处理" clearable filterable>
-            <el-option v-for="item in scope.row.function"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+            <el-option v-for="item in scope.row.function" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </template>
@@ -69,54 +57,56 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs, ref, onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
-import { ShowData } from '@/api/sports/check-scores2'
+import { defineComponent } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useCheckScore } from '@/pinia/modules/check_score';
 import ChangeLang from '@/layout/components/Topbar/ChangeLang.vue'
-import { checkScores, common } from '@/i18n'
 
 export default defineComponent({
   components: { ChangeLang },
   name: 'checkScores2Operate',
   setup() {
     const router = useRouter()
-    const state = reactive({
-      id: router.currentRoute._rawValue.params.id,
-      loading: false,
-      result: [],
-      mrow: [],
-      form: ref(null),
-      submit: () => {
-        if (state.loading) {
-          return
-        }
-
-        state.loading = true
-        ShowData({ gid: state.id, gtype: 'FT' })
-          .then(data => {
-            state.result = data['result']
-            state.mrow = data['mrow']
-            console.log(data)
-            state.loading = false
-          })
-          .catch(err => {
-            console.log(err)
-            state.loading = false
-          })
-      },
-      back: () => {
-        router.go(-1)
-      },
-    })
-
-    onBeforeMount(() => {
-      state.submit()
-    })
+    const route = useRoute();
+    const { dispatchBetSlipList } = useCheckScore();
 
     return {
-      ...toRefs(state),
+      router,
+      route,
+      dispatchBetSlipList
     }
   },
+  data() {
+    return {
+      loading: false,
+      report: [],
+      sport: {},
+    }
+  },
+  computed: {
+    success: function () {
+      let { getSuccess } = useCheckScore();
+      return getSuccess;
+    },
+    betSlipList: function () {
+      let { getBetSlipList } = useCheckScore();
+      return getBetSlipList;
+    }
+  },
+  methods: {
+    goBeforePage: function () {
+      this.router.go(-1)
+    }
+  },
+  async mounted() {
+    console.log(this.route.query);
+    this.loading = true;
+    await this.dispatchBetSlipList(this.route.query)
+    this.loading = false;
+    console.log(this.betSlipList);
+    this.sport = this.betSlipList.sport;
+    this.report = this.betSlipList.report;
+  }
 })
 </script>
 <style lang="scss" scoped>

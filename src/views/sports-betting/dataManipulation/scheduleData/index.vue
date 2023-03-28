@@ -171,6 +171,7 @@ import {
 } from '@/api/sports/data-manipulation/schedule-data'
 
 export default {
+  props: ['handleGType'],
   data() {
     return {
       formData: {
@@ -248,6 +249,7 @@ export default {
     reload() {
       this.getAllianceTypes()
       this.getItems()
+      this.handleGType(this.formData.gtype)
     },
     getItems() {
       this.loading = true

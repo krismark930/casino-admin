@@ -2,10 +2,10 @@
 import { ref, defineProps } from 'vue'
 
 defineProps<{
-  setting: Object
-  count: Number
-  rowNum: Number
-  colNum: Number
+  setting: Object,
+  count: Number,
+  rowNum: Number,
+  colNum: Number,
 }>()
 </script>
 <template>

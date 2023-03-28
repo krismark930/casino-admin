@@ -13,10 +13,10 @@
         <el-button type="primary" link>刷水速度测试</el-button>
       </el-form-item>
     </el-form>
-    <Table1 />
-    <Table2 />
-    <Table3 />
-    <Table4 />
+    <Table1 :initialUserdata="userdata" :loading="loading" :setData="setData" />
+    <Table2 :initialUserdata="userdata" :loading="loading" :setData="setData" />
+    <Table3 :initialUserdata="userdata" :loading="loading" :setData="setData" />
+    <Table4 :initialUserdata="userdata" :loading="loading" :setData="setData" />
   </div>
 </template>
 <script>
@@ -24,6 +24,7 @@ import Table1 from '@/views/sports-betting/dataRefresh/table1.vue'
 import Table2 from '@/views/sports-betting/dataRefresh/table2.vue'
 import Table3 from '@/views/sports-betting/dataRefresh/table3.vue'
 import Table4 from '@/views/sports-betting/dataRefresh/table4.vue'
+import { GetData, SetData } from '@/api/sports/data-refresh'
 export default {
   formData: {},
   components: {
@@ -31,6 +32,44 @@ export default {
     Table2,
     Table3,
     Table4,
+  },
+  data() {
+    return {
+      userdata: {},
+      loading: false,
+    }
+  },
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      this.loading = true
+      GetData()
+        .then(res => {
+          this.userdata = { ...res }
+          console.log('user data', this.userdata)
+        })
+        .catch(err => {
+          console.error('get data error', err)
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+    setData(newUserdata) {
+      this.loading = true
+      SetData({
+        data: newUserdata,
+      })
+        .then(res => {})
+        .catch(err => {
+          console.error('set data error', err)
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
   },
 }
 </script>
