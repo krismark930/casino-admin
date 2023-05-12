@@ -108,7 +108,7 @@ export default [
             path: 'bet-slip',
             name: 'check-scores2.bet-slip',
             component: CheckScores2BetSlip,
-            props: true
+            props: true,
           },
           {
             path: 'operate/:id',

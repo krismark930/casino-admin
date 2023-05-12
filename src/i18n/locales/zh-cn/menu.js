@@ -48,8 +48,9 @@ export default {
 
   //lottery
   lotterys: '彩票管理',
-  markSixs: '六合彩管理',
-  alwaysColor2: '时时彩2',
+  markSixs: '香港六合彩管理',
+  macaoSixMark: '澳门六合彩管理',
+  alwaysColor2: '时时彩2管理',
 
   //account
   accounts: '账户',

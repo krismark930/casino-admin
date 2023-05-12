@@ -4,6 +4,9 @@ const Companys = () => import('@/views/account/companys/index.vue')
 const ShareHolders = () => import('@/views/account/shareholders/index.vue')
 const GeneralAgents = () => import('@/views/account/general-agents/index.vue')
 const Agents = () => import('@/views/account/agents/index.vue')
+const CountUser = () => import('@/views/account/agents/count_user.vue')
+const Record = () => import('@/views/account/agents/record.vue')
+const RecordIP = () => import('@/views/account/agents/record_ip.vue')
 const VIPs = () => import('@/views/account/vips/index.vue')
 const VIP2s = () => import('@/views/account/vip2s/index.vue')
 const Onlines = () => import('@/views/account/onlines/index.vue')
@@ -57,11 +60,36 @@ export default [
       {
         path: '/agents',
         name: 'agents',
-        component: Agents,
         meta: {
           title: 'menu.agents',
           affix: true,
         },
+        noChildren: true,
+        children: [
+          {
+            path: '',
+            name: 'agents.home',
+            component: Agents,
+          },
+          {
+            path: 'count-user',
+            name: 'agents.count_user',
+            component: CountUser,
+            props: true,
+          },
+          {
+            path: 'record',
+            name: 'agents.record',
+            component: Record,
+            props: true,
+          },
+          {
+            path: 'record-ip',
+            name: 'agents.record_ip',
+            component: RecordIP,
+            props: true,
+          },
+        ],
       },
       {
         path: '/vips',

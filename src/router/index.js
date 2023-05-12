@@ -66,6 +66,8 @@ export const statisticsRoutes = [...statistics]
 export const analyticsRoutes = [...analytics]
 // systemlog
 export const systemlogsRoutes = [...systemlog]
+// account
+export const accontRoutes = [...account]
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -87,6 +89,7 @@ const router = createRouter({
     ...statisticsRoutes,
     ...analyticsRoutes,
     ...systemlogsRoutes,
+    ...accontRoutes,
     ...error,
   ],
   scrollBehavior(to, from, savedPosition) {

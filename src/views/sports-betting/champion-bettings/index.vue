@@ -1,7 +1,5 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
     <h3>{{ $t('menu.championBettings') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>
@@ -10,74 +8,61 @@
         </el-form-item>
         <el-form-item label="">
           <el-select v-model="formData.timeOption" style="width: 80px;">
-            <el-option
-              v-for="item in timeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in timeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
           <span style="margin-left: 10px;">{{ formData.counter + '秒' }}</span>
         </el-form-item>
         <el-form-item label="会员帐号">
-          <el-input
-            clearable
-            v-model="formData.keyword"
-            placeholder=""
-          ></el-input>
+          <el-input clearable v-model="formData.keyword" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="">
           <el-button type="primary" @click="getItems">确认</el-button>
         </el-form-item>
         <el-form-item label="投注状态">
-          <el-select
-            v-model="formData.betStatusOption"
-            style="width: 80px;"
-            @change="getItems"
-          >
-            <el-option
-              v-for="item in betStatusOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+          <el-select v-model="formData.betStatusOption" style="width: 80px;" @change="getItems">
+            <el-option v-for="item in betStatusOptions" :key="item.value" :label="item.label"
+              :value="item.value"></el-option>
           </el-select>
         </el-form-item>
       </div>
     </el-form>
-    <el-table
-      :data="championBettingData"
-      style="width: 100%;"
-      border
-      header-align="center"
-      stripe
-      v-loading="loading"
-    >
-      <el-table-column property="userName" label="用户名称" align="center" />
-      <el-table-column property="minutes" label="分钟数" align="center" />
+    <el-table :data="championBettingData.slice((page - 1) * 20, page * 20)" style="width: 100%;" border
+      header-align="center" stripe v-loading="loading">
+      <el-table-column property="userName" label="用户名称" align="center">
+        <template #default="scope">
+          {{ scope.row.userName }}<br>
+          <font color="#cc0000">
+            {{ scope.row.OpenType }}&nbsp;&nbsp;{{ scope.row.TurnRate }}
+          </font>
+        </template>
+      </el-table-column>
+      <el-table-column property="minutes" label="分钟数" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.minutes"></div>
+        </template>
+      </el-table-column>
       <el-table-column label="投注时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.bettingTime }}</span>
+            <el-icon>
+              <timer />
+            </el-icon>
+            <span style="margin-left: 10px" v-html="scope.row.bettingTime"></span>
           </div>
         </template>
       </el-table-column>
       <el-table-column label="开始时间" width="130" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
+            <el-icon>
+              <timer />
+            </el-icon>
             <span style="margin-left: 10px">{{ scope.row.startingTime }}</span>
           </div>
         </template>
       </el-table-column>
       <el-table-column property="gameType" label="球赛种类" align="center" />
-      <el-table-column
-        property="content"
-        width="200"
-        label="內容"
-        align="center"
-      >
+      <el-table-column property="content" width="200" label="內容" align="center">
         <template #default="scope">
           <div v-html="scope.row.content"></div>
         </template>
@@ -87,54 +72,38 @@
           <div v-html="scope.row.state"></div>
         </template>
       </el-table-column>
-      <el-table-column property="betAmount" label="投注金额" align="center" />
-      <el-table-column
-        property="winableAmount"
-        label="可赢金额"
-        align="center"
-      />
-      <el-table-column
-        property="memberResult"
-        label="会员结果"
-        align="center"
-      />
+      <el-table-column property="betAmount" label="投注金额" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.betAmount"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="winableAmount" label="可赢金额" align="center" />
+      <el-table-column property="memberResult" label="会员结果" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.memberResult"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="betSlip" label="注单" align="center">
         <template #default="scope">
+          <div style="color: red; cursor: pointer;" @click="deleteReport(scope.row.id)"><b>删除</b></div>
           <div v-html="scope.row.betSlip"></div>
         </template>
       </el-table-column>
-      <el-table-column
-        property="function"
-        width="180"
-        label="功能"
-        align="center"
-      >
+      <el-table-column property="function" width="180" label="功能" align="center">
         <template #default="scope">
           <el-select style="width: 110px;" v-model="functions[scope.$index]">
-            <el-option
-              v-for="(item, index) in functionOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-              @click="$event => handleClick(scope.row, index)"
-            ></el-option>
+            <el-option v-for="(item, index) in functionOptions" :key="item.value" :label="item.label" :value="item.value"
+              @click="$event => handleClick(scope.row, index)"></el-option>
           </el-select>
         </template>
       </el-table-column>
-      <!-- <el-table-column fixed="right" label="操作" width="70">
-          <template #default="scope">
-            <el-button
-              type="primary"
-              icon="delete"
-              @click="deleteDepositData(scope.$index, scope.row)"
-            ></el-button>
-          </template>
-        </el-table-column> -->
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="championBettingData.length" :page-size="20"
+        @current-change="onPageChange" v-model:current-page="page" />
     </div>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
 import {
@@ -144,6 +113,7 @@ import {
   CancelEvent,
   BalanceEvent,
 } from '@/api/sports/champion-betting'
+import { useChampionBettingStore } from "@/pinia/modules/champion_betting";
 
 const keyValues = [
   { key: '', confirmed: '' },
@@ -250,6 +220,12 @@ const keyValues = [
 ]
 
 export default {
+  setup() {
+    const { dispatchChampionDeleteEvent } = useChampionBettingStore();
+    return {
+      dispatchChampionDeleteEvent
+    }
+  },
   data() {
     return {
       formData: {
@@ -345,15 +321,26 @@ export default {
       functionOptions: [{ value: '注单处理', label: '注单处理' }],
       functions: [],
       loading: false,
+      totalCount: 0,
+      page: 1,
     }
   },
   mounted() {
     this.getItems()
     this.getFunctionItems()
   },
+  computed: {
+    success: function () {
+      const { getSuccess } = useChampionBettingStore();
+      return getSuccess;
+    }
+  },
   methods: {
-    deleteDepositData(index, row) {
-      console.log(index, row)
+    async deleteReport(id) {
+      await this.dispatchChampionDeleteEvent({ id: id });
+      if (this.success) {
+        this.getItems();
+      }
     },
     handleClick(item, index) {
       if (index) {
@@ -420,10 +407,12 @@ export default {
         username: this.formData.keyword,
         result_type: this.formData.betStatusOption,
         ball: this.formData.ballOption,
+        page: this.page,
       })
-        .then(data => {
-          this.championBettingData = [...data]
-          this.functions = [...Array(data.length)].map(_ => '注单处理')
+        .then(res => {
+          this.championBettingData = [...res.data]
+          // this.totalCount = res.totalCount
+          this.functions = [...Array(res.data.length)].map(_ => '注单处理')
           this.loading = false
         })
         .catch(err => {
@@ -437,6 +426,9 @@ export default {
           this.functionOptions = [...this.functionOptions, ...data]
         })
         .catch(err => console.error('get functions error', err))
+    },
+    onPageChange(currentPage) {
+      this.getItems()
     },
   },
 }

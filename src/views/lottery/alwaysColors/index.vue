@@ -1,30 +1,26 @@
 <template>
   <div style="padding: 0.75rem;">
-    <el-tabs
-      v-model="activeName"
-      class="parameter-tabs"
-      @tab-click="handleClick"
-    >
+    <el-tabs v-model="activeName" class="parameter-tabs" @tab-click="handleClick">
       <el-tab-pane label="管理首页" name="first">
-        <ManageHome />
+        <ManageHome v-if="activeName == 'first'" />
       </el-tab-pane>
       <el-tab-pane label="报表明细" name="second">
-        <ReportDetails />
+        <ReportDetails v-if="activeName == 'second'" />
       </el-tab-pane>
       <el-tab-pane label="时时彩设置" name="third">
-        <ColorSettings />
+        <ColorSettings v-if="activeName == 'third'" />
       </el-tab-pane>
       <el-tab-pane label="限额管理" name="fourth">
-        <QuotaManagement />
+        <QuotaManagement v-if="activeName == 'fourth'" />
       </el-tab-pane>
-      <el-tab-pane label="彩票结果管理" name="fisth">
-        <ResultsManagement />
+      <el-tab-pane label="彩票结果管理" name="fifth">
+        <ResultsManagement v-if="activeName == 'fifth'" />
       </el-tab-pane>
       <el-tab-pane label="彩票赔率管理" name="sixth">
-        <OddsManagement />
+        <OddsManagement v-if="activeName == 'sixth'" />
       </el-tab-pane>
       <el-tab-pane label="一键返水" name="seventh">
-        <OnekeyRebate />
+        <OnekeyRebate v-if="activeName == 'seventh'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -41,13 +37,13 @@ import OddsManagement from '@/views/lottery/alwaysColors/oddsManagement/index.vu
 import OnekeyRebate from '@/views/lottery/alwaysColors/onekeyRebate/index.vue'
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-    console.log(tab, event)
+  console.log(tab, event)
 }
 
 const activeName = ref('first')
 </script>
 <style lang="scss" scoped>
-.parameter-tabs > .el-tabs_content {
+.parameter-tabs>.el-tabs_content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;

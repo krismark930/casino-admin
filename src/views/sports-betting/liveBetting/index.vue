@@ -1,7 +1,5 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
     <h3>{{ $t('menu.liveBetting') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>
@@ -10,49 +8,26 @@
         </el-form-item>
         <el-form-item label="">
           <el-select v-model="formData.timeOption" style="width: 80px;">
-            <el-option
-              v-for="item in timeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in timeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
           <span style="margin-left: 10px;">{{ timerCount + '秒' }}</span>
         </el-form-item>
         <el-form-item label="足球审核时间">
           <div style="display: inline-flex; width: 90px;">
-            <el-input
-              v-model="formData.footballReviewTime.first"
-              placeholder=""
-            ></el-input>
-            <el-input
-              v-model="formData.footballReviewTime.second"
-              placeholder=""
-            ></el-input>
+            <el-input v-model="formData.footballReviewTime.first" placeholder=""></el-input>
+            <el-input v-model="formData.footballReviewTime.second" placeholder=""></el-input>
           </div>
         </el-form-item>
         <el-form-item label="棒球审核时间">
           <div style="display: inline-flex; width: 90px;">
-            <el-input
-              v-model="formData.baseballReviewTime.first"
-              placeholder=""
-            ></el-input>
-            <el-input
-              v-model="formData.baseballReviewTime.second"
-              placeholder=""
-            ></el-input>
+            <el-input v-model="formData.baseballReviewTime.first" placeholder=""></el-input>
+            <el-input v-model="formData.baseballReviewTime.second" placeholder=""></el-input>
           </div>
         </el-form-item>
         <el-form-item label="其他审核时间">
           <div style="display: inline-flex; width: 90px;">
-            <el-input
-              v-model="formData.otherReviewTime.first"
-              placeholder=""
-            ></el-input>
-            <el-input
-              v-model="formData.otherReviewTime.second"
-              placeholder=""
-            ></el-input>
+            <el-input v-model="formData.otherReviewTime.first" placeholder=""></el-input>
+            <el-input v-model="formData.otherReviewTime.second" placeholder=""></el-input>
           </div>
         </el-form-item>
         <el-form-item label="">
@@ -60,82 +35,59 @@
         </el-form-item>
         <el-form-item>
           <el-select v-model="formData.musicOption" style="width: 80px;">
-            <el-option
-              v-for="item in musicOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in musicOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
       </div>
       <div>
         <el-form-item label="投注时间">
           <el-select v-model="formData.sortOption" style="width: 100px;">
-            <el-option
-              v-for="item in sortOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in sortOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="球赛种类">
           <el-select v-model="formData.ballOption" style="width: 80px;">
-            <el-option
-              v-for="item in ballOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+            <el-option v-for="item in ballOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="会员帐号">
-          <el-input
-            clearable
-            v-model="formData.keyword"
-            placeholder=""
-          ></el-input>
+          <el-input clearable v-model="formData.keyword" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="注单日期">
-          <el-date-picker
-            v-model="formData.betDate"
-            placeholder=""
-            value-format="YYYY-MM-DD"
-            style="width: 150px;"
-          ></el-date-picker>
+          <el-date-picker v-model="formData.betDate" placeholder="" value-format="YYYY-MM-DD"
+            style="width: 150px;"></el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="getItems">提交</el-button>
         </el-form-item>
       </div>
     </el-form>
-    <el-table
-      :data="liveBettingData"
-      style="width: 100%;"
-      border
-      header-align="center"
-      stripe
-      v-loading="loading"
-    >
+    <el-table :data="liveBettingData" style="width: 100%;" border header-align="center" stripe v-loading="loading">
       <el-table-column label="投注时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">
-              {{ scope.row.betTime }}
-            </span>
+            <el-icon>
+              <timer />
+            </el-icon>
+            <span style="margin-left: 10px" v-html="scope.row.betTime"></span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="userName" label="用户名称" align="center" />
-      <el-table-column property="gameType" label="球赛种类" align="center" />
-      <el-table-column
-        property="content"
-        label="內容"
-        align="center"
-        width="250"
-      >
+      <el-table-column property="userName" label="用户名称" align="center">
+        <template #default="scope">
+          {{ scope.row.userName }}<br>
+          <font color="#cc0000">
+            {{ scope.row.OpenType }}&nbsp;&nbsp;{{ scope.row.TurnRate }}
+          </font>
+        </template>
+      </el-table-column>
+      <el-table-column property="gameType" label="球赛种类" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.gameType"></div>
+          <div style="color: blue; font-weight: bold;">{{ scope.row.OrderID }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column property="content" label="內容" align="center" width="250">
         <template #default="scope">
           <div v-html="scope.row.content"></div>
         </template>
@@ -145,41 +97,37 @@
           <div v-html="scope.row.state"></div>
         </template>
       </el-table-column>
-      <el-table-column property="betAmount" label="投注金额" align="center" />
-      <el-table-column
-        property="winableAmount"
-        label="可赢金额"
-        align="center"
-      />
-      <el-table-column property="result" label="结果" align="center" />
+      <el-table-column property="betAmount" label="投注金额" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.betAmount"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="winableAmount" label="可赢金额" align="center" />
+      <el-table-column property="result" label="结果" align="center">
+        <template #default="scope">
+          <div v-html="scope.row.result"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="operate" label="操作" align="center">
         <template #default="scope">
           <div v-html="scope.row.operate"></div>
         </template>
       </el-table-column>
-      <el-table-column
-        property="function"
-        label="功能"
-        align="center"
-        width="150"
-      >
+      <el-table-column property="function" label="功能" align="center" width="150">
         <template #default="scope">
           <el-select style="width: 130px;" v-model="functions[scope.$index]">
-            <el-option
-              v-for="(item, index) in functionOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-              @click="$event => handleClick(scope.row, index)"
-            ></el-option>
+            <el-option v-for="(item, index) in functionOptions" :key="item.value" :label="item.label" :value="item.value"
+              @click="$event => handleClick(scope.row, index)"></el-option>
           </el-select>
         </template>
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" :page-size="20"
+        @current-change="onPageChange" v-model:current-page="page" />
     </div>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
 import {
@@ -188,6 +136,8 @@ import {
   ResumeEvent,
   CancelEvent,
 } from '@/api/sports/livebetting'
+import { useRouter } from 'vue-router';
+import { formatDate } from '@/utils'
 
 const keyValues = [
   { key: '', confirmed: '' },
@@ -282,10 +232,16 @@ const keyValues = [
 ]
 
 export default {
+  setup() {
+    const router = useRouter();
+    return {
+      router
+    }
+  },
   data() {
     return {
       formData: {
-        betDate: new Date().toISOString().split('T')[0],
+        betDate: formatDate(new Date()),
         keyword: '',
         timeOption: 180,
         musicOption: '',
@@ -430,6 +386,8 @@ export default {
           label: '注单处理',
         },
       ],
+      totalCount: 0,
+      page: 1,
     }
   },
 
@@ -462,7 +420,6 @@ export default {
     this.getFunctionItems()
   },
   methods: {
-    testFunc() {},
     restartCountdown() {
       clearTimeout(this.timer)
       if (this.timerCount !== this.formData.timeOption) {
@@ -514,9 +471,11 @@ export default {
         BS1: this.formData.baseballReviewTime.second,
         OP: this.formData.otherReviewTime.first,
         OP1: this.formData.otherReviewTime.second,
+        page: this.page,
       })
-        .then(data => {
-          this.liveBettingData = [...data]
+        .then(res => {
+          this.liveBettingData = [...res.data]
+          this.totalCount = res.totalCount
           this.loading = false
           this.functions = [...Array(data.length)].map(_ => '注单处理')
           // timerCount
@@ -532,6 +491,9 @@ export default {
       GetFunctionItems().then(data => {
         this.functionOptions = [...this.functionOptions, ...data]
       })
+    },
+    onPageChange(currentPage) {
+      this.getItems()
     },
   },
 }

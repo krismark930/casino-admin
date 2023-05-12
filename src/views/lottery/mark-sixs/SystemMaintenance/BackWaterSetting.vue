@@ -13,593 +13,71 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(item, i) in data" :key="i">
+        <template v-for="(item, i) in waterSettingList" :key="i">
           <tr>
             <th>
-              {{ item.type }}
+              {{ item.ds }}
             </th>
             <td>
-              <el-input v-model="item.valueA" />
+              <el-input v-model="item.yg" />
             </td>
             <td>
-              <el-input v-model="item.valueB" />
+              <el-input v-model="item.ygb" />
             </td>
             <td>
-              <el-input v-model="item.valueC" />
+              <el-input v-model="item.ygc" />
             </td>
             <td>
-              <el-input v-model="item.valueD" />
+              <el-input v-model="item.ygd" />
             </td>
             <td>
-              <el-input v-model="item.singleBet" />
+              <el-input v-model="item.xx" />
             </td>
             <td>
-              <el-input v-model="item.singleItem" />
+              <el-input v-model="item.xxx" />
             </td>
           </tr>
         </template>
       </tbody>
     </table>
     <el-col>
-      <div style="display:flex; justify-content: center; padding-top:10px;">
-        <el-button type="success">确认修改</el-button>
-        <el-button type="warning">刷新</el-button>
+      <div style="display: flex; justify-content: center; padding-top: 10px">
+        <el-button type="success" @click="updateWaterSetting">确认修改</el-button>
       </div>
     </el-col>
   </el-row>
 </template>
-<script lang="ts" setup>
-const data = [
-  {
-    type: '特A',
-    valueA: '13',
-    valueB: '13',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '特B',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '单双',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '大小',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '合数单双',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正特',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正A',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正B',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '总和单双',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '总和大小',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '色波',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '半波',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正码过关',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二全中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三全中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三中二',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二中特',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '特串',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '特肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '五肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '六肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '一肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '尾数',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '家禽野兽',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '半半波',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '头数',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正特尾数',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '七色波',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '尾大尾小',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '大单小单',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '大双小双',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '连肖',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '五不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '六不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '七不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '八不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '九不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '十不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '十一不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '十二不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四中一',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '五中一',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '正1-6',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二肖连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三肖连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四肖连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '五肖连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二肖连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三肖连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四肖连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '五肖连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二尾连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三尾连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四尾连中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '二尾连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '三尾连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-  {
-    type: '四尾连不中',
-    valueA: '0',
-    valueB: '0',
-    valueC: '0',
-    valueD: '0',
-    singleBet: '5000',
-    singleItem: '10000',
-  },
-]
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import { ElLoading } from "element-plus";
+import { systemMaintanceStore } from "@/pinia/modules/mark_six/system_maintance.js";
+import { storeToRefs } from "pinia";
+const { dispatchWaterSetting } = systemMaintanceStore();
+const { dispatchUpdateWaterSetting } = systemMaintanceStore();
+const waterSettingList = computed(() => {
+  const { getWaterSettingList } = storeToRefs(systemMaintanceStore());
+  return getWaterSettingList.value;
+});
+const updateWaterSetting = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateWaterSetting({
+    data: JSON.stringify(waterSettingList.value),
+  });
+  loading.close();
+};
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchWaterSetting();
+  loading.close();
+});
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;

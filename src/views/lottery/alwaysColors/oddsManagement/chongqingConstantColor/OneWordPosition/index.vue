@@ -6,19 +6,19 @@
     @tab-click="handleClick"
   >
     <el-tab-pane label="万" name="first">
-      <TenThousand />
+      <TenThousand v-if="activeName === 'first'"/>
     </el-tab-pane>
     <el-tab-pane label="仟" name="second">
-      <Thousand />
+      <Thousand v-if="activeName === 'second'"/>
     </el-tab-pane>
     <el-tab-pane label="佰" name="third">
-      <Hundred />
+      <Hundred v-if="activeName === 'third'"/>
     </el-tab-pane>
     <el-tab-pane label="拾" name="fourth">
-      <PickUp />
+      <PickUp v-if="activeName === 'fourth'"/>
     </el-tab-pane>
     <el-tab-pane label="个" name="fivth">
-      <Individual />
+      <Individual v-if="activeName === 'fivth'"/>
     </el-tab-pane>
   </el-tabs>
 </template>

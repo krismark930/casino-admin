@@ -33,6 +33,14 @@ export const CheckScore = data => {
   })
 }
 
+export const BKCheckScore = data => {
+  return request({
+    url: '/api/sport/bk_check_score',
+    method: 'post',
+    data,
+  })
+}
+
 export const SaveScore = data => {
   return request({
     url: '/api/sport/save_score',

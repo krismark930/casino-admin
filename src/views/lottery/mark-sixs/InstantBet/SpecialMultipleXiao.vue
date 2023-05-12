@@ -1,7 +1,7 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('lottery.TeshawTitle') }}[{{ selectedPeriod }}期]
+      {{class2}}统计[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
@@ -19,44 +19,52 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('lottery.maximumloss')">
-          <el-input v-model="maximumLoss" style="width: 80px" />
-        </el-form-item>
-        <el-form-item :label="$t('lottery.backWater')">
-          <el-input v-model="backWater" style="width: 80px" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="Search" @click="handleSearch">
-            {{ $t('lottery.flyCalc') }}
-          </el-button>
+        <el-form-item label="下注总额:">
+          {{mainAmount}}
         </el-form-item>
       </el-form>
     </el-col>
     <el-col>
       <div class="flex">
-        <el-button size="small">
-          <el-icon><Plus /></el-icon>
-          特肖
-        </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('二肖')">
           <el-icon><Plus /></el-icon>
           二肖
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('三肖')">
           <el-icon><Plus /></el-icon>
           三肖
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('四肖')">
           <el-icon><Plus /></el-icon>
           四肖
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('五肖')">
           <el-icon><Plus /></el-icon>
           五肖
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('六肖')">
           <el-icon><Plus /></el-icon>
           六肖
+        </el-button>
+        <el-button size="small" @click="getDataByClass2('七肖')">
+          <el-icon><Plus /></el-icon>
+          七肖
+        </el-button>
+        <el-button size="small" @click="getDataByClass2('八肖')">
+          <el-icon><Plus /></el-icon>
+          八肖
+        </el-button>
+        <el-button size="small" @click="getDataByClass2('九肖')">
+          <el-icon><Plus /></el-icon>
+          九肖
+        </el-button>
+        <el-button size="small" @click="getDataByClass2('十肖')">
+          <el-icon><Plus /></el-icon>
+          十肖
+        </el-button>
+        <el-button size="small" @click="getDataByClass2('十一肖')">
+          <el-icon><Plus /></el-icon>
+          十一肖
         </el-button>
       </div>
     </el-col>
@@ -66,59 +74,100 @@
       <table class="instant-bet-positive-code">
         <thead>
           <tr>
-            <th>序号</th>
             <th>号码</th>
-            <th>注数</th>
-            <th>下注总额</th>
-            <th>占成</th>
-            <th>佣金</th>
-            <th>彩金</th>
+            <th>赔率</th>
+            <th>总额</th>
             <th>预计盈利</th>
-            <th>走飞</th>
-            <th>走飞金额</th>
-            <th>当前赔率</th>
           </tr>
         </thead>
+        <tbody>
+          <tr v-for="(item, index) in mainData" :key="index">
+            <td>{{item.class3}}</td>
+            <td>{{item.rate}}</td>
+            <td>{{item.sum_m}}</td>
+            <td>{{item.profit}}</td>
+          </tr>
+        </tbody>
       </table>
     </el-row>
   </el-scrollbar>
 </template>
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
-const selectedPeriod = ref('2023021')
-const maximumLoss = ref('0')
-const backWater = ref('1')
-const handleSearch = () => {}
-const periodsList = [
-  {
-    label: '第2023021期',
-    value: '2023021',
-  },
-  {
-    label: '第2023020期',
-    value: '2023020',
-  },
-  {
-    label: '第2023019期',
-    value: '2023019',
-  },
-  {
-    label: '第2023018期',
-    value: '2023018',
-  },
-  {
-    label: '第2023017期',
-    value: '2023017',
-  },
-  {
-    label: '第2023016期',
-    value: '2023016',
-  },
-  {
-    label: '第2023015期',
-    value: '2023015',
-  },
-]
+import { ref, reactive, defineProps, onMounted, computed, watch, toRefs } from 'vue'
+import { ElNotification } from 'element-plus';
+import { ElLoading } from 'element-plus'
+import { instantBetStore } from "@/pinia/modules/mark_six/instant_bet.js";
+import { storeToRefs } from "pinia";
+
+const { dispatchGetPeriod } = instantBetStore();
+const { dispatchGetPass } = instantBetStore();
+
+const selectedPeriod = ref('')
+const class2 = ref("二肖");
+const getDataByClass2 = async (data) => {
+  class2.value = data;
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "生肖", class2: class2.value });
+  loading.close();  
+}
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(instantBetStore());
+  return getSuccess.value;
+})
+const mainAmount = computed(() => {
+  const { getMainAmount } = storeToRefs(instantBetStore());
+  return getMainAmount.value;
+})
+const mainData = computed(() => {
+  const { getMainData } = storeToRefs(instantBetStore());
+  console.log(getMainData.value[0]);
+  return getMainData.value;
+})
+const periodsList = computed(() => {
+  const { getPeriodList } = storeToRefs(instantBetStore());
+  if (getPeriodList.value.length > 0) {
+    selectedPeriod.value = getPeriodList.value[0].value;
+  }
+  return getPeriodList.value;
+})
+watch(selectedPeriod, async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "生肖", class2: class2.value });
+  loading.close();
+}, { deep: true })
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: '成功',
+      message: '操作成功。',
+      type: 'success',
+    })
+  } else {
+    ElNotification({
+      title: '错误',
+      message: '操作失败。',
+      type: 'error',
+    })
+  }
+}
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPeriod({});
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "生肖", class2: class2.value });
+  loading.close();
+})
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;
@@ -142,9 +191,6 @@ table.instant-bet-positive-code {
       border: $table-border;
       text-align: center;
     }
-  }
-  td:nth-child(7n + 1) {
-    background-color: rgb(255, 244, 225);
   }
 }
 

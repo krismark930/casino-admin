@@ -41,6 +41,7 @@ const app = createApp(App)
 // 引入element-plus
 import ElementPlus from 'element-plus'
 import './assets/style/element-variables.scss'
+import VueSocketIO from 'vue-3-socket.io';
 
 // 国际化
 import i18n from '@/i18n'
@@ -84,10 +85,21 @@ addBackToTop({
   textColor: '#409eff',
 })
 
+// const SOCKET_URL = 'http://localhost:3000';
+const SOCKET_URL = 'http://27.126.187.127';
+
+console.log(SOCKET_URL);
+
 app
   .use(i18n)
   .use(addBackToTop)
   .use(ElementPlus)
   .use(pinia)
+  .use(
+    new VueSocketIO({
+      debug: true,
+      connection: SOCKET_URL,
+    })
+  )
   .use(router)
   .mount('#app')

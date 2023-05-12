@@ -5,11 +5,11 @@
       class="parameter-tabs"
       @tab-click="handleClick"
     >
-      <el-tab-pane label="足球" name="first">
-        <Football />
+      <el-tab-pane label="足球" name="football">
+        <Football :isCurrentTab="activeName == 'football'" />
       </el-tab-pane>
-      <el-tab-pane label="篮球" name="second">
-        <Basketball />
+      <el-tab-pane label="篮球" name="basketball">
+        <Basketball :isCurrentTab="activeName == 'basketball'" />
       </el-tab-pane>
       <el-tab-pane label="棒球" name="third">
         <Baseball />
@@ -23,8 +23,8 @@
       <el-tab-pane label="其它" name="sixth">
         <Other />
       </el-tab-pane>
-      <el-tab-pane label="结果" name="seventh">
-        <Result />
+      <el-tab-pane label="结果" name="result">
+        <Result :isCurrentTab="activeName == 'result'" />
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -44,7 +44,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event)
 }
 
-const activeName = ref('first')
+const activeName = ref('football')
 </script>
 <style lang="scss" scoped>
 .parameter-tabs > .el-tabs_content {

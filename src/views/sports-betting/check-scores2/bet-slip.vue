@@ -1,6 +1,16 @@
 <template>
   <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
-    <h3>{{ $t('menu.checkScores2') }}</h3>
+    <el-row style="margin-bottom: 10px;">
+      <el-col :span="12">
+        <h3>
+          {{ route.query.title == undefined ? $t('menu.checkScores2') : route.query.title }}
+        </h3>
+      </el-col>
+      <el-col :span="12">
+        <el-button type="primary" @click="goBeforePage">后 退</el-button>
+      </el-col>
+    </el-row>
+
     <el-table v-loading="loading" :data="report" style="width: 100%;" border header-align="center" stripe>
       <el-table-column property="bettingTime" label="投注时间" align="center">
         <template #default="scope">
@@ -31,12 +41,12 @@
       </el-table-column>
       <el-table-column property="betAmount" label="投注金额" align="right">
         <template #default="scope">
-          {{ scope.row.betscore }}
+          <div v-html="scope.row.betscore"></div>
         </template>
       </el-table-column>
       <el-table-column property="memberreport" label="会员结果" align="right">
         <template #default="scope">
-          {{ scope.row.M_report }}
+          {{ scope.row.M_Result }}
         </template>
       </el-table-column>
       <el-table-column property="operate" label="操作" align="center">
