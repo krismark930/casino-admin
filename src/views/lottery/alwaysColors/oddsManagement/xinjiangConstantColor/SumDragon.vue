@@ -1,8 +1,3 @@
-<script lang="ts" setup>
-import { ref, defineProps } from 'vue'
-
-const oddsValue = ref('1.95')
-</script>
 <template>
   <el-scrollbar>
     <el-row class="scrollbar-flex-content">
@@ -16,29 +11,63 @@ const oddsValue = ref('1.95')
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <template v-for="m in 4" :key="m">
-              <td>总和双</td>
+          <tr v-if="odds1 != null">
+              <td>总和大</td>
               <td>
                 <div style="display: flex; column-gap: 10px;">
                   <div>
                     <el-input
-                      v-model="oddsValue"
+                      v-model="odds1.h0"
                       size="small"
                       controls-position="center"
                     />
                   </div>
                 </div>
               </td>
-            </template>
+              <td>总和小</td>
+              <td>
+                <div style="display: flex; column-gap: 10px;">
+                  <div>
+                    <el-input
+                      v-model="odds1.h1"
+                      size="small"
+                      controls-position="center"
+                    />
+                  </div>
+                </div>
+              </td>
+              <td>总和单</td>
+              <td>
+                <div style="display: flex; column-gap: 10px;">
+                  <div>
+                    <el-input
+                      v-model="odds1.h2"
+                      size="small"
+                      controls-position="center"
+                    />
+                  </div>
+                </div>
+              </td>
+              <td>总和双</td>
+              <td>
+                <div style="display: flex; column-gap: 10px;">
+                  <div>
+                    <el-input
+                      v-model="odds1.h3"
+                      size="small"
+                      controls-position="center"
+                    />
+                  </div>
+                </div>
+              </td>
           </tr>
-          <tr>
+          <tr v-if="odds1 != null">
             <td>龙</td>
             <td>
               <div style="display: flex; column-gap: 10px;">
                 <div>
                   <el-input
-                    v-model="oddsValue"
+                    v-model="odds1.h4"
                     size="small"
                     controls-position="center"
                   />
@@ -50,7 +79,7 @@ const oddsValue = ref('1.95')
               <div style="display: flex; column-gap: 10px;">
                 <div>
                   <el-input
-                    v-model="oddsValue"
+                    v-model="odds1.h5"
                     size="small"
                     controls-position="center"
                   />
@@ -62,7 +91,7 @@ const oddsValue = ref('1.95')
               <div style="display: flex; column-gap: 10px;">
                 <div>
                   <el-input
-                    v-model="oddsValue"
+                    v-model="odds1.h6"
                     size="small"
                     controls-position="center"
                   />
@@ -75,9 +104,45 @@ const oddsValue = ref('1.95')
     </el-row>
   </el-scrollbar>
   <div style="padding-top:20px; float:right;">
-    <el-button type="info">保存</el-button>
+    <el-button type="info" @click="saveB5Odds">保存</el-button>
   </div>
 </template>
+<script setup>
+import { ref, onMounted } from "vue";
+import { storeToRefs } from "pinia";
+import { ElLoading } from "element-plus";
+import { b5OddsStore } from "@/pinia/modules/always_color/b5_odds.js";
+const colNum = 5;
+const lottery_type = ref("新疆时时彩");
+const sub_type = ref("总和龙虎和");
+const odds1 = ref(null);
+const { dispatchGetOdds1 } = b5OddsStore();
+const { dispatchSaveOdds } = b5OddsStore();
+const saveB5Odds = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchSaveOdds(odds1.value);
+  loading.close();
+};
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  let formData = {
+    lottery_type: lottery_type.value,
+    sub_type: sub_type.value,
+  };
+  await dispatchGetOdds1(formData);
+  const { getB5OddsItem1 } = storeToRefs(b5OddsStore());
+  odds1.value = getB5OddsItem1.value;
+  loading.close();
+});
+</script>
 <style lang="scss" scoped>
 $table-border: 1px solid #5a584b;
 $table-th-bgcolor: #484742;

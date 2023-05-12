@@ -1,7 +1,7 @@
 <template>
   <el-row justify="space-between">
     <h3 style="font-weight: 600;">
-      {{ $t('lottery.missAllTitle') }}[{{ selectedPeriod }}期]
+      {{class2}}统计[{{ selectedPeriod }}期]
     </h3>
     <el-col>
       <el-form inline="true">
@@ -19,50 +19,42 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('lottery.maximumloss')">
-          <el-input v-model="maximumLoss" style="width: 80px" />
-        </el-form-item>
-        <el-form-item :label="$t('lottery.backWater')">
-          <el-input v-model="backWater" style="width: 80px" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="Search" @click="handleSearch">
-            {{ $t('lottery.flyCalc') }}
-          </el-button>
+        <el-form-item label="下注总额:">
+          {{mainAmount}}
         </el-form-item>
       </el-form>
     </el-col>
     <el-col>
       <div class="flex">
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('五不中')">
           <el-icon><Plus /></el-icon>
           五不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('六不中')">
           <el-icon><Plus /></el-icon>
           六不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('七不中')">
           <el-icon><Plus /></el-icon>
           七不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('八不中')">
           <el-icon><Plus /></el-icon>
           八不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('九不中')">
           <el-icon><Plus /></el-icon>
           九不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('十不中')">
           <el-icon><Plus /></el-icon>
           十不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('十一不中')">
           <el-icon><Plus /></el-icon>
           十一不中
         </el-button>
-        <el-button size="small">
+        <el-button size="small" @click="getDataByClass2('十二不中')">
           <el-icon><Plus /></el-icon>
           十二不中
         </el-button>
@@ -74,32 +66,49 @@
       <table class="instant-bet-positive-code">
         <thead>
           <tr>
-            <th>序号</th>
-            <th>号码</th>
-            <th>注数</th>
-            <th>下注总额</th>
-            <th>占成</th>
-            <th>佣金</th>
-            <th>彩金</th>
-            <th>预计盈利</th>
-            <th>走飞</th>
-            <th>走飞金额</th>
-            <th>当前赔率</th>
+            <template v-for="l in blockNum" :key="l">
+              <th>{{ $t('lottery.number') }}</th>
+              <th>{{ $t('lottery.odds') }}</th>
+              <th>{{ $t('lottery.lumpSum') }}</th>
+              <th>{{ $t('lottery.expectedProfit') }}</th>
+              <th style="width: 10px;"></th>
+            </template>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>共1页 当前是第1页 第1页</td>
+          <tr v-for="n in rowNum" :key="n" v-if="mainData.length > 0">
+            <template v-for="m in blockNum" :key="m">
+              <template v-if="n + (m - 1) * rowNum < recordNum">
+                <td v-if="mainData[n + (m - 1) * rowNum - 1]?.class3 !== undefined">
+                  <Font :color="[mainData[n + (m - 1) * rowNum - 1].color]">
+                    <b>{{ mainData[n + (m - 1) * rowNum - 1].class3 }}</b>
+                  </Font>
+                </td>
+                <td v-if="mainData[n + (m - 1) * rowNum - 1]?.rate !== undefined">
+                  {{ mainData[n + (m - 1) * rowNum - 1].rate }}
+                </td>
+                <td v-if="mainData[n + (m - 1) * rowNum - 1]?.sum_m !== undefined">
+                  {{ mainData[n + (m - 1) * rowNum - 1].sum_m }}
+                </td>
+                <td v-if="mainData[n + (m - 1) * rowNum - 1]?.profit !== undefined">
+                  {{ mainData[n + (m - 1) * rowNum - 1].profit }}
+                </td>
+                <td></td>
+              </template>
+              <template v-else>
+                <template v-if="n + (m - 1) * rowNum == recordNum">
+                  <td :colspan="colNum">{{ $t('lottery.bettingTotal') }}: {{ mainAmount }}</td>
+                </template>
+                <!-- <template v-if="n + (m - 1) * rowNum == recordNum + 1">
+                  <td :colspan="colNum">{{ $t('lottery.totalAmount') }}: 0</td>
+                </template>
+                <template v-if="n + (m - 1) * rowNum == recordNum + 2">
+                  <td :colspan="colNum">
+                    {{ $t('lottery.totalAmountOfFlight') }}: 0
+                  </td>
+                </template> -->
+              </template>
+            </template>
           </tr>
         </tbody>
       </table>
@@ -107,41 +116,87 @@
   </el-scrollbar>
 </template>
 <script lang="ts" setup>
-import { ref, reactive } from 'vue'
-const selectedPeriod = ref('2023021')
-const maximumLoss = ref('1000')
-const backWater = ref('2')
-const handleSearch = () => {}
-const periodsList = [
-  {
-    label: '第2023021期',
-    value: '2023021',
-  },
-  {
-    label: '第2023020期',
-    value: '2023020',
-  },
-  {
-    label: '第2023019期',
-    value: '2023019',
-  },
-  {
-    label: '第2023018期',
-    value: '2023018',
-  },
-  {
-    label: '第2023017期',
-    value: '2023017',
-  },
-  {
-    label: '第2023016期',
-    value: '2023016',
-  },
-  {
-    label: '第2023015期',
-    value: '2023015',
-  },
-]
+import { ref, reactive, defineProps, onMounted, computed, watch, toRefs } from 'vue'
+import { ElNotification } from 'element-plus';
+import { ElLoading } from 'element-plus'
+import { instantBetStore } from "@/pinia/modules/mark_six/instant_bet.js";
+import { storeToRefs } from "pinia";
+
+const { dispatchGetPeriod } = instantBetStore();
+const { dispatchGetPass } = instantBetStore();
+
+const selectedPeriod = ref('')
+const rowNum = 13
+const blockNum = 4
+const colNum = 7
+const recordNum = 50
+const rowNum2 = 5
+const recordNum2 = 18
+const class2 = ref("五不中");
+const getDataByClass2 = async (data) => {
+  class2.value = data;
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "全不中", class2: class2.value });
+  loading.close();  
+}
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(instantBetStore());
+  return getSuccess.value;
+})
+const mainAmount = computed(() => {
+  const { getMainAmount } = storeToRefs(instantBetStore());
+  return getMainAmount.value;
+})
+const mainData = computed(() => {
+  const { getMainData } = storeToRefs(instantBetStore());
+  console.log(getMainData.value[0]);
+  return getMainData.value;
+})
+const periodsList = computed(() => {
+  const { getPeriodList } = storeToRefs(instantBetStore());
+  if (getPeriodList.value.length > 0) {
+    selectedPeriod.value = getPeriodList.value[0].value;
+  }
+  return getPeriodList.value;
+})
+watch(selectedPeriod, async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "全不中", class2: class2.value });
+  loading.close();
+}, { deep: true })
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: '成功',
+      message: '操作成功。',
+      type: 'success',
+    })
+  } else {
+    ElNotification({
+      title: '错误',
+      message: '操作失败。',
+      type: 'error',
+    })
+  }
+}
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchGetPeriod({});
+  await dispatchGetPass({ period: selectedPeriod.value, class1: "全不中", class2: class2.value });
+  loading.close();
+})
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;
@@ -166,7 +221,8 @@ table.instant-bet-positive-code {
       text-align: center;
     }
   }
-  td:nth-child(10n + 1) {
+
+  td:nth-child(5n + 1) {
     background-color: rgb(255, 244, 225);
   }
 }

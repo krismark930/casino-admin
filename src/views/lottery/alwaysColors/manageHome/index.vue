@@ -1,82 +1,43 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
+    style="
+      border: 1px solid #eee;
+      padding: 0.75rem;
+      margin-top: 0.75rem;
+      text-align: center;
+    "
   >
     <h3>彩票注单查询</h3>
     <el-form :inline="true" :model="formData">
-      <div>
+      <div style="margin-bottom: 20px">
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="1363.0" suffix="元">
+            <el-statistic precision="2" :value="totalItem.t_allmoney" suffix="元">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   当前页总投注金额
-                  <el-tooltip
-                    effect="dark"
-                    content="当前页总投注金额"
-                    placement="top"
-                  >
-                    <el-icon style="margin-left: 4px" :size="12">
-                      <Warning />
-                    </el-icon>
-                  </el-tooltip>
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>比昨天</span>
-                <span class="green">
-                  24%
-                  <el-icon>
-                    <CaretTop />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="12346.35">
+            <el-statistic precision="2" :value="totalItem.t_sy" suffix="元">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
-                  当前页输赢统计
-                  <el-tooltip
-                    effect="dark"
-                    content="当前页输赢统计(会员结果)"
-                    placement="top"
-                  >
-                    <el-icon style="margin-left: 4px" :size="12">
-                      <Warning />
-                    </el-icon>
-                  </el-tooltip>
+                  当前页输赢统计（会员结果）
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>逐月</span>
-                <span class="red">
-                  12%
-                  <el-icon>
-                    <CaretBottom />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
       </div>
       <div>
         <el-form-item label="">
-          <el-select
-            v-model="formData.option1"
-            placeholder=""
-            style="width: 130px;"
-          >
+          <el-select v-model="formData.type" placeholder="" style="width: 130px">
             <el-option
-              v-for="item in options1"
+              v-for="item in typeOption"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -84,13 +45,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="">
-          <el-select
-            v-model="formData.option2"
-            placeholder=""
-            style="width: 130px;"
-          >
+          <el-select v-model="formData.js" placeholder="" style="width: 130px">
             <el-option
-              v-for="item in options2"
+              v-for="item in jsOption"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -98,285 +55,312 @@
           </el-select>
         </el-form-item>
         <el-form-item label="会员">
-          <el-input
-            clearable
-            v-model="formData.member"
-            placeholder=""
-          ></el-input>
+          <el-input clearable v-model="formData.user_name" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="日期">
-          <el-date-picker
-            v-model="formData.daterange"
-            type="daterange"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          />
+          <el-date-picker v-model="formData.s_time" type="date" placeholder="开始日期" />
+          &nbsp;~&nbsp;
+          <el-date-picker v-model="formData.e_time" type="date" placeholder="结束日期" />
         </el-form-item>
         <el-form-item label="期数">
-          <el-input
-            clearable
-            v-model="formData.period"
-            placeholder=""
-          ></el-input>
+          <el-input clearable v-model="formData.qishu" placeholder=""></el-input>
         </el-form-item>
         <el-form-item label="订单号">
-          <el-input
-            clearable
-            v-model="formData.orderNumber"
-            placeholder=""
-          ></el-input>
+          <el-input clearable v-model="formData.tf_id" placeholder=""></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">搜索</el-button>
+          <el-button type="primary" @click="getOrderListByFilter">搜索</el-button>
         </el-form-item>
       </div>
     </el-form>
     <el-table
-      :data="lotteryQueryData"
-      style="width: 100%;"
+      :data="orderList"
+      v-loading="loading"
+      style="width: 100%"
       border
       header-align="center"
       stripe
     >
       <el-table-column
-        property="orderNumber"
+        property="order_sub_num"
         label="订单号"
         align="center"
         width="180px"
       />
-      <el-table-column
-        property="lotteryCategory"
-        label="彩票类别"
-        align="center"
-      />
-      <el-table-column
-        property="lotteryNumber"
-        label="彩票期号"
-        align="center"
-      />
-      <el-table-column property="betting" label="投注玩法" align="center" />
-      <el-table-column
-        property="bettingContent"
-        label="投注内容"
-        align="center"
-      />
-      <el-table-column property="betAmount" label="投注金额" align="center" />
-      <el-table-column property="betrayal" label="反水" align="center" />
-      <el-table-column property="odds" label="赔率" align="center" />
-      <el-table-column
-        property="winableAmount"
-        label="可赢金额"
-        align="center"
-      />
-      <el-table-column
-        property="memberResult"
-        label="会员结果"
-        align="center"
-      />
-      <el-table-column
-        property="winableAmount"
-        label="可赢金额"
-        align="center"
-      />
+      <el-table-column property="lottery_name" label="彩票类别" align="center" />
+      <el-table-column property="qishu" label="彩票期号" align="center" />
+      <el-table-column property="rtype_str" label="投注玩法" align="center" />
+      <el-table-column property="content_name" label="投注内容" align="center" />
+      <el-table-column property="bet_money_one" label="投注金额" align="center" />
+      <el-table-column property="fs" label="反水" align="center" />
+      <el-table-column property="bet_rate_one" label="赔率" align="center" />
+      <el-table-column property="win_sub" label="可赢金额" align="center" />
+      <el-table-column property="money_result" label="会员结果" align="center" />
       <el-table-column label="投注时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.bettingTime }}</span>
+            <el-icon>
+              <timer />
+            </el-icon>
+            <span style="margin-left: 10px">{{ scope.row.bet_time }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column
-        property="bettingAccount"
-        label="投注账号"
-        align="center"
-      />
+      <el-table-column property="username" label="投注账号" align="center" />
       <el-table-column fixed="right" align="center" width="170px">
         <template #header>
           <el-space>
             <span>状态</span>
-            <el-button type="primary" size="small">批量作废</el-button>
-            <el-checkbox v-model="formData.state" />
+            <el-button type="primary" size="small" @click="orderCancelAll"
+              >批量作废</el-button
+            >
+            <el-checkbox v-model="allChecked" />
           </el-space>
         </template>
         <template #default="scope">
-          {{ scope.row.state }}
+          <div v-if="scope.row.status == 0">
+            <el-space>
+              <font color="#0000FF">未结算</font>--<font
+                color="#ffcccc"
+                style="cursor: pointer"
+                @click="cancelOrder(scope.row.id)"
+                >作废</font
+              >
+              <el-checkbox v-model="scope.row.checked" />
+            </el-space>
+          </div>
+          <div v-if="scope.row.status == 1">
+            <font color="#FF0000">已结算</font>
+          </div>
+          <div v-if="scope.row.status == 2">
+            <font color="#FF0000">已重算</font>
+          </div>
+          <div v-if="scope.row.status == 3">
+            <font color="#FFcccc">作废</font>
+          </div>
         </template>
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="totalItem.count"
+        :page-size="20"
+        @current-change="onPageChange"
+        v-model:current-page="formData.page"
+      />
     </div>
   </div>
 </template>
 <script>
+import { manageHomeStore } from "@/pinia/modules/always_color/manage_home.js";
+import { ElNotification } from "element-plus";
+import moment from "moment-timezone";
 export default {
+  setup() {
+    const { dispatchOrderList } = manageHomeStore();
+    const { dispatchCancelOrderAll } = manageHomeStore();
+    const { dispatchAllChecked } = manageHomeStore();
+    return {
+      dispatchOrderList,
+      dispatchCancelOrderAll,
+      dispatchAllChecked,
+    };
+  },
   data() {
     return {
+      loading: false,
+      allChecked: false,
       formData: {
-        option1: '全部彩票',
-        option2: '全部注单',
-        daterange: '',
-        period: '',
-        orderNumber: '',
-        member: '',
-        state: '',
+        page: 1,
+        status: 0,
+        type: "ALL_LOTTERY",
+        js: "0,1,2,3",
+        user_name: "",
+        s_time: moment("2021-06-01").format("YYYY-MM-DD"),
+        e_time: moment().format("YYYY-MM-DD"),
+        qishu: "",
       },
-      lotteryQueryData: [
+      typeOption: [
         {
-          orderNumber: '202302140837131316',
-          lotteryCategory: '五分彩',
-          lotteryNumber: '2598.36',
-          betting: '快速-五分彩',
-          bettingContent: '第一球-0',
-          betAmount: '11.00',
-          betrayal: '0.00',
-          odds: '9.50',
-          winableAmount: '104.50',
-          memberResult: '-11',
-          bettingTime: '02-14 08:37:13',
-          bettingAccount: 'aa123',
-          state: '已结算',
+          value: "ALL_LOTTERY",
+          label: "全部彩票",
         },
         {
-          orderNumber: '202302140837131316',
-          lotteryCategory: '五分彩',
-          lotteryNumber: '2598.36',
-          betting: '快速-五分彩',
-          bettingContent: '第一球-0',
-          betAmount: '11.00',
-          betrayal: '0.00',
-          odds: '9.50',
-          winableAmount: '104.50',
-          memberResult: '-11',
-          bettingTime: '02-14 08:37:13',
-          bettingAccount: 'aa123',
-          state: '已结算',
+          value: "CQ",
+          label: "重庆时时彩",
         },
         {
-          orderNumber: '202302140837131316',
-          lotteryCategory: '五分彩',
-          lotteryNumber: '2598.36',
-          betting: '快速-五分彩',
-          bettingContent: '第一球-0',
-          betAmount: '11.00',
-          betrayal: '0.00',
-          odds: '9.50',
-          winableAmount: '104.50',
-          memberResult: '-11',
-          bettingTime: '02-14 08:37:13',
-          bettingAccount: 'aa123',
-          state: '已结算',
-        },
-      ],
-      options1: [
-        {
-          value: 'ALL_LOTTERY',
-          label: '全部彩票',
+          value: "JX",
+          label: "新疆时时彩",
         },
         {
-          value: 'CQ',
-          label: '重庆时时彩',
+          value: "TJ",
+          label: "天津时时彩",
         },
         {
-          value: 'JX',
-          label: '新疆时时彩',
+          value: "GDSF",
+          label: "广东十分彩",
         },
         {
-          value: 'TJ',
-          label: '天津时时彩',
+          value: "GXSF",
+          label: "广西十分彩",
         },
         {
-          value: 'GDSF',
-          label: '广东十分彩',
+          value: "TJSF",
+          label: "天津十分彩",
         },
         {
-          value: 'GXSF',
-          label: '广西十分彩',
+          value: "CQSF",
+          label: "重庆十分彩",
         },
         {
-          value: 'TJSF',
-          label: '天津十分彩',
+          value: "BJKN",
+          label: "北京快乐8",
         },
         {
-          value: 'CQSF',
-          label: '重庆十分彩',
+          value: "BJPK",
+          label: "北京PK拾",
         },
         {
-          value: 'BJKN',
-          label: '北京快乐8',
+          value: "GD11",
+          label: "广东11选5",
         },
         {
-          value: 'BJPK',
-          label: '北京PK拾',
+          value: "D3",
+          label: "3D彩",
         },
         {
-          value: 'GD11',
-          label: '广东11选5',
+          value: "P3",
+          label: "排列三",
         },
         {
-          value: 'D3',
-          label: '3D彩',
+          value: "T3",
+          label: "上海时时乐",
         },
         {
-          value: 'P3',
-          label: '排列三',
+          value: "XYFT",
+          label: "幸运飞艇",
         },
         {
-          value: 'T3',
-          label: '上海时时乐',
+          value: "FFC5",
+          label: "五分彩",
         },
         {
-          value: 'XYFT',
-          label: '幸运飞艇',
+          value: "TXSSC",
+          label: "腾讯时时彩",
         },
         {
-          value: 'FFC5',
-          label: '五分彩',
+          value: "TWSSC",
+          label: "台湾时时彩",
         },
         {
-          value: 'TXSSC',
-          label: '腾讯时时彩',
+          value: "AZXY5",
+          label: "澳洲幸运5",
         },
         {
-          value: 'TWSSC',
-          label: '台湾时时彩',
-        },
-        {
-          value: 'AZXY5',
-          label: '澳洲幸运5',
-        },
-        {
-          value: 'AZXY10',
-          label: '澳洲幸运10',
+          value: "AZXY10",
+          label: "澳洲幸运10",
         },
       ],
-      options2: [
+      jsOption: [
         {
-          value: '0',
-          label: '未结算注单',
+          value: "0",
+          label: "未结算注单",
         },
         {
-          value: '1',
-          label: '已结算注单',
+          value: "1",
+          label: "已结算注单",
         },
         {
-          value: '2',
-          label: '已重算注单',
+          value: "2",
+          label: "已重算注单",
         },
         {
-          value: '3',
-          label: '作废注单',
+          value: "3",
+          label: "作废注单",
         },
         {
-          value: '0,1,2,3',
-          label: '全部注单',
+          value: "0,1,2,3",
+          label: "全部注单",
         },
       ],
-    }
+    };
   },
-  methods: {},
-}
+  computed: {
+    orderList: function () {
+      const { getOrderList } = manageHomeStore();
+      return getOrderList;
+    },
+    totalItem: function () {
+      const { getTotalItem } = manageHomeStore();
+      return getTotalItem;
+    },
+  },
+  watch: {
+    allChecked: function (newValue) {
+      this.dispatchAllChecked(newValue);
+    },
+  },
+  methods: {
+    onPageChange: async function () {
+      this.loading = true;
+      this.formData.s_time = moment(this.formData.s_time).format("YYYY-MM-DD");
+      this.formData.e_time = moment(this.formData.e_time).format("YYYY-MM-DD");
+      await this.dispatchOrderList(this.formData);
+      this.loading = false;
+    },
+    getOrderListByFilter: async function () {
+      this.loading = true;
+      this.formData.s_time = moment(this.formData.s_time).format("YYYY-MM-DD");
+      this.formData.e_time = moment(this.formData.e_time).format("YYYY-MM-DD");
+      await this.dispatchOrderList(this.formData);
+      this.loading = false;
+    },
+    cancelOrder: async function (id) {
+      var sResult = prompt("请在下面输入作废的理由", "");
+      this.loading = true;
+      let data = {
+        ...this.formData,
+        zf: 1,
+        id: id,
+        cancel_reason: sResult,
+      };
+      await this.dispatchOrderList(data);
+      this.loading = false;
+    },
+    orderCancelAll: async function () {
+      if (!this.allChecked) {
+        ElNotification({
+          title: "错误",
+          message: "您未选中任何复选框。",
+          type: "error",
+        });
+        return;
+      }
+      var sResult = prompt("请在下面输入作废的理由", "");
+      let ids = this.orderList
+        .filter((item) => Number(item.status) === 0)
+        .map((item) => item.id)
+        .toString();
+      this.loading = true;
+      await this.dispatchCancelOrderAll({ ids: ids, cancel_reason: sResult });
+      this.formData.s_time = moment(this.formData.s_time).format("YYYY-MM-DD");
+      this.formData.e_time = moment(this.formData.e_time).format("YYYY-MM-DD");
+      await this.dispatchOrderList(this.formData);
+      this.loading = false;
+      this.allChecked = false;
+    },
+  },
+  async mounted() {
+    this.loading = true;
+    this.formData.s_time = moment(this.formData.s_time).format("YYYY-MM-DD");
+    this.formData.e_time = moment(this.formData.e_time).format("YYYY-MM-DD");
+    await this.dispatchOrderList(this.formData);
+    this.loading = false;
+  },
+};
 </script>
 <style lang="scss" scoped>
 .pagination {
@@ -395,7 +379,7 @@ export default {
 
 .statistic-card {
   height: 100%;
-  padding-left: 20px;
+  padding: 10px;
   border-radius: 4px;
   background-color: var(--el-bg-color-overlay);
 }
@@ -424,6 +408,7 @@ export default {
 .green {
   color: var(--el-color-success);
 }
+
 .red {
   color: var(--el-color-error);
 }

@@ -7,16 +7,16 @@
           <th>内容</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="configItem != null">
         <tr>
           <th>网站信息</th>
           <td>
-            <div style="display: flex; column-gap: 10px;">
+            <div style="display: flex; column-gap: 10px">
               <el-form-item label="网站名称:">
-                <el-input value="皇冠现金网" />
+                <el-input v-model="configItem.webname" />
               </el-form-item>
               <el-form-item label="网址:http://">
-                <el-input value="www.hg.com" />
+                <el-input v-model="configItem.weburl" />
               </el-form-item>
             </div>
           </td>
@@ -25,7 +25,7 @@
           <th>过关设置</th>
           <td>
             <el-form-item label="最高派彩">
-              <el-input value="25000" />
+              <el-input v-model="configItem.ggpz" />
             </el-form-item>
           </td>
         </tr>
@@ -34,22 +34,16 @@
           <td>
             <el-form-item label="请选择与当前年份相应的生肖">
               <el-select
-                v-model="select"
+                v-model="configItem.sanimal"
                 placeholder="Select"
                 style="width: 115px"
               >
-                <el-option label="猴" value="0" />
-                <el-option label="羊" value="1" />
-                <el-option label="马" value="2" />
-                <el-option label="蛇" value="3" />
-                <el-option label="龙" value="4" />
-                <el-option label="兔" value="5" />
-                <el-option label="虎" value="6" />
-                <el-option label="牛" value="7" />
-                <el-option label="鼠" value="8" />
-                <el-option label="猪" value="9" />
-                <el-option label="狗" value="10" />
-                <el-option label="鸡" value="11" />
+                <el-option
+                  v-for="(item, index) in animalOption"
+                  :key="index"
+                  :label="item.label"
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </td>
@@ -57,21 +51,21 @@
         <tr>
           <th>B盘默认设置</th>
           <td>
-            <div style="display: flex; flex-wrap: wrap; column-gap: 10px;">
+            <div style="display: flex; flex-wrap: wrap; column-gap: 10px">
               <el-form-item label="特码B升">
-                <el-input value="-7"></el-input>
+                <el-input v-model="configItem.tm"></el-input>
               </el-form-item>
               <el-form-item label="特码两面B盘升">
-                <el-input value="0"></el-input>
+                <el-input v-model="configItem.tmdx"></el-input>
               </el-form-item>
               <el-form-item label="特码波色B盘升">
-                <el-input value="0"></el-input>
+                <el-input v-model="configItem.tmps"></el-input>
               </el-form-item>
               <el-form-item label="正码B升">
-                <el-input value="0"></el-input>
+                <el-input v-model="configItem.zm"></el-input>
               </el-form-item>
               <el-form-item label="正码两面B盘升">
-                <el-input value="0"></el-input>
+                <el-input v-model="configItem.zmdx"></el-input>
               </el-form-item>
             </div>
           </td>
@@ -80,19 +74,19 @@
           <th>五行</th>
           <td>
             <el-form-item label="金">
-              <el-input value="12,13,20,21,28,29,42,43"></el-input>
+              <el-input v-model="configItem.five_elements_1"></el-input>
             </el-form-item>
             <el-form-item label="木">
-              <el-input value="02,03,10,11,24,25,32,33,40,41"></el-input>
+              <el-input v-model="configItem.five_elements_2"></el-input>
             </el-form-item>
             <el-form-item label="水">
-              <el-input value="01,08,09,16,17,30,31,38,39,46,47"></el-input>
+              <el-input v-model="configItem.five_elements_3"></el-input>
             </el-form-item>
             <el-form-item label="火">
-              <el-input value="04,05,18,19,26,27,34,35,48,49"></el-input>
+              <el-input v-model="configItem.five_elements_4"></el-input>
             </el-form-item>
             <el-form-item label="土">
-              <el-input value="06,07,14,15,22,23,36,37,44,45"></el-input>
+              <el-input v-model="configItem.five_elements_5"></el-input>
             </el-form-item>
           </td>
         </tr>
@@ -101,7 +95,7 @@
           <td>
             <el-input
               :rows="2"
-              v-model="textarea"
+              v-model="configItem.affice"
               type="textarea"
               placeholder="欢迎光临[金沙]香港六合彩第92期:开奖时间为8月04日21:30开奖,本公司淤下午16:30开盘.如有改变.一切时间由香港马会提供为准! 请下注后认真检查确认下注成功。开奖后的注单一律为无效注单。"
             />
@@ -111,12 +105,16 @@
           <th>系统维护</th>
           <td>
             <el-select
-              v-model="sysmain"
+              v-model="configItem.opwww"
               placeholder="开启网站"
               style="width: 115px"
             >
-              <el-option label="开启网站" value="0" />
-              <el-option label="关闭网站" value="1" />
+              <el-option
+                v-for="(item, index) in opwwwOption"
+                :key="index"
+                :label="item.label"
+                :value="item.value"
+              />
             </el-select>
           </td>
         </tr>
@@ -125,7 +123,7 @@
           <td>
             <el-input
               :rows="2"
-              v-model="systext"
+              v-model="configItem.a10"
               type="textarea"
               placeholder=" 无法显示网页 
                     您正在查找的页当前不可用。 
@@ -149,9 +147,9 @@
         <tr>
           <th></th>
           <td>
-            <el-button type="primary">重填</el-button>
-            <el-button type="success">确认修改</el-button>
-            <el-button type="warning">刷新</el-button>
+            <!-- <el-button type="primary">重填</el-button> -->
+            <el-button type="success" @click="updateWebsiteSetting">确认修改</el-button>
+            <!-- <el-button type="warning">刷新</el-button> -->
           </td>
         </tr>
       </tbody>
@@ -159,11 +157,94 @@
   </el-row>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-const select = ref('猴')
-const textarea = ref('')
-const systext = ref('')
-const sysmain = ref('开启网站')
+import { ref, onMounted, computed } from "vue";
+import { ElLoading } from "element-plus";
+import { systemMaintanceStore } from "@/pinia/modules/mark_six/system_maintance.js";
+import { storeToRefs } from "pinia";
+const { dispatchWebsiteSettingItem } = systemMaintanceStore();
+const { dispatchUpdateWebsiteSetting } = systemMaintanceStore();
+const opwwwOption = ref([
+  {
+    label: "开启网站",
+    value: 0,
+  },
+  {
+    label: "关闭网站",
+    value: 1,
+  },
+]);
+const animalOption = ref([
+  {
+    label: "鼠",
+    value: 1,
+  },
+  {
+    label: "牛",
+    value: 2,
+  },
+  {
+    label: "虎",
+    value: 3,
+  },
+  {
+    label: "兔",
+    value: 4,
+  },
+  {
+    label: "龙",
+    value: 5,
+  },
+  {
+    label: "蛇",
+    value: 6,
+  },
+  {
+    label: "马",
+    value: 7,
+  },
+  {
+    label: "羊",
+    value: 8,
+  },
+  {
+    label: "猴",
+    value: 9,
+  },
+  {
+    label: "鸡",
+    value: 10,
+  },
+  {
+    label: "狗",
+    value: 11,
+  },
+  {
+    label: "猪",
+    value: 12,
+  },
+]);
+const configItem = computed(() => {
+  const { getWebsiteSettingItem } = storeToRefs(systemMaintanceStore());
+  return getWebsiteSettingItem.value;
+});
+const updateWebsiteSetting = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateWebsiteSetting(configItem.value);
+  loading.close();
+};
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchWebsiteSettingItem();
+  loading.close();
+});
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;

@@ -22,9 +22,11 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "axios": "^0.21.1",
+    "moment-timezone": "^0.5.43",
     "pinia": "^2.0.33",
     "vanilla-back-to-top": "^7.2.1",
     "vue": "3.2.33",
+    "vue-3-socket.io": "^1.0.5",
     "vue-router": "^4.0.5",
     "vuex": "^4.0.0"
   },

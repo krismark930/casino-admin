@@ -1,6 +1,15 @@
 <template>
   <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
-    <h3>{{ $t('menu.checkScores2') }}</h3>
+    <el-row style="margin-bottom: 10px;">
+      <el-col :span="12">
+        <h3>
+          {{ route.query.title == undefined ? $t('menu.checkScores2') : route.query.title }}
+        </h3>
+      </el-col>
+      <el-col :span="12">
+        <el-button type="primary" @click="goBeforePage">后 退</el-button>
+      </el-col>
+    </el-row>
 
     <el-form :inline="true" ref="form" v-if="!step">
       <el-table v-loading="loading" :data="[item]" style="width: 100%;" border header-align="center" stripe>
@@ -43,7 +52,7 @@
       <div style="margin-top: 20px;">
         <el-form-item>
           <el-button type="primary" @click="checkScore">提 交</el-button>
-          <el-button type="danger" @click="back">清 除</el-button>
+          <el-button type="danger" @click="resetScore">清 除</el-button>
         </el-form-item>
       </div>
     </el-form>
@@ -118,7 +127,7 @@
       <div style="margin-top: 20px;">
         <el-form-item>
           <el-button type="primary" @click="saveScore">提 交</el-button>
-          <el-button type="danger" @click="back">清 除</el-button>
+          <el-button type="danger" @click="betResumption">返 回</el-button>
         </el-form-item>
       </div>
     </el-form>
@@ -127,22 +136,28 @@
 
 <script>
 import { defineComponent, reactive, toRefs, ref, onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
-import { GetItemById, SaveScore, CheckScore } from '@/api/sports/check-scores2'
+import { useRouter, useRoute } from 'vue-router'
+import { GetItemById, SaveScore, CheckScore, BKCheckScore } from '@/api/sports/check-scores2'
 import ChangeLang from '@/layout/components/Topbar/ChangeLang.vue'
+import { useCheckScore } from '@/pinia/modules/check_score';
 import { checkScores } from '@/i18n'
+import { ElNotification } from 'element-plus'
 
 export default defineComponent({
   components: { ChangeLang },
   name: 'checkScores2Operate',
   setup() {
-    const router = useRouter()
+    const router = useRouter();
+    const route = useRoute();
+    const { dispatchBetResumption } = useCheckScore();
     const state = reactive({
-      id: router.currentRoute._rawValue.params.id,
+      id: route.params.id,
+      g_type: route.query.gtype,
       step: 0,
       item: {},
       scores: [],
       check: [],
+      users: [],
       loading: false,
       checkScores,
       form: ref(null),
@@ -151,7 +166,6 @@ export default defineComponent({
         if (state.loading) {
           return
         }
-
         state.loading = true
         GetItemById({ id: state.id })
           .then(data => {
@@ -167,57 +181,6 @@ export default defineComponent({
             state.loading = false
           })
       },
-      checkScore: () => {
-        console.log("ok");
-        if (state.item.Score == 0) {
-          if (!confirm('本场赛事已经结算,确定再次结算!')) {
-            router.go(-1)
-            return
-          }
-        }
-        if (state.item.MB_Inball != '' || state.item.TG_Inball != '') {
-          if (!confirm('本场赛事已经有比分，确定重新输入比分?')) {
-            router.go(-1);
-            return
-          }
-        }
-        if (confirm(`主队半场进球数：${state.item.MB_Inball_HR}  主队全场进球数：${state.item.MB_Inball}\n\nn客队半场进球数: ${state.item.TG_Inball_HR}  客队全场进球数：${state.item.TG_Inball}\n\n请确定输入是否正确?`)) {
-          state.loading = true
-          CheckScore({ id: state.id, item: { ...state.item, 'type': 'FT' } })
-            .then(res => {
-              if (res.code == 'settled') {
-                console.log(res.message)
-              } else {
-                state.scores = res
-                state.scores.forEach(elem => {
-                  state.check.push(true)
-                })
-              }
-              state.step = 1
-              state.loading = false
-            })
-            .catch(err => {
-              console.log(err)
-              state.loading = false
-            })
-        }
-      },
-      saveScore: () => {
-        state.loading = true
-        SaveScore({ id: state.id, item: state.item })
-          .then(res => {
-            if (res.code == 0) console.log(res.message)
-            state.loading = false
-            router.push('/check-scores2')
-          })
-          .catch(err => {
-            console.log(err)
-            state.loading = false
-          })
-      },
-      back: () => {
-        router.go(-1)
-      },
     })
 
     onBeforeMount(() => {
@@ -225,9 +188,117 @@ export default defineComponent({
     })
 
     return {
+      dispatchBetResumption,
+      router,
+      route,
       ...toRefs(state),
     }
   },
+  sockets: {
+    connect: function () {
+      console.log('socket to notification channel connected')
+    },
+  },
+  methods: {
+    betResumption: async function () {
+      this.loading = true;
+      await this.dispatchBetResumption({ mid: this.id, g_type: this.g_type });
+      this.loading = false;
+      this.step = 0;
+    },
+    resetScore: function () {
+      this.item.MB_Inball = 0;
+      this.item.MB_Inball_HR = 0;
+      this.item.TG_Inball = 0;
+      this.item.TG_Inball_HR = 0;
+    },
+    goBeforePage: function () {
+      this.router.go(-1)
+    },
+    checkScore: function () {
+      if (this.item.Score == 0) {
+        if (!confirm('本场赛事已经结算,确定再次结算!')) {
+          this.router.go(-1)
+          return
+        }
+      }
+      if (this.item.MB_Inball != '' || this.item.TG_Inball != '') {
+        if (!confirm('本场赛事已经有比分，确定重新输入比分?')) {
+          this.router.go(-1);
+          return
+        }
+      }
+      if (confirm(`主队半场进球数：${this.item.MB_Inball_HR}  主队全场进球数：${this.item.MB_Inball}\n\nn客队半场进球数: ${this.item.TG_Inball_HR}  客队全场进球数：${this.item.TG_Inball}\n\n请确定输入是否正确?`)) {
+        this.loading = true
+        if (this.g_type == "FT") {
+          CheckScore({ id: this.id, item: { ...this.item, type: this.g_type } })
+            .then(res => {
+              if (res.message == '本场赛事已经结算!') {
+                console.log(res.message)
+                ElNotification({
+                  title: '错误',
+                  message: '本场赛事已经结算!',
+                  type: 'error',
+                })
+              } else {
+                this.scores = res.data
+                this.users = res.users;
+                this.scores.forEach(elem => {
+                  this.check.push(true)
+                })
+                this.step = 1;
+              }
+              this.loading = false
+            })
+            .catch(err => {
+              console.log(err)
+              this.loading = false
+            })
+        } else {
+          BKCheckScore({ id: this.id, item: { ...this.item, type: this.g_type } })
+            .then(res => {
+              if (res.message == '本场赛事已经结算!') {
+                console.log(res.message)
+                ElNotification({
+                  title: '错误',
+                  message: '本场赛事已经结算!',
+                  type: 'error',
+                })
+              } else {
+                this.scores = res.data
+                this.users = res.users;
+                this.scores.forEach(elem => {
+                  this.check.push(true)
+                })
+                this.step = 1;
+              }
+              this.loading = false
+            })
+            .catch(err => {
+              console.log(err)
+              this.loading = false
+            })
+        }
+      }
+    },
+    saveScore: function () {
+      this.loading = true
+      SaveScore({ id: this.id, item: this.item })
+        .then(res => {
+          if (res.code == 0) console.log(res.message)
+          this.loading = false
+          this.$socket.emit("sendUserMoney", this.users);
+          this.router.push('/check-scores2')
+        })
+        .catch(err => {
+          console.log(err)
+          this.loading = false
+        })
+    },
+  },
+  mounted() {
+    console.log(this.g_type);
+  }
 })
 </script>
 <style lang="scss" scoped>

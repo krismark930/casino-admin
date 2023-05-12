@@ -10,39 +10,33 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(item, i) in data" :key="i">
+        <template v-for="(item, i) in mainData" :key="i">
           <tr>
-            <td>{{ item.type1 }}</td>
-            <td>{{ item.type2 }}</td>
+            <td>{{ item.class2 }}</td>
+            <td>{{ item.class3 }}</td>
             <td>
-              <div
-                style="display: flex; column-gap: 10px; justify-content: center;"
-              >
+              <div style="display: flex; column-gap: 10px; justify-content: center;">
                 <div>
-                  <el-input-number
-                    v-model="item.odds"
-                    size="small"
-                    controls-position="right"
-                  />
+                  <el-input-number v-model="item.rate" :step="0.01" :min="0" size="small" controls-position="right" />
                 </div>
-                <div><el-checkbox size="small" /></div>
+                <div><el-checkbox size="small" v-model="item.checked" /></div>
               </div>
             </td>
-            <td>{{ item.currentOdds }}</td>
-            <td>{{ item.betAmount }}</td>
+            <td>{{ item.rate }}</td>
+            <td>{{ item.gold }}</td>
           </tr>
         </template>
       </tbody>
     </table>
   </el-row>
   <el-row>
-    <el-button size="small">
+    <el-button size="small" @click="incrementRate">
       赔率增加
     </el-button>
-    <el-button size="small">
+    <el-button size="small" @click="decrementRate">
       赔率减少
     </el-button>
-    <el-button size="small">
+    <el-button size="small" @click="submitMainRate">
       提交
     </el-button>
     <el-button size="small">
@@ -50,165 +44,55 @@
     </el-button>
   </el-row>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { ElLoading } from 'element-plus'
+import { oddsSettingStore } from "@/pinia/modules/mark_six/odds_setting.js";
+import { storeToRefs } from "pinia";
 
-const data = ref([
-  {
-    type1: '一肖',
-    type2: '鼠',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '虎',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '龙',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '马',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '猴',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '狗',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '牛',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '兔',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '蛇',
-    odds: 1.77,
-    currentOdds: 1.77,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '羊',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '鸡',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '一肖',
-    type2: '猪',
-    odds: 2.01,
-    currentOdds: 2.01,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '0',
-    odds: 2.0,
-    currentOdds: 2.0,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '1',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '2',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '3',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '4',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '5',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '6',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '7',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '8',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-  {
-    type1: '正特尾数',
-    type2: '9',
-    odds: 1.8,
-    currentOdds: 1.8,
-    betAmount: 0,
-  },
-])
+const { dispatchOneXiaoRate } = oddsSettingStore();
+const { dispatchMainRate } = oddsSettingStore();
+
+const plusValue = ref(0.01);
+const class1 = ref("一肖");
+
+const submitMainRate = async () => {
+  console.log(data);
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchMainRate({ data: JSON.stringify(mainData.value) });
+  loading.close();
+}
+
+const incrementRate = () => {
+  mainData.value.map(item => {
+    item.rate = (Number(item.rate) + plusValue.value).toFixed(2);
+  })
+}
+
+const decrementRate = () => {
+  mainData.value.map(item => {
+    item.rate = (Number(item.rate) - plusValue.value).toFixed(2);;
+  })
+}
+
+const mainData = computed(() => {
+  const { getMainData } = storeToRefs(oddsSettingStore());
+  return getMainData.value;
+})
+
+onMounted(async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: '加载中...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
+  await dispatchOneXiaoRate({ class1: class1.value });
+  loading.close();
+})
 </script>
 <style lang="scss" scoped>
 $table-border: 1px solid #ece9d8;
@@ -218,12 +102,15 @@ table {
   border: $table-border;
   border-collapse: collapse;
   width: 100%;
+
   th[colspan='4'] {
     background-color: #fe773d;
   }
+
   th {
     background-color: #fdf4ca;
   }
+
   th,
   td {
     border: $table-border;

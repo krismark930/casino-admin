@@ -6,16 +6,16 @@
     @tab-click="handleClick"
   >
     <el-tab-pane label="前三" name="first">
-      <TopThree />
+      <TopThree v-if="activeName === 'first'"/>
     </el-tab-pane>
     <el-tab-pane label="中三" name="second">
-      <MiddleThree />
+      <MiddleThree v-if="activeName === 'second'"/>
     </el-tab-pane>
     <el-tab-pane label="后三" name="third">
-      <AfterThree />
+      <AfterThree v-if="activeName === 'third'"/>
     </el-tab-pane>
     <el-tab-pane label="万仟" name="fourth">
-      <AllFive />
+      <AllFive v-if="activeName === 'fourth'"/>
     </el-tab-pane>
   </el-tabs>
 </template>

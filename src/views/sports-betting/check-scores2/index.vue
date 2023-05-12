@@ -50,13 +50,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="时间" width="180" align="center">
+      <el-table-column label="开赛时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon>
               <timer />
             </el-icon>
-            <span style="margin-left: 10px">{{ scope.row.M_Date }}</span>
+            <span style="margin-left: 10px">{{ scope.row.M_Start }}</span>
           </div>
         </template>
       </el-table-column>
@@ -89,11 +89,15 @@
         </template>
       </el-table-column>
 
-      <el-table-column property="receiveScore" label="接收比分" align="center"></el-table-column>
+      <el-table-column property="receiveScore" label="接收比分" align="center">
+        <template #default="scope">
+          <el-checkbox v-model="scope.row.GetScore" size="large" @change="updateGetScore(scope.row)" />
+        </template>
+      </el-table-column>
 
       <el-table-column property="eventCanceled" label="赛事取消" align="center">
         <template #default="scope">
-          <el-select placeholder="赛事处理" v-model="eventValue" @change="updateSportEvent(scope.row.MID)">
+          <el-select placeholder="赛事处理" v-model="eventValue" @change="updateSportEvent(scope.row)">
             <el-option v-for="item in events" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </template>
@@ -122,10 +126,7 @@
 
       <el-table-column property="show" label="显示" align="center">
         <template #default="scope">
-          <span v-if="scope.row.MB_Inball != ''">
-            <el-link @click="betResumption(scope.row.MID)">恢复</el-link>
-          </span>
-          <span v-else>
+          <span>
             <p>正常</p>
           </span>
         </template>
@@ -156,8 +157,10 @@
       </template>
     </el-dialog>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" :page-size="20"
+        @current-change="onPageChange" v-model:current-page="page" />
     </div>
+    <el-backtop :right="60" :bottom="60" target=".main" />
   </div>
 </template>
 
@@ -178,15 +181,15 @@ export default defineComponent({
     const { dispatchTodaySportListByOrder } = useCheckScore();
     const { dispatchLeagueByDate } = useCheckScore();
     const { dispatchSportOpen } = useCheckScore();
-    const { dispatchBetResumption } = useCheckScore();
     const { dispatchBetEvent } = useCheckScore();
+    const { dispatchGetScore } = useCheckScore();
     return {
       router,
       dispatchTodaySportListByOrder,
       dispatchSportOpen,
       dispatchLeagueByDate,
-      dispatchBetResumption,
-      dispatchBetEvent
+      dispatchBetEvent,
+      dispatchGetScore
     }
   },
   data() {
@@ -204,13 +207,19 @@ export default defineComponent({
       visible: false,
       mid: 0,
       open: 1,
-      eventValue: 1
+      eventValue: 1,
+      score: 0,
+      page: 1,
     }
   },
   computed: {
     success: function () {
       let { getSuccess } = useCheckScore();
       return getSuccess;
+    },
+    totalCount: function () {
+      let { getTotalCount } = useCheckScore();
+      return getTotalCount;
     },
     todaySportListByOrder: function () {
       let { getTodaySportListByOrder } = useCheckScore();
@@ -229,6 +238,7 @@ export default defineComponent({
         g_type: this.type,
         display_type: newValue,
         league: this.league,
+        score: this.score
       };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
@@ -241,6 +251,7 @@ export default defineComponent({
         g_type: this.type,
         display_type: this.viewType,
         league: this.league,
+        score: this.score
       };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
@@ -254,6 +265,7 @@ export default defineComponent({
         g_type: newValue,
         display_type: this.viewType,
         league: this.league,
+        score: this.score
       };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
@@ -267,6 +279,7 @@ export default defineComponent({
         g_type: this.type,
         display_type: this.viewType,
         league: newValue,
+        score: this.score
       };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData);
@@ -274,11 +287,48 @@ export default defineComponent({
     }
   },
   methods: {
+    onPageChange: async function (currentPage) {
+      let formData = {
+        m_date: formatDate(new Date()),
+        search: this.keyword,
+        g_type: this.type,
+        display_type: this.viewType,
+        league: this.league,
+        score: this.score,
+        page: this.page
+      };
+      this.loading = true;
+      await this.dispatchTodaySportListByOrder(formData)
+      await this.dispatchLeagueByDate(formData)
+      if (this.success) {
+        ElNotification({
+          title: '成功',
+          message: '操作成功。',
+          type: 'success',
+        })
+      } else {
+        ElNotification({
+          title: '错误',
+          message: '操作失败。',
+          type: 'error',
+        })
+      }
+      this.loading = false;
+    },
+    updateGetScore: async function (item) {
+      this.loading = true
+      let get_score = 0;
+      if (item["GetScore"]) {
+        get_score = 1;
+      }
+      await this.dispatchGetScore({ mid: item["MID"], get_score: get_score });
+      this.successResult();
+    },
     toBetSlip: function (id) {
-      this.router.push({ name: 'check-scores2.bet-slip', query: { gid: id, bet_date: this.m_date, gtype: "FT" } })
+      this.router.push({ name: 'check-scores2.bet-slip', query: { gid: id, bet_date: this.m_date, gtype: this.type } })
     },
     toOperation: function (id) {
-      this.router.push('/check-scores2/operate/' + id)
+      this.router.push({ path: '/check-scores2/operate/' + id, query: { gtype: this.type } })
     },
     closeBet: async function (mid, open) {
       this.visible = true;
@@ -294,6 +344,8 @@ export default defineComponent({
         g_type: this.type,
         display_type: this.viewType,
         league: this.league,
+        score: this.score,
+        page: this.page
       };
       await this.dispatchSportOpen({ m_date: this.m_date, g_type: this.type, open: this.open, mid: this.mid });
       await this.dispatchTodaySportListByOrder(formData)
@@ -323,6 +375,8 @@ export default defineComponent({
         g_type: this.type,
         display_type: this.viewType,
         league: this.league,
+        score: this.score,
+        page: this.page
       };
       await this.dispatchSportOpen({ m_date: this.m_date, g_type: this.type, open: open });
       await this.dispatchTodaySportListByOrder(formData)
@@ -335,15 +389,11 @@ export default defineComponent({
         g_type: this.type,
         display_type: this.viewType,
         league: this.league,
+        score: this.score,
+        page: this.page
       };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData);
-      this.successResult();
-    },
-    betResumption: async function (mid) {
-      this.mid = mid;
-      this.loading = true;
-      await this.dispatchBetResumption({ mid: this.mid, g_type: this.type });
       this.successResult();
     },
     updateSportEvent: async function (mid) {
@@ -360,6 +410,8 @@ export default defineComponent({
       g_type: this.type,
       display_type: this.viewType,
       league: this.league,
+      score: this.score,
+      page: this.page
     };
     this.loading = true;
     await this.dispatchTodaySportListByOrder(formData)

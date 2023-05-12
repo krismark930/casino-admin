@@ -74,7 +74,18 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="totalCount"
+        :page-size="20"
+        @current-change="onPageChange"
+        v-model:current-page="page"
+      />
+    </div>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
 import {
@@ -92,6 +103,8 @@ export default {
       functionOptions: [],
       checkListData: [],
       loading: false,
+      totalCount: 0,
+      page: 1,
     }
   },
   mounted() {
@@ -101,9 +114,12 @@ export default {
   methods: {
     getItems() {
       this.loading = true
-      GetItems()
-        .then(data => {
-          this.checkListData = [...data]
+      GetItems({
+        page: this.page,
+      })
+        .then(res => {
+          this.checkListData = [...res.data]
+          this.totalCount = res.totalCount
           this.loading = false
         })
         .catch(err => {
@@ -164,8 +180,17 @@ export default {
           })
       }
     },
+    onPageChange(currentPage) {
+      this.getItems()
+    },
   },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.pagination {
+  margin-top: 10px;
+  text-align: center;
+  display: inline-flex;
+}
+</style>

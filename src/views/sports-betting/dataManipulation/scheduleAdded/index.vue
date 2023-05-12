@@ -138,6 +138,7 @@
       </el-form-item>
     </el-form>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
 import { ref } from 'vue'

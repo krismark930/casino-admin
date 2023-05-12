@@ -37,7 +37,11 @@
       stripe
       v-loading="loading"
     >
-      <el-table-column type="index" label="序号" align="center" />
+      <el-table-column fixed="left" label="序号" align="center" width="70">
+        <template #default="scope">
+          <div>{{ (page - 1) * 20 + scope.$index + 1 }}</div>
+        </template>
+      </el-table-column>
       <el-table-column property="mLeague" label="联盟" align="center" />
       <el-table-column property="R" label="让球" align="center" />
       <el-table-column property="OU" label="大小球" align="center" />
@@ -66,9 +70,17 @@
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="totalCount"
+        :page-size="20"
+        @current-change="onPageChange"
+        v-model:current-page="page"
+      />
     </div>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
 import { GetItems, DeleteEvent } from '@/api/sports/alliance-restriction'
@@ -116,6 +128,8 @@ export default {
         },
       ],
       loading: false,
+      totalCount: 0,
+      page: 1,
     }
   },
   mounted() {
@@ -127,13 +141,16 @@ export default {
       GetItems({
         type: this.formData.typeOption,
         league: this.formData.keyword,
+        page: this.page,
       })
-        .then(data => {
-          this.allianceRestrictionsData = [...data]
-          this.loading = false
+        .then(res => {
+          this.allianceRestrictionsData = [...res.data]
+          this.totalCount = res.totalCount
         })
         .catch(err => {
           console.error('get items error', err)
+        })
+        .finally(res => {
           this.loading = false
         })
     },
@@ -154,6 +171,9 @@ export default {
             console.error('delete event error', err)
           })
       }
+    },
+    onPageChange(currentPage) {
+      this.getItems()
     },
   },
 }

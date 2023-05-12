@@ -2,14 +2,11 @@
   <div
     style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
   >
-    <h3>篮球</h3>
+    <h3>足球</h3>
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="线上操盘">
-          <el-select
-            v-model="formData.onlineTradingOption"
-            style="width: 80px;"
-          >
+          <el-select v-model="formData.onlineTrading" style="width: 80px;">
             <el-option
               v-for="item in onlineTradingOptions"
               :key="item.value"
@@ -29,83 +26,125 @@
           </el-select>
         </el-form-item>
         <el-form-item label="美东时间">
-          <span>2023-03-02 02:36:32</span>
-        </el-form-item>
-        <el-form-item label="" style="display: inline-flex;">
-          <el-button type="primary" link>单式</el-button>
-          <el-button type="primary" link>滚球</el-button>
-          <el-button type="primary" link>过关</el-button>
-          <el-button type="primary" link>已开赛</el-button>
-        </el-form-item>
-      </div>
-      <div>
-        <el-form-item label="观看方式">
-          <el-select v-model="formData.viewOption" style="width: 80px;">
-            <el-option
-              v-for="item in viewOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="选择联盟">
-          <el-select v-model="formData.allianceOption">
-            <el-option
-              v-for="item in allianceOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
+          {{ currentTime }}
         </el-form-item>
       </div>
     </el-form>
-    <el-table
-      :data="footballData"
-      style="width: 100%;"
-      border
-      header-align="center"
-      stripe
-    >
-      <el-table-column label="时间" width="180" align="center">
-        <template #default="scope">
-          <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.time }}</span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column property="alliance" label="联盟" align="center" />
-      <el-table-column property="sessions" label="场次" align="center" />
-      <el-table-column property="team" label="队伍" align="center" />
-      <el-table-column property="winBet" label="独赢 / 注单" align="center" />
-      <el-table-column
-        property="handicapBet"
-        label="让球 / 注单"
-        align="center"
-      />
-      <el-table-column
-        property="plateBetSlip"
-        label="大小盘 / 注单"
-        align="center"
-      />
-      <el-table-column property="oddBet" label="单双 / 注单" align="center" />
-    </el-table>
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
-    </div>
+  </div>
+  <div style="padding: 0.75rem;">
+    <el-tabs v-model="tabName" class="parameter-tabs">
+      <el-tab-pane label="单式" name="S">
+        <STable
+          :onlineTrading="formData.onlineTrading"
+          :leagueList="leagueList"
+          :isActive="activeName === 'S'"
+          :updateTime="updateTime"
+          :gtype="gtype"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="滚球" name="RB">
+        <RBTable
+          :onlineTrading="formData.onlineTrading"
+          :leagueList="leagueList"
+          :isActive="activeName === 'RB'"
+          :updateTime="updateTime"
+          :gtype="gtype"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="过关" name="P">
+        <PTable
+          :onlineTrading="formData.onlineTrading"
+          :leagueList="leagueList"
+          :isActive="activeName === 'P'"
+          :updateTime="updateTime"
+          :gtype="gtype"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="已开赛" name="PL">
+        <PLTable
+          :onlineTrading="formData.onlineTrading"
+          :leagueList="leagueList"
+          :isActive="activeName === 'PL'"
+          :updateTime="updateTime"
+          :gtype="gtype"
+        />
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
-<script>
+<script setup>
+import STable from '@/views/sports-betting/sportsEvent/tables/STable.vue'
+import RBTable from '@/views/sports-betting/sportsEvent/tables/RBTable.vue'
+import PTable from '@/views/sports-betting/sportsEvent/tables/PTable.vue'
+import PLTable from '@/views/sports-betting/sportsEvent/tables/PLTable.vue'
+import { ref, defineProps } from 'vue'
+import { computed } from '@vue/reactivity'
+
+const props = defineProps({
+  isCurrentTab: {
+    type: Boolean,
+  },
+})
+
+const formData = {
+  onlineTrading: '1',
+  reorganizeOption: '不更新',
+}
+const onlineTradingOptions = [
+  {
+    value: '1',
+    label: 'A盘',
+  },
+  {
+    value: '2',
+    label: 'B盘',
+  },
+  {
+    value: '3',
+    label: 'C盘',
+  },
+  {
+    value: '4',
+    label: 'D盘',
+  },
+]
+const reorganizeOptions = [
+  {
+    value: '-1',
+    label: '不更新',
+  },
+  {
+    value: '180',
+    label: '180 sec',
+  },
+]
+const tabName = ref('S')
+let time = ref(new Date())
+const gtype = 'BK'
+
+function updateTime() {
+  time = new Date()
+}
+
+const currentTime = computed(() => {
+  const timeArr = time.value.toISOString().split('T')
+  return `${timeArr[0]} ${timeArr[1].slice(0, 8)}`
+})
+
+const activeName = computed(() => {
+  return props.isCurrentTab ? tabName.value : ''
+})
+</script>
+<!-- <script>
+import { ref } from 'vue'
+import { GetLeagueList } from '@/api/sports/real-wagger'
 export default {
+  props: ['isCurrentTab'],
   data() {
     return {
       formData: {
-        onlineTradingOption: 'C盘',
+        onlineTrading: '1',
         reorganizeOption: '不更新',
-        viewOption: '全部',
-        allianceOption: '全部',
       },
       footballData: [
         {
@@ -148,63 +187,34 @@ export default {
           label: '180 sec',
         },
       ],
-      viewOptions: [
+      tabName: ref('S'),
+      leagueList: [
         {
-          value: '0',
+          value: '',
           label: '全部',
         },
-        {
-          value: '1',
-          label: '自己',
-        },
       ],
-      allianceOptions: [
-        {
-          value: '全部',
-          label: '全部',
-        },
-        {
-          value: '中国男子篮球职业联赛',
-          label: '中国男子篮球职业联赛',
-        },
-        {
-          value: '德国篮球联赛',
-          label: '德国篮球联赛',
-        },
-        {
-          value: '日本B3篮球联赛',
-          label: '日本B3篮球联赛',
-        },
-        {
-          value: '欧洲篮球杯赛',
-          label: '欧洲篮球杯赛',
-        },
-        {
-          value: '欧洲篮球联赛',
-          label: '欧洲篮球联赛',
-        },
-        {
-          value: '澳大利亚女子国家篮球联赛',
-          label: '澳大利亚女子国家篮球联赛',
-        },
-        {
-          value: '美国大学篮球',
-          label: '美国大学篮球',
-        },
-        {
-          value: '韩国女子篮球联赛',
-          label: '韩国女子篮球联赛',
-        },
-        {
-          value: '韩国篮球联赛',
-          label: '韩国篮球联赛',
-        },
-      ],
+      time: new Date(),
+      gtype: 'BK',
     }
   },
-  methods: {},
+  computed: {},
+  computed: {
+    currentTime() {
+      const timeArr = this.time.toISOString().split('T')
+      return `${timeArr[0]} ${timeArr[1].slice(0, 8)}`
+    },
+    activeName() {
+      return this.isCurrentTab ? this.tabName : ''
+    },
+  },
+  methods: {
+    updateTime() {
+      this.time = new Date()
+    },
+  },
 }
-</script>
+</script> -->
 <style lang="scss" scoped>
 .pagination {
   margin-top: 10px;

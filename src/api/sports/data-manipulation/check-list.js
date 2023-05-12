@@ -4,7 +4,7 @@ export const GetItems = data => {
   return request({
     url: '/api/check-list/get_items',
     method: 'get',
-    // params: data,
+    params: data,
   })
 }
 

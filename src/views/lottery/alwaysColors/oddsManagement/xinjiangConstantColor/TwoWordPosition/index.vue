@@ -6,34 +6,34 @@
     @tab-click="handleClick"
   >
     <el-tab-pane label="万仟" name="first">
-      <WanQian />
+      <WanQian v-if="activeName == 'first'" />
     </el-tab-pane>
     <el-tab-pane label="万佰" name="second">
-      <MillionDollar />
+      <MillionDollar v-if="activeName == 'second'" />
     </el-tab-pane>
     <el-tab-pane label="万拾" name="third">
-      <WanShi />
+      <WanShi v-if="activeName == 'third'" />
     </el-tab-pane>
     <el-tab-pane label="万个" name="fourth">
-      <TenThousand />
+      <TenThousand v-if="activeName == 'fourth'" />
     </el-tab-pane>
     <el-tab-pane label="仟佰" name="fivth">
-      <ThHundred />
+      <ThHundred v-if="activeName == 'fivth'" />
     </el-tab-pane>
     <el-tab-pane label="仟拾" name="six">
-      <ThousandPick />
+      <ThousandPick v-if="activeName == 'six'" />
     </el-tab-pane>
     <el-tab-pane label="仟个" name="seventh">
-      <Thousand />
+      <Thousand v-if="activeName == 'seventh'" />
     </el-tab-pane>
     <el-tab-pane label="佰拾" name="eighth">
-      <Hundreds />
+      <Hundreds v-if="activeName == 'eighth'" />
     </el-tab-pane>
     <el-tab-pane label="佰个" name="ninth">
-      <Hundred />
+      <Hundred v-if="activeName == 'ninth'" />
     </el-tab-pane>
     <el-tab-pane label="拾个" name="tenth">
-      <PickUp />
+      <PickUp v-if="activeName == 'tenth'" />
     </el-tab-pane>
   </el-tabs>
 </template>

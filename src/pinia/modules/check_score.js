@@ -6,16 +6,19 @@ import { UPDATE_SPORT_OPEN } from "@/api";
 import { GET_LEAGUE_BY_DATE } from "@/api";
 import { BET_RESUMPTION } from "@/api";
 import { BET_EVENT } from "@/api";
+import { UPDATE_GET_SCORE } from "@/api";
 
 export const useCheckScore = defineStore('check_score', {
     state: () => ({
         success: false,
+        totalCount: 0,
         betSlipList: [],
         todaySportListByOrder: [],
         leagueList: []
     }),
     getters: {
         getSuccess: (state) => state.success,
+        getTotalCount: (state) => state.totalCount,
         getBetSlipList: (state) => state.betSlipList,
         getTodaySportListByOrder: (state) => state.todaySportListByOrder,
         getLeagueList: (state) => state.leagueList
@@ -32,6 +35,9 @@ export const useCheckScore = defineStore('check_score', {
         },
         setLeagueList(leagueList) {
             this.leagueList = leagueList;
+        },
+        setTotalCount(totalCount) {
+            this.totalCount = totalCount;
         },
         async dispatchBetSlipList(data) {
             try {
@@ -51,7 +57,11 @@ export const useCheckScore = defineStore('check_score', {
                 let response = await request({ url: GET_TODAY_SPORT_BY_ORDER, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    response.data.map(item => {
+                        item["GetScore"] = item["GetScore"] == 1 ? true : false;
+                    })
                     this.setTodaySportListByOrder(response.data);
+                    this.setTotalCount(response.totalCount);
                 }
             } catch (e) {
                 console.log(e.response);
@@ -106,6 +116,18 @@ export const useCheckScore = defineStore('check_score', {
                 console.log(data);
                 this.setSuccess(false);
                 let response = await request({ url: BET_EVENT, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
+                console.log(e.response);
+            }
+        },
+        async dispatchGetScore(data) {
+            try {
+                console.log(data);
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_GET_SCORE, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
                 }

@@ -5,7 +5,11 @@
     <h3>结果</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="日期">
-        <el-select v-model="formData.dateOption" style="width: 80px;">
+        <el-select
+          v-model="formData.dateOption"
+          style="width: 80px;"
+          @change="getItems"
+        >
           <el-option
             v-for="item in dateOptions"
             :key="item.value"
@@ -15,7 +19,11 @@
         </el-select>
       </el-form-item>
       <el-form-item label="赛程">
-        <el-select v-model="formData.sportsOption" style="width: 80px;">
+        <el-select
+          v-model="formData.sportsOption"
+          style="width: 80px;"
+          @change="getItems"
+        >
           <el-option
             v-for="item in sportsOptions"
             :key="item.value"
@@ -26,24 +34,22 @@
       </el-form-item>
     </el-form>
     <el-table
-      :data="footballData"
       style="width: 100%;"
+      :data="tableData"
       border
       header-align="center"
       stripe
+      v-loading="loading"
     >
-      <el-table-column label="时间" width="180" align="center">
+      <el-table-column
+        v-for="index in 5"
+        :label="labelList[index - 1]"
+        align="center"
+      >
         <template #default="scope">
-          <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.time }}</span>
-          </div>
+          <div v-html="scope.row[propertyList[index - 1]]"></div>
         </template>
       </el-table-column>
-      <el-table-column property="sessions" label="场次" align="center" />
-      <el-table-column property="team" label="队伍" align="center" />
-      <el-table-column property="topHalf" label="上半" align="center" />
-      <el-table-column property="finishRace" label="完赛" align="center" />
     </el-table>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="100" />
@@ -51,62 +57,82 @@
   </div>
 </template>
 <script>
+import { GetResultData as GetItems } from '@/api/sports/real-wagger'
 export default {
+  props: ['isCurrentTab'],
   data() {
     return {
       formData: {
-        dateOption: '今日',
-        sportsOption: '',
+        dateOption: '',
+        sportsOption: 'FT',
       },
-      resultData: [
-        {
-          id: 1,
-          time: '',
-          sessions: '',
-          team: '',
-          topHalf: '',
-          finishRace: '',
-        },
-      ],
+      tableData: [],
       dateOptions: [
         {
-          value: '今日',
+          value: '',
           label: '今日',
         },
         {
-          value: '昨日',
+          value: 'Y',
           label: '昨日',
         },
       ],
       sportsOptions: [
         {
-          value: '足球',
+          value: 'FT',
           label: '足球',
         },
         {
-          value: '篮球',
+          value: 'BK',
           label: '篮球',
         },
         {
-          value: '网球',
+          value: 'TN',
           label: '网球',
         },
         {
-          value: '排球',
+          value: 'VB',
           label: '排球',
         },
         {
-          value: '棒球',
+          value: 'BS',
           label: '棒球',
         },
         {
-          value: '其他',
+          value: 'OP',
           label: '其他',
         },
       ],
+      loading: false,
+      labelList: ['时间', '场次', '队伍', '上半', '完赛'],
+      propertyList: ['time', 'sessions', 'team', 'topHalf', 'finishTheRace'],
     }
   },
-  methods: {},
+  mounted() {
+    this.getItems()
+  },
+  watch: {
+    isCurrentTab(newProp, oldProp) {
+      this.getItems()
+    },
+  },
+  methods: {
+    getItems() {
+      if (!this.isCurrentTab) return
+      this.loading = true
+      GetItems({
+        gtype: this.formData.sportsOption,
+        flag: this.formData.dateOption,
+      })
+        .then(res => {
+          this.tableData = [...res]
+        })
+        .catch(err => {})
+        .finally(() => {
+          this.loading = false
+        })
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>

@@ -119,3 +119,5 @@ npm run build
 ## License
 
 [MIT © ZSEN-2020](./LICENSE)
+
+set NODE_OPTIONS=--max_old_space_size=8096

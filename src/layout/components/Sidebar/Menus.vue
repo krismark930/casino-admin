@@ -93,7 +93,6 @@ export default defineComponent({
   font-size: 16px;
   text-align: center;
   color: currentColor;
-  transform: translateY(-18px);
 }
 
 // menu hover
@@ -103,6 +102,10 @@ export default defineComponent({
     background-color: $menuHover !important;
   }
   display: -webkit-box;
+}
+
+.el-sub-menu__title * {
+  vertical-align: -webkit-baseline-middle;
 }
 
 .el-sub-menu {
