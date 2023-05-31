@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 0.75rem;">
+  <div style="padding: 20px; text-align: center;">
     <div style="padding-bottom:20px">
       <el-button type="danger" link @click="HandleDeposit">存入帳戶</el-button>
       <el-button type="danger" link @click="HandleBulk">批量存款</el-button>
@@ -7,122 +7,236 @@
       <BulkDeposit v-if="VisibleDeposit == '批量存款'" />
     </div>
     <template v-if="VisibleDeposit == ''">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="帳戶:">
-            <el-input></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="日期区间：">
-            <el-row>
-              <el-col :span="11">
-                <el-date-picker
-                  v-model="form.date1"
-                  type="date"
-                  placeholder="Pick a date"
-                  style="width: 100%"
-                />
-              </el-col>
-              <el-col :span="11">
-                <el-date-picker
-                  v-model="form.date2"
-                  placeholder="Pick a date"
-                  style="width: 100%"
-                />
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-row>
-            <el-col :span="16">
-              <el-form-item label="审核方式">
-                <el-select v-model="reviewMethod" placeholder="全部">
-                  <el-option label="全部" value="all" />
-                  <el-option label="全部(含转换)" value="allConversions" />
-                  <el-option label="存入" value="deposit" />
-                  <el-option label="提出" value="propose" />
-                  <el-option label="赠送" value="gift" />
-                  <el-option label="已作废" value="abolished" />
-                  <el-option label="未审核" value="noReviewed" />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-button>查詢</el-button>
-            </el-col>
-          </el-row>
-        </el-col>
-        <el-col :span="4">
-          <el-form-item label="總頁數:">
-            <el-pagination
-              v-model:current-page="currentPage"
-              v-model:page-size="pageSize"
-              :page-sizes="[1]"
-              layout="sizes"
-              :total="1"
-            />
-          </el-form-item>
-        </el-col>
-      </el-row>
+      <el-form :model="formData" inline="true">
+        <el-form-item label="帳戶:">
+          <el-input v-model="formData.name"/>
+        </el-form-item>
+        <el-form-item label="日期区间：">
+          <el-date-picker
+            v-model="formData.s_date"
+            type="date"
+            value-format="YYYY-MM-DD"
+            style="width: 200px;"
+          />
+          ~
+          <el-date-picker
+            v-model="formData.e_date"
+            type="date"
+            value-format="YYYY-MM-DD"
+            style="width: 200px;"
+          />
+        </el-form-item>
+      </el-form>
+      <el-form :model="formData" inline="true">
+        <el-form-item label="审核方式: ">
+          <el-select v-model="formData.type">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="getCashDataByFilter">查詢</el-button>
+        </el-form-item>
+      </el-form>
       <h1>帳戶查詢</h1>
-      <el-scrollbar>
-        <el-row class="scrollbar-flex-content">
-          <table class="cashsystem-table">
-            <thead>
-              <tr>
-                <th>會員帳號</th>
-                <th>姓名-电话</th>
-                <th>银行资料</th>
-                <th>金額</th>
-                <th>操作前余额</th>
-                <th>当前余额</th>
-                <th>类型</th>
-                <th>日期</th>
-                <th>審核帳號</th>
-                <th>審核日期</th>
-                <th>操作操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>目前沒有記錄</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>總計</td>
-              </tr>
-            </tbody>
-          </table>
-        </el-row>
-      </el-scrollbar>
+      <el-table
+        :data="cashList"
+        v-loading="loading"
+        style="width: 100%;"
+        border
+        header-align="center"
+        stripe
+      >
+        <el-table-column property="UserName" label="會員帳號" align="center" />
+        <el-table-column property="Alias" label="姓名-电话" align="center" />
+        <el-table-column property="BankInfo" label="银行资料" align="center">
+          <template #default="scope">
+            <div v-html="scope.row.BankInfo"></div>
+          </template>
+        </el-table-column>
+        <el-table-column property="Gold" label="金額" align="center" />
+        <el-table-column
+          property="previousAmount"
+          label="操作前余额"
+          align="center"
+        />
+        <el-table-column property="currentAmount" label="当前余额" align="center" />
+        <el-table-column property="Type2" label="类型" align="center" />
+        <el-table-column label="日期" width="180" align="center">
+          <template #default="scope">
+            <div style="display: flex; align-items: center">
+              <el-icon><timer /></el-icon>
+              <span style="margin-left: 10px">{{ scope.row.Date }}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column property="User" label="審核帳號" align="center">          
+          <template #default="scope">
+            <div v-if="scope.row.Checked != 0">{{scope.row.User}}</div>
+            <div v-else></div>
+          </template>
+        </el-table-column>
+        <el-table-column property="Date" label="審核日期" align="center">                
+          <template #default="scope">
+            <div v-if="scope.row.Checked != 0">{{scope.row.Date}}</div>
+            <div v-else></div>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="100" align="center">
+          <template #default="scope">
+            <div v-if="scope.row.Checked == 0">
+              <el-button-group>
+                <el-button
+                  type="success"
+                  link
+                  @click="reviewCash(scope.row.ID)"
+                >
+                  {{scope.row.type}}审核
+                </el-button>
+                <el-button
+                  type="primary"
+                  link
+                  @click="rejectCash(scope.row.ID)"
+                >
+                  拒绝
+                </el-button>
+                <el-button
+                  type="danger"
+                  link
+                  @click="deleteCash(scope.row.ID)"
+                >
+                  删除
+                </el-button>
+              </el-button-group>              
+            </div>
+            <div v-else>
+              <div v-html="scope.row.status"></div>
+              <font color="red">{{scope.row.Notes}}</font>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination">
+        <el-pagination background layout="prev, pager, next" :total="totalCount" 
+          :page-size="20"
+          @current-change="onPageChange"
+          v-model:current-page="formData.page_no" />
+      </div>
     </template>
   </div>
 </template>
 <script lang="ts" setup>
+import { ref, computed, watch, onMounted } from 'vue'
+import moment from 'moment-timezone';
+import { ElNotification } from "element-plus";
+import {storeToRefs} from "pinia";
+import { paymentStore } from "@/pinia/modules/payment.js";
 import { Management } from '@element-plus/icons-vue'
 import type { TabsPaneContext } from 'element-plus'
-
-import { ref, reactive } from 'vue'
-
 import DepositAccount from './DepositAccount.vue'
 import BulkDeposit from './BulkDeposit.vue'
+const {dispatchCashSystem} = paymentStore();
+const {dispatchReviewCash} = paymentStore();
+const {dispatchCancelCash} = paymentStore();
+const {dispatchDeleteCash} = paymentStore();
 
 const CashSystemLayout = ref('存入帳戶')
-const VisibleDeposit = ref("")
-const pageSize = ref(1)
-const currentPage = ref(1)
-const form = reactive({
-  bettingType: '',
-  date1: '',
-  date2: '',
-  periodNumber: '',
+const VisibleDeposit = ref("");
+const loading = ref(false);
+const formData = ref({
+  lv: "M",
+  s_date: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+  e_date: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+  name: "",
+  type: "",
+  page_no: 1,
 })
+const typeOptions = ref([
+  {
+    label: "全部",
+    value: ""
+  },
+  {
+    label: "全部(含转换)",
+    value: "ALL"
+  },
+  {
+    label: "存入",
+    value: "S"
+  },
+  {
+    label: "提出",
+    value: "T"
+  },
+  {
+    label: "赠送",
+    value: "F"
+  },
+  {
+    label: "已作废",
+    value: "Q"
+  },
+  {
+    label: "未审核",
+    value: "C"
+  },
+])
+const reviewCash = async (id) => {
+  loading.value = true;
+  await dispatchReviewCash({id});
+  await dispatchCashSystem(formData.value);
+  loading.value = false;
+}
+const rejectCash = async (id) => {
+  if (confirm("是否确定恢复金额?")){
+    let cancelMsg = prompt("请输入拒绝理由：", "");
+    loading.value = true;
+    await dispatchCancelCash({id, cancelMsg});
+    await dispatchCashSystem(formData.value);
+    successResult();
+    loading.value = false;
+  }
+}
+const deleteCash = async (id) => {
+  if(confirm("是否确定删除纪录?")) {
+    loading.value = true;
+    await dispatchDeleteCash({id});
+    await dispatchCashSystem(formData.value);
+    successResult();
+    loading.value = false;    
+  }
+}
+const getCashDataByFilter = async () => {
+  loading.value = true;
+  await dispatchCashSystem(formData.value);
+  loading.value = false;
+}
+const onPageChange = async () => {
+  loading.value = true;
+  await dispatchCashSystem(formData.value);
+  loading.value = false;
+}
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-    console.log(tab, event)
+  console.log(tab, event)
+}
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: "操作失败。",
+      type: "error",
+    });
+  }
 }
 const HandleDeposit = () => {
   VisibleDeposit.value = '存入帳戶';
@@ -130,39 +244,28 @@ const HandleDeposit = () => {
 const HandleBulk = () => {
   VisibleDeposit.value = '批量存款';
 }
-const reviewMethod = ref("全部")
+const success = computed(() => {
+  const {getSuccess} = storeToRefs(paymentStore());
+  return getSuccess.value;
+})
+const totalCount = computed(() => {
+  const {getTotalCount} = storeToRefs(paymentStore());
+  return getTotalCount.value;
+})
+const cashList = computed(() => {
+  const {getCashList} = storeToRefs(paymentStore());
+  return getCashList.value;
+})
+onMounted(async () => {
+  loading.value = true;
+  await dispatchCashSystem(formData.value);
+  loading.value = false;
+})
 </script>
 <style lang="scss" scoped>
-$table-border: 1px solid #ece9d8;
-$table-th-bgcolor: #fdf4ca;
-table.cashsystem-table {
-  overflow-x: scroll;
-  width: 100%;
-  border: $table-border;
-  margin-top: 15px;
-  border-collapse: collapse;
-  tr {
-    height: 30px;
-    th {
-      text-align: center;
-      padding: 10px;
-      background-color: $table-th-bgcolor;
-      border: $table-border;
-    }
-    td {
-      padding: 5px 10px;
-      border: $table-border;
-      text-align: center;
-    }
-  }
-  td:nth-child(7n + 1) {
-    background-color: rgb(225, 251, 255);
-  }
-}
-
-.button-group {
-  button {
-    margin-bottom: 10px;
-  }
+.pagination {
+  margin-top: 10px;
+  text-align: center;
+  display: inline-flex;
 }
 </style>

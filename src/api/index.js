@@ -245,3 +245,31 @@ export const SAVE_B5_ODDS = 'api/admin/odds-setting/b5/save';
 
 export const GET_GDSF_ODDS = 'api/admin/odds-setting/gdsf/get';
 export const SAVE_GDSF_ODDS = 'api/admin/odds-setting/gdsf/save';
+
+// human management api
+
+export const GET_QUERY = 'api/admin/human-management/query';
+export const GET_QUERY_KY = 'api/admin/human-management/query-ky';
+export const GET_QUERY_HTR = 'api/admin/human-management/query-htr';
+export const GET_REPORT = 'api/admin/human-management/report';
+export const GET_REPORT_KY = 'api/admin/human-management/report-ky';
+export const GET_REPORT_HTR = 'api/admin/human-management/report-htr';
+export const DISCOUNT_ZR = 'api/admin/human-management/discount-zr';
+export const DISCOUNT_DZ = 'api/admin/human-management/discount-dz';
+export const DISCOUNT_KY = 'api/admin/human-management/discount-ky';
+export const DISCOUNT_HTR = 'api/admin/human-management/discount-htr';
+export const GAME_SYSTEM = 'api/admin/human-management/game-system';
+export const GAME_OPEN = 'api/admin/human-management/game-open';
+export const GAME_DELETE = 'api/admin/human-management/game-delete';
+export const GAME_EDIT = 'api/admin/human-management/game-edit';
+export const GAME_UPDATE = 'api/admin/human-management/game-update';
+export const GAME_ADD = 'api/admin/human-management/game-add';
+
+export const CASH_SYSTEM = 'api/admin/payment/cash-system';
+export const CASH_REVIEW = 'api/admin/payment/cash-review';
+export const CASH_CANCEL = 'api/admin/payment/cash-cancel';
+export const CASH_DELETE = 'api/admin/payment/cash-delete';
+export const CASH_SAVE = 'api/admin/payment/cash-save';
+export const CASH_BULK_SAVE = 'api/admin/payment/cash-bulk-save';
+export const PAYMENT_METHOD = 'api/admin/payment/payment-method';
+export const ADD_PAYMENT_METHOD = 'api/admin/payment/payment-method/add';

@@ -7,40 +7,41 @@
       <el-form-item label="真人账号">
         <el-input
           clearable
-          v-model="formData.liveAccount"
+          v-model="formData.user"
           placeholder=""
         ></el-input>
       </el-form-item>
       <el-form-item label="注单日期">
         <el-date-picker
-          v-model="formData.betDate"
+          v-model="formData.date"
           placeholder=""
           value-format="YYYY-MM-DD"
           style="width: 150px;"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary">确认</el-button>
+        <el-button type="primary" @click="getQueryResultByFilter">确认</el-button>
       </el-form-item>
     </el-form>
     <el-table
-      :data="queryBetSlipFData"
+      :data="queryList"
+      v-loading="loading"
       style="width: 100%;"
       border
       header-align="center"
       stripe
     >
-      <el-table-column type="index" label="编号" align="center" />
-      <el-table-column property="liveAccount" label="真人帐号" align="center" />
+      <el-table-column type="index" :index="indexMethod" label="编号" align="center" />
+      <el-table-column property="playerName" label="真人帐号" align="center" />
       <el-table-column
-        property="transactionNumber"
+        property="tradeNo"
         label="交易编号"
         align="center"
       />
-      <el-table-column property="sceneID" label="场景ID" align="center" />
-      <el-table-column property="roomNumber" label="房间号" align="center" />
+      <el-table-column property="sceneId" label="场景ID" align="center" />
+      <el-table-column property="Roomid" label="房间号" align="center" />
       <el-table-column
-        property="roomMagnification"
+        property="Roombet"
         label="房間倍率"
         align="center"
       />
@@ -48,7 +49,7 @@
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.startingTime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.SceneStartTime }}</span>
           </div>
         </template>
       </el-table-column>
@@ -56,27 +57,31 @@
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.endTime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.SceneEndTime }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="type" label="类型" align="center" />
-      <el-table-column property="betAmount" label="投注金额" align="center" />
+      <el-table-column property="Type" label="类型" align="center" />
+      <el-table-column property="Cost" label="投注金额" align="center" />
       <el-table-column
-        property="payoutAmount"
+        property="transferAmount"
         label="派彩金额"
         align="center"
       />
       <el-table-column
-        property="jackpotPool"
+        property="Jackpotcomm"
         label="Jackpot彩池"
         align="center"
       />
       <el-table-column
-        property="whetherRebate"
         label="是否返水"
         align="center"
-      />
+      >
+        <template #default="scope">
+          <font color=blue v-if="scope.row.isFS == 1">已返水</font>
+          <font color=red v-else>未返水</font>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="100" />
@@ -84,33 +89,55 @@
   </div>
 </template>
 <script>
+import { humanManagementStore } from "@/pinia/modules/human_management.js";
+import moment from "moment-timezone";
 export default {
-  data() {
+  setup() {
+    const {dispatchQueryHtr} = humanManagementStore();
     return {
-      formData: {
-        betDate: '',
-        liveAccount: '',
-      },
-      queryBetSlipFData: [
-        {
-          liveAccount: '',
-          transactionNumber: '',
-          sceneID: '',
-          roomNumber: '',
-          roomMagnification: '',
-          startingTime: '',
-          endTime: '',
-          type: '',
-          betType: '',
-          betAmount: '',
-          payoutAmount: '',
-          jackpotPool: '',
-          whetherRebate: '',
-        },
-      ],
+      dispatchQueryHtr
     }
   },
-  methods: {},
+  data() {
+    return {
+      loading: false,
+      formData: {
+        date: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+        user: '',
+        page_no: 1,
+      },
+    }
+  },
+  methods: {
+    getQueryResultByFilter: async function() {
+      this.loading = true;
+      await this.dispatchQueryHtr(this.formData);
+      this.loading = false;
+    },
+    onPageChange: async function() {
+      this.loading = true;
+      await this.dispatchQueryHtr(this.formData);
+      this.loading = false;
+    },
+    indexMethod: function(index) {
+      return index + 1 + (this.formData.page_no - 1) * 20;
+    }
+  },
+  computed: {
+    queryList: function() {
+      const {getQueryHtrList} = humanManagementStore();
+      return getQueryHtrList;
+    },
+    totalCount: function() {
+      const {getTotalCount} = humanManagementStore();
+      return getTotalCount;
+    }
+  },
+  async mounted() {
+    this.loading = true;
+    await(this.dispatchQueryHtr(this.formData));
+    this.loading = false;
+  }
 }
 </script>
 <style lang="scss" scoped>

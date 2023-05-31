@@ -329,7 +329,7 @@ export default {
         betDate: formatDate(new Date()),
         keyword: "",
         typeOption: "",
-        betStatusOption: "",
+        betStatusOption: "all",
         sortOption: "",
         ballOption: "",
         timeOption: 180,
