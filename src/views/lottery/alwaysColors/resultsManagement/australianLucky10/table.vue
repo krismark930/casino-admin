@@ -197,7 +197,7 @@ export default {
     getazxy10ResultByFilter: async function () {
       this.formData.query_time = moment(this.formData.query_time).format("YYYY-MM-DD");
       this.loading = true;
-      await this.dispatchazxy10ResultList(this.formData);
+      await this.dispatchAZXY10ResultList(this.formData);
       this.loading = false;
     },
     reSettlement: async function (lottery_type, qishu) {

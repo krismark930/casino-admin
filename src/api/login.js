@@ -33,7 +33,7 @@ export const GetUserinfo = () => {
       id: 1,
       name: 'zhangsan',
       'role|1': ['admin', 'visitor'], // 随机返回一个角色admin或visitor
-      avatar: "@image('48x48', '#fb0a2a')",
+      avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80",
     },
   }
 }

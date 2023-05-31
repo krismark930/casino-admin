@@ -2,29 +2,79 @@
   <div style="text-align: center;">
     <h3>一键返水（电子游戏）</h3>
     <el-form :model="formData" inline="true">
-      <el-form-item label="">
+      <el-form-item label="开始日期">
         <el-date-picker
-          v-model="formData.dateRange"
-          type="datetimerange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
+          v-model="formData.s_time"
+          placeholder=""
+          value-format="YYYY-MM-DD"
+        ></el-date-picker>
+      </el-form-item>
+      <el-form-item label="结束日期">
+        <el-date-picker
+          v-model="formData.e_time"
+          placeholder=""
+          value-format="YYYY-MM-DD"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary">开始返水</el-button>
+        <el-button type="primary" @click="discountDz">开始返水</el-button>
       </el-form-item>
     </el-form>
     <h6>注：不自动返水的会员请填把会员的返水改为0</h6>
   </div>
 </template>
 <script>
+import { ElNotification } from "element-plus";
+import moment from "moment-timezone";
+import { ElLoading } from "element-plus";
+import { humanManagementStore } from "@/pinia/modules/human_management.js";
 export default {
+  setup() {
+    const {dispatchDiscountDz} = humanManagementStore();
+    return {
+      dispatchDiscountDz
+    }
+  },
   data() {
     return {
       formData: {
-        dateRange: '',
+        s_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+        e_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
       },
     }
   },
+  computed: {
+    success: function () {
+      let { getSuccess } = humanManagementStore();
+      return getSuccess;
+    },    
+  },
+  methods: {
+    successResult: function () {
+      if (this.success) {
+        ElNotification({
+          title: "成功",
+          message: "操作成功。",
+          type: "success",
+        });
+      } else {
+        ElNotification({
+          title: "错误",
+          message: "操作失败。",
+          type: "error",
+        });
+      }
+    },
+    discountDz: async function() {
+      const loading = ElLoading.service({
+        lock: true,
+        text: "加载中...",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      await this.dispatchDiscountDz(this.formData)
+      loading.close();
+      this.successResult();
+    }
+  }
 }
 </script>

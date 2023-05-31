@@ -118,7 +118,7 @@
           <el-button type="primary" @click="() => toOperation(scope.row.MID)">
             结算
           </el-button>
-          <p v-if="scope.row.Checked">
+          <p v-if="scope.row.Checked == 1">
             二次
             <br />
             比分

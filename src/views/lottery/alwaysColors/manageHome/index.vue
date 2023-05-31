@@ -75,11 +75,11 @@
     </el-form>
     <el-table
       :data="orderList"
+      :row-class-name="tableRowClassName"
       v-loading="loading"
       style="width: 100%"
       border
       header-align="center"
-      stripe
     >
       <el-table-column
         property="order_sub_num"
@@ -95,7 +95,12 @@
       <el-table-column property="fs" label="反水" align="center" />
       <el-table-column property="bet_rate_one" label="赔率" align="center" />
       <el-table-column property="win_sub" label="可赢金额" align="center" />
-      <el-table-column property="money_result" label="会员结果" align="center" />
+      <el-table-column property="money_result" label="会员结果" align="center">
+        <template #default="scope">
+          <Font color="red" v-if="scope.row.is_win == 1">{{scope.row.money_result}}</Font>
+          <Font v-else>{{scope.row.money_result}}</Font>
+        </template>
+      </el-table-column>
       <el-table-column label="投注时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
@@ -159,6 +164,15 @@ import { ElNotification } from "element-plus";
 import moment from "moment-timezone";
 export default {
   setup() {
+    const tableRowClassName = ({
+      row
+    }) => {
+      if (row.is_win == 1) {
+        console.log(row.is_win);
+        return 'warning-row'
+      }
+      return ''
+    }
     const { dispatchOrderList } = manageHomeStore();
     const { dispatchCancelOrderAll } = manageHomeStore();
     const { dispatchAllChecked } = manageHomeStore();
@@ -166,6 +180,7 @@ export default {
       dispatchOrderList,
       dispatchCancelOrderAll,
       dispatchAllChecked,
+      tableRowClassName
     };
   },
   data() {
@@ -362,7 +377,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .pagination {
   margin-top: 10px;
   text-align: center;
@@ -411,5 +426,9 @@ export default {
 
 .red {
   color: var(--el-color-error);
+}
+
+.el-table .warning-row {
+  background-color: #ffff00 !important;
 }
 </style>

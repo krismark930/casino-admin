@@ -7,22 +7,32 @@
       <el-form-item label="真人账号">
         <el-input
           clearable
-          v-model="formData.liveAccount"
+          v-model="formData.user"
           placeholder=""
         ></el-input>
       </el-form-item>
-      <el-form-item label="">
+      <el-form-item label="开始日期">
         <el-date-picker
-          v-model="formData.dateRange"
-          type="datetimerange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
+          type="datetime"
+          v-model="formData.s_time"
+          placeholder=""
+          value-format="YYYY-MM-DD HH:mm:ss"
+        ></el-date-picker>
       </el-form-item>
+      <el-form-item label="结束日期">
+        <el-date-picker
+          type="datetime"
+          v-model="formData.e_time"
+          placeholder=""
+          value-format="YYYY-MM-DD HH:mm:ss"
+        ></el-date-picker>
+      </el-form-item>
+    </el-form>
+    <el-form :inline="true" :model="formData">
       <el-form-item label="投注类型">
-        <el-select v-model="formData.typeOption" style="width: 150px;">
+        <el-select v-model="formData.type" style="width: 150px;">
           <el-option
-            v-for="item in typeOptions"
+            v-for="item in kyTypeOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -30,199 +40,79 @@
         </el-select>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary">确认</el-button>
+        <el-button type="primary" @click="getQueryResultByFilter">确认</el-button>
       </el-form-item>
     </el-form>
     <el-table
-      :data="reportKData"
+      :data="reportList"
+      v-loading="loading"
       style="width: 100%;"
       border
       header-align="center"
       stripe
+      show-summary
     >
-      <el-table-column type="index" label="编号" align="center" />
-      <el-table-column property="liveAccount" label="真人帐号" align="center" />
-      <el-table-column property="penCount" label="笔数" align="center" />
-      <el-table-column property="betAmount" label="投注金额" align="center" />
+      <el-table-column type="index" width="100px" label="编号" align="center" />
+      <el-table-column property="user_name" label="真人帐号" align="center" />
+      <el-table-column property="bs" label="笔数" align="center" />
+      <el-table-column property="tz" label="投注金额" align="center" />
       <el-table-column
-        property="validStake"
+        property="yxtz"
         label="有效投注额"
         align="center"
       />
       <el-table-column
-        property="memberResult"
+        property="jg"
         label="会员结果"
         align="center"
       />
     </el-table>
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
-    </div>
   </div>
+  <el-backtop :right="60" :bottom="60" target=".main" />
 </template>
 <script>
+import { humanManagementStore } from "@/pinia/modules/human_management.js";
+import moment from "moment-timezone";
 export default {
-  data() {
+  setup() {
+    const {dispatchReportKy} = humanManagementStore();
     return {
-      formData: {
-        dateRange: '',
-        liveAccount: '',
-        typeOption: '',
-      },
-      reportKData: [
-        {
-          liveAccount: '',
-          penCount: '',
-          memberResult: '',
-          betAmount: '',
-          validStake: '',
-        },
-      ],
-      typeOptions: [
-        {
-          value: '全部',
-          label: '全部',
-        },
-        {
-          value: '十三水',
-          label: '十三水',
-        },
-        {
-          value: '斗地主',
-          label: '斗地主',
-        },
-        {
-          value: '百人牛牛',
-          label: '百人牛牛',
-        },
-        {
-          value: '森林舞会',
-          label: '森林舞会',
-        },
-        {
-          value: '百家乐',
-          label: '百家乐',
-        },
-        {
-          value: '血流成河',
-          label: '血流成河',
-        },
-        {
-          value: '万人炸金花',
-          label: '万人炸金花',
-        },
-        {
-          value: '抢庄牌九',
-          label: '抢庄牌九',
-        },
-        {
-          value: '极速炸金花',
-          label: '极速炸金花',
-        },
-        {
-          value: '通比牛牛',
-          label: '通比牛牛',
-        },
-        {
-          value: '21点',
-          label: '21点',
-        },
-        {
-          value: '押庄龙虎',
-          label: '押庄龙虎',
-        },
-        {
-          value: '三公',
-          label: '三公',
-        },
-        {
-          value: '炸金花',
-          label: '炸金花',
-        },
-        {
-          value: '抢庄牛牛',
-          label: '抢庄牛牛',
-        },
-        {
-          value: '二八杠',
-          label: '二八杠',
-        },
-        {
-          value: '德州扑克',
-          label: '德州扑克',
-        },
-        {
-          value: '押宝抢庄牛牛',
-          label: '押宝抢庄牛牛',
-        },
-        {
-          value: '炸金牛',
-          label: '炸金牛',
-        },
-        {
-          value: '单挑牛牛',
-          label: '单挑牛牛',
-        },
-        {
-          value: '百人骰宝',
-          label: '百人骰宝',
-        },
-        {
-          value: '红包捕鱼',
-          label: '红包捕鱼',
-        },
-        {
-          value: '奔驰宝马',
-          label: '奔驰宝马',
-        },
-        {
-          value: '二人麻将',
-          label: '二人麻将',
-        },
-        {
-          value: '金鲨银鲨',
-          label: '金鲨银鲨',
-        },
-        {
-          value: '看牌抢庄牛牛',
-          label: '看牌抢庄牛牛',
-        },
-        {
-          value: '五星宏辉',
-          label: '五星宏辉',
-        },
-        {
-          value: '血战骰宝',
-          label: '血战骰宝',
-        },
-        {
-          value: '幸运转盘',
-          label: '幸运转盘',
-        },
-        {
-          value: '赌场扑克',
-          label: '赌场扑克',
-        },
-        {
-          value: '港式梭哈',
-          label: '港式梭哈',
-        },
-        {
-          value: '水果机',
-          label: '水果机',
-        },
-        {
-          value: '鱼虾蟹',
-          label: '鱼虾蟹  ',
-        },
-        {
-          value: '跑得快',
-          label: '跑得快',
-        },
-      ],
+      dispatchReportKy
     }
   },
-  methods: {},
+  data() {
+    return {
+      loading: false,
+      formData: {
+        s_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD HH:mm:ss"),
+        e_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD HH:mm:ss"),
+        user: '',
+        type: '',
+      },
+    }
+  },
+  methods: {
+    getQueryResultByFilter: async function() {
+      this.loading = true;
+      await this.dispatchReportKy(this.formData);
+      this.loading = false;
+    },
+  },
+  computed: {
+    kyTypeOptions: function() {
+      const {getKyTypeOptions} = humanManagementStore();
+      return getKyTypeOptions;
+    },
+    reportList: function() {
+      const {getReportKyList} = humanManagementStore();
+      return getReportKyList;
+    },
+  },
+  async mounted() {
+    this.loading = true;
+    await(this.dispatchReportKy(this.formData));
+    this.loading = false;
+  }
 }
 </script>
 <style lang="scss" scoped>
