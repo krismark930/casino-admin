@@ -16,7 +16,7 @@
     <div v-if="activeType == '新增'">
       <AddMethod />
     </div>
-    <div v-if="activeType == '网银'">
+    <!-- <div v-if="activeType == '网银'">
       <OnlineBanking />
     </div>
     <div v-if="activeType == '微信'">
@@ -45,13 +45,14 @@
     </div>
     <div v-if="activeType == '虚拟货币'">
       <VirtualCurrency />
-    </div>
-    <div v-if="activeType == '支付方式'">
+    </div> -->
+    <div>
       <h1>支付方式</h1>
       <el-table :data="paymentList" v-loading="loading" style="width: 100%;" border header-align="center" stripe>
         <el-table-column property="Switch" label="状态" align="center">
           <template #default="scope">
             <font color='red' v-if="scope.row.Switch == 1"><b>启用</b></font>
+            <font v-else></font>
           </template>
         </el-table-column>
         <el-table-column property="Sort" label="排序" align="center">
@@ -129,10 +130,10 @@
         <el-table-column fixed="right" label="操作" width="250" align="center">
           <template #default="scope">
             <div style="display: flex;">
-              <el-button type="primary" size="small">修改</el-button>
-              <el-button type="success" size="small">启用</el-button>
-              <el-button type="danger" size="small">停用</el-button>
-              <el-button type="warning" size="small">删除</el-button>
+              <el-button type="primary" size="small" @click="updatePaymentMethod(scope.row)">修改</el-button>
+              <el-button type="success" size="small" @click="usePaymentMethod(scope.row.ID)">启用</el-button>
+              <el-button type="danger" size="small" @click="stopPaymentMethod(scope.row.ID)">停用</el-button>
+              <el-button type="warning" size="small" @click="deletePaymentMethod(scope.row.ID)">删除</el-button>
             </div>
           </template>
         </el-table-column>
@@ -141,7 +142,7 @@
   </el-card>
 </template>
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { storeToRefs } from "pinia";
 import { paymentStore } from "@/pinia/modules/payment.js";
 import AddMethod from './AddMethod.vue'
@@ -157,9 +158,13 @@ import CloudQuickPass from './CloudQuickPass.vue'
 import VirtualCurrency from './VirtualCurrency.vue'
 
 const { dispatchPaymentMethod } = paymentStore();
+const { dispatchAddPaymentMethod } = paymentStore();
+const { dispatchUsePaymentMethod } = paymentStore();
+const { dispatchDeletePaymentMethod } = paymentStore();
 
-const activeType = ref('支付方式')
+const activeType = ref('')
 const loading = ref(false);
+const pay_type = ref('');
 
 const wapOptions = ref([
   {
@@ -227,16 +232,107 @@ const typeOptions = ref([
   },
 
 ])
-
+watch(activeType, async (newValue) => {
+  switch(newValue) {
+    case "网银":
+      pay_type.value = 1;
+      break;
+    case "微信":
+      pay_type.value = 2;
+      break;
+    case "支付宝":
+      pay_type.value = 3;
+      break;
+    case "快捷支付":
+      pay_type.value = 4;
+      break;
+    case "QQ钱包":
+      pay_type.value = 5;
+      break;
+    case "百度钱包":
+      pay_type.value = 6;
+      break;
+    case "京东钱包":
+      pay_type.value = 7;
+      break;
+    case "银联钱包":
+      pay_type.value = 8;
+      break;
+    case "云闪付":
+      pay_type.value = 9;
+      break;
+    case "虚拟货币":
+      pay_type.value = 10;
+      break;
+    default:
+      pay_type.value = '';
+      break;
+  }
+  
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  loading.value = true;
+  await dispatchPaymentMethod(formData);
+  loading.value = false;
+})
 const paymentList = computed(() => {
   const { getPaymentList } = storeToRefs(paymentStore());
   console.log(getPaymentList.value)
   return getPaymentList.value
 })
 
+const updatePaymentMethod = async (item) => {
+  loading.value = true
+  await dispatchAddPaymentMethod(item);
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  await dispatchPaymentMethod(formData);
+  loading.value = false;
+}
+
+const usePaymentMethod = async (ID) => {
+  loading.value = true;
+  await dispatchUsePaymentMethod({"ID": ID, "Switch": 1});
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  await dispatchPaymentMethod(formData);
+  loading.value = false
+}
+
+const stopPaymentMethod = async (ID) => {
+  loading.value = true;
+  await dispatchUsePaymentMethod({"ID": ID, "Switch": 0});
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  await dispatchPaymentMethod(formData);
+  loading.value = false
+}
+
+const deletePaymentMethod = async (ID) => {
+  loading.value = true;
+  await dispatchDeletePaymentMethod({"ID": ID});
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  await dispatchPaymentMethod(formData);
+  loading.value = false
+}
 onMounted(async () => {
   loading.value = true;
-  await dispatchPaymentMethod({ lv: "M" });
+  let formData = {
+    lv: "M",
+    pay_type: pay_type.value
+  }
+  await dispatchPaymentMethod(formData);
   loading.value = false;
 })
 </script>
