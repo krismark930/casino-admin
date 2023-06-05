@@ -273,3 +273,5 @@ export const CASH_SAVE = 'api/admin/payment/cash-save';
 export const CASH_BULK_SAVE = 'api/admin/payment/cash-bulk-save';
 export const PAYMENT_METHOD = 'api/admin/payment/payment-method';
 export const ADD_PAYMENT_METHOD = 'api/admin/payment/payment-method/add';
+export const USE_PAYMENT_METHOD = 'api/admin/payment/payment-method/use';
+export const DELETE_PAYMENT_METHOD = 'api/admin/payment/payment-method/delete';
