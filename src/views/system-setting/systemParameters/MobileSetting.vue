@@ -1,68 +1,90 @@
 <template>
   <div class="mobilesetting-form-wrapper">
     <el-form
-      :model="mobileSettingForm"
+      :model="sysConfigItem"
       class="mobilesetting-form"
       :size="formSize"
       label-width="150px"
     >
-      <el-form-item label="网站标题:" prop="webtitle">
-        <el-input v-model="mobileSettingForm.webtitle" />
+      <el-form-item label="网站标题:" prop="web_name_wap">
+        <el-input v-model="sysConfigItem.web_name_wap" />
       </el-form-item>
-      <el-form-item label="网站名称:" prop="webname">
-        <el-input v-model="mobileSettingForm.webname" />
+      <el-form-item label="网站名称:" prop="web_title_wap">
+        <el-input v-model="sysConfigItem.web_title_wap" />
       </el-form-item>
-      <el-form-item label="公告:" prop="announcement">
-        <el-input v-model="mobileSettingForm.announcement" />
+      <el-form-item label="公告:" prop="web_gonggao_wap">
+        <el-input v-model="sysConfigItem.web_gonggao_wap" />
       </el-form-item>
       <el-form-item label="弹出框:">
-        <el-input v-model="mobileSettingForm.popup" type="textarea" />
+        <el-input v-model="sysConfigItem.web_popmsg_wap" type="textarea" />
       </el-form-item>
-      <el-form-item label="网站描述:" prop="webdesc">
-        <el-input v-model="mobileSettingForm.webdesc" />
+      <el-form-item label="网站描述:" prop="web_description_wap">
+        <el-input v-model="sysConfigItem.web_description_wap" />
       </el-form-item>
-      <el-form-item label="关键字:" prop="keywords">
-        <el-input v-model="mobileSettingForm.keywords" />
+      <el-form-item label="关键字:" prop="web_keywords_wap">
+        <el-input v-model="sysConfigItem.web_keywords_wap" />
       </el-form-item>
-      <el-form-item label="作者:" prop="author">
-        <el-input v-model="mobileSettingForm.author" class="author" />
+      <el-form-item label="作者:" prop="web_author_wap">
+        <el-input v-model="sysConfigItem.web_author_wap" class="author" />
         <h5>不建议修改</h5>
       </el-form-item>
       <el-form-item label="轮播图片:">
-        <el-input v-model="mobileSettingForm.caroselpic" type="textarea" />
+        <el-input v-model="sysConfigItem.web_banner_wap" type="textarea" />
       </el-form-item>
-      <el-form-item label="轮播时间:" prop="caroseltime">
+      <el-form-item label="轮播时间:" prop="web_slider_time_wap">
         <el-input
-          v-model="mobileSettingForm.caroseltime"
+          v-model="sysConfigItem.web_slider_time_wap"
           class="carouseltime"
         />
         <h5>毫秒</h5>
       </el-form-item>
-      <el-form-item label="刷新时间:" prop="refreshtime">
-        <el-input v-model="mobileSettingForm.refreshtime" class="refreshtime" />
+      <el-form-item label="刷新时间:" prop="web_refreshtime_wap">
+        <el-input v-model="sysConfigItem.web_refreshtime_wap" class="refreshtime" />
         <h5>秒</h5>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">确定</el-button>
+        <el-button type="primary" @click="updateMobileSetting">确定</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
-<script setup>
-import { ref, reactive } from 'vue'
-const formSize = ref('default')
-
-const mobileSettingForm = reactive({
-  webtitle: '',
-  webname: '',
-  announcement: '',
-  webdesc: '',
-  keywords: '',
-  author: '',
-  caroselpic: '',
-  caroseltime: '',
-  refreshtime: '',
+<script lang="ts" setup>
+import { ref, reactive, toRefs, computed } from 'vue'
+import { systemStore } from '@/pinia/modules/system';
+import { ElNotification, ElLoading } from "element-plus";
+import { storeToRefs } from 'pinia';
+const {dispatchUpdateTurnService} = systemStore();
+const props = defineProps<{ sysConfigItem: Array<any> }>();
+const { sysConfigItem } = toRefs(props);
+const updateMobileSetting = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateTurnService(sysConfigItem.value);
+  successResult();
+  loading.close();
+}
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(systemStore());
+  return getSuccess.value;
 })
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: "操作失败。",
+      type: "error",
+    });
+  }
+}
 </script>
 <style lang="scss" scoped>
 .mobilesetting-form-wrapper {

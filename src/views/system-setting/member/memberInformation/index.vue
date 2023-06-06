@@ -1,179 +1,140 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;">
     <h3>{{ $t('menu.memberInformation') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="关键字查找">
-        <el-input
-          clearable
-          v-model="formData.keyword"
-          placeholder=""
-        ></el-input>
+        <el-input clearable v-model="formData.user_name" placeholder=""></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">确认</el-button>
+        <el-button type="primary" @click="getUserInfoByFilter">确认</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="memberInformationData" style="width: 100%;" border stripe>
+    <el-table :data="userInfoList" v-loading="loading" style="width: 100%;" border stripe>
       <el-table-column type="index" label="编号" align="center" />
-      <el-table-column
-        property="credentialInfo"
-        label="帐号密码"
-        align="center"
-      >
+      <el-table-column property="credentialInfo" label="帐号密码" align="center">
         <template #default="scope">
           <el-space :size="5" spacer=":">
-            <el-icon size="mid"><User /></el-icon>
-            <span>{{ scope.row.credentialInfo.username }}</span>
+            <el-icon size="mid">
+              <User />
+            </el-icon>
+            <span>{{ scope.row.UserName }}</span>
           </el-space>
           <br />
           <el-space :size="5" spacer=":">
-            <el-icon size="mid"><Unlock /></el-icon>
-            <span>{{ scope.row.credentialInfo.password }}</span>
+            <el-icon size="mid">
+              <Unlock />
+            </el-icon>
+            <span>{{ scope.row.PassWord }}</span>
           </el-space>
         </template>
       </el-table-column>
       <el-table-column label="日期时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.datetime }}</span>
+            <el-icon>
+              <timer />
+            </el-icon>
+            <span style="margin-left: 10px">{{ scope.row.OnlineTime }}</span>
           </div>
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center">
         <template #default="scope">
-          <el-input
-            v-model="scope.row.remark"
-            placeholder=""
-            type="textarea"
-            :value="scope.row.remark"
-          ></el-input>
+          <el-input v-model="scope.row.Notes" placeholder="" type="textarea"></el-input>
         </template>
       </el-table-column>
       <el-table-column label="电话号码" align="center">
         <template #default="scope">
-          <el-input
-            v-model="scope.row.phoneNumber"
-            placeholder=""
-            :value="scope.row.phoneNumber"
-            clearable
-          ></el-input>
+          <el-input v-model="scope.row.Phone" placeholder=""  clearable></el-input>
         </template>
       </el-table-column>
-      <el-table-column property="name" label="姓名" align="center">
+      <el-table-column property="Alias" label="姓名" align="center">
         <template #default="scope">
-          <el-input
-            v-model="scope.row.name"
-            placeholder=""
-            :value="scope.row.name"
-            clearable
-          ></el-input>
+          <el-input v-model="scope.row.Alias" placeholder=""  clearable></el-input>
         </template>
       </el-table-column>
-      <el-table-column
-        property="availableBalance"
-        label="可用余额"
-        align="center"
-      />
-      <el-table-column property="ip" label="IP" align="center" />
-      <el-table-column property="contactInfo" label="联系方式" align="center" />
+      <el-table-column property="Money" label="可用余额" align="center" />
+      <el-table-column property="LoginIP" label="IP" align="center" />
+      <el-table-column property="Bank_Address" label="联系方式" align="center" />
       <el-table-column fixed="right" label="操作" align="center" width="220px">
         <template #default="scope">
-          <el-button
-            type="primary"
-            size="small"
-            @click="editMemberData(scope.$index, scope.row)"
-          >
+          <el-button type="primary" size="small" @click="updateUserInfo(scope.row)">
             更改
           </el-button>
-          <el-button
-            type="danger"
-            size="small"
-            @click="deleteMemberData(scope.$index, scope.row)"
-          >
+          <el-button type="danger" size="small" @click="deleteUserInfo(scope.row.id)">
             删除
-          </el-button>
-          <el-button
-            type="danger"
-            size="small"
-            @click="deleteSimailarData(scope.$index, scope.row)"
-          >
-            删除同类
           </el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange"
+        :page-size="20" v-model:current-page="formData.page_no" />
     </div>
   </div>
 </template>
 <script>
+import { userInfoStore } from "@/pinia/modules/user_info.js";
 export default {
+  setup() {
+    const { dispatchUserInfoData } = userInfoStore();
+    const { dispatchUpdateUserInfoData } = userInfoStore();
+    const { dispatchDeleteUserInfoData } = userInfoStore();
+
+    return {
+      dispatchUserInfoData,
+      dispatchUpdateUserInfoData,
+      dispatchDeleteUserInfoData
+    }
+  },
   data() {
     return {
       formData: {
-        keyword: '',
+        user_name: '',
+        page_no: 1
       },
-      memberInformationData: [
-        {
-          id: 1,
-          credentialInfo: {
-            username: 'aa123',
-            password: '112233',
-          },
-          datetime: '2023-02-22 12:48:27',
-          remark: '转入',
-          phoneNumber: '138****9999',
-          name: '测试',
-          availableBalance: '0.0',
-          ip: '103.170.73.18',
-          contactInfo: '',
-        },
-        {
-          id: 2,
-          credentialInfo: {
-            username: 'aa123',
-            password: '112233',
-          },
-          datetime: '2023-02-22 12:48:27',
-          remark: '转入2',
-          phoneNumber: '138****9999',
-          name: '测试',
-          availableBalance: '0.0',
-          ip: '103.170.73.18',
-          contactInfo: '',
-        },
-        {
-          id: 3,
-          credentialInfo: {
-            username: 'aa123',
-            password: '112233',
-          },
-          datetime: '2023-02-22 12:48:27',
-          remark: '转入3',
-          phoneNumber: '138****9999',
-          name: '测试',
-          availableBalance: '0.0',
-          ip: '103.170.73.18',
-          contactInfo: '',
-        },
-      ],
+      loading: false,
+    }
+  },
+  computed: {
+    totalCount: function () {
+      const { getTotalCount } = userInfoStore();
+      return getTotalCount;
+    },
+    userInfoList: function () {
+      const {getUserInfoList} = userInfoStore();
+      return getUserInfoList;
     }
   },
   methods: {
-    editMemberData(index, row) {
-      console.log(index, row)
+    async getUserInfoByFilter() {
+      this.loading = true;
+      await this.dispatchUserInfoData(this.formData);
+      this.loading = false;
     },
-    deleteMemberData(index, row) {
-      console.log(index, row)
+    async onPageChange() {
+      this.loading = true;
+      await this.dispatchUserInfoData(this.formData);
+      this.loading = false;
     },
-    deleteSimailarData(index, row) {
-      console.log(index, row)
+    async updateUserInfo(item) {
+      this.loading = true;
+      await this.dispatchUpdateUserInfoData(item);
+      await this.dispatchUserInfoData(this.formData);
+      this.loading = false;
+    },
+    async deleteUserInfo(id) {
+      this.loading = true;
+      await this.dispatchDeleteUserInfoData({id});
+      await this.dispatchUserInfoData(this.formData);
+      this.loading = false;
     },
   },
+  async mounted() {
+    this.loading = true;
+    await this.dispatchUserInfoData(this.formData);
+    this.loading = false;
+  }
 }
 </script>
 <style lang="scss" scoped>

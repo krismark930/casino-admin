@@ -2,14 +2,22 @@
   <div class="weburl-wrapper">
     <!-- <h5 class="url-notice">注:网址以/结尾!</h5> -->
 
-    <el-table :data="tableData" class="weburl-table">
-      <el-table-column prop="version" label="电脑版网址" width="200" />
-      <el-table-column prop="url" label="手机版网址" />
-      <el-table-column label="功能" width="200">
+    <el-table :data="urlList" class="weburl-table">
+      <el-table-column prop="PCURL" label="电脑版网址" width="500">
+        <template #default="scope">
+          <el-input v-model="scope.row.PCURL"/>
+        </template>
+      </el-table-column>
+      <el-table-column prop="WAPURL" label="手机版网址">        
+        <template #default="scope">
+          <el-input v-model="scope.row.WAPURL"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="功能">
         <template #default="scope">
           <el-button
             size="small"
-            @click="handleEdit(scope.row.version, scope.row.url)"
+            @click="updateUrl(scope.row)"
           >
             设定
           </el-button>
@@ -39,29 +47,51 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-
+import { reactive, ref, toRefs, computed } from 'vue'
+import {systemStore} from "@/pinia/modules/system";
+import { storeToRefs } from 'pinia';
+import { ElNotification, ElLoading } from "element-plus";
+const {dispatchUpdateUrl} = systemStore();
+const props = defineProps<{ urlList: Array<any> }>();
+const { urlList } = toRefs(props);
 const dialogVisible = ref(false)
 const form = reactive({
   version: '',
   url: '',
 })
-const formLabelWidth = '90px'
-const tableData = [
-  {
-    version: '电脑版网址',
-    url: 'http://vip.pj6678.com',
-  },
-  {
-    version: '手机版网址',
-    url: 'http://wap.pj6678.com',
-  },
-]
 
-const handleEdit = (versionName: string, url: string) => {
-  dialogVisible.value = true
-  form.version = versionName
-  form.url = url
+const formLabelWidth = '90px'
+
+const updateUrl = async (item: any) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateUrl(item);
+  successResult();
+  loading.close();
+}
+
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(systemStore());
+  return getSuccess.value;
+})
+
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: "操作失败。",
+      type: "error",
+    });
+  }
 }
 </script>
 <style lang="scss" scoped>

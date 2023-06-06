@@ -10,6 +10,11 @@ import { PAYMENT_METHOD } from "@/api";
 import { ADD_PAYMENT_METHOD } from "@/api";
 import { USE_PAYMENT_METHOD } from "@/api";
 import { DELETE_PAYMENT_METHOD } from "@/api";
+import { WEB_BANK_DATA } from "@/api";
+import { ADD_WEB_BANK_DATA } from "@/api";
+import { USE_WEB_BANK_DATA } from "@/api";
+import { DELETE_WEB_BANK_DATA } from "@/api";
+import { UPDATE_USDT_RATE } from "@/api";
 
 export const paymentStore = defineStore('payment', {
     state: () => ({
@@ -18,7 +23,12 @@ export const paymentStore = defineStore('payment', {
         cashList: [],
         totalCount: 0,
         paymentList: [],
-        webBankList: []
+        webBankList: [],
+        usdtList: {
+            tjck: false,
+            ckfanli: "",
+            USDT: ""
+        }
     }),
     getters: {
         getSuccess: (state) => state.success,
@@ -26,7 +36,8 @@ export const paymentStore = defineStore('payment', {
         getCashList: (state) => state.cashList,
         getTotalCount: (state) => state.totalCount,
         getPaymentList: (state) => state.paymentList,
-        getWebBankList: (state) => state.webBankList
+        getWebBankList: (state) => state.webBankList,
+        getUSDTList: (state) => state.usdtList,
     },
     actions: {
         setSuccess(success) {
@@ -46,6 +57,9 @@ export const paymentStore = defineStore('payment', {
         },
         setWebBankList(webBankList) {
             this.webBankList = webBankList;
+        },
+        setUSDTList(usdtList) {
+            this.usdtList = usdtList
         },
         async dispatchCashSystem(data) {
             try {
@@ -176,6 +190,7 @@ export const paymentStore = defineStore('payment', {
                 if (response.status === 200) {
                     this.setSuccess(true);
                     this.setWebBankList(response.data);
+                    this.setUSDTList(response.usdt_rate);
                 }
             } catch (e) {
                 console.log(e.response.data.message);
@@ -210,6 +225,18 @@ export const paymentStore = defineStore('payment', {
             try {
                 this.setSuccess(false);
                 let response = await request({ url: DELETE_WEB_BANK_DATA, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
+                console.log(e.response.data.message);
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchUpdateUSDTRate(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_USDT_RATE, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
                 }

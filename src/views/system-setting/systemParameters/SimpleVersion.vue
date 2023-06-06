@@ -1,6 +1,6 @@
 <template>
   <div class="simpleversion-wrapper">
-    <el-table :data="tableData" class="simpleversion-table">
+    <el-table :data="simpleVersionList" class="simpleversion-table">
       <el-table-column prop="simpleVersion" label="简易版公告">
         <template #default="scope">
           <el-input
@@ -14,7 +14,7 @@
         <template #default="scope">
           <el-button
             type="primary"
-            @click="handleSubmit(scope.row.simpleVersion)"
+            @click="updateSimpleVersion(scope.row)"
           >
             确定
           </el-button>
@@ -23,14 +23,43 @@
     </el-table>
   </div>
 </template>
-<script setup>
-import { ref } from 'vue'
-
-const tableData = [
-  {
-    simpleVersion: ' ',
-  },
-]
+<script lang="ts" setup>
+import { ref, reactive, toRefs, computed } from 'vue'
+import { systemStore } from '@/pinia/modules/system';
+import { ElNotification, ElLoading } from "element-plus";
+import { storeToRefs } from 'pinia';
+const {dispatchUpdateNotification} = systemStore();
+const props = defineProps<{ simpleVersionList: Array<any> }>();
+const { simpleVersionList } = toRefs(props);
+const updateSimpleVersion = async (item: any) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateNotification({systimee: item.simpleVersion});
+  successResult();
+  loading.close();
+}
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(systemStore());
+  return getSuccess.value;
+})
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: "操作失败。",
+      type: "error",
+    });
+  }
+}
 </script>
 <style lang="scss" scoped>
 .simpleversion-wrapper {
