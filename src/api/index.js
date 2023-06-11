@@ -179,6 +179,7 @@ export const DETAIL_LOTTERY = '/api/admin/always-color/detail-lottery';
 
 export const GET_LOTTERY_CONFIG = '/api/admin/sys-config/lottery';
 export const UPDATE_LOTTERY_CONFIG = '/api/admin/sys-config/lottery/update';
+export const UPDATE_USDT_RATE = '/api/admin/sys-config/usdt/update';
 
 export const GET_USER_CONFIG = '/api/admin/user-config/lottery/all';
 export const GET_USER_CONFIG_ITEM = '/api/admin/user-config/lottery/item';
@@ -275,3 +276,43 @@ export const PAYMENT_METHOD = 'api/admin/payment/payment-method';
 export const ADD_PAYMENT_METHOD = 'api/admin/payment/payment-method/add';
 export const USE_PAYMENT_METHOD = 'api/admin/payment/payment-method/use';
 export const DELETE_PAYMENT_METHOD = 'api/admin/payment/payment-method/delete';
+export const WEB_BANK_DATA = 'api/admin/payment/web-bank-data';
+export const ADD_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/add';
+export const USE_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/use';
+export const DELETE_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/delete';
+
+// system data
+export const GET_SYSTEM_DATA = 'api/admin/system/all';
+export const UPDATE_URL = 'api/admin/system/update-url';
+export const UPDATE_TURN_SERVICE = 'api/admin/system/update-turn-service';
+export const UPDATE_NOTIFICATION = 'api/admin/system/update-notification';
+
+export const GET_SYSTEM_NOTICE = 'api/admin/system/notice';
+export const ADD_SYSTEM_NOTICE = 'api/admin/system/add-notice';
+export const UPDATE_SYSTEM_NOTICE = 'api/admin/system/update-notice';
+export const DELETE_SYSTEM_NOTICE = 'api/admin/system/delete-notice';
+
+export const GET_MESSAGE_DATA = 'api/admin/system/message';
+export const ADD_MESSAGE_DATA = 'api/admin/system/add-message';
+export const DELETE_MESSAGE_DATA = 'api/admin/system/delete-message';
+
+export const GET_ACCESS_DATA = 'api/admin/system/access';
+export const DELETE_ACCESS_DATA = 'api/admin/system/delete-access';
+export const CANCEL_ACCESS_DATA = 'api/admin/system/cancel-access';
+
+export const GET_USER_INFO = 'api/admin/system/user-info';
+export const UPDATE_USER_INFO = 'api/admin/system/update-user-info';
+export const DELETE_USER_INFO = 'api/admin/system/delete-user-info';
+
+export const GET_CONTACT_INFO = 'api/admin/system/site-news';
+export const DELETE_CONTACT_INFO = 'api/admin/system/delete-site-news';
+
+export const GET_AG_LOGS = 'api/admin/system/ag-logs';
+export const GET_BBIN_LOGS = 'api/admin/system/bbin-logs';
+export const GET_MG_LOGS = 'api/admin/system/mg-logs';
+export const GET_PT_LOGS = 'api/admin/system/pt-logs';
+export const GET_OG_LOGS = 'api/admin/system/og-logs';
+export const GET_KY_LOGS = 'api/admin/system/ky-logs';
+
+export const GET_ADMIN_INFO = 'api/admin/system/admin-info';
+export const UPDATE_ADMIN_INFO = 'api/admin/system/update-admin-info';
