@@ -81,6 +81,8 @@ export default {
   userSetting: '用户设置',
   subAccount: '子账号',
   agency: '代理商',
+  company: '公司',
+  share: '股东',
 
   //Human Management
   humanManagement: '真人管理',

@@ -316,3 +316,18 @@ export const GET_KY_LOGS = 'api/admin/system/ky-logs';
 
 export const GET_ADMIN_INFO = 'api/admin/system/admin-info';
 export const UPDATE_ADMIN_INFO = 'api/admin/system/update-admin-info';
+
+export const GET_SUB_USER = 'api/admin/user-management/sub-user';
+export const ADD_SUB_USER = 'api/admin/user-management/add-sub-user';
+export const UPDATE_SUB_USER = 'api/admin/user-management/update-sub-user';
+export const DELETE_SUB_USER = 'api/admin/user-management/delete-sub-user';
+export const SUSPEND_SUB_USER = 'api/admin/user-management/suspend-sub-user';
+export const PERMISSION_SUB_USER = 'api/admin/user-management/permission-sub-user';
+
+export const GET_COMPANY = 'api/admin/user-management/company';
+export const GET_COMPANY_INFO = 'api/admin/user-management/company-info';
+export const ADD_COMPANY = 'api/admin/user-management/add-company';
+export const UPDATE_COMPANY = 'api/admin/user-management/update-company';
+export const DETAIL_COMPANY = 'api/admin/user-management/detail-company';
+export const UPDATE_MONEY_AGENCY = 'api/admin/user-management/update-money-agency';
+export const UPDATE_MEMBER = 'api/admin/user-management/update-member';
