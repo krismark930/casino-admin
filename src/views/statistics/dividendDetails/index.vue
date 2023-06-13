@@ -7,7 +7,7 @@
       <div>
         <el-form-item label="" style="padding: 10px;">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="25960.92" suffix="元">
+            <el-statistic precision="2" :value="totalStatistics.value_1" suffix="元">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总盈利
@@ -19,22 +19,11 @@
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>逐月</span>
-                <span class="green">
-                  24%
-                  <el-icon>
-                    <CaretTop />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="12346.35" suffix="元">
+            <el-statistic precision="2" :value="totalStatistics.value_2" suffix="元">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   彩金
@@ -46,22 +35,11 @@
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>逐月</span>
-                <span class="red">
-                  12%
-                  <el-icon>
-                    <CaretBottom />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="25960.92" suffix="元">
+            <el-statistic precision="2" :value="totalStatistics.value_3" suffix="元">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   佣金
@@ -73,25 +51,14 @@
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>逐月</span>
-                <span class="green">
-                  24%
-                  <el-icon>
-                    <CaretTop />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
       </div>
       <div>
         <el-form-item label="選擇代理商">
-          <el-select v-model="formData.agent" placeholder="">
+          <el-select v-model="formData.id" placeholder="">
             <el-option
-              v-for="item in options"
+              v-for="item in agentOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -100,104 +67,76 @@
         </el-form-item>
         <el-form-item label="">
           <el-date-picker
-            v-model="formData.daterange"
-            type="daterange"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            v-model="formData.start_time"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="开始日期"
+          />
+          <el-date-picker
+            v-model="formData.end_time"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="结束日期"
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">查詢</el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">上个月</el-button>
+          <el-button type="primary" @click="getStatisticsDataByFilter">查詢</el-button>
         </el-form-item>
       </div>
     </el-form>
     <el-table
-      :data="dividendDetailsData"
+      :data="statisticsList"
+      v-loading="loading"
       style="width: 100%; text-align: center; display: inline-block;"
       border
       header-align="center"
       stripe
     >
-      <el-table-column property="type" label="类型" align="center" />
-      <el-table-column property="totalStake" label="总投注额" align="center" />
+      <el-table-column property="title" label="类型" align="center" />
+      <el-table-column property="value_1" label="总投注额" align="center" />
       <el-table-column
-        property="validStake"
+        property="value_2"
         label="有效投注额"
         align="center"
       />
-      <el-table-column property="profit" label="盈利" align="center" />
+      <el-table-column property="value_3" label="盈利" align="center" />
     </el-table>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        daterange: '',
-        agent: '',
-      },
-      dividendDetailsData: [
-        {
-          type: '体育博弈',
-          totalStake: '0.00元',
-          validStake: '0.00元',
-          profit: '0.00元',
-        },
-        {
-          type: '时时彩',
-          totalStake: '0.00元',
-          validStake: '0.00元',
-          profit: '0.00元',
-        },
-        {
-          type: '六合彩',
-          totalStake: '0.00元',
-          validStake: '0.00元',
-          profit: '0.00元',
-        },
-        {
-          type: '真人',
-          totalStake: '0.00元',
-          validStake: '0.00元',
-          profit: '0.00元',
-        },
-        {
-          type: 'AG捕鱼王',
-          totalStake: '0.00元',
-          validStake: '0.00元',
-          profit: '0.00元',
-        },
-      ],
-      options: [
-        {
-          value: '4',
-          label: 'ddm999',
-        },
-        {
-          value: '95',
-          label: 'csk8899',
-        },
-        {
-          value: '96',
-          label: 'csaa123',
-        },
-        {
-          value: '97',
-          label: 'dd123',
-        },
-        {
-          value: '98',
-          label: '1231238qq',
-        },
-      ],
-    }
-  },
-  methods: {},
-}
+<script setup>
+  import {ref, computed, onMounted} from "vue";
+  import moment from "moment-timezone";
+  import {statisticsStore} from "@/pinia/modules/statistics";
+  import {storeToRefs} from "pinia";
+  const {dispatchDividendDetails} = statisticsStore();
+  const formData = ref({
+    start_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+    end_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+    id: ""
+  })
+  const loading = ref(false);
+  const agentOptions = computed(() => {
+    const { getAgentsList } = storeToRefs(statisticsStore());
+    return getAgentsList.value
+  })
+  const statisticsList = computed(() => {
+    const {getStatisticsList} = storeToRefs(statisticsStore());
+    return getStatisticsList.value;
+  })
+  const totalStatistics = computed(() => {
+    const {getTotalStatistics} = storeToRefs(statisticsStore());
+    return getTotalStatistics.value
+  })
+  const getStatisticsDataByFilter = async () => {
+    loading.value = true;
+    await dispatchDividendDetails(formData.value);
+    loading.value = false;    
+  }
+  onMounted(async () => {
+    loading.value = true;
+    await dispatchDividendDetails(formData.value);
+    loading.value = false;
+  })
 </script>
 <style lang="scss" scoped>
 :global(h2#card-usage ~ .example .example-showcase) {

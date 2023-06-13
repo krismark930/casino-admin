@@ -7,7 +7,7 @@
       <div>
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="25960.92">
+            <el-statistic precision="2" :value="totalStatistics.CK">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总存款
@@ -19,22 +19,11 @@
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>比昨天</span>
-                <span class="green">
-                  24%
-                  <el-icon>
-                    <CaretTop />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
         <el-form-item label="">
           <div class="statistic-card">
-            <el-statistic precision="2" :value="12346.35">
+            <el-statistic precision="2" :value="totalStatistics.TK">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总提款
@@ -46,40 +35,35 @@
                 </div>
               </template>
             </el-statistic>
-            <div class="statistic-footer">
-              <div class="footer-item">
-                <span>逐月</span>
-                <span class="red">
-                  12%
-                  <el-icon>
-                    <CaretBottom />
-                  </el-icon>
-                </span>
-              </div>
-            </div>
           </div>
         </el-form-item>
       </div>
       <div>
         <el-form-item label="">
           <el-date-picker
-            v-model="formData.daterange"
-            type="daterange"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            v-model="formData.startdate"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="开始日期"
+          />
+          <el-date-picker
+            v-model="formData.overdate"
+            type="date"
+            value-format="YYYY-MM-DD"
+            placeholder="结束日期"
           />
         </el-form-item>
         <el-form-item label="会员帐号">
           <el-input
             clearable
-            v-model="formData.memberAccount"
+            v-model="formData.username"
             placeholder=""
           ></el-input>
         </el-form-item>
         <el-form-item label="代理商">
-          <el-select v-model="formData.agent" placeholder="">
+          <el-select v-model="formData.Agent" placeholder="">
             <el-option
-              v-for="item in options"
+              v-for="item in agentOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -87,9 +71,9 @@
           </el-select>
         </el-form-item>
         <el-form-item label="类型">
-          <el-select v-model="formData.type" placeholder="">
+          <el-select v-model="formData.Type" placeholder="">
             <el-option
-              v-for="item in options"
+              v-for="item in typeOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -97,131 +81,114 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">确认</el-button>
+          <el-button type="primary" @click="getStatisticsDataByFilter">确认</el-button>
         </el-form-item>
       </div>
     </el-form>
     <el-table
-      :data="dailyAccountData"
+      :data="statisticsList"
+      v-loading = "loading"
       style="width: 100%;"
       border
       header-align="center"
       stripe
     >
       <el-table-column type="index" label="编号" />
-      <el-table-column property="accountNumber" label="帐号" />
-      <el-table-column property="amount" label="金额" />
-      <el-table-column property="balanceBefore" label="操作前余额" />
-      <el-table-column property="balanceAfter" label="操作后余额" />
+      <el-table-column property="UserName" label="帐号" />
+      <el-table-column property="Gold" label="金额" />
+      <el-table-column property="previousAmount" label="操作前余额" />
+      <el-table-column property="currentAmount" label="操作后余额" />
       <el-table-column label="日期时间" width="180">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.datetime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.Date }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="contactNumber" label="联系电话" />
-      <el-table-column property="bankofDeposit" label="开户银行" />
-      <el-table-column property="bankAccount" label="银行账号" />
-      <el-table-column property="name" label="用户名" />
-      <el-table-column property="orderNumber" label="定单号" />
+      <el-table-column property="Phone" label="联系电话" />
+      <el-table-column property="Bank_Address" label="开户银行" />
+      <el-table-column property="Bank_Account" label="银行账号" />
+      <el-table-column property="Alias" label="用户名" />
+      <el-table-column property="Order_Code" label="定单号" />
       <el-table-column fixed="right" label="操作" width="70">
         <template #default="scope">
-          <el-button
-            type="primary"
-            icon="delete"
-            @click="deleteDailyAccountData(scope.$index, scope.row)"
-          ></el-button>
+          <div v-if="scope.row.Checked == 0 || (scope.row.Music==0 && scope.rowType == 'S' && scope.row.Payway == 'W')">
+            未处理
+          </div>
+          <div v-else>
+            <div v-if="scope.row.Type == 'S'">
+              <font v-if="scope.row.Cancel == 1" color="red">存入已拒绝</font>
+              <font v-else color="blue">已存入</font>
+            </div>
+            <div v-else>
+              <font v-if="scope.row.Cancel == 1" color="red">已恢复</font>
+              <font v-else color="blue">已提出</font>
+            </div>
+          </div>
         </template>
       </el-table-column>
     </el-table>
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
-    </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        daterange: '',
-        memberAccount: '',
-        agent: '',
-        type: '',
-      },
-      dailyAccountData: [
-        {
-          id: 1,
-          accountNumber: 'aa123',
-          amount: '4.22',
-          balanceBefore: '2598.36',
-          balanceAfter: '2636.1',
-          datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
-          bankofDeposit: '微信',
-          bankAccount: '彩票返水',
-          name: '测试会员',
-          orderNumber: 'order',
-        },
-        {
-          id: 1,
-          accountNumber: 'aa123',
-          amount: '4.22',
-          balanceBefore: '2598.36',
-          balanceAfter: '2636.1',
-          datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
-          bankofDeposit: '微信',
-          bankAccount: '彩票返水',
-          name: '测试会员',
-          orderNumber: 'order',
-        },
-        {
-          id: 1,
-          accountNumber: 'aa123',
-          amount: '4.22',
-          balanceBefore: '2598.36',
-          balanceAfter: '2636.1',
-          datetime: '2023-02-22 12:48:27',
-          contactNumber: '测试会员',
-          bankofDeposit: '微信',
-          bankAccount: '彩票返水',
-          name: '测试会员',
-          orderNumber: 'order',
-        },
-      ],
-      options: [
-        {
-          value: '会员',
-          label: '会员',
-        },
-        {
-          value: '代理',
-          label: '代理',
-        },
-        {
-          value: '总代理',
-          label: '总代理',
-        },
-        {
-          value: '股东',
-          label: '股东',
-        },
-        {
-          value: '公司',
-          label: '公司',
-        },
-      ],
-    }
-  },
-  methods: {
-    deleteDailyAccountData(index, row) {
-      console.log(index, row)
+<script setup>
+  import {ref, computed, onMounted} from "vue";
+  import moment from "moment-timezone";
+  import {statisticsStore} from "@/pinia/modules/statistics";
+  import {storeToRefs} from "pinia";
+  const {dispatchDailyAccounts} = statisticsStore();
+  const formData = ref({
+    startdate: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+    overdate: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+    username: "",
+    Agent: "",
+    Type: "",
+  })
+  const typeOptions = ref([
+    {
+      label: "全部",
+      value: ""
     },
-  },
-}
+    {
+      label: "存款",
+      value: "S"
+    },
+    {
+      label: "提款",
+      value: "T"
+    },
+    {
+      label: "彩金",
+      value: "C"
+    },
+    {
+      label: "返水",
+      value: "F"
+    },
+  ])
+  const loading = ref(false);
+  const agentOptions = computed(() => {
+    const { getAgentsList } = storeToRefs(statisticsStore());
+    return getAgentsList.value
+  })
+  const statisticsList = computed(() => {
+    const {getStatisticsList} = storeToRefs(statisticsStore());
+    return getStatisticsList.value;
+  })
+  const totalStatistics = computed(() => {
+    const {getTotalStatistics} = storeToRefs(statisticsStore());
+    return getTotalStatistics.value
+  })
+  const getStatisticsDataByFilter = async () => {
+    loading.value = true;
+    await dispatchDailyAccounts(formData.value);
+    loading.value = false;    
+  }
+  onMounted(async () => {
+    loading.value = true;
+    await dispatchDailyAccounts(formData.value);
+    loading.value = false;
+  })
 </script>
 <style lang="scss" scoped>
 .pagination {
