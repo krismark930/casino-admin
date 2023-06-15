@@ -336,3 +336,5 @@ export const DIVIDEND_DETAILS = 'api/admin/statistics/dividend-details';
 export const DAILY_ACCOUNTS = 'api/admin/statistics/daily-accounts';
 export const SYSTEM_LOGS = 'api/admin/statistics/system-logs';
 export const GET_ONLINE = 'api/admin/statistics/get-online';
+
+export const SPORT_REPORT_ALL = 'api/admin/sport-report/all';

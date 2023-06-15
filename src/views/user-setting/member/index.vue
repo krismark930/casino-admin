@@ -230,7 +230,7 @@
             </el-form>
             <el-footer style="text-align: center">
                 <el-button type="primary" @click="updateCompany">確定</el-button>
-                <el-button type="danger" @click="cancelEditCompany">取消</el-button>
+                <el-button type="danger" @click="editCompanyDialogVisible = false">取消</el-button>
             </el-footer>
         </el-dialog>
         <el-dialog v-model="detailCompanyDialogVisible" width="90%">
