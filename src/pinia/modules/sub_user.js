@@ -44,6 +44,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
         async dispatchAddSubUserData(data) {
@@ -55,6 +56,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
         async dispatchUpdateSubUserData(data) {
@@ -66,6 +68,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
         async dispatchDeleteSubUserData(data) {
@@ -77,6 +80,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
         async dispatchSuspendSubUserData(data) {
@@ -88,6 +92,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
         async dispatchPermissionSubUser(data) {
@@ -99,6 +104,7 @@ export const subUserStore = defineStore('sub_user', {
                 }
             } catch (e) {
                 console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
             }
         },
     },
