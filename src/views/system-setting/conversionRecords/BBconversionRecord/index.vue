@@ -1,107 +1,101 @@
 <template>
-  <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
-  >
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;">
     <h3>{{ $t('menu.BBconveresionRecord') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="关键字查找">
-        <el-input
-          clearable
-          v-model="formData.keyword"
-          placeholder=""
-        ></el-input>
+        <el-input clearable v-model="formData.user_name" placeholder=""></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">确认</el-button>
+        <el-button type="primary" @click="getBBINLogsByFilter">确认</el-button>
       </el-form-item>
     </el-form>
-    <el-table
-      :data="BBconversionRecordData"
-      style="width: 100%;"
-      border
-      header-align="center"
-      stripe
-    >
+    <el-table :data="bbinLogList" v-loading="loading" style="width: 100%;" border header-align="center" stripe>
       <el-table-column type="index" label="编号" />
-      <el-table-column property="accountNumber" label="帐号" />
-      <el-table-column property="AGrealAccount" label="AG真人帐号" />
-      <el-table-column property="name" label="姓名" />
-      <el-table-column property="amount" label="金额" />
-      <el-table-column property="orderNumber" label="定单号" />
+      <el-table-column property="Username" label="帐号" />
+      <el-table-column property="BBIN_User" label="BBIN真人帐号" />
+      <el-table-column property="Alias" label="姓名" />
+      <el-table-column property="Gold" label="金额" />
+      <el-table-column property="Billno" label="定单号" />
       <el-table-column label="日期时间" width="180">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.datetime }}</span>
+            <el-icon>
+              <timer />
+            </el-icon>
+            <span style="margin-left: 10px">{{ scope.row.DateTime }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="conversionType" label="转换类型" />
-      <el-table-column property="state" label="状态" />
+      <el-table-column property="Type" label="转换类型">
+        <template #defaul="scope">
+          <div v-if="scope.row.Type == 'IN'">转入</div>
+          <div v-else>转出</div>
+        </template>
+      </el-table-column>
+      <el-table-column property="state" label="状态">
+        <template #defaul="scope">
+          <Font v-if="scope.row.Result <= 0">失败</Font>
+          <Font v-else>成功</Font>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="70">
         <template #default="scope">
-          <el-button
-            type="primary"
-            icon="delete"
-            @click="deleteBBData(scope.$index, scope.row)"
-          ></el-button>
+          <div v-if="scope.row.Result == 0">已处理</div>
+          <div v-else>已转入</div>
         </template>
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange"
+        :page-size="20" v-model:current-page="formData.page_no" />
     </div>
   </div>
 </template>
 <script>
+import { gameLogStore } from "@/pinia/modules/game_log.js";
 export default {
+  setup() {
+    const { dispatchBBINLogsData } = gameLogStore();
+    return {
+      dispatchBBINLogsData
+    }
+  },
   data() {
     return {
       formData: {
-        keyword: '',
+        user_name: '',
+        page_no: 1
       },
-      BBconversionRecordData: [
-        {
-          id: 1,
-          accountNumber: 'aa123',
-          AGrealAccount: 'TT_AAA1230',
-          name: 'hello',
-          amount: '2636.1',
-          orderNumber: 'order',
-          datetime: '2023-02-22 12:48:27',
-          conversionType: '转入',
-          state: '成功',
-        },
-        {
-          id: 2,
-          accountNumber: 'aa123',
-          AGrealAccount: 'TT_AAA1230',
-          name: 'hello',
-          amount: '2636.1',
-          orderNumber: 'order',
-          datetime: '2023-02-22 12:48:27',
-          conversionType: '转入',
-          state: '成功',
-        },
-        {
-          id: 3,
-          accountNumber: 'aa123',
-          AGrealAccount: 'TT_AAA1230',
-          name: 'hello',
-          amount: '2636.1',
-          orderNumber: 'order',
-          datetime: '2023-02-22 12:48:27',
-          conversionType: '转入',
-          state: '成功',
-        },
-      ],
+      loading: false
+    }
+  },
+  computed: {
+    totalCount: function() {
+      const {getTotalCount} = gameLogStore();
+      return getTotalCount;
+    },
+    bbinLogList: function() {
+      const {getBBINLogList} = gameLogStore();
+      return getBBINLogList;
     }
   },
   methods: {
-    deleteBBData(index, row) {
-      console.log(index, row)
+    async getBBINLogsByFilter() {
+      this.loading = true;
+      await this.dispatchBBINLogsData(this.formData)
+      this.loading = false;
+    },
+    async onPageChange() {
+      this.loading = true;
+      await this.dispatchBBINLogsData(this.formData)
+      this.loading = false;
     },
   },
+  async mounted() {
+    this.loading = true;
+    await this.dispatchBBINLogsData(this.formData)
+    this.loading = false;
+  }
 }
 </script>
 <style lang="scss" scoped>

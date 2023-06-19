@@ -6,28 +6,22 @@
       @tab-click="handleClick"
     >
       <el-tab-pane label="AG转换记录" name="first">
-        <MemberDeposit />
-        <AGRecord />
+        <AGRecord v-if="activeName == 'first'"/>
       </el-tab-pane>
       <el-tab-pane label="OG转换记录" name="second">
-        <MemberWithdrawal />
-        <OGRecord />
+        <OGRecord v-if="activeName == 'second'" />
       </el-tab-pane>
       <el-tab-pane label="BB转换记录" name="third">
-        <MemberInformation />
-        <BBRecord />
+        <BBRecord  v-if="activeName == 'third'"/>
       </el-tab-pane>
       <el-tab-pane label="MG转换记录" name="fourth">
-        <MemberContactInformation />
-        <MGRecord />
+        <MGRecord  v-if="activeName == 'fourth'"/>
       </el-tab-pane>
       <el-tab-pane label="PT转换记录" name="fifth">
-        <MemberInformation />
-        <PTRecord />
+        <PTRecord  v-if="activeName == 'fifth'"/>
       </el-tab-pane>
       <el-tab-pane label="开元棋牌转换记录" name="sixth">
-        <MemberContactInformation />
-        <ChessRecord />
+        <ChessRecord  v-if="activeName == 'sixth'"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -41,7 +35,7 @@ import OGRecord from '@/views/system-setting/conversionRecords/OGconversionRecor
 import BBRecord from '@/views/system-setting/conversionRecords/BBconversionRecord/index.vue'
 import MGRecord from '@/views/system-setting/conversionRecords/MGconversionRecord/index.vue'
 import PTRecord from '@/views/system-setting/conversionRecords/PTconversionRecord/index.vue'
-import ChessRecord from '@/views/system-setting/conversionRecords/ChessconversionRecord/index.vue'
+import ChessRecord from '@/views/system-setting/conversionRecords/chessconversionRecord/index.vue'
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
     console.log(tab, event)

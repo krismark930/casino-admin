@@ -1,6 +1,6 @@
 <template>
   <div class="turnservice-wrapper">
-    <el-table :data="tableData" class="turnservice-table">
+    <el-table :data="turnServiceList" class="turnservice-table">
       <el-table-column prop="service" label="服务"></el-table-column>
       <el-table-column prop="status" label="地位" width="200">
         <template #default="scope">
@@ -11,7 +11,7 @@
         <template #default="scope">
           <el-button
             size="small"
-            @click="handleSave(scope.row.service, scope.row.status)"
+            @click="updateTurnService(scope.row)"
           >
             节省
           </el-button>
@@ -21,47 +21,83 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from 'vue'
-const serviceStatus = reactive({
-  openreg: false,
-  agplat: false,
-  ogplat: false,
-  bbinplat: false,
-  mgplat: false,
-  ptplat: false,
-  kaiyuanchess: false,
+<script lang="ts" setup>
+import { ref, reactive, toRefs, computed } from 'vue'
+import { systemStore } from '@/pinia/modules/system';
+import { ElNotification, ElLoading } from "element-plus";
+import { storeToRefs } from 'pinia';
+const {dispatchUpdateTurnService} = systemStore();
+const props = defineProps<{ turnServiceList: Array<any> }>();
+const { turnServiceList } = toRefs(props);
+const updateTurnService = async (item: any) => {
+  let formData = {};
+  switch (item.service) {
+    case "开放注册":
+      formData = {
+        isReg: item.status ? 1 : 0
+      }
+      break;  
+    case "AG平台":
+      formData = {
+        AG_Repair: item.status ? 1 : 0
+      }
+      break;  
+    case "OG平台":
+      formData = {
+        OG_Repair: item.status ? 1 : 0
+      }
+      break;  
+    case "BBIN平台":
+      formData = {
+        BBIN_Repair: item.status ? 1 : 0
+      }
+      break;  
+    case "MG平台":
+      formData = {
+        MG_Repair: item.status ? 1 : 0
+      }
+      break;  
+    case "PT平台":
+      formData = {
+        PT_Repair: item.status ? 1 : 0
+      }
+      break;  
+    case "开元棋牌":
+      formData = {
+        KY_Repair: item.status ? 1 : 0
+      }
+      break;  
+    default:
+      break;
+  }
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchUpdateTurnService(formData);
+  successResult();
+  loading.close();
+}
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(systemStore());
+  return getSuccess.value;
 })
-const tableData = [
-  {
-    service: '开放注册',
-    status: true,
-  },
-  {
-    service: 'AG平台',
-    status: false,
-  },
-  {
-    service: 'OG平台',
-    status: false,
-  },
-  {
-    service: 'BBIN平台',
-    status: false,
-  },
-  {
-    service: 'MG平台',
-    status: false,
-  },
-  {
-    service: 'PT平台',
-    status: false,
-  },
-  {
-    service: '开元棋牌',
-    status: false,
-  },
-]
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: "操作失败。",
+      type: "error",
+    });
+  }
+}
 </script>
 
 <style lang="scss" scoped>

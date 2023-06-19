@@ -2,6 +2,11 @@ const Layout = () => import('@/layout/index.vue')
 const SubAccount = () => import('@/views/user-setting/subAccount/index.vue')
 const Member = () => import('@/views/user-setting/member/index.vue')
 const Agency = () => import('@/views/user-setting/agency/index.vue')
+const Company = () => import('@/views/user-setting/company/index.vue');
+const Share = () => import('@/views/user-setting/share/index.vue');
+const GeneralAgent = () => import('@/views/user-setting/general_agent/index.vue');
+const Member2 = () => import('@/views/user-setting/member_2/index.vue');
+
 
 export default [
   {
@@ -23,6 +28,33 @@ export default [
         },
       },
       {
+        path: '/company',
+        name: 'Company',
+        component: Company,
+        meta: {
+          title: 'menu.companys',
+          affix: true,
+        },
+      },
+      {
+        path: '/share',
+        name: 'Share',
+        component: Share,
+        meta: {
+          title: 'menu.shareHolders',
+          affix: true,
+        },
+      },
+      {
+        path: '/general-agent',
+        name: 'GeneralAgent',
+        component: GeneralAgent,
+        meta: {
+          title: 'menu.generalAgents',
+          affix: true,
+        },
+      },
+      {
         path: '/agency',
         name: 'Agency',
         component: Agency,
@@ -40,6 +72,15 @@ export default [
           affix: true,
         },
       },
+      // {
+      //   path: '/member-2',
+      //   name: 'Member2',
+      //   component: Member2,
+      //   meta: {
+      //     title: 'menu.vip2s',
+      //     affix: true,
+      //   },
+      // },
     ],
   },
 ]

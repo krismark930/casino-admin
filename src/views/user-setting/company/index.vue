@@ -2,7 +2,7 @@
     <el-card shadow="never">
         <el-row style="margin-bottom: 1.5rem; font-size: 20px;">
             <el-col>
-                <h4>代理商管理</h4>
+                <h4>公司管理</h4>
             </el-col>
         </el-row>
         <el-row class="hidden-lg-and-up" style="margin-bottom: 1rem;">
@@ -72,7 +72,7 @@
                     {{scope.row.Alias}}
                 </template>
             </el-table-column>
-            <el-table-column prop="UserName" label="代理商 帐号" width="140">
+            <el-table-column prop="UserName" label="公司 帐号" width="140">
                 <template #default="scope">
                     <div>{{scope.row.UserName}}</div>
                     <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div>
@@ -115,8 +115,6 @@
                     <el-button link type="success" size="small" :disabled="scope.row.Status == 1 || scope.row.Status == 2" @click="handleEditType(scope.row.ID, scope.row.UserName, 'suspend')">
                         冻结
                     </el-button>
-                    <br />
-                    <el-button link type="danger" size="small" @click="handleMoneyAgency(scope.row)">额度管理</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -124,24 +122,8 @@
             <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange"
                 :page-size="pageSize" v-model:current-page="formData.page_no" />
         </div>
-        <el-dialog v-model="editMoneyDialogVisible">
-          <h2>代理商额度修改</h2>
-          <el-form-item label="代理 帳號 :">
-            {{ editMoneyAgencyData.agent }}
-          </el-form-item>
-          <el-form-item label="會員 名稱 :">
-            {{ editMoneyAgencyData.Alias }}
-          </el-form-item>
-          <el-form-item label="現金額度 :">
-            <el-input v-model="editMoneyAgencyData.Money"/>
-          </el-form-item>
-          <el-footer style="text-align: center;">
-              <el-button type="primary" @click="updateMoneyAgency">確定</el-button>
-              <el-button type="danger" @click="editMoneyDialogVisible == false">取消</el-button>
-          </el-footer>
-        </el-dialog>
         <el-dialog v-model="newCompanyDialogVisible">
-            <el-form-item label="總代理管理 --新增 ,修改">
+            <el-form-item label="管理管理 --新增 ,修改">
                 <el-select v-model="newCompanyData.parents_id">
                     <el-option v-for="(item, index) in addParentsList" :key="index" :label="item.label" :value="item.value">
                     </el-option>
@@ -149,7 +131,7 @@
             </el-form-item>
             <h2>基本資料設定</h2>
             <el-form label-width="150">
-                <el-form-item :label="`代理商 帳號 : ${newCompanyData.UserName}`">
+                <el-form-item :label="`公司 帳號 : ${newCompanyData.UserName}`">
                     <el-select v-model="newCompanyData.num_1" style="width: 100px" @change="handleChangeNumber">
                         <el-option v-for="(item, index) in numberOptions" :key="index" :label="item.label"
                             :value="item.value"></el-option>
@@ -165,14 +147,14 @@
                     ◎帳號規則：請輸入四位數字０～９
                     <el-button type="primary">檢查帳號</el-button>
                 </el-form-item>
-                <el-form-item label="密碼 : ">
+                <el-form-item label="密碼 :	">
                     <el-input type="password" style="width: 200px" v-model="newCompanyData.PassWord" maxlength="12"></el-input>
                     ◎密碼規則：須為6~12碼英數字夾雜且符合0~9及a~z字。
                 </el-form-item>
                 <el-form-item label="確認密碼 :">
                     <el-input type="password" v-model="newCompanyData.confirmPassword" style="width: 200px;" maxlength="12"></el-input>
                 </el-form-item>
-                <el-form-item label="代理商 名稱 :">
+                <el-form-item label="公司 名稱 :">
                     <el-input v-model="newCompanyData.Alias"></el-input>
                 </el-form-item>
             </el-form>
@@ -188,11 +170,9 @@
                             :value="item.value"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="總代理 佔成數 :">
-                    <el-input style="width: 200px;" v-model="newCompanyData.winloss_c"></el-input>
-                </el-form-item>
-                <el-form-item label="代理商 佔成數 :">
-                    <el-input style="width: 200px;" v-model="newCompanyData.winloss_d"></el-input>
+                <el-form-item label="使用天数 :">
+                    <el-input style="width: 200px;" v-model="newCompanyData.usedate"></el-input>
+                    （0为不限制，1为一天。）
                 </el-form-item>
             </el-form>
             <el-footer style="text-align: center">
@@ -203,7 +183,7 @@
         <el-dialog v-model="editCompanyDialogVisible">
             <h2>基本資料設定</h2>
             <el-form label-width="150">
-                <el-form-item label="代理商 帳號 :">
+                <el-form-item label="公司 帳號 :">
                     {{editCompanyData.name}}
                 </el-form-item>
                 <el-form-item label="密碼: ">
@@ -213,16 +193,16 @@
                 <el-form-item label="確認密碼 :">
                     <el-input type="password" v-model="editCompanyData.passwd" style="width: 200px;" maxlength="12"></el-input>
                 </el-form-item>
-                <el-form-item label="代理商 名稱 :">
+                <el-form-item label="公司 名稱 :">
                     <el-input v-model="editCompanyData.alias"></el-input>
                 </el-form-item>
-                <el-form-item label="代理商 联系电话:">
+                <el-form-item label="公司 联系电话:">
                 {{editCompanyData.Phone}}
                 </el-form-item>
-                <el-form-item label="代理商 开户行 :">
+                <el-form-item label="公司 开户行 :">
                 {{editCompanyData.Bank_Address}}
                 </el-form-item>
-                <el-form-item label="代理商 银行账号 :">
+                <el-form-item label="公司 银行账号 :">
                 {{editCompanyData.Bank_Account}}
                 </el-form-item>
             </el-form>
@@ -233,7 +213,7 @@
         </el-dialog>
         <el-dialog v-model="detailCompanyDialogVisible" width="90%">
             <div style="display: flex;">
-                代理商 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.UserName}} -- 名稱:{{detailCompanyData.Alias}} 
+                公司 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.UserName}} -- 名稱:{{detailCompanyData.Alias}} 
             </div>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
                 <tr class="m_title_edit" >
@@ -801,11 +781,10 @@ const { dispatchCompanyInfoData } = companyStore();
 const { dispatchAddCompanyData } = companyStore();
 const { dispatchUpdateCompanyData } = companyStore();
 const { dispatchUpdateDetailCompany } = companyStore();
-const { dispatchUpdateMoneyAgency } = companyStore();
 const pageSize = ref(20)
 const loading = ref(false);
 const formData = ref({
-    lv: "D",
+    lv: "A",
     parents_id: "",
     page_no: 1,
     orderby: "DESC",
@@ -818,7 +797,6 @@ const formData = ref({
 const newCompanyDialogVisible = ref(false);
 const editCompanyDialogVisible = ref(false);
 const detailCompanyDialogVisible = ref(false);
-const editMoneyDialogVisible = ref(false);
 const numberOptions = [
     {
         label: "0",
@@ -872,22 +850,21 @@ const wagerOptions = [
     }
 ]
 const newCompanyData = ref({
-    lv: "D",
+    lv: "A",
     num_1: 0,
     num_2: 0,
     num_3: 0,
-    UserName: "ddm",
+    UserName: "adm",
     PassWord: "",
     confirmPassword: "",
     Alias: "",
     wager: 0,
     maxcredit: "0",
-    winloss_c: 0,
-    winloss_d: 0,
+    usedate: 0,
     parents_id: ""
 })
 const editCompanyData = ref({
-    lv: "D",    
+    lv: "A",    
     parents_id: "",
     admin: "",
     id: "",
@@ -897,13 +874,10 @@ const editCompanyData = ref({
     alias: "",
     Phone: "",
     Bank_Address: "",
-    Bank_Account: "",
-    super: "",
-    corprator: "",
-    world: ""
+    Bank_Account: ""
 });
 const detailCompanyData = ref({
-    lv: "D",
+    lv: "A",
     admin: "",
     parents_id: "",
     name: "",
@@ -1108,13 +1082,6 @@ const BK_Turn_OU_D_OPTIONS = ref([]);
 const BK_Turn_RE_D_OPTIONS = ref([]);
 const BK_Turn_ROU_D_OPTIONS = ref([]);
 const BK_Turn_EO_D_OPTIONS = ref([]);
-
-const editMoneyAgencyData = ref({
-  agent: "",
-  Money: "",
-  Alias: "",
-  admin : ""
-})
 
 const detailCompany = (item) => {
     detailCompanyData.value.name = item.UserName;
@@ -1656,6 +1623,7 @@ const detailCompany = (item) => {
     detailCompanyDialogVisible.value = true;
 }
 const editCompany = (item) => {
+    console.log(item.UserName);
     editCompanyData.value.id = item.ID;
     editCompanyData.value.admin = item.Admin
     editCompanyData.value.name = item.UserName;
@@ -1663,26 +1631,7 @@ const editCompany = (item) => {
     editCompanyData.value.Phone = item.Phone;
     editCompanyData.value.Bank_Address = item.Bank_Address;
     editCompanyData.value.Bank_Account = item.Bank_Account;
-    editCompanyData.value.super = item.Super;
-    editCompanyData.value.corprator = item.Corprator;
-    editCompanyData.value.world = item.World;
     editCompanyDialogVisible.value = true;
-}
-const handleMoneyAgency = (item) => {
-  editMoneyAgencyData.value.agent = item.UserName;
-  editMoneyAgencyData.value.Money = item.Money;
-  editMoneyAgencyData.value.Alias = item.Alias;
-  editMoneyAgencyData.value.admin = item.Admin;
-  editMoneyDialogVisible.value = true;
-}
-const updateMoneyAgency = async () => {
-  loading.value = true;
-  await dispatchUpdateMoneyAgency(editMoneyAgencyData.value);
-    successResult();
-    editMoneyDialogVisible.value = false;
-    await dispatchCompanyData(formData.value);
-    await dispatchCompanyInfoData(formData.value);
-    loading.value = false;
 }
 const updateDetailCompany = async (gtype) => {
     detailCompanyData.value.gtype = gtype;
@@ -1741,8 +1690,8 @@ const addCompany = async () => {
         alert("請輸入:管理帳號!!");
         return;
     }
-    if (newCompanyData.value.UserName == "ddm" || newCompanyData.value.UserName.length < 6) {
-        alert("請輸入:代理商帳號 !!");
+    if (newCompanyData.value.UserName == "adm" || newCompanyData.value.UserName.length < 6) {
+        alert("請輸入:公司帳號 !!");
         return;
     }
     if (!regex.test(newCompanyData.value.PassWord)) {
@@ -1776,7 +1725,7 @@ const cancelNewCompany = () => {
         num_1: 0,
         num_2: 0,
         num_3: 0,
-        UserName: "ddm",
+        UserName: "adm",
         PassWord: "",
         confirmPassword: "",
         Alias: "",
@@ -1788,7 +1737,7 @@ const cancelNewCompany = () => {
     newCompanyDialogVisible.value = false;
 }
 const handleChangeNumber = () => {
-    newCompanyData.value.UserName = "ddm";
+    newCompanyData.value.UserName = "adm";
     newCompanyData.value.UserName = newCompanyData.value.UserName + newCompanyData.value.num_1 + newCompanyData.value.num_2 + newCompanyData.value.num_3;
 }
 

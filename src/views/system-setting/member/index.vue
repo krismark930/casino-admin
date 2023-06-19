@@ -6,16 +6,16 @@
       @tab-click="handleClick"
     >
       <el-tab-pane label="会员存款" name="first">
-        <MemberDeposit />
+        <MemberDeposit v-if="activeName == 'first'"/>
       </el-tab-pane>
       <el-tab-pane label="会员提款" name="second">
-        <MemberWithdrawal />
+        <MemberWithdrawal v-if="activeName == 'second'"/>
       </el-tab-pane>
       <el-tab-pane label="会员信息" name="third">
-        <MemberInformation />
+        <MemberInformation v-if="activeName == 'third'"/>
       </el-tab-pane>
       <el-tab-pane label="会员联系方式" name="fourth">
-        <MemberContactInformation />
+        <MemberContactInformation v-if="activeName == 'fourth'"/>
       </el-tab-pane>
     </el-tabs>
   </div>

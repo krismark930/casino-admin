@@ -97,7 +97,7 @@
 
       <el-table-column property="eventCanceled" label="赛事取消" align="center">
         <template #default="scope">
-          <el-select placeholder="赛事处理" v-model="eventValue" @change="updateSportEvent(scope.row)">
+          <el-select placeholder="赛事处理" v-model="eventValue" @change="updateSportEvent(scope.row.MID)">
             <el-option v-for="item in events" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </template>
