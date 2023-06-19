@@ -5,35 +5,23 @@
     <h3>{{ $t('menu.systemLog') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>
-        <el-form-item label="">
-          <el-select
-            v-model="formData.timeOption"
-            placeholder=" "
-            style="width: 80px;"
-          >
-            <el-option
-              v-for="item in timeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="日期">
           <el-date-picker
             placeholder=""
-            v-model="formData.date"
+            type="date"
+            value-format="YYYY-MM-DD"
+            v-model="formData.date_start"
             style="width: 150px;"
           />
         </el-form-item>
         <el-form-item label="帐户">
           <el-select
-            v-model="formData.accountOption"
+            v-model="formData.parents_id"
             placeholder=" "
             style="width: 80px;"
           >
             <el-option
-              v-for="item in accountOptions"
+              v-for="item in agentOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -41,31 +29,34 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">快速查詢</el-button>
+          <el-button type="primary" @click="getStatisticsDataByFilter">快速查詢</el-button>
+          <el-button type="danger" @click="goBack">快速查詢</el-button>
         </el-form-item>
       </div>
     </el-form>
     <el-table
-      :data="systemLogData"
+      :data="statisticsList"
       style="width: 100%;"
+      v-loading="loading"
       border
       header-align="center"
       stripe
+      v-if="!showLog"
     >
       <el-table-column type="index" label="序号" align="center" width="70" />
-      <el-table-column property="accountNumber" label="帐号" align="center" />
-      <el-table-column property="level" label="级别" align="center" />
+      <el-table-column property="UserName" label="帐号" align="center" />
+      <el-table-column property="Level" label="级别" align="center" />
       <el-table-column label="登陆时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.loginTime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.LoginTime }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="loginURL" label="登陆网址" align="center" />
+      <el-table-column property="Url" label="登陆网址" align="center" />
       <el-table-column
-        property="loginIPRegion"
+        property="LoginIP"
         label="登陆IP和地区"
         align="center"
       />
@@ -75,14 +66,14 @@
             <el-button
               type="primary"
               link
-              @click="checkData(scope.$index, scope.row)"
+              @click="checkData(scope.row)"
             >
               查看
             </el-button>
             <el-button
               type="danger"
               link
-              @click="kickLineData(scope.$index, scope.row)"
+              @click="kickLineData(scope.row)"
             >
               踢线
             </el-button>
@@ -90,81 +81,104 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-table
+      :data="statisticsList"
+      style="width: 100%;"
+      v-loading="loading"
+      border
+      header-align="center"
+      stripe
+      v-else
+    >
+      <el-table-column type="index" label="序号" align="center" width="70" />
+      <el-table-column property="UserName" label="帐号" align="center" />
+      <el-table-column property="level" label="级别" align="center">
+        <template #default="scope">
+          <div v-if="scope.row.UserName.substring(0,1) == 'a'">公司</div>
+          <div v-else-if="scope.row.UserName.substring(0,1) == 'b'">股东</div>
+          <div v-else-if="scope.row.UserName.substring(0,1) == 'c'">总代理</div>
+          <div v-else-if="scope.row.UserName.substring(0,1) == 'd'">代理商</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="活动时间" width="180" align="center">
+        <template #default="scope">
+          <div style="display: flex; align-items: center">
+            <el-icon><timer /></el-icon>
+            <span style="margin-left: 10px">{{ scope.row.LoginTime }}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column property="ConText" label="活动内容" align="center" />
+      <el-table-column
+        property="LoginIP"
+        label="登陆IP"
+        align="center"
+      />
+    </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange" :page-size="20"
+        v-model:current-page="formData.page" />
     </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        date: '',
-        accountOption: '全部',
-        timeOption: '10秒',
-      },
-      systemLogData: [
-        {
-          accountNumber: 'admin',
-          level: '',
-          loginTime: '2023-02-22 12:48:27',
-          loginURL: 'http://htadmin.pj6678.com',
-          loginIPRegion: '188.43.14.13 英国',
-          contactNumber: '测试会员',
-          bankofDeposit: '微信',
-          bankAccount: '彩票返水',
-          name: '测试会员',
-          orderNumber: 'order',
-        },
-      ],
-      timeOptions: [
-        {
-          value: '10',
-          label: '10秒',
-        },
-        {
-          value: '30',
-          label: '30秒',
-        },
-        {
-          value: '60',
-          label: '60秒',
-        },
-        {
-          value: '90',
-          label: '90秒',
-        },
-        {
-          value: '120',
-          label: '120秒',
-        },
-        {
-          value: '180',
-          label: '180秒',
-        },
-      ],
-      accountOptions: [
-        {
-          value: '全部',
-          label: '全部',
-        },
-        {
-          value: 'admin===管理员',
-          label: 'admin===管理员',
-        },
-      ],
-    }
-  },
-  methods: {
-    checkData(index, row) {
-      console.log(index, row)
-    },
-    kickLineData(index, row) {
-      console.log(index, row)
-    },
-  },
-}
+<script setup>
+  import {ref, computed, onMounted} from "vue";
+  import moment from "moment-timezone";
+  import {statisticsStore} from "@/pinia/modules/statistics";
+  import {storeToRefs} from "pinia";
+  const {dispatchSystemLogs} = statisticsStore();
+  const showLog=ref(false);
+  const formData = ref({
+    date_start: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
+    parents_id: "",
+    name: "",
+    page: 1
+  })
+  const loading = ref(false);
+  const agentOptions = computed(() => {
+    const { getAgentsList } = storeToRefs(statisticsStore());
+    return getAgentsList.value
+  })
+  const statisticsList = computed(() => {
+    const {getStatisticsList} = storeToRefs(statisticsStore());
+    return getStatisticsList.value;
+  })
+  const totalCount = computed(() => {
+    const {getTotalCount} = storeToRefs(statisticsStore());
+    return getTotalCount.value
+  })
+  const kickLineData = async (item) => {
+    formData.value.name = item.UserName;
+    formData.value.active = 1;
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    loading.value = false;
+  }
+  const getStatisticsDataByFilter = async () => {
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    loading.value = false;
+  }
+  const goBack = () => {
+    showLog.value = false;
+  }
+  const checkData = async (item) => {
+    formData.value.name = item.UserName;
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    showLog.value = true;
+    loading.value = false;
+  }
+  const onPageChange = async () => {
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    loading.value = false;
+  }
+  onMounted(async () => {
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    loading.value = false;
+  })
 </script>
 <style lang="scss" scoped>
 .pagination {

@@ -24,6 +24,7 @@ const SearchBettings = () =>
 const ChampionBettings = () =>
   import('@/views/sports-betting/champion-bettings/index.vue')
 const SportsEvent = () => import('@/views/sports-betting/sportsEvent/index.vue')
+const SportsReport = () => import('@/views/sports-betting/report/index.vue');
 import checkScores2 from '@/i18n/locales/zh-cn/check-scores2'
 
 export default [
@@ -150,6 +151,15 @@ export default [
         component: SportsEvent,
         meta: {
           title: 'menu.sportsEvent',
+          affix: true,
+        },
+      },
+      {
+        path: '/sport-report',
+        name: 'SportsReport',
+        component: SportsReport,
+        meta: {
+          title: '报表',
           affix: true,
         },
       },

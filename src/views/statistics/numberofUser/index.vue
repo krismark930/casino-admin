@@ -7,12 +7,12 @@
       <div>
         <el-form-item label="在线人数">
           <el-select
-            v-model="formData.userOption"
+            v-model="formData.level"
             placeholder=" "
             style="width: 80px;"
           >
             <el-option
-              v-for="item in userOptions"
+              v-for="item in agentOptions"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -21,55 +21,56 @@
         </el-form-item>
         <el-form-item label="在线帐号">
           <el-input
-            v-model="formData.account"
+            v-model="formData.name"
             placeholder=""
             clearable
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">提交</el-button>
+          <el-button type="primary" @click="getStatisticsDataByFilter">提交</el-button>
         </el-form-item>
       </div>
     </el-form>
     <el-table
-      :data="numberofUserData"
+      :data="statisticsList"
+      v-loading="loading"
       style="width: 100%;"
       border
       header-align="center"
       stripe
     >
       <el-table-column type="index" label="序号" align="center" width="70" />
-      <el-table-column property="account" label="账号" align="center" />
-      <el-table-column property="name" label="名称" align="center" />
+      <el-table-column property="UserName" label="账号" align="center" />
+      <el-table-column property="Alias" label="名称" align="center" />
       <el-table-column label="操作" width="120" align="center">
         <template #default="scope">
           <el-button-group>
             <el-button
               type="danger"
               link
-              @click="kickLineData(scope.$index, scope.row)"
+              @click="kickLineData(scope.row)"
             >
               踢线
             </el-button>
             <el-button
               type="primary"
               link
-              @click="realPersonSetting(scope.$index, scope.row)"
+              @click="realPersonSetting(scope.row)"
             >
               真人设置
             </el-button>
           </el-button-group>
         </template>
       </el-table-column>
-      <el-table-column property="credits" label="信用额度" align="center" />
-      <el-table-column property="cashAmount" label="现金额度" align="center" />
-      <el-table-column property="BBAmount" label="BB额度" align="center" />
-      <el-table-column property="AGAmount" label="AG额度" align="center" />
-      <el-table-column property="OGAmount" label="OG额度" align="center" />
-      <el-table-column property="MGAmount" label="MG额度" align="center" />
-      <el-table-column property="PTAmount" label="PT额度" align="center" />
+      <el-table-column property="Credit" label="信用额度" align="center" />
+      <el-table-column property="Money" label="现金额度" align="center" />
+      <el-table-column property="BBIN_Money" label="BB额度" align="center" />
+      <el-table-column property="AG_Money" label="AG额度" align="center" />
+      <el-table-column property="OG_Money" label="OG额度" align="center" />
+      <el-table-column property="MG_Money" label="MG额度" align="center" />
+      <el-table-column property="PT_Money" label="PT额度" align="center" />
       <el-table-column
-        property="kaiyuanAmount"
+        property="KY_Money"
         label="开元额度"
         align="center"
       />
@@ -77,7 +78,7 @@
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.loginTime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.LoginTime }}</span>
           </div>
         </template>
       </el-table-column>
@@ -85,71 +86,72 @@
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon><timer /></el-icon>
-            <span style="margin-left: 10px">{{ scope.row.activityTime }}</span>
+            <span style="margin-left: 10px">{{ scope.row.OnlineTime }}</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="loginURL" label="登陆网址" align="center" />
+      <el-table-column property="Url" label="登陆网址" align="center" />
       <el-table-column
-        property="loginIPRegion"
+        property="LoginIP"
         label="登陆IP和地区"
         align="center"
       />
-      <el-table-column property="machineCode" label="机器码" align="center" />
+      <el-table-column property="MachineCode" label="机器码" align="center" />
     </el-table>
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
-    </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      formData: {
-        account: '',
-        userOption: '会员',
-      },
-      numberofUserData: [
-        {
-          account: 'aaa123',
-          name: 'hello',
-          credits: '1100',
-          cashAmount: '1087',
-          BBAmount: '122元',
-          AGAmount: '122元',
-          OGAmount: '122元',
-          MGAmount: '122元',
-          PTAmount: '122元',
-          kaiyuanAmount: '122元',
-          loginTime: '2023-03-02 02:34:18',
-          activityTime: '2023-03-02 02:34:18',
-          loginURL: 'http://vip.pj6678.com',
-          loginIPRegion: '188.43.14.13 英国',
-          machineCode: 'D7048F27BCEA8D0EF7ED',
-        },
-      ],
-      userOptions: [
-        {
-          value: '会员',
-          label: '会员',
-        },
-        {
-          value: '代理',
-          label: '代理',
-        },
-      ],
-    }
-  },
-  methods: {
-    realPersonSetting(index, row) {
-      console.log(index, row)
+<script setup>
+  import {ref, computed, onMounted} from "vue";
+  import moment from "moment-timezone";
+  import {statisticsStore} from "@/pinia/modules/statistics";
+  import {storeToRefs} from "pinia";
+  const {dispatchOnlineData} = statisticsStore();
+  const formData = ref({
+    level: "",
+    username: "",
+    name: "",
+  })
+  const loading = ref(false);
+  const agentOptions = ref([
+    {
+      label: "会员",
+      value: "member"
     },
-    kickLineData(index, row) {
-      console.log(index, row)
+    {
+      label: "代理",
+      value: "agents"
     },
-  },
-}
+  ])
+  const statisticsList = computed(() => {
+    const {getStatisticsList} = storeToRefs(statisticsStore());
+    return getStatisticsList.value;
+  })
+  const totalCount = computed(() => {
+    const {getTotalCount} = storeToRefs(statisticsStore());
+    return getTotalCount.value
+  })
+  const kickLineData = async (item) => {
+    formData.value.username = item.UserName;
+    formData.value.active = 1;
+    loading.value = true;
+    await dispatchOnlineData(formData.value);
+    loading.value = false;
+  }
+  const getStatisticsDataByFilter = async () => {
+    loading.value = true;
+    await dispatchOnlineData(formData.value);
+    loading.value = false;
+  }
+  const onPageChange = async () => {
+    loading.value = true;
+    await dispatchOnlineData(formData.value);
+    loading.value = false;
+  }
+  onMounted(async () => {
+    loading.value = true;
+    await dispatchOnlineData(formData.value);
+    loading.value = false;
+  })
 </script>
 <style lang="scss" scoped>
 .pagination {

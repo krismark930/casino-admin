@@ -86,10 +86,7 @@ addBackToTop({
   textColor: '#409eff',
 })
 
-// const SOCKET_URL = 'http://localhost:3000';
-const SOCKET_URL = 'http://27.126.187.127';
-
-console.log(SOCKET_URL);
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
 
 app
   .use(i18n)

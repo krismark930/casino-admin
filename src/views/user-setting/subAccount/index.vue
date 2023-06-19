@@ -198,6 +198,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { subUserStore } from "@/pinia/modules/sub_user.js";
+import { ElNotification, ElLoading } from "element-plus";
 import { storeToRefs } from "pinia";
 const { dispatchSubUserData } = subUserStore();
 const { dispatchAddSubUserData } = subUserStore();
@@ -251,6 +252,31 @@ const updatePermission = async () => {
 const addSubUserDialogShow = () => {
   newUserDialogVisible.value = true;
 }
+
+const successResult = () => {
+  if (success.value) {
+    ElNotification({
+      title: "成功",
+      message: "操作成功。",
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "错误",
+      message: errMessage.value,
+      type: "error",
+    });
+  }
+}
+
+const success = computed(() => {
+  const { getSuccess } = storeToRefs(subUserStore());
+  return getSuccess.value;
+})
+const errMessage = computed(() => {
+  const {getErrMessage} = storeToRefs(subUserStore());
+  return getErrMessage.value;
+})
 const subUserList = computed(() => {
   const { getSubUserList } = storeToRefs(subUserStore());
   console.log(getSubUserList.value);
@@ -275,6 +301,7 @@ const addSubUser = async () => {
   }
   loading.value = true;
   await dispatchAddSubUserData(subUser.value);
+  successResult();
   newUserDialogVisible.value = false;
   await dispatchSubUserData(formData.value);
   subUser.value = {
