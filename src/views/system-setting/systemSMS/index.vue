@@ -2,15 +2,15 @@
   <div style="padding: 1rem;">
     <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center;">
       <h3>{{ $t('menu.systemSmss') }}</h3>
-      <el-form :model="newsFormData" label-width="100px" style="width: 600px; display: inline-block;">
+      <el-form :model="newsFormData" label-width="100px" style="width: 800px; display: inline-block;">
         <el-form-item label="帐号">
-          <el-input v-model="newsFormData.UserName" placeholder="" clearable></el-input>
+          <el-input v-model="newsFormData.UserName" placeholder="" clearable></el-input>所有会员everyone
         </el-form-item>
         <el-form-item label="标题">
           <el-input v-model="newsFormData.Subject" placeholder="" clearable></el-input>
         </el-form-item>
         <el-form-item label="短信息">
-          <el-input type="textarea" autosize placeholder="Please input message" v-model="newsFormData.Message"></el-input>
+          <el-input type="textarea" :autosize="{ minRows: 6, maxRows: 20 }" placeholder="Please input message" v-model="newsFormData.Message"></el-input>
         </el-form-item>
         <el-form-item style="display: inline-flex;">
           <el-button type="primary" @click="addWebMessageData">确定</el-button>
