@@ -339,3 +339,4 @@ export const GET_ONLINE = 'api/admin/statistics/get-online';
 
 export const SPORT_REPORT_ALL = 'api/admin/sport-report/all';
 export const SPORT_REPORT_TOP = 'api/admin/sport-report/top';
+export const SPORT_REBATE = 'api/admin/sport-report/rebate';

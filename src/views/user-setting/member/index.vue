@@ -75,7 +75,7 @@
             <el-table-column prop="UserName" label="代理商 帐号" width="140">
                 <template #default="scope">
                     <div>{{scope.row.UserName}}</div>
-                    <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div>
+                    <!-- <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div> -->
                 </template>
             </el-table-column>
             <el-table-column prop="Money" label="可用額度" width="150" />

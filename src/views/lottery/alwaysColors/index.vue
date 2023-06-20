@@ -26,7 +26,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import {useRoute} from 'vue-router';
 import type { TabsPaneContext } from 'element-plus'
 import ManageHome from '@/views/lottery/alwaysColors/manageHome/index.vue'
 import ReportDetails from '@/views/lottery/alwaysColors/reportDetails/index.vue'
@@ -36,11 +37,20 @@ import ResultsManagement from '@/views/lottery/alwaysColors/resultsManagement/in
 import OddsManagement from '@/views/lottery/alwaysColors/oddsManagement/index.vue'
 import OnekeyRebate from '@/views/lottery/alwaysColors/onekeyRebate/index.vue'
 
+const route = useRoute();
+
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
 }
 
-const activeName = ref('first')
+const activeName = ref('first');
+
+onMounted(() => {
+  if (route.query.activeName != undefined) {
+    activeName.value = route.query.activeName;
+  }
+  console.log(activeName.value);
+})
 </script>
 <style lang="scss" scoped>
 .parameter-tabs>.el-tabs_content {
