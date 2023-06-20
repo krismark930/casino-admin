@@ -4,14 +4,15 @@
     <el-form
       :model="formData"
       label-width="100px"
-      style="width: 600px; display: inline-block;"
+      style="width: 800px; display: inline-block;"
     >
       <el-form-item label="帐号">
         <el-input
           v-model="formData.accountNumber"
           placeholder=""
           clearable
-        ></el-input>
+        ></el-input>          
+        所有会员everyone
       </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="formData.title" placeholder="" clearable></el-input>
@@ -19,6 +20,7 @@
       <el-form-item label="短信息">
         <el-input
           type="textarea"
+          :rows="10"
           autosize
           placeholder="Please input message"
           v-model="formData.message"
