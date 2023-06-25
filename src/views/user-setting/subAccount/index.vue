@@ -20,9 +20,9 @@
       </el-col>
     </el-row>
     <el-table :data="subUserList" v-loading="loading" border header-align="center" stripe>
-      <el-table-column prop="UserName" label="帐号">
+      <el-table-column prop="UserName" label="帐号" style="display: flex;">
         <template #default="scope">
-          <el-input v-model="scope.row.UserName" />
+          <Font>a</Font><el-input v-model="scope.row.UserName" />
         </template>
       </el-table-column>
       <el-table-column prop="Passwd" label="密码">
@@ -38,7 +38,7 @@
       <el-table-column prop="AddDate" label="日期" />
       <el-table-column prop="Status" label="帐号状况">
         <template #default="scope">
-          <Font v-if="scope.row.Status == 2">
+          <Font v-if="scope.row.Status == 0">
             启用
           </Font>
           <Font color="red" v-else>
@@ -84,10 +84,10 @@
             <el-form-item label="系统公告: ">
               <el-checkbox v-model="competence[2]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统短信: ">
+            <el-form-item label="系统消息: ">
               <el-checkbox v-model="competence[3]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统消息: ">
+            <el-form-item label="公司: ">
               <el-checkbox v-model="competence[4]"></el-checkbox>
             </el-form-item>
             <el-form-item label="数据刷新: ">
@@ -104,54 +104,54 @@
             <el-form-item label="数据操盘: ">
               <el-checkbox v-model="competence[8]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="在线人数: ">
+            <el-form-item label="审核比分: ">
               <el-checkbox v-model="competence[9]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统参数: ">
+            <el-form-item label="滚球注单: ">
               <el-checkbox v-model="competence[10]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统公告: ">
+            <el-form-item label="查询注单: ">
               <el-checkbox v-model="competence[11]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统短信: ">
+            <el-form-item label="六合彩管理: ">
               <el-checkbox v-model="competence[12]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统消息: ">
+            <el-form-item label="时时彩管理: ">
               <el-checkbox v-model="competence[13]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="数据刷新: ">
+            <el-form-item label="系统日志: ">
               <el-checkbox v-model="competence[14]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="幣值设置: ">
+            <el-form-item label="基本資料: ">
               <el-checkbox v-model="competence[15]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="联盟限制: ">
+            <el-form-item label="子帳號: ">
               <el-checkbox v-model="competence[16]"></el-checkbox>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="数据操盘: ">
+            <el-form-item label="系统短信: ">
               <el-checkbox v-model="competence[17]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="在线人数: ">
+            <el-form-item label="股东: ">
               <el-checkbox v-model="competence[18]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统参数: ">
+            <el-form-item label="总代理: ">
               <el-checkbox v-model="competence[19]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统公告: ">
+            <el-form-item label="代理商: ">
               <el-checkbox v-model="competence[20]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统短信: ">
+            <el-form-item label="会员: ">
               <el-checkbox v-model="competence[21]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="系统消息: ">
+            <el-form-item label="报表: ">
               <el-checkbox v-model="competence[22]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="数据刷新: ">
+            <el-form-item label="现金系统: ">
               <el-checkbox v-model="competence[23]"></el-checkbox>
             </el-form-item>
-            <el-form-item label="幣值设置: ">
+            <el-form-item label="支付方式: ">
               <el-checkbox v-model="competence[24]"></el-checkbox>
             </el-form-item>
           </el-col>
@@ -176,7 +176,7 @@
     <el-dialog v-model="newUserDialogVisible">
       <h2>新增使用者</h2>
       <el-form>
-        <el-form-item label="帐号: ">
+        <el-form-item label="帐号: a">
           <el-input v-model="subUser.UserName" />
         </el-form-item>
         <el-form-item label="密码: ">
@@ -222,6 +222,7 @@ const subUser = ref({
   Alias: "",
 })
 const competence = ref([]);
+const subUserList = ref([]);
 const loading = ref(false);
 const permissionDialogShow = (item) => {
   permissionDialogVisible.value = true;
@@ -277,11 +278,13 @@ const errMessage = computed(() => {
   const {getErrMessage} = storeToRefs(subUserStore());
   return getErrMessage.value;
 })
-const subUserList = computed(() => {
-  const { getSubUserList } = storeToRefs(subUserStore());
-  console.log(getSubUserList.value);
-  return getSubUserList.value;
-})
+//const subUserList = computed(() => {
+//  const { getSubUserList } = storeToRefs(subUserStore());
+//  getSubUserList.value.map(item => {
+//    item.UserName = item.UserName.substring(1);
+//  })
+//  return getSubUserList.value;
+//})
 const totalCount = computed(() => {
   const { getTotalCount } = storeToRefs(subUserStore());
   return getTotalCount.value
@@ -299,11 +302,17 @@ const addSubUser = async () => {
     alert("请输入名称!!");
     return;
   }
+  subUser.value.UserName = "a" + subUser.value.UserName;
   loading.value = true;
   await dispatchAddSubUserData(subUser.value);
   successResult();
   newUserDialogVisible.value = false;
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   subUser.value = {
     UserName: "",
     Passwd: "",
@@ -313,8 +322,14 @@ const addSubUser = async () => {
 }
 const updateSubUser = async (item) => {
   loading.value = true;
+  item.UserName = "a" + item.UserName;
   await dispatchUpdateSubUserData(item);
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false;
 }
 const handleChangeSort = async () => {
@@ -327,29 +342,53 @@ const suspendSubUser = async (id, Status) => {
   loading.value = true;
   await dispatchSuspendSubUserData({ id, Status: status });
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false;
 }
 const deleteSubUser = async (id) => {
   loading.value = true;
   await dispatchDeleteSubUserData({ id });
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false
 }
 const onPageChange = async () => {
   loading.value = true;
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false;
 }
 onMounted(async () => {
   loading.value = true;
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false;
 })
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+}
+.cell {
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -4,6 +4,8 @@ import { DIVIDEND_DETAILS } from "@/api";
 import { DAILY_ACCOUNTS } from "@/api";
 import { SYSTEM_LOGS } from "@/api";
 import { GET_ONLINE } from "@/api";
+import { UPDATE_REAL_PERSON } from "@/api";
+import { UPDATE_SYSCONFIG } from "@/api";
 
 export const statisticsStore = defineStore('statistics', {
     state: () => ({
@@ -95,6 +97,30 @@ export const statisticsStore = defineStore('statistics', {
                     this.setTotalCount(response.total_count);
                     this.setStatisticsList(response.data);
                     this.setAgentsList(response.agents);
+                }
+            } catch (e) {
+                console.log(e.response);
+                this.setErrorMsg(e.response.message);
+            }
+        },
+        async dispatchUpdateRealPersonData(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_REAL_PERSON, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
+                console.log(e.response);
+                this.setErrorMsg(e.response.message);
+            }
+        },
+        async dispatchUpdateSysconfigData(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_SYSCONFIG, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
                 }
             } catch (e) {
                 console.log(e.response);

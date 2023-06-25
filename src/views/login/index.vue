@@ -65,12 +65,14 @@ import { useRouter, useRoute } from 'vue-router'
 import ChangeLang from '@/layout/components/Topbar/ChangeLang.vue'
 import useLang from '@/i18n/useLang'
 import { useApp } from '@/pinia/modules/app'
+import { authStore } from '@/pinia/modules/auth'
 
 export default defineComponent({
   components: { ChangeLang },
   name: 'login',
   setup() {
     const { proxy: ctx } = getCurrentInstance() // 可以把ctx当成vue2中的this
+    const { setAdmin } = authStore();
     const router = useRouter()
     const route = useRoute()
     const { lang } = useLang()
@@ -118,13 +120,14 @@ export default defineComponent({
           if (valid) {
             state.loading = true
             try {
-              const { success, token, message } = await Login(state.model)
+              const { success, token, message, data } = await Login(state.model)
               if (success) {
                 ctx.$message.success({
                   message: ctx.$t('login.loginsuccess'),
                   duration: 1000,
                 })
-
+                setAdmin(data.Competence);
+                localStorage.setItem("permission", data.Competence);
                 const targetPath = decodeURIComponent(route.query.redirect)
                 if (targetPath.startsWith('http')) {
                   // 如果是一个url地址

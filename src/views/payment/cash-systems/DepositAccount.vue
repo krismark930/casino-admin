@@ -10,7 +10,7 @@
               style="margin-bottom: 0;"
               label="會員"
             >
-              <el-input v-model="formData.name"/>
+              <el-input v-model="formData.name" :onblur="getMemberByName"/>
             </el-form-item>
           </td>
         </tr>
@@ -26,8 +26,14 @@
         </tr>
         <tr>
           <th>金額</th>
-          <td>
-            <el-input v-model="formData.gold"></el-input>
+          <td style="text-align: left; display: flex; align-items: center;">
+            <el-input v-model="formData.gold" style="width: 250px"/>
+            <div v-if="userVisible">
+              <Font color="red" style="margin-left: 10px;"  v-if="user == null || user.Money == undefined"><b>查无此用户!</b></Font>
+              <div style="margin-left: 10px;" v-else>
+                <b>姓名:<Font color="blue">{{user.Alias}}</Font> &nbsp;&nbsp;&nbsp;&nbsp;余额:<Font color="blue">{{user.Money}}</Font>元</b>
+              </div>
+            </div>
           </td>
         </tr>
         <tr>
@@ -72,12 +78,14 @@ import { ElLoading } from "element-plus";
 import type { FormInstance } from 'element-plus'
 const formRef = ref<FormInstance>()
 const {dispatchSaveCash} = paymentStore();
+const {dispatchGetUser} = paymentStore();
 const formData = ref({
   name: "",
   type: "S",
   gold: "",
   memo: "",
 })
+const userVisible = ref(false);
 const setMemo = (msg) => {
   formData.value.memo = msg;
 }
@@ -104,6 +112,14 @@ const successResult = () => {
     });
   }
 }
+const getMemberByName = async () => {
+  await dispatchGetUser(formData.value);
+  userVisible.value = true;
+}
+const user = computed(() => {
+  const {getUser} = storeToRefs(paymentStore());
+  return getUser.value;
+})
 const saveCash = async () => {
   if (formData.value.name == "") {
     alert("請輸入会员账号");

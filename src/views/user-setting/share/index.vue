@@ -65,7 +65,7 @@
             </el-col>
         </el-row>
         <el-table :data="companyList" v-loading="loading" border header-align="center" stripe>
-            <el-table-column prop="Admin" label="管理 帐号" width="180" />
+            <el-table-column prop="Super" label="管理 帐号" width="180" />
             <el-table-column prop="LoginName" label="登陆帐号" width="125">
                 <template #default="scope">
                     {{scope.row.LoginName}}<br>

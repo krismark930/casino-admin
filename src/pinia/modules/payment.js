@@ -15,6 +15,7 @@ import { ADD_WEB_BANK_DATA } from "@/api";
 import { USE_WEB_BANK_DATA } from "@/api";
 import { DELETE_WEB_BANK_DATA } from "@/api";
 import { UPDATE_USDT_RATE } from "@/api";
+import { GET_USER } from "@/api";
 
 export const paymentStore = defineStore('payment', {
     state: () => ({
@@ -28,6 +29,9 @@ export const paymentStore = defineStore('payment', {
             tjck: false,
             ckfanli: "",
             USDT: ""
+        },
+        user: {
+
         }
     }),
     getters: {
@@ -38,6 +42,7 @@ export const paymentStore = defineStore('payment', {
         getPaymentList: (state) => state.paymentList,
         getWebBankList: (state) => state.webBankList,
         getUSDTList: (state) => state.usdtList,
+        getUser: (state) => state.user,
     },
     actions: {
         setSuccess(success) {
@@ -60,6 +65,9 @@ export const paymentStore = defineStore('payment', {
         },
         setUSDTList(usdtList) {
             this.usdtList = usdtList
+        },
+        setUser(user) {
+            this.user = user;
         },
         async dispatchCashSystem(data) {
             try {
@@ -239,6 +247,19 @@ export const paymentStore = defineStore('payment', {
                 let response = await request({ url: UPDATE_USDT_RATE, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                }
+            } catch (e) {
+                console.log(e.response.data.message);
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchGetUser(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: GET_USER, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                    this.setUser(response.data);
                 }
             } catch (e) {
                 console.log(e.response.data.message);
