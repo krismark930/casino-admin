@@ -19,7 +19,7 @@ export default {
   systemSetting: '系统设置',
   systemParameters: '系统参数',
   systemNotifications: '系统公告',
-  systemSmss: '系统短信',
+  systemSms: '系统短信',
   member: '会员',
   conversionRecords: '转换记录',
   basicDataSettings: '基本资料设定',

@@ -41,7 +41,7 @@ const app = createApp(App)
 // 引入element-plus
 import ElementPlus from 'element-plus'
 import './assets/style/element-variables.scss'
-import VueSocketIO from 'vue-3-socket.io';
+import socket from "@/utils/socket";
 
 // 国际化
 import i18n from '@/i18n'
@@ -75,8 +75,9 @@ import * as Directives from '@/directive'
 Object.values(Directives).forEach(fn => fn(app))
 
 // 错误日志
-import useErrorHandler from './error-log'
-useErrorHandler(app)
+
+// import useErrorHandler from './error-log'
+// useErrorHandler(app)
 
 import { addBackToTop } from 'vanilla-back-to-top'
 addBackToTop({
@@ -85,18 +86,13 @@ addBackToTop({
   textColor: '#409eff',
 })
 
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+
 
 app
   .use(i18n)
   .use(addBackToTop)
   .use(ElementPlus)
   .use(pinia)
-  .use(
-    new VueSocketIO({
-      debug: true,
-      connection: SOCKET_URL,
-    })
-  )
+  .use(socket)
   .use(router)
   .mount('#app')

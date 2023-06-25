@@ -12,11 +12,11 @@
 				<el-button type="primary" @click="handleDateRange('last week')">上星期</el-button>
 				<el-button type="primary" @click="handleDateRange('this month')">本月份</el-button>
 				<el-button type="primary" @click="handleDateRange('last month')">上月份</el-button>
-				<el-button type="danger">一键返水</el-button>
-				<el-button type="danger">彩票返水</el-button>
-				<el-button type="danger">真人返水</el-button>
-				<el-button type="danger">电子返水</el-button>
-				<el-button type="danger">捕鱼返水</el-button>
+				<el-button type="danger" @click="sportRebateDialogShow">一键返水</el-button>
+				<el-button type="danger" @click="goAlwaysColorPage">彩票返水</el-button>
+				<el-button type="danger" @click="goRebatePage('first')">真人返水</el-button>
+				<el-button type="danger" @click="goRebatePage('second')">电子返水</el-button>
+				<el-button type="danger" @click="goRebatePage('fourth')">捕鱼返水</el-button>
 			</el-form-item>
 		</el-row>
 		<el-row style="margin: 20px;">
@@ -75,12 +75,12 @@
 			</el-col>
 		</el-row>		
 	</div>
-	<div v-else style="margin-left: 30px;">
+	<div v-else style="margin-left: 30px; margin-top: 10px;">
 		<div>
 			{{ formData.title }} : {{ formData.next_name }} -- 日期 : {{ formData.date_start }} ~ {{ formData.date_end }} -- 报表分类 : {{ formData.report_kind }} --  投注方式 : {{ payType }} -- 投注种类 : {{ type }} -- 下注管道 : 网络下注 -- <el-button type="primary" @click="goBackReportAll">回上一页</el-button>
 		</div>
 		<div>
-			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'A'">
+			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'A'" style="margin-top: 10px">
 			  <tr class="m_title_report_top" > 
 			    <td colspan="12">现金</td>
 			  </tr>
@@ -126,7 +126,7 @@
 			    <td>0/1.000</td>
 			  </tr>
 			</table>
-			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'B'">
+			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'B'" style="margin-top: 10px">
 			  <tr class="m_title_report_top" > 
 			    <td colspan="12">现金</td>
 			  </tr>
@@ -172,7 +172,7 @@
 			    <td>0/1.000</td>
 			  </tr>
 			</table>
-			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'C'">
+			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'C'" style="margin-top: 10px">
 			  <tr class="m_title_report_top" > 
 			    <td colspan="12">现金</td>
 			  </tr>
@@ -218,7 +218,7 @@
 			    <td>0/1.000</td>
 			  </tr>
 			</table>
-			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'D'">
+			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'D'" style="margin-top: 10px">
 			  <tr class="m_title_report_top" > 
 			    <td colspan="12">现金</td>
 			  </tr>
@@ -245,11 +245,10 @@
 			  	<td>{{Number(item.VGOLD).toFixed(1)}}</td>
 			  	<td>{{Number(item.M_Result).toFixed(1)}}</td>
 			  	<td>{{Number(item.T_Result).toFixed(1)}}</td>
-			  	<td>{{Number(item.D_Result).toFixed(1)}}</td>
 			  	<td>{{item.D_Point}}%</td>
-			  	<td>{{Number(item.C_Result).toFixed(1)}}</td>
+			  	<td>{{Number(item.D_Result).toFixed(1)}}</td>
 			  	<td>{{item.C_Point}}%</td>
-			  	<td>{{Number(item.B_Result).toFixed(1)}}</td>
+			  	<td>{{Number(item.C_Result).toFixed(1)}}</td>
 			  	<td>{{ (Number(sportReportItem.sgold)/Number(sportReportItem.all_vgold)).toFixed(3) }}/1.000</td>
 			  	<td>{{ (Number(sportReportItem.sgold)/Number(sportReportItem.all_vgold)).toFixed(3) }}/1.000</td>
 			  </tr>
@@ -268,7 +267,7 @@
 			    <td>0/1.000</td>
 			  </tr>
 			</table>
-			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'MEM'">
+			<table border="1" cellpadding="0" cellspacing="1" class="m_tab_top" v-if="formData.level == 'MEM'" style="margin-top: 10px">
 			  <tr class="m_title_report_top" > 
 			    <td colspan="12">现金</td>
 			  </tr>
@@ -294,9 +293,7 @@
 			  	<td>{{Number(item.T_Result).toFixed(1)}}</td>
 			  	<td>{{item.D_Point}}%</td>
 			  	<td>{{Number(item.D_Result).toFixed(1)}}</td>
-			  	<td>{{item.CurType}}</td>
-			  	<td>0/1.000</td>
-			  	<td>0/1.000</td>
+			  	<td></td>
 			  </tr>
 			  <tr class="m_rig_to"> 
 			    <td>总计	</td>
@@ -308,11 +305,9 @@
 			    <td></td>
 			    <td>{{Number(sportReportItem.c_d_result).toFixed(1)}}</td>
 			    <td></td>
-			    <td>0/1.000</td>
-			    <td>0/1.000</td>
 			  </tr>
 			</table>
-			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'member'">
+			<table border="1" cellpadding="0" cellspacing="1"  class="m_tab_top" v-if="formData.level == 'member'" style="margin-top: 10px">
 			  <tr class="m_title_report" >
 			    <td width="100">时间	</td>
 			    <td width="100">退水</td>
@@ -427,6 +422,28 @@
 			</table>
 		</div>
 	</div>
+	<el-dialog v-model="sportRebateDialogVisible" title=" 一键反水（体育）">
+		<el-form :inline="true">
+			<el-form-item label="开始日期:">
+				<el-date-picker type="date" value-format="YYYY-MM-DD" v-model="sportRebateFormData.start_date"/>
+			</el-form-item>
+			<el-form-item label="结束日期:">
+				<el-date-picker type="date" value-format="YYYY-MM-DD" v-model="sportRebateFormData.end_date"/>
+			</el-form-item>
+		</el-form>
+		<el-form-item label="有效会员:">
+			<el-input v-model="sportRebateFormData.valid_name"/><Font color="red">不填代表所有会员</Font>
+		</el-form-item>
+		<el-form-item label="排除会员:">
+			<el-input v-model="sportRebateFormData.bad_name"/>
+		</el-form-item>
+		<div style="text-align: center;">
+			<el-button type="primary" @click="startSportRebate">开始反水</el-button>
+		</div>
+		<div>注：不自动反水的会员请填到排除会员，用半角逗号,隔开</div>
+		<div>需要提前返水的会员，可以填到有效会员，不填代表所有会员</div>
+		<div>一键返水只适用于关闭体育场场反水的注单</div>
+	</el-dialog>
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue';
@@ -435,9 +452,12 @@ import { sportReportStore } from "@/pinia/modules/sport_report";
 import { storeToRefs } from "pinia";
 import { ElNotification } from "element-plus";
 import { ElLoading } from "element-plus";
+import {useRouter} from 'vue-router';
 
 const { dispatchSportReport } = sportReportStore();
 const { dispatchTopReport } = sportReportStore();
+const { dispatchSportRebate } = sportReportStore();
+const router = useRouter();
 
 const reportAllShow = ref(true);
 const payType = ref("全部");
@@ -449,7 +469,14 @@ const memberName = ref("");
 const agentName = ref("");
 const worldName = ref("");
 const corpratorName = ref("");
+const sportRebateDialogVisible = ref(false);
 
+const sportRebateFormData = ref({
+	start_date: moment().format("YYYY-MM-DD"),
+	end_date: moment().format("YYYY-MM-DD"),
+	valid_name: "",
+	bad_name: ""
+})
 
 const helpList = [
 	{
@@ -704,6 +731,30 @@ const resultOptions = ref([
 	},
 ])
 
+const startSportRebate = async () => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+	await dispatchSportRebate(sportRebateFormData.value);
+	successResult();
+	sportRebateDialogVisible.value = false;
+	loading.close();		
+}
+
+const sportRebateDialogShow = () => {
+	sportRebateDialogVisible.value = true;
+}
+
+const goRebatePage = (value) => {
+	router.push({name: "rebate", query: {activeName: value}})
+}
+
+const goAlwaysColorPage = () => {
+	router.push({name: "alwaysColors", query: {activeName: "seventh"}})
+}
+
 const showMemberReport = async (item) => {
 	reportAllShow.value = false;
 	formData.value.level = "member";
@@ -772,6 +823,8 @@ const showMemReport = async (item) => {
 const showCompanyReport = async () => {
 	reportAllShow.value = false;
 	formData.value.title = "管理";
+	formData.value.level = "A";
+	formData.value.next_name = "admin";
 	formData.value.date_start = dateRange.value[0];
 	formData.value.date_end = dateRange.value[1];
 	gtypeOptions.value.map(item => {
@@ -803,8 +856,16 @@ const showCompanyReport = async () => {
 	loading.close();
 }
 
-const goBackReportAll = () => {
+const goBackReportAll = async () => {
 	reportAllShow.value = true;
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchSportReport();
+  successResult();
+  loading.close();	
 }
 
 const handleDateRange = (date) => {

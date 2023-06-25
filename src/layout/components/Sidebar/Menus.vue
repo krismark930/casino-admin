@@ -47,7 +47,9 @@
       :text-color="variables.menuTextColor"
       :active-text-color="variables.menuActiveTextColor"
     >
-      <submenu v-for="menu in menus" :key="menu.url" :menu="menu" />
+      <template v-for="menu in menus" :key="menu.url">
+        <submenu :menu="menu" v-if="menu.children.length != 0"/>
+      </template>
     </el-menu>
   </el-scrollbar>
 </template>

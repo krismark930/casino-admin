@@ -280,6 +280,7 @@ export const WEB_BANK_DATA = 'api/admin/payment/web-bank-data';
 export const ADD_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/add';
 export const USE_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/use';
 export const DELETE_WEB_BANK_DATA = 'api/admin/payment/web-bank-data/delete';
+export const GET_USER = 'api/admin/payment/user';
 
 // system data
 export const GET_SYSTEM_DATA = 'api/admin/system/all';
@@ -336,6 +337,9 @@ export const DIVIDEND_DETAILS = 'api/admin/statistics/dividend-details';
 export const DAILY_ACCOUNTS = 'api/admin/statistics/daily-accounts';
 export const SYSTEM_LOGS = 'api/admin/statistics/system-logs';
 export const GET_ONLINE = 'api/admin/statistics/get-online';
+export const UPDATE_REAL_PERSON = 'api/admin/statistics/update-real-person';
+export const UPDATE_SYSCONFIG = 'api/admin/statistics/update-sysconfig';
 
 export const SPORT_REPORT_ALL = 'api/admin/sport-report/all';
 export const SPORT_REPORT_TOP = 'api/admin/sport-report/top';
+export const SPORT_REBATE = 'api/admin/sport-report/rebate';
