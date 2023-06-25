@@ -2,7 +2,7 @@
   <div class="turnservice-wrapper">
     <el-table :data="turnServiceList" class="turnservice-table">
       <el-table-column prop="service" label="服务"></el-table-column>
-      <el-table-column prop="status" label="地位" width="200">
+      <el-table-column prop="status" label="开关" width="200">
         <template #default="scope">
           <el-switch v-model="scope.row.status" />
         </template>
@@ -13,7 +13,7 @@
             size="small"
             @click="updateTurnService(scope.row)"
           >
-            节省
+            确定
           </el-button>
         </template>
       </el-table-column>

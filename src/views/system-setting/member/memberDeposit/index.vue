@@ -66,8 +66,16 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="Memo" label="备注" />
-      <el-table-column property="BankName" label="开户银行" />
+      <el-table-column property="Memo" label="备注">
+        <template #default="scope">
+          <div v-html="scope.row.Memo"></div>
+        </template>
+      </el-table-column>
+      <el-table-column property="BankName" label="开户银行">
+        <template #default="scope">
+          <div v-html="scope.row.BankName"></div>
+        </template>
+      </el-table-column>
       <el-table-column property="Bank_Account" label="银行账号" />
       <el-table-column property="Name" label="姓名" />
       <el-table-column property="Order_Code" label="定单号" />

@@ -43,7 +43,7 @@ export default [
         name: 'systemSMS',
         component: SystemSMS,
         meta: {
-          title: 'menu.systemSmss',
+          title: 'menu.systemSms',
           affix: true,
         },
       },
@@ -52,7 +52,7 @@ export default [
         name: 'member',
         component: Member,
         meta: {
-          title: 'menu.member',
+          title: 'menu.memberInformation',
           affix: true,
         },
       },

@@ -23,8 +23,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护重庆时时彩" v-model="lotteryConfig['cq']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用重庆时时彩" v-model="lotteryConfig['cq']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用重庆时时彩" v-model="lotteryConfig['cq']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -36,8 +36,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护天津时时彩" v-model="lotteryConfig['tj']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用天津时时彩" v-model="lotteryConfig['tj']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用天津时时彩" v-model="lotteryConfig['tj']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -49,8 +49,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护新疆时时彩" v-model="lotteryConfig['jx']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用新疆时时彩" v-model="lotteryConfig['jx']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用新疆时时彩" v-model="lotteryConfig['jx']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -62,8 +62,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护河内五分彩" v-model="lotteryConfig['ffc5']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用河内五分彩" v-model="lotteryConfig['ffc5']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用河内五分彩" v-model="lotteryConfig['ffc5']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -75,8 +75,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护腾讯时时彩" v-model="lotteryConfig['txssc']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用腾讯时时彩" v-model="lotteryConfig['txssc']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用腾讯时时彩" v-model="lotteryConfig['txssc']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -88,8 +88,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护台湾时时彩" v-model="lotteryConfig['twssc']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用台湾时时彩" v-model="lotteryConfig['twssc']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用台湾时时彩" v-model="lotteryConfig['twssc']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -101,8 +101,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护重庆快乐十分" v-model="lotteryConfig['cqsf']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用重庆快乐十分" v-model="lotteryConfig['cqsf']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用重庆快乐十分" v-model="lotteryConfig['cqsf']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -114,8 +114,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护广东快乐十分" v-model="lotteryConfig['gdsf']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用广东快乐十分" v-model="lotteryConfig['gdsf']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用广东快乐十分" v-model="lotteryConfig['gdsf']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -127,8 +127,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护天津快乐十分" v-model="lotteryConfig['tjsf']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用天津快乐十分" v-model="lotteryConfig['tjsf']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用天津快乐十分" v-model="lotteryConfig['tjsf']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -140,8 +140,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护广西快乐十分" v-model="lotteryConfig['gxsf']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用广西快乐十分" v-model="lotteryConfig['gxsf']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用广西快乐十分" v-model="lotteryConfig['gxsf']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -153,8 +153,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护福彩3D" v-model="lotteryConfig['d3']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用福彩3D" v-model="lotteryConfig['d3']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用福彩3D" v-model="lotteryConfig['d3']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -166,8 +166,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护排列三" v-model="lotteryConfig['p3']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用排列三" v-model="lotteryConfig['p3']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用排列三" v-model="lotteryConfig['p3']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -179,8 +179,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护上海时时乐" v-model="lotteryConfig['t3']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用上海时时乐" v-model="lotteryConfig['t3']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用上海时时乐" v-model="lotteryConfig['t3']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -192,8 +192,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护北京快乐8" v-model="lotteryConfig['kl8']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用北京快乐8" v-model="lotteryConfig['kl8']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用北京快乐8" v-model="lotteryConfig['kl8']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -205,8 +205,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护北京PK10" v-model="lotteryConfig['pk10']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用北京PK10" v-model="lotteryConfig['pk10']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用北京PK10" v-model="lotteryConfig['pk10']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -218,8 +218,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护广东11选5" v-model="lotteryConfig['gd11']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用广东11选5" v-model="lotteryConfig['gd11']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用广东11选5" v-model="lotteryConfig['gd11']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -231,8 +231,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护幸运飞艇" v-model="lotteryConfig['xyft']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用幸运飞艇" v-model="lotteryConfig['xyft']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用幸运飞艇" v-model="lotteryConfig['xyft']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -244,8 +244,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护澳洲幸运5" v-model="lotteryConfig['azxy5']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用澳洲幸运5" v-model="lotteryConfig['azxy5']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用澳洲幸运5" v-model="lotteryConfig['azxy5']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -257,8 +257,8 @@
         <td height="22" align="left">
           <el-checkbox label="维护澳洲幸运10" v-model="lotteryConfig['azxy10']['close']">
           </el-checkbox>
-          <!-- <el-checkbox label="停用澳洲幸运10" v-model="lotteryConfig['azxy10']['hide']">
-          </el-checkbox> -->
+          <el-checkbox label="停用澳洲幸运10" v-model="lotteryConfig['azxy10']['hide']">
+          </el-checkbox>
         </td>
         <td height="22" align="left">
           <el-form-item label="维护原因:">
@@ -314,7 +314,7 @@
         </td>
       </tr>
 
-      <!-- <tr bgcolor="#FFFFFF">
+      <tr bgcolor="#FFFFFF">
         <td height="22" align="left">北京快乐8期数校对:</td>
         <td height="22" align="left">
           <el-form-item label="开奖时间:">
@@ -325,7 +325,7 @@
             (例如:2021-01-01开的期数是2021001)
           </el-form-item>
         </td>
-      </tr> -->
+      </tr>
 
       <tr bgcolor="#FFFFFF">
         <td height="22" align="left">北京PK10期数校对:</td>

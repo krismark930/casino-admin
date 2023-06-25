@@ -42,6 +42,7 @@ import { ElConfigProvider } from 'element-plus'
 import localeZH from 'element-plus/lib/locale/lang/zh-cn'
 import localeEN from 'element-plus/lib/locale/lang/en'
 import useLang from '@/i18n/useLang'
+import socket from "@/utils/socket";
 
 export default defineComponent({
   components: {

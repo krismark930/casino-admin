@@ -65,7 +65,7 @@
             </el-col>
         </el-row>
         <el-table :data="companyList" v-loading="loading" border header-align="center" stripe>
-            <el-table-column prop="Admin" label="管理 帐号" width="180" />
+            <el-table-column prop="Agents" label="管理 帐号" width="180" />
             <el-table-column prop="LoginName" label="登陆帐号" width="125">
                 <template #default="scope">
                     {{scope.row.LoginName}}<br>
@@ -75,7 +75,7 @@
             <el-table-column prop="UserName" label="代理商 帐号" width="140">
                 <template #default="scope">
                     <div>{{scope.row.UserName}}</div>
-                    <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div>
+                    <!-- <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div> -->
                 </template>
             </el-table-column>
             <el-table-column prop="Money" label="可用額度" width="150" />
