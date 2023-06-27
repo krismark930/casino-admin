@@ -125,15 +125,14 @@ const saveCash = async () => {
     alert("請輸入会员账号");
     return;
   }
-  if (formData.value.gold = "") {
+  if (formData.value.gold == "") {
     alert("請輸入金額");
     return;
   }
-  if (formData.value.memo = "") {
+  if (formData.value.memo == "") {
     alert("請輸入备注");
     return;
   }
-  console.log(formData.value);
   const loading = ElLoading.service({
     lock: true,
     text: "加载中...",

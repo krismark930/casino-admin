@@ -1107,6 +1107,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_LINE_3 = item.FT_Turn_R_C || item.FT_Turn_OU_C || item.FT_Turn_RE_C || item.FT_Turn_ROU_C || item.FT_Turn_EO_C;
+    if (isNaN(Number(detailCompanyData.value.FT_LINE_3))) {
+        detailCompanyData.value.FT_LINE_3 = 1.25;
+    }
     ft_line_3_options.value = [];
     for (let i = detailCompanyData.value.FT_LINE_3; i >= 0; i -= 0.25 ) {
         ft_line_3_options.value.push({
@@ -1123,6 +1126,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_LINE_BIG = item.FT_Turn_P || item.FT_Turn_M || item.FT_Turn_PD || item.FT_Turn_T || item.FT_Turn_F || item.FT_Turn_PR || item.FT_Turn_P3;
+    if (isNaN(Number(detailCompanyData.value.FT_LINE_BIG))) {
+        detailCompanyData.value.FT_LINE_BIG = 1.25;
+    }
     ft_line_big_options.value = [];
     for (let i = detailCompanyData.value.FT_LINE_BIG; i >= 0; i -= 1 ) {
         ft_line_big_options.value.push({
@@ -1131,6 +1137,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_R_A = item.FT_Turn_R_A;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_R_A))) {
+        detailCompanyData.value.FT_Turn_R_A = 1.25;
+    }
     FT_Turn_R_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_R_A; i >= 0; i -= 0.25 ) {
         FT_Turn_R_A_OPTIONS.value.push({
@@ -1139,6 +1148,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_OU_A = item.FT_Turn_OU_A;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_OU_A))) {
+        detailCompanyData.value.FT_Turn_OU_A = 1.25;
+    }
     FT_Turn_OU_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_OU_A; i >= 0; i -= 0.25 ) {
         FT_Turn_OU_A_OPTIONS.value.push({
@@ -1147,6 +1159,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_RE_A = item.FT_Turn_RE_A;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_RE_A))) {
+        detailCompanyData.value.FT_Turn_RE_A = 1.25;
+    }
     FT_Turn_RE_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_RE_A; i >= 0; i -= 0.25 ) {
         FT_Turn_RE_A_OPTIONS.value.push({
@@ -1155,6 +1170,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_ROU_A = item.FT_Turn_ROU_A;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_ROU_A))) {
+        detailCompanyData.value.FT_Turn_ROU_A = 1.25;
+    }
     FT_Turn_ROU_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_ROU_A; i >= 0; i -= 0.25 ) {
         FT_Turn_ROU_A_OPTIONS.value.push({
@@ -1163,6 +1181,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_EO_A = item.FT_Turn_EO_A;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_EO_A))) {
+        detailCompanyData.value.FT_Turn_EO_A = 1.25;
+    }
     FT_Turn_EO_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_EO_A; i >= 0; i -= 0.25 ) {
         FT_Turn_EO_A_OPTIONS.value.push({
@@ -1171,6 +1192,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_M = item.FT_Turn_M;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_M))) {
+        detailCompanyData.value.FT_Turn_M = 1.25;
+    }
     FT_Turn_M_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_M; i >= 0; i -= 1 ) {
         FT_Turn_M_OPTIONS.value.push({
@@ -1179,6 +1203,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_RM = item.FT_Turn_RM;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_RM))) {
+        detailCompanyData.value.FT_Turn_RM = 1.25;
+    }
     FT_Turn_RM_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_RM; i >= 0; i -= 1 ) {
         FT_Turn_RM_OPTIONS.value.push({
@@ -1187,6 +1214,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_PD = item.FT_Turn_PD;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_PD))) {
+        detailCompanyData.value.FT_Turn_PD = 1.25;
+    }
     FT_Turn_PD_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_PD; i >= 0; i -= 1 ) {
         FT_Turn_PD_OPTIONS.value.push({
@@ -1195,6 +1225,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_T = item.FT_Turn_T;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_T))) {
+        detailCompanyData.value.FT_Turn_T = 1.25;
+    }
     FT_Turn_T_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_T; i >= 0; i -= 1 ) {
         FT_Turn_T_OPTIONS.value.push({
@@ -1203,6 +1236,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_F = item.FT_Turn_F;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_F))) {
+        detailCompanyData.value.FT_Turn_F = 1.25;
+    }
     FT_Turn_F_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_F; i >= 0; i -= 1 ) {
         FT_Turn_F_OPTIONS.value.push({
@@ -1211,6 +1247,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_P = item.FT_Turn_P;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_P))) {
+        detailCompanyData.value.FT_Turn_P = 1.25;
+    }
     FT_Turn_P_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_P; i >= 0; i -= 1 ) {
         FT_Turn_P_OPTIONS.value.push({
@@ -1219,6 +1258,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_PR = item.FT_Turn_PR;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_PR))) {
+        detailCompanyData.value.FT_Turn_PR = 1.25;
+    }
     FT_Turn_PR_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_PR; i >= 0; i -= 1 ) {
         FT_Turn_PR_OPTIONS.value.push({
@@ -1227,6 +1269,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_P3 = item.FT_Turn_P3;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_P3))) {
+        detailCompanyData.value.FT_Turn_P3 = 1.25;
+    }
     FT_Turn_P3_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_P3; i >= 0; i -= 1 ) {
         FT_Turn_P3_OPTIONS.value.push({
@@ -1235,6 +1280,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_R_B = item.FT_Turn_R_B;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_R_B))) {
+        detailCompanyData.value.FT_Turn_R_B = 1.25;
+    }
     FT_Turn_R_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_R_B; i >= 0; i -= 0.25 ) {
         FT_Turn_R_B_OPTIONS.value.push({
@@ -1243,6 +1291,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_OU_B = item.FT_Turn_OU_B;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_OU_B))) {
+        detailCompanyData.value.FT_Turn_OU_B = 1.25;
+    }
     FT_Turn_OU_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_OU_B; i >= 0; i -= 0.25 ) {
         FT_Turn_OU_B_OPTIONS.value.push({
@@ -1251,6 +1302,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_RE_B = item.FT_Turn_RE_B;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_RE_B))) {
+        detailCompanyData.value.FT_Turn_RE_B = 1.25;
+    }
     FT_Turn_RE_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_RE_B; i >= 0; i -= 0.25 ) {
         FT_Turn_RE_B_OPTIONS.value.push({
@@ -1259,6 +1313,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_ROU_B = item.FT_Turn_ROU_B;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_ROU_B))) {
+        detailCompanyData.value.FT_Turn_ROU_B = 1.25;
+    }
     FT_Turn_ROU_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_ROU_B; i >= 0; i -= 0.25 ) {
         FT_Turn_ROU_B_OPTIONS.value.push({
@@ -1267,6 +1324,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_EO_B = item.FT_Turn_EO_B;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_EO_B))) {
+        detailCompanyData.value.FT_Turn_EO_B = 1.25;
+    }
     FT_Turn_EO_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_EO_B; i >= 0; i -= 0.25 ) {
         FT_Turn_EO_B_OPTIONS.value.push({
@@ -1275,6 +1335,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_R_C = item.FT_Turn_R_C;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_R_C))) {
+        detailCompanyData.value.FT_Turn_R_C = 1.25;
+    }
     FT_Turn_R_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_R_C; i >= 0; i -= 0.25 ) {
         FT_Turn_R_C_OPTIONS.value.push({
@@ -1283,6 +1346,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_OU_C = item.FT_Turn_OU_C;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_OU_C))) {
+        detailCompanyData.value.FT_Turn_OU_C = 1.25;
+    }
     FT_Turn_OU_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_OU_C; i >= 0; i -= 0.25 ) {
         FT_Turn_OU_C_OPTIONS.value.push({
@@ -1291,6 +1357,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_RE_C = item.FT_Turn_RE_C;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_RE_C))) {
+        detailCompanyData.value.FT_Turn_RE_C = 1.25;
+    }
     FT_Turn_RE_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_RE_C; i >= 0; i -= 0.25 ) {
         FT_Turn_RE_C_OPTIONS.value.push({
@@ -1299,6 +1368,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_ROU_C = item.FT_Turn_ROU_C;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_ROU_C))) {
+        detailCompanyData.value.FT_Turn_ROU_C = 1.25;
+    }
     FT_Turn_ROU_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_ROU_C; i >= 0; i -= 0.25 ) {
         FT_Turn_ROU_C_OPTIONS.value.push({
@@ -1307,6 +1379,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_EO_C = item.FT_Turn_EO_C;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_EO_C))) {
+        detailCompanyData.value.FT_Turn_EO_C = 1.25;
+    }
     FT_Turn_EO_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_EO_C; i >= 0; i -= 0.25 ) {
         FT_Turn_EO_C_OPTIONS.value.push({
@@ -1315,6 +1390,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_R_D = item.FT_Turn_R_D;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_R_D))) {
+        detailCompanyData.value.FT_Turn_R_D = 1.25;
+    }
     FT_Turn_R_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_R_D; i >= 0; i -= 0.25 ) {
         FT_Turn_R_D_OPTIONS.value.push({
@@ -1323,6 +1401,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_OU_D = item.FT_Turn_OU_D;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_OU_D))) {
+        detailCompanyData.value.FT_Turn_OU_D = 1.25;
+    }
     FT_Turn_OU_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_OU_D; i >= 0; i -= 0.25 ) {
         FT_Turn_OU_D_OPTIONS.value.push({
@@ -1331,6 +1412,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_RE_D = item.FT_Turn_RE_D;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_RE_D))) {
+        detailCompanyData.value.FT_Turn_RE_D = 1.25;
+    }
     FT_Turn_RE_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_RE_D; i >= 0; i -= 0.25 ) {
         FT_Turn_RE_D_OPTIONS.value.push({
@@ -1339,6 +1423,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_ROU_D = item.FT_Turn_ROU_D;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_ROU_D))) {
+        detailCompanyData.value.FT_Turn_ROU_D = 1.25;
+    }
     FT_Turn_ROU_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_ROU_D; i >= 0; i -= 0.25 ) {
         FT_Turn_ROU_D_OPTIONS.value.push({
@@ -1347,6 +1434,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FT_Turn_EO_D = item.FT_Turn_EO_D;
+    if (isNaN(Number(detailCompanyData.value.FT_Turn_EO_D))) {
+        detailCompanyData.value.FT_Turn_EO_D = 1.25;
+    }
     FT_Turn_EO_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FT_Turn_EO_D; i >= 0; i -= 0.25 ) {
         FT_Turn_EO_D_OPTIONS.value.push({
@@ -1383,6 +1473,9 @@ const detailCompany = (item) => {
 
 
     detailCompanyData.value.BK_LINE_1 = item.BK_Turn_R_A || item.BK_Turn_OU_A || item.BK_Turn_RE_A || item.BK_Turn_ROU_A || item.BK_Turn_EO_A;
+    if (isNaN(Number(detailCompanyData.value.BK_LINE_1))) {
+        detailCompanyData.value.BK_LINE_1 = 1.25;
+    }
     bk_line_1_options.value = [];
     for (let i = detailCompanyData.value.BK_LINE_1; i >= 0; i -= 0.25 ) {
         bk_line_1_options.value.push({
@@ -1391,6 +1484,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_LINE_2 = item.BK_Turn_R_B || item.BK_Turn_OU_B|| item.BK_Turn_RE_B || item.BK_Turn_ROU_B || item.BK_Turn_EO_B;
+    if (isNaN(Number(detailCompanyData.value.BK_LINE_2))) {
+        detailCompanyData.value.BK_LINE_2 = 1.25;
+    }
     bk_line_2_options.value = [];
     for (let i = detailCompanyData.value.BK_LINE_2; i >= 0; i -= 0.25 ) {
         bk_line_2_options.value.push({
@@ -1399,6 +1495,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_LINE_3 = item.BK_Turn_R_C || item.BK_Turn_OU_C || item.BK_Turn_RE_C || item.BK_Turn_ROU_C || item.BK_Turn_EO_C;
+    if (isNaN(Number(detailCompanyData.value.BK_LINE_3))) {
+        detailCompanyData.value.BK_LINE_3 = 1.25;
+    }
     bk_line_3_options.value = [];
     for (let i = detailCompanyData.value.BK_LINE_3; i >= 0; i -= 0.25 ) {
         bk_line_3_options.value.push({
@@ -1407,6 +1506,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_LINE_4 = item.BK_Turn_R_D || item.BK_Turn_OU_D || item.BK_Turn_RE_D || item.BK_Turn_ROU_D || item.BK_Turn_EO_D;
+    if (isNaN(Number(detailCompanyData.value.BK_LINE_4))) {
+        detailCompanyData.value.BK_LINE_4 = 1.25;
+    }
     bk_line_4_options.value = [];
     for (let i = detailCompanyData.value.BK_LINE_4; i >= 0; i -= 0.25 ) {
         bk_line_4_options.value.push({
@@ -1415,6 +1517,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_LINE_BIG = item.BK_Turn_P || item.BK_Turn_M || item.BK_Turn_PD || item.BK_Turn_T || item.BK_Turn_F || item.BK_Turn_PR || item.BK_Turn_P3;
+    if (isNaN(Number(detailCompanyData.value.BK_LINE_BIG))) {
+        detailCompanyData.value.BK_LINE_BIG = 1.25;
+    }
     bk_line_big_options.value = [];
     for (let i = detailCompanyData.value.BK_LINE_BIG; i >= 0; i -= 1 ) {
         bk_line_big_options.value.push({
@@ -1423,6 +1528,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_R_A = item.BK_Turn_R_A;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_R_A))) {
+        detailCompanyData.value.BK_Turn_R_A = 1.25;
+    }
     BK_Turn_R_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_R_A; i >= 0; i -= 0.25 ) {
         BK_Turn_R_A_OPTIONS.value.push({
@@ -1431,6 +1539,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_OU_A = item.BK_Turn_OU_A;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_OU_A))) {
+        detailCompanyData.value.BK_Turn_OU_A = 1.25;
+    }
     BK_Turn_OU_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_OU_A; i >= 0; i -= 0.25 ) {
         BK_Turn_OU_A_OPTIONS.value.push({
@@ -1439,6 +1550,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_RE_A = item.BK_Turn_RE_A;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_RE_A))) {
+        detailCompanyData.value.BK_Turn_RE_A = 1.25;
+    }
     BK_Turn_RE_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_RE_A; i >= 0; i -= 0.25 ) {
         BK_Turn_RE_A_OPTIONS.value.push({
@@ -1447,6 +1561,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_ROU_A = item.BK_Turn_ROU_A;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_ROU_A))) {
+        detailCompanyData.value.BK_Turn_ROU_A = 1.25;
+    }
     BK_Turn_ROU_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_ROU_A; i >= 0; i -= 0.25 ) {
         BK_Turn_ROU_A_OPTIONS.value.push({
@@ -1455,6 +1572,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_EO_A = item.BK_Turn_EO_A;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_EO_A))) {
+        detailCompanyData.value.BK_Turn_EO_A = 1.25;
+    }
     BK_Turn_EO_A_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_EO_A; i >= 0; i -= 0.25 ) {
         BK_Turn_EO_A_OPTIONS.value.push({
@@ -1463,6 +1583,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.FS_Turn_FS = item.FS_Turn_FS;
+    if (isNaN(Number(detailCompanyData.value.FS_Turn_FS))) {
+        detailCompanyData.value.FS_Turn_FS = 1.25;
+    }
     FS_Turn_FS_OPTIONS.value = [];
     for (let i = detailCompanyData.value.FS_Turn_FS; i >= 0; i -= 1 ) {
         FS_Turn_FS_OPTIONS.value.push({
@@ -1471,6 +1594,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_PR = item.BK_Turn_PR;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_PR))) {
+        detailCompanyData.value.BK_Turn_PR = 1.25;
+    }
     BK_Turn_PR_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_PR; i >= 0; i -= 1 ) {
         BK_Turn_PR_OPTIONS.value.push({
@@ -1479,6 +1605,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_P3 = item.BK_Turn_P3;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_P3))) {
+        detailCompanyData.value.BK_Turn_P3 = 1.25;
+    }
     BK_Turn_P3_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_P3; i >= 0; i -= 1 ) {
         BK_Turn_P3_OPTIONS.value.push({
@@ -1487,6 +1616,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_R_B = item.BK_Turn_R_B;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_R_B))) {
+        detailCompanyData.value.BK_Turn_R_B = 1.25;
+    }
     BK_Turn_R_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_R_B; i >= 0; i -= 0.25 ) {
         BK_Turn_R_B_OPTIONS.value.push({
@@ -1495,6 +1627,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_OU_B = item.BK_Turn_OU_B;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_OU_B))) {
+        detailCompanyData.value.BK_Turn_OU_B = 1.25;
+    }
     BK_Turn_OU_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_OU_B; i >= 0; i -= 0.25 ) {
         BK_Turn_OU_B_OPTIONS.value.push({
@@ -1503,6 +1638,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_RE_B = item.BK_Turn_RE_B;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_RE_B))) {
+        detailCompanyData.value.BK_Turn_RE_B = 1.25;
+    }
     BK_Turn_RE_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_RE_B; i >= 0; i -= 0.25 ) {
         BK_Turn_RE_B_OPTIONS.value.push({
@@ -1511,6 +1649,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_ROU_B = item.BK_Turn_ROU_B;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_ROU_B))) {
+        detailCompanyData.value.BK_Turn_ROU_B = 1.25;
+    }
     BK_Turn_ROU_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_ROU_B; i >= 0; i -= 0.25 ) {
         BK_Turn_ROU_B_OPTIONS.value.push({
@@ -1519,6 +1660,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_EO_B = item.BK_Turn_EO_B;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_EO_B))) {
+        detailCompanyData.value.BK_Turn_EO_B = 1.25;
+    }
     BK_Turn_EO_B_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_EO_B; i >= 0; i -= 0.25 ) {
         BK_Turn_EO_B_OPTIONS.value.push({
@@ -1527,6 +1671,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_R_C = item.BK_Turn_R_C;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_R_C))) {
+        detailCompanyData.value.BK_Turn_R_C = 1.25;
+    }
     BK_Turn_R_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_R_C; i >= 0; i -= 0.25 ) {
         BK_Turn_R_C_OPTIONS.value.push({
@@ -1535,6 +1682,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_OU_C = item.BK_Turn_OU_C;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_OU_C))) {
+        detailCompanyData.value.BK_Turn_OU_C = 1.25;
+    }
     BK_Turn_OU_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_OU_C; i >= 0; i -= 0.25 ) {
         BK_Turn_OU_C_OPTIONS.value.push({
@@ -1543,6 +1693,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_RE_C = item.BK_Turn_RE_C;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_RE_C))) {
+        detailCompanyData.value.BK_Turn_RE_C = 1.25;
+    }
     BK_Turn_RE_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_RE_C; i >= 0; i -= 0.25 ) {
         BK_Turn_RE_C_OPTIONS.value.push({
@@ -1551,6 +1704,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_ROU_C = item.BK_Turn_ROU_C;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_ROU_C))) {
+        detailCompanyData.value.BK_Turn_ROU_C = 1.25;
+    }
     BK_Turn_ROU_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_ROU_C; i >= 0; i -= 0.25 ) {
         BK_Turn_ROU_C_OPTIONS.value.push({
@@ -1559,6 +1715,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_EO_C = item.BK_Turn_EO_C;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_EO_C))) {
+        detailCompanyData.value.BK_Turn_EO_C = 1.25;
+    }
     BK_Turn_EO_C_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_EO_C; i >= 0; i -= 0.25 ) {
         BK_Turn_EO_C_OPTIONS.value.push({
@@ -1567,6 +1726,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_R_D = item.BK_Turn_R_D;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_R_D))) {
+        detailCompanyData.value.BK_Turn_R_D = 1.25;
+    }
     BK_Turn_R_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_R_D; i >= 0; i -= 0.25 ) {
         BK_Turn_R_D_OPTIONS.value.push({
@@ -1575,6 +1737,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_OU_D = item.BK_Turn_OU_D;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_OU_D))) {
+        detailCompanyData.value.BK_Turn_OU_D = 1.25;
+    }
     BK_Turn_OU_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_OU_D; i >= 0; i -= 0.25 ) {
         BK_Turn_OU_D_OPTIONS.value.push({
@@ -1583,6 +1748,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_RE_D = item.BK_Turn_RE_D;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_RE_D))) {
+        detailCompanyData.value.BK_Turn_RE_D = 1.25;
+    }
     BK_Turn_RE_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_RE_D; i >= 0; i -= 0.25 ) {
         BK_Turn_RE_D_OPTIONS.value.push({
@@ -1591,6 +1759,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_ROU_D = item.BK_Turn_ROU_D;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_ROU_D))) {
+        detailCompanyData.value.BK_Turn_ROU_D = 1.25;
+    }
     BK_Turn_ROU_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_ROU_D; i >= 0; i -= 0.25 ) {
         BK_Turn_ROU_D_OPTIONS.value.push({
@@ -1599,6 +1770,9 @@ const detailCompany = (item) => {
         })
     }
     detailCompanyData.value.BK_Turn_EO_D = item.BK_Turn_EO_D;
+    if (isNaN(Number(detailCompanyData.value.BK_Turn_EO_D))) {
+        detailCompanyData.value.BK_Turn_EO_D = 1.25;
+    }
     BK_Turn_EO_D_OPTIONS.value = [];
     for (let i = detailCompanyData.value.BK_Turn_EO_D; i >= 0; i -= 0.25 ) {
         BK_Turn_EO_D_OPTIONS.value.push({
