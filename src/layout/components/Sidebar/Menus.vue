@@ -48,7 +48,7 @@
       :active-text-color="variables.menuActiveTextColor"
     >
       <template v-for="menu in menus" :key="menu.url">
-        <submenu :menu="menu" v-if="menu.children.length != 0"/>
+        <submenu :menu="menu" v-if="menu.children?.length != 0"/>
       </template>
     </el-menu>
   </el-scrollbar>
@@ -76,15 +76,23 @@ export default defineComponent({
     },
   },
   setup() {
+    
     const route = useRoute()
-    const { menus } = storeToRefs(useMenus())
 
+    const menus = computed(() => {
+      const { menus } = storeToRefs(useMenus());
+      return menus.value
+    })
+    
     return {
       menus,
       activePath: computed(() => route.path),
       variables: computed(() => config),
     }
   },
+  mounted() {
+    console.log(this.menus);
+  }
 })
 </script>
 <style lang="scss">

@@ -36,6 +36,8 @@
                   <th>银行账号</th>
                   <th>开户行</th>
                   <th>VIP</th>
+                  <th>最低</th>
+                  <th>最高</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,6 +59,12 @@
                       <el-option v-for="optionItem in vipOptions" :key="optionItem.value" :label="optionItem.label"
                         :value="optionItem.value"></el-option>
                     </el-select>
+                  </td>
+                  <td>
+                    <el-input v-model="webBankItem.bankaddress" />
+                  </td>
+                  <td>
+                    <el-input v-model="webBankItem.bankaddress" />
                   </td>
                 </tr>
               </tbody>
@@ -84,6 +92,8 @@
                 <th>银行账号</th>
                 <th>开户行</th>
                 <th>VIP专用</th>
+                <th>最低</th>
+                <th>最高</th>
                 <th></th>
               </tr>
             </thead>
@@ -113,6 +123,12 @@
                     <el-option v-for="optionItem in vipOptions" :key="optionItem.value" :label="optionItem.label"
                       :value="optionItem.value"></el-option>
                   </el-select>
+                </td>
+                <td>
+                  <el-input v-model="item.min_amount" />
+                </td>
+                <td>
+                  <el-input v-model="item.max_amount" />
                 </td>
                 <td>
                   <div style="display: flex;">

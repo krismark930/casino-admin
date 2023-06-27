@@ -248,6 +248,11 @@ const updatePermission = async () => {
   await dispatchPermissionSubUser(form)
   permissionDialogVisible.value = false;
   await dispatchSubUserData(formData.value);
+  const { getSubUserList } = storeToRefs(subUserStore());
+  getSubUserList.value.map(item => {
+    item.UserName = item.UserName.substring(1);
+  })
+  subUserList.value = getSubUserList.value;
   loading.value = false;
 }
 const addSubUserDialogShow = () => {
