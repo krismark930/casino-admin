@@ -35,12 +35,14 @@ export default app => {
   if (flag) {
     app.config.errorHandler = function(err, vm, info) {
       nextTick(() => {
-        useErrorlog().addErrorLog({
-          err,
-          info,
-          url: window.location.href,
-          id: Date.now(),
-        })
+
+        // useErrorlog().addErrorLog({
+        //   err,
+        //   info,
+        //   url: window.location.href,
+        //   id: Date.now(),
+        // })
+        
         // console.error(err, info)
       })
     }

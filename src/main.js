@@ -76,8 +76,8 @@ Object.values(Directives).forEach(fn => fn(app))
 
 // 错误日志
 
-// import useErrorHandler from './error-log'
-// useErrorHandler(app)
+import useErrorHandler from './error-log'
+useErrorHandler(app)
 
 import { addBackToTop } from 'vanilla-back-to-top'
 addBackToTop({
@@ -85,8 +85,6 @@ addBackToTop({
   backgroundColor: 'white',
   textColor: '#409eff',
 })
-
-
 
 app
   .use(i18n)
