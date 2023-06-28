@@ -61,10 +61,10 @@
                     </el-select>
                   </td>
                   <td>
-                    <el-input v-model="webBankItem.bankaddress" />
+                    <el-input v-model="webBankItem.min_amount" />
                   </td>
                   <td>
-                    <el-input v-model="webBankItem.bankaddress" />
+                    <el-input v-model="webBankItem.max_amount" />
                   </td>
                 </tr>
               </tbody>
@@ -165,7 +165,9 @@ const webBankItem = ref({
   alias: "",
   bankno: "",
   bankaddress: "",
-  vip: 0
+  vip: 0,
+  min_amount: 100,
+  max_amount: 10000,
 })
 
 const vipOptions = ref([

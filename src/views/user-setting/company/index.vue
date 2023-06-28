@@ -213,7 +213,7 @@
         </el-dialog>
         <el-dialog v-model="detailCompanyDialogVisible" width="90%">
             <div style="display: flex;">
-                公司 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.UserName}} -- 名稱:{{detailCompanyData.Alias}} 
+                公司 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.name}} -- 名稱:{{detailCompanyData.Alias}} 
             </div>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
                 <tr class="m_title_edit" >
@@ -1085,6 +1085,7 @@ const BK_Turn_EO_D_OPTIONS = ref([]);
 
 const detailCompany = (item) => {
     detailCompanyData.value.name = item.UserName;
+    detailCompanyData.value.Alias = item.Alias;
     detailCompanyData.value.id = item.ID;
     detailCompanyData.value.admin = item.Admin;
     detailCompanyData.value.parents_id = item.ID;

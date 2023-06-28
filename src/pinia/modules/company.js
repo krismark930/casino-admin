@@ -7,6 +7,7 @@ import { UPDATE_COMPANY } from "@/api";
 import { DETAIL_COMPANY } from "@/api";
 import { UPDATE_MONEY_AGENCY } from "@/api";
 import { UPDATE_MEMBER } from "@/api";
+import { UPDATE_AGENCY } from "@/api";
 
 export const companyStore = defineStore('company', {
     state: () => ({
@@ -148,6 +149,18 @@ export const companyStore = defineStore('company', {
             try {
                 this.setSuccess(false);
                 let response = await request({ url: UPDATE_MEMBER, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
+                console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchUpdateAgency(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_AGENCY, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
                 }
