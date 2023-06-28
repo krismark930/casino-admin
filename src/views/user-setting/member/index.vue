@@ -118,6 +118,8 @@
                     <br />
                     <el-button link type="danger" size="small" @click="handleEditType(scope.row.id, scope.row.UserName, 'logout')">踢线</el-button>
                     <br />
+                    <el-button link type="primary" size="small" @click="handleTransferAgency(scope.row.UserName)">转移</el-button>
+                    <br /> 
                     <el-button link type="danger" size="small" @click="goCountUserPage(scope.row.UserName)">统计</el-button>
                     <br />
                     <el-button link type="danger" size="small" @click="goRecordIPPage(scope.row.UserName)">日志</el-button>
@@ -128,6 +130,17 @@
             <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange"
                 :page-size="pageSize" v-model:current-page="formData.page_no" />
         </div>
+        <el-dialog v-model="editTransferAgency" title="--会员转移设置--">
+            <el-form-item label="会员帐号：">
+                {{ transferAgencyItem.UserName }}
+            </el-form-item>
+            <el-form-item label="代理帐号：">
+                <el-input v-model="transferAgencyItem.agent"/>
+            </el-form-item>
+            <el-form-item>                
+                <el-button type="primary" @click="updateAgency">确定</el-button>
+            </el-form-item>
+        </el-dialog>
         <el-dialog v-model="editMoneyDialogVisible">
           <h2>代理商额度修改</h2>
           <el-form-item label="代理 帳號 :">
@@ -157,8 +170,15 @@
                     <el-input type="password" style="width: 200px" v-model="newCompanyData.password" maxlength="12"></el-input>
                     ◎密碼規則：須為6~12碼英數字夾雜且符合0~9及a~z字。
                 </el-form-item>
-                <el-form-item label="確認密碼 :">
+                <el-form-item label="確認密碼:">
                     <el-input type="password" v-model="newCompanyData.confirmPassword" style="width: 200px;" maxlength="12"></el-input>
+                </el-form-item>
+                <el-form-item label="提款密碼: ">
+                    <el-input type="password" style="width: 200px" v-model="newCompanyData.address" maxlength="12"></el-input>
+                    ◎密碼規則：須為6~12碼英數字夾雜且符合0~9及a~z字。
+                </el-form-item>
+                <el-form-item label="確認密碼:">
+                    <el-input type="password" v-model="newCompanyData.confirmAddress" style="width: 200px;" maxlength="12"></el-input>
                 </el-form-item>
             </el-form>
             <el-footer style="text-align: center">
@@ -231,11 +251,12 @@
             <el-footer style="text-align: center">
                 <el-button type="primary" @click="updateCompany">確定</el-button>
                 <el-button type="danger" @click="editCompanyDialogVisible = false">取消</el-button>
+                <el-button type="warning" @click="realPersonSetting">真人盘口设定</el-button>
             </el-footer>
         </el-dialog>
         <el-dialog v-model="detailCompanyDialogVisible" width="90%">
             <div style="display: flex;">
-                代理商 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.UserName}} -- 名稱:{{detailCompanyData.Alias}} 
+                会员 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.name}} -- 名稱:{{detailCompanyData.Alias}} 
             </div>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
                 <tr class="m_title_edit" >
@@ -586,6 +607,83 @@
                 </tr>
             </table>
         </el-dialog>
+        <el-dialog v-model="realPersonDialogVisible" title="會員真人盘口管理">
+          <el-form label-width="150">
+            <el-form-item label="會員帳號 :">
+              <p>{{ selectedUser.UserName }}</p>
+            </el-form-item>
+            <el-form-item label="會員 名稱 :">
+              <p>{{ selectedUser.Alias }}</p>
+            </el-form-item>
+            <el-form-item label="會員 额度 :">
+              体育余额: {{ selectedUser.Money }}元 &nbsp;&nbsp;&nbsp;&nbsp; AG余额:{{ selectedUser.AG_Money }}元 &nbsp;&nbsp;&nbsp;
+              OG余额:{{ selectedUser.OG_Money }}元 &nbsp;&nbsp;&nbsp; BBIN余额:{{ selectedUser.BBIN_Money }}元 &nbsp;&nbsp;&nbsp;
+              MG余额:{{ selectedUser.MG_Money }}元 &nbsp;&nbsp;&nbsp; PT余额:{{ selectedUser.PT_Money }}元 &nbsp;&nbsp;&nbsp;
+              开元余额:{{ selectedUser.KY_Money }}元
+            </el-form-item>
+            <el-form-item label="真人 控制 :">
+              <el-checkbox v-model="sysConfigItem.AG" label="AG" size="large" />
+              <el-checkbox v-model="sysConfigItem.OG" label="OG" size="large" />
+              <el-checkbox v-model="sysConfigItem.BBIN" label="BBIN" size="large" />
+              <el-checkbox v-model="sysConfigItem.MG" label="MG" size="large" />
+              <el-checkbox v-model="sysConfigItem.PT" label="PT" size="large" />
+              <el-checkbox v-model="sysConfigItem.KY" label=" 开元棋牌" size="large" />
+            </el-form-item>
+            <el-form-item label="额度 转换 :">
+              <el-checkbox v-model="selectedUser.AG_TR" label="AG" size="large" />
+              <el-checkbox v-model="selectedUser.OG_TR" label="OG" size="large" />
+              <el-checkbox v-model="selectedUser.BBIN_TR" label="BBIN" size="large" />
+              <el-checkbox v-model="selectedUser.MG_TR" label="MG" size="large" />
+              <el-checkbox v-model="selectedUser.PT_TR" label="PT" size="large" />
+              <el-checkbox v-model="selectedUser.KY_TR" label=" 开元棋牌" size="large" />
+            </el-form-item>
+            <el-form-item label="AG真人账号 :">
+              <el-input v-model="selectedUser.AG_User" />
+            </el-form-item>
+            <el-form-item label="AG真人密码 :">
+              <el-input v-model="selectedUser.AG_Pass" />
+            </el-form-item>
+            <el-form-item label="AG真人盘口 :">
+              <el-select v-model="selectedUser.AG_Type">
+                <el-option v-for="(item, index) in AG_TypeOptions" :key="index" :label="item.label"
+                  :value="item.value"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="BBIN真人账号 :">
+              <el-input v-model="selectedUser.BBIN_User" />
+            </el-form-item>
+            <el-form-item label="BBIN真人密码 :">
+              <el-input v-model="selectedUser.BBIN_Pass" />
+            </el-form-item>
+            <el-form-item label="MG真人账号 :">
+              <el-input v-model="selectedUser.MG_User" />
+            </el-form-item>
+            <el-form-item label="MG真人密码 :">
+              <el-input v-model="selectedUser.MG_Pass" />
+            </el-form-item>
+            <el-form-item label="PT真人账号 :">
+              <el-input v-model="selectedUser.PT_User" />
+            </el-form-item>
+            <el-form-item label="PT真人密码 :">
+              <el-input v-model="selectedUser.PT_Pass" />
+            </el-form-item>
+            <el-form-item label="OG真人账号 :">
+              <el-input v-model="selectedUser.OG_User" />
+            </el-form-item>
+            <el-form-item label="OG视讯限红 :">
+              <div style="display: flex">
+                <el-input v-model="selectedUser.OG_Limit1" /> - <el-input v-model="selectedUser.OG_Limit2" />
+              </div>
+            </el-form-item>
+            <el-form-item label="开元棋牌账号 :">
+              <el-input v-model="selectedUser.KY_User" />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="updateRealPersonData">確定</el-button>
+              <el-button type="danger" @click="realPersonDialogVisible = false">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
     </el-card>
 </template>
 <script setup>
@@ -595,11 +693,17 @@ import { ElNotification, ElLoading } from "element-plus";
 import {storeToRefs} from "pinia";
 import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
+import { statisticsStore } from "@/pinia/modules/statistics";
+import { systemStore } from "@/pinia/modules/system";
 const { dispatchCompanyData } = companyStore();
 const { dispatchAddCompanyData } = companyStore();
 const { dispatchUpdateMember } = companyStore();
 const { dispatchUpdateDetailCompany } = companyStore();
 const { dispatchUpdateMoneyAgency } = companyStore();
+const { dispatchUpdateAgency } = companyStore();
+const { dispatchUpdateRealPersonData } = statisticsStore();
+const { dispatchUpdateSysconfigData } = statisticsStore();
+const { dispatchSystemData } = systemStore();
 const router = useRouter();
 const pageSize = ref(20)
 const loading = ref(false);
@@ -614,10 +718,106 @@ const formData = ref({
     active_id: "",
     name: ""
 })
+const transferAgencyItem = ref({
+    lv: "MEM",
+    UserName: "",
+    agent: "",
+})
 const newCompanyDialogVisible = ref(false);
 const editCompanyDialogVisible = ref(false);
 const detailCompanyDialogVisible = ref(false);
 const editMoneyDialogVisible = ref(false);
+const editTransferAgency = ref(false);
+const realPersonDialogVisible = ref(false);
+const selectedUser = ref({});
+const AG_TypeOptions = ref([
+  {
+    label: "A盘 限红20－50000元",
+    value: "A"
+  },
+  {
+    label: "B盘 限红50－5000元",
+    value: "B"
+  },
+  {
+    label: "C盘 限红20－10000元",
+    value: "C"
+  },
+  {
+    label: "D盘 限红200－20000元",
+    value: "D"
+  },
+  {
+    label: "E盘 限红300－30000元",
+    value: "E"
+  },
+  {
+    label: "F盘 限红400－40000元",
+    value: "F"
+  },
+  {
+    label: "G盘 限红500－50000元",
+    value: "G"
+  },
+  {
+    label: "H盘 限红1000－100000元",
+    value: "H"
+  },
+  {
+    label: "I盘 限红2000－200000元",
+    value: "I"
+  },
+])
+const realPersonSetting = () => {
+  selectedUser.value = editCompanyData.value;
+    editCompanyDialogVisible.value = false;
+  realPersonDialogVisible.value = true;
+  selectedUser.value.AG_TR = selectedUser.value.AG_TR == 0 ? true : false;
+  selectedUser.value.OG_TR = selectedUser.value.OG_TR == 0 ? true : false;
+  selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR == 0 ? true : false;
+  selectedUser.value.MG_TR = selectedUser.value.MG_TR == 0 ? true : false;
+  selectedUser.value.PT_TR = selectedUser.value.PT_TR == 0 ? true : false;
+  selectedUser.value.KY_TR = selectedUser.value.KY_TR == 0 ? true : false;
+}
+const updateRealPersonData = async () => {
+  selectedUser.value.AG_TR = selectedUser.value.AG_TR ? 0 : 1;
+  selectedUser.value.OG_TR = selectedUser.value.OG_TR ? 0 : 1;
+  selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR ? 0 : 1;
+  selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
+  selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
+  selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
+  
+  sysConfigItem.value.AG = sysConfigItem.value.AG  ? 1 : 0;
+  sysConfigItem.value.OG = sysConfigItem.value.OG  ? 1 : 0;
+  sysConfigItem.value.BBIN = sysConfigItem.value.BBIN  ? 1 : 0;
+  sysConfigItem.value.MG = sysConfigItem.value.MG  ? 1 : 0;
+  sysConfigItem.value.PT = sysConfigItem.value.PT  ? 1 : 0;
+  sysConfigItem.value.KY = sysConfigItem.value.KY  ? 1 : 0;
+
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  }); 
+
+  await dispatchUpdateRealPersonData(selectedUser.value);
+  await dispatchUpdateSysconfigData(sysConfigItem.value);
+  successResult();
+  await dispatchCompanyData(formData.value);
+  realPersonDialogVisible.value = false;
+  loading.close();
+}
+
+const sysConfigItem = computed(() => {
+  const { getSysConfigItem } = storeToRefs(systemStore());
+  getSysConfigItem.value.AG = getSysConfigItem.value.AG == 1 ? true : false;
+  getSysConfigItem.value.OG = getSysConfigItem.value.OG == 1 ? true : false;
+  getSysConfigItem.value.BBIN = getSysConfigItem.value.BBIN == 1 ? true : false;
+  getSysConfigItem.value.MG = getSysConfigItem.value.MG == 1 ? true : false;
+  getSysConfigItem.value.PT = getSysConfigItem.value.PT == 1 ? true : false;
+  getSysConfigItem.value.KY = getSysConfigItem.value.KY == 1 ? true : false;
+  return getSysConfigItem.value
+})
 const numberOptions = [
     {
         label: "0",
@@ -683,7 +883,9 @@ const newCompanyData = ref({
     maxcredit: "0",
     winloss_c: 0,
     winloss_d: 0,
-    parents_id: ""
+    parents_id: "",
+    address: "",
+    confirmAdress: "",
 })
 const editCompanyData = ref({});
 const detailCompanyData = ref({
@@ -937,9 +1139,24 @@ const goRecordIPPage = (userName) => {
   router.push({ name: "agents.record_ip", query: { username: userName } });
 }
 
+const handleTransferAgency = (userName) => {
+    editTransferAgency.value = true;
+    transferAgencyItem.value.UserName =  userName;
+}
+
+const updateAgency = async () => {
+    loading.value = true;
+    await dispatchUpdateAgency(transferAgencyItem.value);
+    successResult();
+    editTransferAgency.value = false;
+    await dispatchCompanyData(formData.value);
+    loading.value = false;
+}
+
 const detailCompany = (item) => {
     console.log(item.FT_Turn_R);
     detailCompanyData.value.name = item.UserName;
+    detailCompanyData.value.Alias = item.Alias;
     detailCompanyData.value.id = item.id;
     detailCompanyData.value.admin = item.Admin;
     detailCompanyData.value.parents_id = item.id;
@@ -1741,6 +1958,15 @@ const addCompany = async () => {
             return;
         }
     }
+    if (newCompanyData.value.address == "") {
+        alert("請輸入 :提款密碼 !!");
+        return;
+    }
+    if (newCompanyData.value.address != newCompanyData.value.confirmAddress) {
+        alert("您的密碼需使用字母加上數字!!");
+        console.log("no equal")
+        return;
+    }
     if (newCompanyData.value.Alias == "") {
         alert("請輸入 :名稱 !!");
         return;
@@ -1843,6 +2069,7 @@ const onPageChange = async () => {
 onMounted(async () => {
     loading.value = true;
     await dispatchCompanyData(formData.value);
+    await dispatchSystemData({ lv: "M" });
     loading.value = false;
 })
 </script>

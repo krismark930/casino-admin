@@ -70,7 +70,7 @@
           <template #default="scope">
             <div style="display: flex; align-items: center">
               <el-icon><timer /></el-icon>
-              <span style="margin-left: 10px">{{ scope.row.Date }}</span>
+              <span style="margin-left: 10px">{{ scope.row.created_at }}</span>
             </div>
           </template>
         </el-table-column>
@@ -82,8 +82,7 @@
         </el-table-column>
         <el-table-column property="Date" label="審核日期" align="center">                
           <template #default="scope">
-            <div v-if="scope.row.Checked != 0">{{scope.row.Date}}</div>
-            <div v-else></div>
+            <div>{{scope.row.Date}}</div>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100" align="center">
