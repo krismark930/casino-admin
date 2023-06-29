@@ -31,8 +31,8 @@ export const paymentStore = defineStore('payment', {
             USDT: ""
         },
         user: {
-
-        }
+        },
+        currentAmount: 0,
     }),
     getters: {
         getSuccess: (state) => state.success,
@@ -43,6 +43,7 @@ export const paymentStore = defineStore('payment', {
         getWebBankList: (state) => state.webBankList,
         getUSDTList: (state) => state.usdtList,
         getUser: (state) => state.user,
+        getCurrentAmount: (state) => state.currentAmount
     },
     actions: {
         setSuccess(success) {
@@ -69,6 +70,9 @@ export const paymentStore = defineStore('payment', {
         setUser(user) {
             this.user = user;
         },
+        setCurrentAmount(currentAmount) {
+            this.currentAmount = currentAmount;
+        },
         async dispatchCashSystem(data) {
             try {
                 this.setSuccess(false);
@@ -88,6 +92,7 @@ export const paymentStore = defineStore('payment', {
                 let response = await request({ url: CASH_REVIEW, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    this.setCurrentAmount(response.data);
                 }
             } catch (e) {
                 console.log(e.response);
@@ -99,6 +104,7 @@ export const paymentStore = defineStore('payment', {
                 let response = await request({ url: CASH_CANCEL, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    this.setCurrentAmount(response.data);
                 }
             } catch (e) {
                 console.log(e.response);
@@ -121,6 +127,7 @@ export const paymentStore = defineStore('payment', {
                 let response = await request({ url: CASH_SAVE, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    this.setCurrentAmount(response.data);
                 }
             } catch (e) {
                 console.log(e.response.data.message);

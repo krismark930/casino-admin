@@ -444,6 +444,12 @@
 		<div>需要提前返水的会员，可以填到有效会员，不填代表所有会员</div>
 		<div>一键返水只适用于关闭体育场场反水的注单</div>
 	</el-dialog>
+	<el-dialog v-model="showRebateResult">
+		<div v-if="rebateResult.length == 0">暂无数据!</div>
+		<div v-else>
+			<div v-for="(item, index) in rebateResult" :key="index">{{item}}</div>
+		</div>
+	</el-dialog>
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue';
@@ -731,6 +737,13 @@ const resultOptions = ref([
 	},
 ])
 
+const showRebateResult = ref(false);
+
+const rebateResult = computed(() => {
+	const { getRebateResult } = storeToRefs(sportReportStore());
+	return getRebateResult.value;
+})
+
 const startSportRebate = async () => {
   const loading = ElLoading.service({
     lock: true,
@@ -738,6 +751,7 @@ const startSportRebate = async () => {
     background: "rgba(0, 0, 0, 0.7)",
   });
 	await dispatchSportRebate(sportRebateFormData.value);
+	showRebateResult.value = true;
 	successResult();
 	sportRebateDialogVisible.value = false;
 	loading.close();		

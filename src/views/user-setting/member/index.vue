@@ -695,6 +695,7 @@ import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
 import { statisticsStore } from "@/pinia/modules/statistics";
 import { systemStore } from "@/pinia/modules/system";
+import socket from "@/utils/socket";
 const { dispatchCompanyData } = companyStore();
 const { dispatchAddCompanyData } = companyStore();
 const { dispatchUpdateMember } = companyStore();
@@ -1935,7 +1936,10 @@ const handleEditType = async (ID, UserName, activeType) => {
     formData.value.active_id = ID;
     formData.value.name = UserName;
     loading.value = true;
-    await dispatchCompanyData(formData.value);  
+    await dispatchCompanyData(formData.value);
+    if (activeType == "disable") {
+        socket.io.emit("logout", UserName);
+    }
     loading.value = false;
 }
 const addCompany = async () => {

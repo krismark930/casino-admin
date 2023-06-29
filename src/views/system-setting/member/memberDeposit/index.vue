@@ -29,7 +29,7 @@
           </el-statistic>
         </div>
       </el-form-item>
-      <el-form-item label="">
+      <!-- <el-form-item label="">
         <div class="statistic-card">
           <el-statistic precision="2" :value="TK">
             <template #title>
@@ -44,7 +44,7 @@
             </template>
           </el-statistic>
         </div>
-      </el-form-item>
+      </el-form-item> -->
     </el-form>
     <el-table :data="accessList" v-loading="loading" style="width: 100%;" border header-align="center" stripe>
       <el-table-column type="index" label="编号" />

@@ -92,13 +92,7 @@
     >
       <el-table-column type="index" label="序号" align="center" width="70" />
       <el-table-column property="UserName" label="帐号" align="center" />
-      <el-table-column property="level" label="级别" align="center">
-        <template #default="scope">
-          <div v-if="scope.row.UserName.substring(0,1) == 'a'">公司</div>
-          <div v-else-if="scope.row.UserName.substring(0,1) == 'b'">股东</div>
-          <div v-else-if="scope.row.UserName.substring(0,1) == 'c'">总代理</div>
-          <div v-else-if="scope.row.UserName.substring(0,1) == 'd'">代理商</div>
-        </template>
+      <el-table-column property="Level" label="级别" align="center">
       </el-table-column>
       <el-table-column label="活动时间" width="180" align="center">
         <template #default="scope">
@@ -159,11 +153,16 @@
     await dispatchSystemLogs(formData.value);
     loading.value = false;
   }
-  const goBack = () => {
+  const goBack = async () => {
+    formData.value.parents_id = "";
     showLog.value = false;
+    loading.value = true;
+    await dispatchSystemLogs(formData.value);
+    loading.value = false;
   }
   const checkData = async (item) => {
     formData.value.name = item.UserName;
+    formData.value.parents_id = item.UserName;
     loading.value = true;
     await dispatchSystemLogs(formData.value);
     showLog.value = true;
