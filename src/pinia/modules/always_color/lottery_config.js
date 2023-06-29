@@ -8,10 +8,12 @@ export const lotteryConfigStore = defineStore('lottery_config', {
     state: () => ({
         success: false,
         lotteryConfig: null,
+        rebateResult: [],
     }),
     getters: {
         getSuccess: (state) => state.success,
-        getLotteryConfig: (state) => state.lotteryConfig
+        getLotteryConfig: (state) => state.lotteryConfig,
+        getRebateResult: (state) => state.rebateResult,
     },
     actions: {
         setSuccess(success) {
@@ -19,6 +21,9 @@ export const lotteryConfigStore = defineStore('lottery_config', {
         },
         setLotteryConfig(lotteryConfig) {
             this.lotteryConfig = lotteryConfig;
+        },
+        setRebateResult(rebateResult) {
+            this.rebateResult = rebateResult;
         },
         async dispatchGetLotteryConfig(data) {
             try {
@@ -49,6 +54,7 @@ export const lotteryConfigStore = defineStore('lottery_config', {
                 let response = await request({ url: START_DISCOUNT, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    this.setRebateResult(response.data);
                 }
             } catch (e) {
                 console.log(e.response);

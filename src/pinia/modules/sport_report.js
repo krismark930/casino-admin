@@ -11,6 +11,7 @@ export const sportReportStore = defineStore('user_info', {
         totalCount: 0,
         sportReportItem: {},
         topReportList: [],
+        rebateResult: [],
     }),
     getters: {
         getSuccess: (state) => state.success,
@@ -18,6 +19,7 @@ export const sportReportStore = defineStore('user_info', {
         getTotalCount: (state) => state.totalCount,
         getSportReportItem: (state) => state.sportReportItem,
         getTopReportList: (state) => state.topReportList,
+        getRebateResult: (state) => state.rebateResult,
     },
     actions: {
         setSuccess(success) {
@@ -34,6 +36,9 @@ export const sportReportStore = defineStore('user_info', {
         },
         setTopReportList(topReportList) {
             this.topReportList = topReportList;
+        },
+        setRebateResult(rebateResult) {
+            this.rebateResult = rebateResult;
         },
         async dispatchSportReport() {
             try {
@@ -68,6 +73,7 @@ export const sportReportStore = defineStore('user_info', {
                 let response = await request({ url: SPORT_REBATE, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
+                    this.setRebateResult(response.data);
                 }
             } catch (e) {
                 console.log(e.response);
