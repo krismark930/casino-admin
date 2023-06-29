@@ -13,7 +13,7 @@
       <el-form-item>
         <el-button type="primary" @click="getAccessDataByFilter">确认</el-button>
       </el-form-item>
-      <el-form-item label="">
+      <!-- <el-form-item label="">
         <div class="statistic-card">
           <el-statistic precision="2" :value="CK">
             <template #title>
@@ -28,7 +28,7 @@
             </template>
           </el-statistic>
         </div>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="">
         <div class="statistic-card">
           <el-statistic precision="2" :value="TK">

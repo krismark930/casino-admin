@@ -76,6 +76,7 @@ import { ElNotification } from "element-plus";
 import { paymentStore } from "@/pinia/modules/payment.js";
 import { ElLoading } from "element-plus";
 import type { FormInstance } from 'element-plus'
+const emit = defineEmits<{e: "mainVisible"}>();
 const formRef = ref<FormInstance>()
 const {dispatchSaveCash} = paymentStore();
 const {dispatchGetUser} = paymentStore();
@@ -141,6 +142,7 @@ const saveCash = async () => {
   await dispatchSaveCash(formData.value);
   successResult();
   loading.close();
+  emit("mainVisible");
 }
 const errMessage = computed(() => {
   const {getErrMessage} = storeToRefs(paymentStore());

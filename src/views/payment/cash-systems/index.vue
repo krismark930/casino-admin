@@ -3,8 +3,8 @@
     <div style="padding-bottom:20px">
       <el-button type="danger" link @click="HandleDeposit">存入帳戶</el-button>
       <el-button type="danger" link @click="HandleBulk">批量存款</el-button>
-      <DepositAccount v-if="VisibleDeposit == '存入帳戶'" />
-      <BulkDeposit v-if="VisibleDeposit == '批量存款'" />
+      <DepositAccount v-if="VisibleDeposit == '存入帳戶'"  @mainVisible="mainVisible"/>
+      <BulkDeposit v-if="VisibleDeposit == '批量存款'" @mainVisible="mainVisible"/>
     </div>
     <template v-if="VisibleDeposit == ''">
       <el-form :model="formData" inline="true">
@@ -70,7 +70,7 @@
           <template #default="scope">
             <div style="display: flex; align-items: center">
               <el-icon><timer /></el-icon>
-              <span style="margin-left: 10px">{{ scope.row.Date }}</span>
+              <span style="margin-left: 10px">{{ scope.row.created_at }}</span>
             </div>
           </template>
         </el-table-column>
@@ -82,8 +82,7 @@
         </el-table-column>
         <el-table-column property="Date" label="審核日期" align="center">                
           <template #default="scope">
-            <div v-if="scope.row.Checked != 0">{{scope.row.Date}}</div>
-            <div v-else></div>
+            <div>{{scope.row.Date}}</div>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="100" align="center">
@@ -93,7 +92,7 @@
                 <el-button
                   type="success"
                   link
-                  @click="reviewCash(scope.row.ID)"
+                  @click="reviewCash(scope.row)"
                 >
                   {{scope.row.type}}审核
                 </el-button>
@@ -132,6 +131,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import moment from 'moment-timezone';
+import socket from "@/utils/socket";
 import { ElNotification } from "element-plus";
 import {storeToRefs} from "pinia";
 import { paymentStore } from "@/pinia/modules/payment.js";
@@ -185,11 +185,17 @@ const typeOptions = ref([
     value: "C"
   },
 ])
-const reviewCash = async (id) => {
+const currentAmount = computed(() => {
+  const {getCurrentAmount} = storeToRefs(paymentStore());
+  return getCurrentAmount.value;
+})
+const reviewCash = async (item) => {
   loading.value = true;
-  await dispatchReviewCash({id});
+  await dispatchReviewCash({id: item.ID});
   await dispatchCashSystem(formData.value);
   loading.value = false;
+  console.log({userName: item.UserName, currentAmount: currentAmount.value});
+  socket.io.emit("updateMoney", {userName: item.UserName, currentAmount: currentAmount.value})
 }
 const rejectCash = async (id) => {
   if (confirm("是否确定恢复金额?")){
@@ -222,6 +228,12 @@ const onPageChange = async () => {
 }
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab, event)
+}
+const mainVisible = async () => {
+  VisibleDeposit.value = "";
+  loading.value = true;
+  await dispatchCashSystem(formData.value);
+  loading.value = false;
 }
 const successResult = () => {
   if (success.value) {
