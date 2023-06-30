@@ -60,7 +60,7 @@
             <el-input v-model="scope.row.Sort" />
           </template>
         </el-table-column>
-        <el-table-column property="Address" width="250" label="返回地址" align="center">
+        <el-table-column property="Address" width="400" label="返回地址" align="center">
           <template #default="scope">
             <el-input v-model="scope.row.Address" />
           </template>

@@ -344,3 +344,10 @@ export const UPDATE_SYSCONFIG = 'api/admin/statistics/update-sysconfig';
 export const SPORT_REPORT_ALL = 'api/admin/sport-report/all';
 export const SPORT_REPORT_TOP = 'api/admin/sport-report/top';
 export const SPORT_REBATE = 'api/admin/sport-report/rebate';
+
+export const AG_MONEY = 'api/admin/real-game/ag-money';
+export const BBIN_MONEY = 'api/admin/real-game/bbin-money';
+export const MG_MONEY = 'api/admin/real-game/mg-money';
+export const PT_MONEY = 'api/admin/real-game/pt-money';
+export const OG_MONEY = 'api/admin/real-game/og-money';
+export const KY_MONEY = 'api/admin/real-game/ky-money';

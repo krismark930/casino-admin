@@ -29,7 +29,11 @@
     </el-form>
     <el-table :data="statisticsList" v-loading="loading" style="width: 100%;" border header-align="center" stripe>
       <el-table-column type="index" label="序号" align="center" width="70" />
-      <el-table-column property="UserName" label="账号" align="center" />
+      <el-table-column property="UserName" label="账号" align="center">
+        <template #default="scope">
+            <el-button type="primary" link @click="goCountUserPage(scope.row.UserName)">{{ scope.row.UserName }}</el-button>
+        </template>
+      </el-table-column>
       <el-table-column property="Alias" label="名称" align="center" />
       <el-table-column label="操作" width="120" align="center">
         <template #default="scope">
@@ -46,14 +50,57 @@
           </el-button-group>
         </template>
       </el-table-column>
-      <el-table-column property="Credit" label="信用额度" align="center" />
+      <el-table-column property="Credit" label="信用额度" align="center">
+      </el-table-column>
       <el-table-column property="Money" label="现金额度" align="center" />
-      <el-table-column property="BBIN_Money" label="BB额度" align="center" />
-      <el-table-column property="AG_Money" label="AG额度" align="center" />
-      <el-table-column property="OG_Money" label="OG额度" align="center" />
-      <el-table-column property="MG_Money" label="MG额度" align="center" />
-      <el-table-column property="PT_Money" label="PT额度" align="center" />
-      <el-table-column property="KY_Money" label="开元额度" align="center" />
+      <el-table-column property="BBIN_Money" label="BB额度" align="center">
+          <template #default="scope">
+              <div style="display: flex;">
+                {{ scope.row.BBIN_Money }}
+                <img width="16" height="16" id="re_credit" @click="updateBBINMoney(scope.row.UserName)">
+              </div>
+          </template>
+      </el-table-column>
+      <el-table-column property="AG_Money" label="AG额度" align="center">
+          <template #default="scope">
+              <div style="display: flex;">
+                {{ scope.row.BBIN_Money }}
+                <img width="16" height="16" id="re_credit" @click="updateAGMoney(scope.row.UserName)">
+              </div>
+          </template>
+      </el-table-column>
+      <el-table-column property="OG_Money" label="OG额度" align="center">
+        <template #default="scope">
+            <div style="display: flex;">
+              {{ scope.row.OG_Money }}
+              <img width="16" height="16" id="re_credit" @click="updateOGMoney(scope.row.UserName)">
+            </div>
+        </template>
+      </el-table-column>
+      <el-table-column property="MG_Money" label="MG额度" align="center">
+        <template #default="scope">
+            <div style="display: flex;">
+              {{ scope.row.MG_Money }}
+              <img width="16" height="16" id="re_credit" @click="updateMGMoney(scope.row.UserName)">
+            </div>
+        </template>
+      </el-table-column>
+      <el-table-column property="PT_Money" label="PT额度" align="center">
+        <template #default="scope">
+            <div style="display: flex;">
+              {{ scope.row.PT_Money }}
+              <img width="16" height="16" id="re_credit" @click="updatePTMoney(scope.row.UserName)">
+            </div>
+        </template>
+      </el-table-column>
+      <el-table-column property="KY_Money" label="开元额度" align="center">
+        <template #default="scope">
+            <div style="display: flex;">
+              {{ scope.row.KY_Money }}
+              <img width="16" height="16" id="re_credit" @click="updateKYMoney(scope.row.UserName)">
+            </div>
+        </template>
+      </el-table-column>
       <el-table-column label="登陆时间" width="180" align="center">
         <template #default="scope">
           <div style="display: flex; align-items: center">
@@ -163,12 +210,21 @@ import moment from "moment-timezone";
 import { ElNotification, ElLoading } from "element-plus";
 import socket from "@/utils/socket";
 import { statisticsStore } from "@/pinia/modules/statistics";
+import { realGameStore } from "@/pinia/modules/real_game";
 import { systemStore } from "@/pinia/modules/system";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 const { dispatchOnlineData } = statisticsStore();
 const { dispatchSystemData } = systemStore();
 const { dispatchUpdateRealPersonData } = statisticsStore();
 const { dispatchUpdateSysconfigData } = statisticsStore();
+const { dispatchAGMoney } = realGameStore();
+const { dispatchBBINMoney } = realGameStore();
+const { dispatchMGMoney } = realGameStore();
+const { dispatchPTMoney } = realGameStore();
+const { dispatchOGMoney } = realGameStore();
+const { dispatchKYMoney } = realGameStore();
+const router = useRouter();
 const formData = ref({
   level: "",
   username: "",
@@ -226,6 +282,78 @@ const agentOptions = ref([
 ])
 const selectedUser = ref({});
 const realPersonDialogVisible = ref(false);
+const updateAGMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchAGMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
+const updateBBINMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchBBINMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
+const updateMGMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchMGMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
+const updatePTMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchPTMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
+const updateOGMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchOGMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
+const updateKYMoney = async(user_name) => {
+  const loading = ElLoading.service({
+    lock: true,
+    text: "加载中...",
+    background: "rgba(0, 0, 0, 0.7)",
+  });
+  await dispatchKYMoney({user_name});
+  await dispatchOnlineData(formData.value);
+  await dispatchSystemData({ lv: "M" });
+  successResult();
+  loading.close();
+}
 const realPersonSetting = (item) => {
   realPersonDialogVisible.value = true;
   item.AG_TR = item.AG_TR == 0 ? true : false;
@@ -255,7 +383,7 @@ const updateRealPersonData = async () => {
     lock: true,
     text: "加载中...",
     background: "rgba(0, 0, 0, 0.7)",
-  }); 
+  });
 
   await dispatchUpdateRealPersonData(selectedUser.value);
   await dispatchUpdateSysconfigData(sysConfigItem.value);
@@ -290,6 +418,9 @@ const totalCount = computed(() => {
   const { getTotalCount } = storeToRefs(statisticsStore());
   return getTotalCount.value
 })
+const goCountUserPage = (userName) => {
+  router.push({ name: "agents.count_user", query: { userName: userName } });
+}
 const successResult = () => {
   if (success.value) {
     ElNotification({
@@ -380,4 +511,11 @@ onMounted(async () => {
 
 .red {
   color: var(--el-color-error);
-}</style>
+}
+
+#re_credit {
+  background-image: url("@/assets/refresh.gif");
+  margin-left: auto;
+  cursor: pointer;
+}
+</style>
