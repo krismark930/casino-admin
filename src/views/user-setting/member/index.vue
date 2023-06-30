@@ -1937,7 +1937,7 @@ const handleEditType = async (ID, UserName, activeType) => {
     formData.value.name = UserName;
     loading.value = true;
     await dispatchCompanyData(formData.value);
-    if (activeType == "disable") {
+    if (activeType == "disable" || activeType == "logout") {
         socket.io.emit("logout", UserName);
     }
     loading.value = false;
