@@ -351,3 +351,7 @@ export const MG_MONEY = 'api/admin/real-game/mg-money';
 export const PT_MONEY = 'api/admin/real-game/pt-money';
 export const OG_MONEY = 'api/admin/real-game/og-money';
 export const KY_MONEY = 'api/admin/real-game/ky-money';
+
+export const GET_POSTS = '/api/admin/post-management/all'
+export const UPDATE_POST = '/api/admin/post-management/update'
+export const DELETE_POST = '/api/admin/post-management/delete'
