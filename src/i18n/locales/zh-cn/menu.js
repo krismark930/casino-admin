@@ -105,4 +105,7 @@ export default {
   // Actions
   betSlip: '注单',
   operate: '操作',
+
+  // Posts
+  post: "意见反馈管理",
 }

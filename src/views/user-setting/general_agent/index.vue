@@ -48,6 +48,7 @@
                     </el-form-item>
                 </el-form>
                     <el-form-item style="margin-left: 20px">
+                        <el-button type="danger" @click="searchDialogShow">快速查找</el-button>
                         <el-button type="primary" @click="addCompanyDialogShow">新增</el-button>
                     </el-form-item>
             </el-col>
@@ -764,6 +765,21 @@
                 </tr>
             </table>
         </el-dialog>
+        <el-dialog v-model="searchDialogVisible" width="30%" title="快速查找">
+            <el-form label-width="150">
+                <el-form-item label="查询条件">
+                    <el-select v-model="formData.search_type">
+                        <el-option v-for="(item, index) in searchOptions" :key="index" :label="item.label" :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="关键字">
+                    <el-input v-model="formData.search"/>
+                </el-form-item>
+            </el-form>
+            <el-footer>
+                <el-button type="primary" @click="getDataByFilter">查询</el-button>
+            </el-footer>
+        </el-dialog>
     </el-card>
 </template>
 <script setup>
@@ -788,11 +804,42 @@ const formData = ref({
     enable: "",
     active: "",
     active_id: "",
-    name: ""
+    name: "",
+    search: "",
+    search_type: "USERNAME",
 })
 const newCompanyDialogVisible = ref(false);
 const editCompanyDialogVisible = ref(false);
 const detailCompanyDialogVisible = ref(false);
+const searchDialogVisible = ref(false);
+const searchOptions = ref([
+    {
+        label: "会员账号",
+        value: "USERNAME"
+    },
+    {
+        label: "会员姓名",
+        value: "ALIAS"
+    },
+    {
+        label: "机器码",
+        value: "MachineCode"
+    },
+    {
+        label: "新增日期",
+        value: "NEW_DATE"
+    },
+])
+const searchDialogShow = () => {
+    searchDialogVisible.value = true;
+}
+const getDataByFilter = async () => {    
+    searchDialogVisible.value = false;
+    loading.value = true;
+    await dispatchCompanyData(formData.value);
+    await dispatchCompanyInfoData(formData.value);
+    loading.value = false;
+}
 const numberOptions = [
     {
         label: "0",
