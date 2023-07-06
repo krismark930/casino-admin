@@ -10,7 +10,7 @@
     "start": "npm run dev:mock",
     "dev": "vite",
     "dev:mock": "vite --mode mock",
-    "build": "vite build",
+    "build": "vite build --max-old-space-size",
     "build:mock": "vite build --mode mock",
     "serve": "vite preview",
     "lint": "eslint --fix --ext .js,.vue src"
