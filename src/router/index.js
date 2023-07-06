@@ -43,6 +43,7 @@ import analytics from './modules/analytics'
 import systemlog from './modules/systemlog'
 import humanManagement from './modules/humanManagement'
 import statistics from './modules/statistics'
+import post from './modules/post'
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
@@ -67,7 +68,9 @@ export const analyticsRoutes = [...analytics]
 // systemlog
 export const systemlogsRoutes = [...systemlog]
 // account
-export const accontRoutes = [...account]
+export const accountRoutes = [...account]
+// post
+export const postRoutes = [...post];
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -89,7 +92,8 @@ const router = createRouter({
     ...statisticsRoutes,
     ...analyticsRoutes,
     ...systemlogsRoutes,
-    ...accontRoutes,
+    ...accountRoutes,
+    ...postRoutes,
     ...error,
   ],
   scrollBehavior(to, from, savedPosition) {

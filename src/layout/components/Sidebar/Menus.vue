@@ -106,16 +106,31 @@ export default defineComponent({
 }
 
 // menu hover
-.el-menu-item,
 .el-sub-menu__title {
   &:hover {
     background-color: $menuHover !important;
   }
-  display: -webkit-box;
 }
 
 .el-sub-menu__title * {
   vertical-align: -webkit-baseline-middle;
+  display: -webkit-box;
+}
+
+.el-menu--collapse {
+
+  .el-sub-menu {
+    .el-menu-item,
+    .el-sub-menu .el-sub-menu__title {
+      background-color: $subMenuBg !important;
+
+      &:hover {
+        background-color: $subMenuHover !important;
+      }
+    }
+    display: -webkit-box;
+  }
+
 }
 
 .el-sub-menu {

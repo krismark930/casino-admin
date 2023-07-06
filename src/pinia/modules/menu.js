@@ -20,6 +20,7 @@ import {
   statisticsRoutes,
   analyticsRoutes,
   systemlogsRoutes,
+  postRoutes
 } from '@/router'
 import router from '@/router'
 import { authStore } from "./auth";
@@ -190,6 +191,7 @@ export const useMenus = defineStore('menu', () => {
       ...humanManagementRoutes,
       ...paymentsRoutes,
       ...statisticsRoutes,
+      ...postRoutes,
     ])
     setMenus(menus)
   }
