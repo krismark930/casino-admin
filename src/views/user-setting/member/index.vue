@@ -2,7 +2,7 @@
     <el-card shadow="never">
         <el-row style="margin-bottom: 1.5rem; font-size: 20px;">
             <el-col>
-                <h4>代理商管理</h4>
+                <h4>会员管理</h4>
             </el-col>
         </el-row>
         <el-row class="hidden-lg-and-up" style="margin-bottom: 1rem;">
