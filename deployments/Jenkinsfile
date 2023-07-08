@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    environment {
+        bbranch ="${Branch}".replace('origin/', '');
+    }
+    stages {
+        stage('git'){
+            steps {
+                // 
+                //git branch: "${bbranch}",credentialsId: '007', url: 'git@github.com:BlockBeliever/jys-admin.git'
+                echo "${bbranch}";
+                echo Branch;
+                // def check_groovy_file="./Jenkinsfile2";
+                // load "${check_groovy_file}";
+                echo 'git clone';
+            }
+        }
+        stage('build') {
+            agent {
+                docker { image 'node:16.19.0' }
+            }
+            steps {
+                sh 'npm --version'
+                sh 'sh ./deployments/build.sh'
+                echo 'build';
+                sh 'sh ./deployments/docker.sh'
+                echo 'docker';
+            }
+        }
+        stage('finished') {
+            steps {
+                sh 'sh ./deployments/finished.sh'
+                echo 'docker';
+            }
+        }
+    }
+}
