@@ -147,7 +147,7 @@
       </el-table-column>
       <el-table-column property="state" label="状态" align="center">
         <template #default="scope">
-          <div v-html="scope.row.state"></div>
+          <div v-html="scope.row.state" @click="toOperation(scope.row)" style="cursor: pointer;"></div>
         </template>
       </el-table-column>
       <el-table-column property="betAmount" label="投注金额" align="center">
@@ -582,7 +582,6 @@ export default {
       page: 1,
     };
   },
-
   watch: {
     timerCount: {
       handler(value) {
@@ -603,11 +602,9 @@ export default {
       },
     },
   },
-
   beforeUnmount() {
     clearTimeout(this.timer);
   },
-
   mounted() {
     this.getItems();
     this.getFunctionItems();
@@ -618,6 +615,12 @@ export default {
     },
     deleteDepositData(index, row) {
       console.log(index, row);
+    },
+    toOperation: function (item) {
+      console.log(item.g_type);
+      if (item.memberResult == "<font></font>") {
+        this.router.push({ path: '/check-scores2/operate/' + item.m_id, query: { gtype: item.g_type, title: "审核比分" } })
+      }
     },
     restartCountdown() {
       clearTimeout(this.timer);
@@ -688,7 +691,6 @@ export default {
         }
       }
     },
-
     getItems() {
       this.loading = true;
       GetItems({
@@ -712,7 +714,6 @@ export default {
           this.restartCountdown();
         });
     },
-
     getFunctionItems() {
       GetFunctionItems()
         .then((data) => {
