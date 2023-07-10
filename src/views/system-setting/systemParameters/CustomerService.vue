@@ -13,7 +13,7 @@
       <el-table-column prop="kf2" label="客服网址2">
         <template #default="scope">
           <el-input v-model="scope.row.kf2" autocomplete="off" />
-          <h5>禁止投注第2节、中场</h5>
+          <h5>禁止投注第2节</h5>
         </template>
       </el-table-column>
       <el-table-column prop="kf3" label="客服网址3">
@@ -25,7 +25,7 @@
       <el-table-column prop="kf4" label="客服网址4">
         <template #default="scope">
           <el-input v-model="scope.row.kf4" autocomplete="off" />
-          <h5>禁止投注第3节，第4节，加时，灰色字体的赛事</h5>
+          <h5>禁止投注第3节，第4节，加时</h5>
         </template>
       </el-table-column>
       <el-table-column label="" width="100">
