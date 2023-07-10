@@ -43,6 +43,7 @@ import localeZH from 'element-plus/lib/locale/lang/zh-cn'
 import localeEN from 'element-plus/lib/locale/lang/en'
 import useLang from '@/i18n/useLang'
 import socket from "@/utils/socket";
+import zhudanFile from '@/assets/zhudan.wav';
 
 export default defineComponent({
   components: {
@@ -58,6 +59,27 @@ export default defineComponent({
       },
     }
   },
+  data() {
+    interval: null
+  },
+  sockets: {
+    monitorUser() {
+      clearInterval(this.interval);
+      this.interval = setInterval(() => {
+        const audio = new Audio(zhudanFile);
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(()=> {
+
+          })
+          .catch(error => {
+          });
+        }
+      }, 5000)
+    },
+  },
+  mounted() {
+  }
 })
 </script>
 
