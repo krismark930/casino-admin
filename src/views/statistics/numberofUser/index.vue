@@ -419,7 +419,8 @@ const totalCount = computed(() => {
   return getTotalCount.value
 })
 const goCountUserPage = (userName) => {
-  router.push({ name: "agents.count_user", query: { userName: userName } });
+  // router.push({ name: "agents.count_user", query: { userName: userName } });
+  window.open(import.meta.env.VITE_BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
 }
 const successResult = () => {
   if (success.value) {

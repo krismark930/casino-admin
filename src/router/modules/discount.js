@@ -1,22 +1,21 @@
 const Layout = () => import('@/layout/index.vue')
-const Post = () => import('@/views/post/index.vue')
+const Discount = () => import('@/views/discount/index.vue')
 
 export default [
   {
-    path: '/post',
+    path: '/discount',
     component: Layout,
-    name: 'Post Management',
     meta: {
-      title: 'menu.post',
+      title: 'menu.discount',
     },
     icon: 'Message',
     children: [
       {
         path: '',
-        name: 'Post',
-        component: Post,
+        name: 'Discount',
+        component: Discount,
         meta: {
-          title: 'menu.post',
+          title: 'menu.discount',
           affix: true,
         },
       },

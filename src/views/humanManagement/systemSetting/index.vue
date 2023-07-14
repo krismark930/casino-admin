@@ -8,7 +8,7 @@
         <el-button type="primary" link @click="addNewGame">新增电子游戏</el-button>
         <el-button type="primary" link @click="addNewGameKY">新增棋牌游戏</el-button>
       </el-form-item>
-      <el-form-item label="平台">
+      <el-form-item label="平台:">
         <el-select v-model="formData.platformType" style="width: 150px;">
           <el-option
             v-for="item in platformOptions"
@@ -18,7 +18,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="开元棋牌">
+      <el-form-item label="游戏名称:">
         <el-input
           v-model="formData.gameName"
           placeholder=""
@@ -347,7 +347,7 @@ export default {
       this.editDialogVisible = true;
     },
     addNewGameKY: function() {
-      this.dialogTitle = "新增电子游戏";
+      this.dialogTitle = "新增棋牌游戏";
       this.gameItem = {
         ID: "",
         GameName: "",

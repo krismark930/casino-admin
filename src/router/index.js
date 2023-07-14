@@ -40,10 +40,10 @@ import lottery from './modules/lottery'
 import account from './modules/account'
 import payment from './modules/payment'
 import analytics from './modules/analytics'
-import systemlog from './modules/systemlog'
 import humanManagement from './modules/humanManagement'
 import statistics from './modules/statistics'
 import post from './modules/post'
+import discount from './modules/discount'
 /* 菜单栏的路由 */
 // 固定菜单
 export const fixedRoutes = [...home]
@@ -65,12 +65,12 @@ export const paymentsRoutes = [...payment]
 export const statisticsRoutes = [...statistics]
 // analytics
 export const analyticsRoutes = [...analytics]
-// systemlog
-export const systemlogsRoutes = [...systemlog]
 // account
 export const accountRoutes = [...account]
 // post
 export const postRoutes = [...post];
+// discount
+export const discountRoutes = [...discount];
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -91,9 +91,9 @@ const router = createRouter({
     ...paymentsRoutes,
     ...statisticsRoutes,
     ...analyticsRoutes,
-    ...systemlogsRoutes,
     ...accountRoutes,
     ...postRoutes,
+    ...discountRoutes,
     ...error,
   ],
   scrollBehavior(to, from, savedPosition) {

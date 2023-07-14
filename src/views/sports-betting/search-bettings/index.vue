@@ -611,7 +611,8 @@ export default {
   },
   methods: {
     goCountUserPage(userName) {
-      this.router.push({ name: "agents.count_user", query: { userName: userName } });
+      //this.router.push({ name: "agents.count_user", query: { userName: userName } });
+      window.open(import.meta.env.VITE_BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
     },
     deleteDepositData(index, row) {
       console.log(index, row);

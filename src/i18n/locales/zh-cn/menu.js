@@ -108,4 +108,7 @@ export default {
 
   // Posts
   post: "意见反馈管理",
+
+  // Discounts
+  discount: "优惠",
 }
