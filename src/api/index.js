@@ -355,3 +355,8 @@ export const KY_MONEY = 'api/admin/real-game/ky-money';
 export const GET_POSTS = '/api/admin/post-management/all'
 export const UPDATE_POST = '/api/admin/post-management/update'
 export const DELETE_POST = '/api/admin/post-management/delete'
+
+export const GET_DISCOUNTS = '/api/admin/discount-management/get';
+export const ADD_DISCOUNT = '/api/admin/discount-management/add';
+export const UPDATE_DISCOUNT = '/api/admin/discount-management/update';
+export const DELETE_DISCOUNT = '/api/admin/discount-management/delete';
