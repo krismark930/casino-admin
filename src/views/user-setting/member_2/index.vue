@@ -21,7 +21,7 @@
         </el-row>
         <el-row justify="space-between">
             <el-col :lg="16" :xs="24" style="display: flex">
-                <el-form label-width="150px">
+                <el-form>
                     <el-form-item label="选择管理:">
                         <el-select placeholder="全部" v-model="formData.parents_id" @change="getCompnayByFilter">
                             <el-option v-for="(item, index) in parentsList" :key="index" :label="item.label" :value="item.value"></el-option>
@@ -705,7 +705,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import {useRouter} from "vue-router";
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import {storeToRefs} from "pinia";
 import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";

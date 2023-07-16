@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 20px; text-align: center;">
+  <div style="padding: 20px; text-align: left;">
     <div style="padding-bottom:20px">
       <el-button type="danger" link @click="HandleDeposit">存入帳戶</el-button>
       <el-button type="danger" link @click="HandleBulk">批量存款</el-button>

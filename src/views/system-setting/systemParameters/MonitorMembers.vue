@@ -25,20 +25,26 @@
 <script lang="ts" setup>
 import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
 const {dispatchUpdateNotification} = systemStore();
 const props = defineProps<{ monitorMemberList: Array<any> }>();
 const { monitorMemberList } = toRefs(props);
 const updateMonitorMember = async (item: any) => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchUpdateNotification(item);
-  successResult();
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    await dispatchUpdateNotification(item);
+    successResult();
+    loading.close();
+  })
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());

@@ -3,10 +3,10 @@
     <el-row style="justify-content: space-between;" v-if="memTableShow">
       <el-col :span="12">
         <el-row style="justify-content: space-between;">
-          <el-col :span="12" style="text-align: justify; padding-top: 7px">
+          <el-col :span="8" style="text-align: justify; padding-top: 7px">
             <h3>注单查询[ {{ selectedPeriod1 }} 期]</h3>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="16">
             <el-form-item label="选择期数">
               <el-select placeholder="选择期数" v-model="selectedPeriod1">
                 <el-option v-for="(item, index) in periodsList" :key="index" :label="item.label" :value="item.value" />
@@ -16,10 +16,7 @@
         </el-row>
       </el-col>
     </el-row>
-    <MemTable v-if="memTableShow" :selectedPeriod1="selectedPeriod1" @showMainTable="showMainTable" />
-    <MainTable v-else :class2="class2" :class4="class4" :fromDate="fromDate" :endDate="endDate"
-      :selectedPeriod="selectedPeriod" :searchKey="searchKey" :userName="userName" :updateMainData="updateMainData" />
-    <el-form label-width="120px" style="margin-top: 20px;">
+    <el-form style="margin-top: 20px;">
       <el-row>
         <el-col :span="12">
           <el-form-item label="查询种类：" label-width="120px">
@@ -106,6 +103,9 @@
         </el-col>
       </el-row>
     </el-form>
+    <MemTable v-if="memTableShow" :selectedPeriod1="selectedPeriod1" @showMainTable="showMainTable" />
+    <MainTable v-else :class2="class2" :class4="class4" :fromDate="fromDate" :endDate="endDate"
+      :selectedPeriod="selectedPeriod" :searchKey="searchKey" :userName="userName" :updateMainData="updateMainData" />
   </el-card>
 </template>
 <script setup>

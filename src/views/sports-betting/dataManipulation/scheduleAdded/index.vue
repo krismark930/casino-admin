@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left;"
   >
     <h3>足球-赛事新增</h3>
     <el-form

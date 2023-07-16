@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: center;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: left;"
   >
     <h3>{{ $t('menu.systemLog') }}</h3>
     <el-form :inline="true" :model="formData">

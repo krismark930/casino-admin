@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;">
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left;">
     <h3>{{ $t('menu.memberInformation') }}</h3>
     <el-form :inline="true" :model="formData">
       <el-form-item label="关键字查找">
@@ -61,9 +61,9 @@
           <el-button type="primary" size="small" @click="updateUserInfo(scope.row)">
             更改
           </el-button>
-          <el-button type="danger" size="small" @click="deleteUserInfo(scope.row.id)">
+          <!--<el-button type="danger" size="small" @click="deleteUserInfo(scope.row.id)">
             删除
-          </el-button>
+          </el-button>-->
         </template>
       </el-table-column>
     </el-table>

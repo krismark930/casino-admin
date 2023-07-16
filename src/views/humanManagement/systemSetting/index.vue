@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left; margin: 1rem;"
   >
     <h3>系统设置</h3>
     <el-form :model="formData" inline="true">
@@ -196,7 +196,7 @@
 import { reactive, ref } from 'vue'
 import { humanManagementStore } from "@/pinia/modules/human_management.js";
 import moment from "moment-timezone";
-import { ElNotification } from "element-plus";
+import { ElNotification,ElMessageBox } from "element-plus";
 import type { FormInstance } from 'element-plus'
 export default {
   setup() {
@@ -387,11 +387,17 @@ export default {
       })
     },
     deleteGame: async function(id) {
-      this.loading = true;
-      await this.dispatchDeleteGame({id: id});
-      await this.dispatchGameSystem(this.formData);
-      this.successResult();
-      this.loading = false;
+      ElMessageBox.confirm('确认删除已选中的数据项?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(async () => {
+        this.loading = true;
+        await this.dispatchDeleteGame({id: id});
+        await this.dispatchGameSystem(this.formData);
+        this.successResult();
+        this.loading = false;   
+      })
     },
   },
   computed: {

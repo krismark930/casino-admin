@@ -16,9 +16,6 @@
         </el-row>
       </el-col>
     </el-row>
-    <MemTable v-if="memTableShow" :selectedPeriod1="selectedPeriod1" @showMainTable="showMainTable" />
-    <MainTable v-else :class2="class2" :class4="class4" :fromDate="fromDate" :endDate="endDate"
-      :selectedPeriod="selectedPeriod" :searchKey="searchKey" :userName="userName" :updateMainData="updateMainData" />
     <el-form label-width="120px" style="margin-top: 20px;">
       <el-row>
         <el-col :span="12">
@@ -106,6 +103,9 @@
         </el-col>
       </el-row>
     </el-form>
+    <MemTable v-if="memTableShow" :selectedPeriod1="selectedPeriod1" @showMainTable="showMainTable" />
+    <MainTable v-else :class2="class2" :class4="class4" :fromDate="fromDate" :endDate="endDate"
+      :selectedPeriod="selectedPeriod" :searchKey="searchKey" :userName="userName" :updateMainData="updateMainData" />
   </el-card>
 </template>
 <script setup>

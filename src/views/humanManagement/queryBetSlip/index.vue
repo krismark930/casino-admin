@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left; margin: 1rem;"
   >
     <h3>查询注单</h3>
     <el-form :inline="true" :model="formData">
@@ -274,7 +274,7 @@ export default {
   },
   async mounted() {
     this.loading = true;
-    await(this.dispatchQuery(this.formData));
+    await this.dispatchQuery(this.formData);
     this.loading = false;
   }
 }

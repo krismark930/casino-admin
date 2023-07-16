@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: center;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: left;"
   >
     <h3>{{ $t('menu.dailyAccount') }}</h3>
     <el-form :inline="true" :model="formData">
@@ -27,6 +27,22 @@
               <template #title>
                 <div style="display: inline-flex; align-items: center">
                   总提款
+                  <el-tooltip effect="dark" content="取款总额" placement="top">
+                    <el-icon style="margin-left: 4px" :size="12">
+                      <Warning />
+                    </el-icon>
+                  </el-tooltip>
+                </div>
+              </template>
+            </el-statistic>
+          </div>
+        </el-form-item>
+        <el-form-item label="">
+          <div class="statistic-card">
+            <el-statistic precision="2" :value="totalStatistics.DF">
+              <template #title>
+                <div style="display: inline-flex; align-items: center">
+                  利润总额
                   <el-tooltip effect="dark" content="取款总额" placement="top">
                     <el-icon style="margin-left: 4px" :size="12">
                       <Warning />

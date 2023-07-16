@@ -13,8 +13,6 @@
           </el-select>
         </el-form-item>
       </el-col>
-      <el-col :span="3"> </el-col>
-      <el-col :span="3"> </el-col>
       <el-col :span="6">
         <el-row :gutter="4">
           <el-col :span="16">

@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left;"
   >
     <h3>赛程数据</h3>
     <el-form :inline="true" :model="formData">

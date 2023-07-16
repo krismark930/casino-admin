@@ -27,25 +27,31 @@
 <script lang="ts" setup>
 import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
 const {dispatchUpdateUrl} = systemStore();
 const props = defineProps<{ badMemberList: Array<any> }>();
 const { badMemberList } = toRefs(props);
 const updateBadMember = async () => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  let formData = {
-    BadMember: badMemberList.value[0].BadMember,
-    BadMember2: badMemberList.value[0].BadMember2,
-    BadMember_JQ: badMemberList.value[0].BadMember_JQ
-  }
-  await dispatchUpdateUrl(formData);
-  successResult();
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    let formData = {
+      BadMember: badMemberList.value[0].BadMember,
+      BadMember2: badMemberList.value[0].BadMember2,
+      BadMember_JQ: badMemberList.value[0].BadMember_JQ
+    }
+    await dispatchUpdateUrl(formData);
+    successResult();
+    loading.close();
+  })
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());

@@ -1,6 +1,6 @@
 <template>
   <div
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 1rem; text-align: center"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 1rem; text-align: left"
   >
     <h3>彩票结果管理</h3>
     <el-tabs type="border-card" v-model="activeName">

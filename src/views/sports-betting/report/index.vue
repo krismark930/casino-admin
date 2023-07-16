@@ -1,6 +1,6 @@
 <template>
 	<div v-if="reportAllShow">
-		<el-row style="margin: 20px; justify-content: center;">
+		<el-row style="margin: 20px; justify-content: start;">
 			<el-form-item label="管理">
 				<el-select v-model="formData.gtype">
 					<el-option v-for="(item, index) in gtypeOptions" :key="index" :label="item.label" :value="item.value"></el-option>

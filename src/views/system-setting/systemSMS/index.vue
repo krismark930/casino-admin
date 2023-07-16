@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 1rem;">
-    <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center;">
-      <h3>{{ $t('menu.systemSmss') }}</h3>
+    <div style="border: 1px solid #eee; padding: 0.75rem; text-align: left;">
+      <h3>系统短信</h3>
       <el-form :model="newsFormData" label-width="100px" style="width: 800px; display: inline-block;">
         <el-form-item label="帐号">
           <el-input v-model="newsFormData.UserName" placeholder="" clearable></el-input>所有会员everyone
@@ -18,7 +18,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center;">
+    <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left;">
       <h3>统计数据</h3>
       <el-form :model="formData" inline="true">
         <el-form-item>

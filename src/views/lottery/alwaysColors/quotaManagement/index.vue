@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="listShow"
-    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 1rem; text-align: center"
+    style="border: 1px solid #eee; padding: 0.75rem; margin-top: 1rem; text-align: left"
   >
     <h3>会员设置</h3>
     <el-form :inline="true" :model="formData">

@@ -1,5 +1,5 @@
 <template>
-  <el-form label-width="20%">
+  <el-form label-width="100px">
     <el-form-item label="投注品种:">
       <el-select v-model="class2" placeholder="-----全部-----">
         <el-option value="特A" label="特码：特A" />
@@ -61,7 +61,7 @@
     <el-form-item>
       <el-button type="primary" @click="onSubmit">查询</el-button>
     </el-form-item>
-    <el-col :span="16" style="float:right;">
+    <el-col :span="16" style="margin-left: 10px;">
       操作提示：如果想按时间来查询选择期数时，请选择[按时间来查]，如果选择了期数将不按时间来查询！.
     </el-col>
   </el-form>

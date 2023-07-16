@@ -198,7 +198,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
 import { subUserStore } from "@/pinia/modules/sub_user.js";
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from "pinia";
 const { dispatchSubUserData } = subUserStore();
 const { dispatchAddSubUserData } = subUserStore();
@@ -326,16 +326,22 @@ const addSubUser = async () => {
   loading.value = false;
 }
 const updateSubUser = async (item) => {
-  loading.value = true;
-  item.UserName = "a" + item.UserName;
-  await dispatchUpdateSubUserData(item);
-  await dispatchSubUserData(formData.value);
-  const { getSubUserList } = storeToRefs(subUserStore());
-  getSubUserList.value.map(item => {
-    item.UserName = item.UserName.substring(1);
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true;
+    item.UserName = "a" + item.UserName;
+    await dispatchUpdateSubUserData(item);
+    await dispatchSubUserData(formData.value);
+    const { getSubUserList } = storeToRefs(subUserStore());
+    getSubUserList.value.map(item => {
+      item.UserName = item.UserName.substring(1);
+    })
+    subUserList.value = getSubUserList.value;
+    loading.value = false;
   })
-  subUserList.value = getSubUserList.value;
-  loading.value = false;
 }
 const handleChangeSort = async () => {
   loading.value = true;
@@ -343,27 +349,39 @@ const handleChangeSort = async () => {
   loading.value = false;
 }
 const suspendSubUser = async (id, Status) => {
-  let status = Status == 0 ? 2 : 0;
-  loading.value = true;
-  await dispatchSuspendSubUserData({ id, Status: status });
-  await dispatchSubUserData(formData.value);
-  const { getSubUserList } = storeToRefs(subUserStore());
-  getSubUserList.value.map(item => {
-    item.UserName = item.UserName.substring(1);
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    let status = Status == 0 ? 2 : 0;
+    loading.value = true;
+    await dispatchSuspendSubUserData({ id, Status: status });
+    await dispatchSubUserData(formData.value);
+    const { getSubUserList } = storeToRefs(subUserStore());
+    getSubUserList.value.map(item => {
+      item.UserName = item.UserName.substring(1);
+    })
+    subUserList.value = getSubUserList.value;
+    loading.value = false;
   })
-  subUserList.value = getSubUserList.value;
-  loading.value = false;
 }
 const deleteSubUser = async (id) => {
-  loading.value = true;
-  await dispatchDeleteSubUserData({ id });
-  await dispatchSubUserData(formData.value);
-  const { getSubUserList } = storeToRefs(subUserStore());
-  getSubUserList.value.map(item => {
-    item.UserName = item.UserName.substring(1);
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true;
+    await dispatchDeleteSubUserData({ id });
+    await dispatchSubUserData(formData.value);
+    const { getSubUserList } = storeToRefs(subUserStore());
+    getSubUserList.value.map(item => {
+      item.UserName = item.UserName.substring(1);
+    })
+    subUserList.value = getSubUserList.value;
+    loading.value = false
   })
-  subUserList.value = getSubUserList.value;
-  loading.value = false
 }
 const onPageChange = async () => {
   loading.value = true;
