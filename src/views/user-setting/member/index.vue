@@ -21,7 +21,7 @@
         </el-row>
         <el-row justify="space-between">
             <el-col :lg="16" :xs="24" style="display: flex">
-                <el-form label-width="150px">
+                <el-form>
                     <el-form-item label="选择管理:">
                         <el-select placeholder="全部" v-model="formData.parents_id" @change="getCompnayByFilter">
                             <el-option v-for="(item, index) in parentsList" :key="index" :label="item.label" :value="item.value"></el-option>
@@ -67,13 +67,13 @@
         </el-row>
         <el-table :data="companyList" v-loading="loading" border header-align="center" stripe>
             <el-table-column prop="Agents" label="管理 帐号" width="180" />
-            <el-table-column prop="LoginName" label="登陆帐号" width="125">
+            <el-table-column prop="LoginName" label="登陆 帐号" width="125">
                 <template #default="scope">
                     {{scope.row.LoginName}}<br>
                     {{scope.row.Alias}}
                 </template>
             </el-table-column>
-            <el-table-column prop="UserName" label="代理商 帐号" width="140">
+            <el-table-column prop="UserName" label="会员 帐号" width="140">
                 <template #default="scope">
                     <div>{{scope.row.UserName}}</div>
                     <!-- <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div> -->
@@ -162,10 +162,10 @@
             <h2>基本資料設定</h2>
             <el-form label-width="150">
                 <el-form-item label="會員帳號:">
-                    <el-input style="width: 200px" v-model="newCompanyData.UserName"></el-input>
+                    <el-input style="width: 200px" v-model="newCompanyData.LoginName"></el-input>
                 </el-form-item>
                 <el-form-item label="會員名稱:">
-                    <el-input style="width: 200px" v-model="newCompanyData.Alias"></el-input>
+                    <el-input style="width: 200px" v-model="newCompanyData.UserName"></el-input>
                 </el-form-item>
                 <el-form-item label="密碼: ">
                     <el-input type="password" style="width: 200px" v-model="newCompanyData.password" maxlength="12"></el-input>
@@ -191,10 +191,16 @@
             <h2>基本資料設定</h2>
             <el-form label-width="150">
                 <el-form-item label="會員帳號:">
-                    {{editCompanyData.UserName}}
+                    {{editCompanyData.LoginName}}
                 </el-form-item>
                 <el-form-item label="會員名稱:">
-                    {{editCompanyData.Alias}}
+                    {{editCompanyData.UserName}}
+                </el-form-item>
+                <el-form-item label="可用額度:">
+                    <el-input style="width: 200px" v-model="editCompanyData.Money"></el-input>
+                </el-form-item>
+                <el-form-item label="信用额度:">
+                    <el-input style="width: 200px" v-model="editCompanyData.Credit"></el-input>
                 </el-form-item>
                 <el-form-item label="开放盘口 :">
                   <el-select v-model="editCompanyData.Type">
@@ -705,7 +711,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import {useRouter} from "vue-router";
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import {storeToRefs} from "pinia";
 import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
@@ -924,6 +930,7 @@ const newCompanyData = ref({
     num_2: 0,
     num_3: 0,
     UserName: "",
+    LoginName: "",
     password: "",
     confirmPassword: "",
     Alias: "",
@@ -1980,6 +1987,11 @@ const updateCompany = async () => {
     loading.value = false;
 }
 const handleEditType = async (ID, UserName, activeType) => {
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
     console.log(ID);
     formData.value.active = activeType;
     formData.value.active_id = ID;
@@ -1990,6 +2002,7 @@ const handleEditType = async (ID, UserName, activeType) => {
         socket.io.emit("logout", UserName);
     }
     loading.value = false;
+  })
 }
 const addCompany = async () => {
     const regex = /^(?=.*[a-zA-Z])(?=.*\d).*$/;
@@ -2020,7 +2033,7 @@ const addCompany = async () => {
         console.log("no equal")
         return;
     }
-    if (newCompanyData.value.Alias == "") {
+    if (newCompanyData.value.LoginName == "") {
         alert("請輸入 :名稱 !!");
         return;
     }
@@ -2035,6 +2048,7 @@ const addCompany = async () => {
       num_2: 0,
       num_3: 0,
       UserName: "",
+      LoginName: "",
       passWord: "",
       confirmPassword: "",
       Alias: "",
@@ -2052,6 +2066,7 @@ const cancelNewCompany = () => {
         num_2: 0,
         num_3: 0,
         UserName: "ddm",
+        LoginName: "",
         passWord: "",
         confirmPassword: "",
         Alias: "",

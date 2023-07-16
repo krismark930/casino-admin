@@ -54,7 +54,7 @@
             </el-col>
             <el-col :span="8">
                 <el-form-item label="OG账号:">
-                    <font><b>{{ userInfo.OG_User }}</b></font>
+                    <font ><b>{{ userInfo.OG_User }}</b></font>
                 </el-form-item>
             </el-col>
         </el-row>
@@ -83,34 +83,34 @@
             </el-col>
             <el-col :span="8">
                 <el-form-item label="AG余额:">
-                    <font color="blue"><b>00元</b></font>
+                    <font color="blue" @click="agDialogShow" style="cursor: pointer;"><b>00元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
                 <el-form-item label="BBIN余额:">
-                    <font color="blue"><b>0元</b></font>
+                    <font color="blue" @click="bbinDialogShow" style="cursor: pointer;"><b>0元</b></font>
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="6">
                 <el-form-item label="OG余额:">
-                    <font color="blue"><b>0元</b></font>
+                    <font color="blue" @click="ogDialogShow" style="cursor: pointer;"><b>0元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="MG余额:">
-                    <font color="blue"><b>0元</b></font>
+                    <font color="blue" @click="mgDialogShow" style="cursor: pointer;"><b>0元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="PT余额:">
-                    <font color="blue"><b>0元</b></font>
+                    <font color="blue" @click="ptDialogShow" style="cursor: pointer;"><b>0元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="开元余额:">
-                    <font color="blue"><b>0元</b></font>
+                    <font color="blue" @click="kyDialogShow" style="cursor: pointer;"><b>0元</b></font>
                 </el-form-item>
             </el-col>
         </el-row>
@@ -227,11 +227,121 @@
             </el-col>
         </el-row>
     </div>
+    <el-dialog v-model="ogTransactionDialogVisible" style="width: 90%">
+        <el-table
+          :data="queryList"
+          v-loading="loading"
+          style="width: 100%;"
+          border
+          header-align="center"
+          stripe
+        >
+          <el-table-column type="index" :index="indexMethod" label="编号" align="center" />
+          <el-table-column property="playerName" label="真人帐号" align="center" />
+          <el-table-column label="投注时间" width="180" align="center">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <el-icon><timer /></el-icon>
+                <span style="margin-left: 10px">{{ scope.row.betTime }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="派彩时间" width="180" align="center">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <el-icon><timer /></el-icon>
+                <span style="margin-left: 10px">{{ scope.row.recalcuTime }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column property="GameName" label="投注类型" align="center" />
+          <el-table-column
+            property="playType"
+            label="投注内容"
+            align="center"
+          />
+          <el-table-column
+            label="返水状态"
+            align="center"
+          >
+            <template #default="scope">
+              <font color=blue v-if="scope.row.isFS == 1">已返水</font>
+              <font color=red v-else>未返水</font>
+            </template>
+          </el-table-column>
+          <el-table-column property="betAmount" label="投注金额" align="center" />
+          <el-table-column
+            property="validBetAmount"
+            label="有效投注额"
+            align="center"
+          />
+          <el-table-column property="netAmount" label="结果" align="center" />
+          <el-table-column property="billNo" label="定单号" align="center" />
+          <el-table-column property="gameCode" label="游戏局号" align="center" />
+          <el-table-column property="tableCode" label="桌号" align="center" />
+          <el-table-column property="platformType" label="平台" align="center" />
+          <el-table-column property="loginIP" label="玩家IP" align="center" />
+        </el-table>
+    </el-dialog>
+    <el-dialog v-model="kyTransactionDialogVisible" style="width: 90%">
+        <el-table
+          :data="kyQueryList"
+          v-loading="loading"
+          style="width: 100%;"
+          border
+          header-align="center"
+          stripe
+        >
+          <el-table-column type="index" :index="indexMethod" label="编号" align="center" />
+          <el-table-column property="Accounts" label="真人帐号" align="center" />
+          <el-table-column label="开始时间" width="180" align="center">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <el-icon><timer /></el-icon>
+                <span style="margin-left: 10px">{{ scope.row.GameStartTime }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column label="结束时间" width="180" align="center">
+            <template #default="scope">
+              <div style="display: flex; align-items: center">
+                <el-icon><timer /></el-icon>
+                <span style="margin-left: 10px">{{ scope.row.GameEndTime }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column property="GameName" label="游戏内容" align="center" />
+          <el-table-column
+            label="返水状态"
+            align="center"
+          >
+            <template #default="scope">
+              <font color=blue v-if="scope.row.isFS == 1">已返水</font>
+              <font color=red v-else>未返水</font>
+            </template>
+          </el-table-column>
+          <el-table-column property="CellScore" label="投注金额" align="center" />
+          <el-table-column
+            property="CellScore"
+            label="AllBet"
+            align="center"
+          />
+          <el-table-column property="Profit" label="盈利" align="center" />
+          <el-table-column property="Revenue" label="抽水" align="center" />
+          <el-table-column property="GameID" label="游戏局号" align="center" />
+          <el-table-column property="UserCount" label="人数" align="center" />
+          <el-table-column property="ServerID" label="房间" align="center" />
+          <el-table-column property="TableID" label="桌号" align="center" />
+          <el-table-column property="ChairID" label="座位" align="center" />
+        </el-table>
+    </el-dialog>
 </template>
 <script>
 import { defineComponent } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCountUserStore } from "@/pinia/modules/count_user";
+import { humanManagementStore } from "@/pinia/modules/human_management.js";
+import moment from "moment-timezone";
 
 export default defineComponent({
     name: 'CountUser',
@@ -239,21 +349,42 @@ export default defineComponent({
         const router = useRouter()
         const route = useRoute();
         const { dispatchUserInfo } = useCountUserStore();
+        const {dispatchQuery, dispatchQueryKy} = humanManagementStore();
         return {
             router,
             route,
-            dispatchUserInfo
+            dispatchUserInfo,
+            dispatchQuery,
+            dispatchQueryKy,
         }
     },
     data() {
         return {
             loading: false,
+            ogTransactionDialogVisible: false,
+            agTransactionDialogVisible: false,
+            kyTransactionDialogVisible: false,
+            formData: {
+                date: "",
+                user: '',
+                platformType: '',
+                type: '',
+                page_no: 1,
+            },
         }
     },
     computed: {
         userInfo: function () {
             const { getUserInfo } = useCountUserStore();
             return getUserInfo;
+        },
+        queryList: function() {
+          const {getQueryList} = humanManagementStore();
+          return getQueryList;
+        },
+        kyQueryList: function() {
+          const {getQueryKyList} = humanManagementStore();
+          return getQueryKyList;
         }
     },
     methods: {
@@ -265,12 +396,55 @@ export default defineComponent({
         },
         goRecordIPPage: function () {
             this.router.push({ name: "agents.record_ip", query: { username: this.userInfo.username } })
+        },
+        ogDialogShow: async function() {
+            this.loading = true;
+            this.ogTransactionDialogVisible = true;
+            this.formData.platformType = "OG";
+            await this.dispatchQuery(this.formData);
+            this.loading = false;
+        },
+        agDialogShow: async function() {
+            this.loading = true;
+            this.ogTransactionDialogVisible = true;
+            this.formData.platformType = "AGIN";
+            await this.dispatchQuery(this.formData);
+            this.loading = false;
+        },
+        bbinDialogShow: async function() {
+            this.loading = true;
+            this.ogTransactionDialogVisible = true;
+            this.formData.platformType = "BBIN";
+            await this.dispatchQuery(this.formData);
+            this.loading = false;
+        },
+        mgDialogShow: async function() {
+            this.loading = true;
+            this.ogTransactionDialogVisible = true;
+            this.formData.platformType = "MG";
+            await this.dispatchQuery(this.formData);
+            this.loading = false;
+        },
+        ptDialogShow: async function() {
+            this.loading = true;
+            this.ogTransactionDialogVisible = true;
+            this.formData.platformType = "PT";
+            await this.dispatchQuery(this.formData);
+            this.loading = false;
+        },
+        kyDialogShow: async function() {
+            this.loading = true;
+            this.kyTransactionDialogVisible = true;
+            await this.dispatchQueryKy(this.formData);
+            this.loading = false;
         }
     },
     async mounted() {
         this.loading = true;
         await this.dispatchUserInfo({ user_name: this.route.query.userName });
+        this.formData.user = this.route.query.userName;
         this.loading = false;
+        console.log(this.loading);
     }
 })
 </script>

@@ -12,6 +12,9 @@
       <el-form-item label="网站名称:" prop="web_title_wap">
         <el-input v-model="sysConfigItem.web_title_wap" />
       </el-form-item>
+      <el-form-item label="电话号码显示:" prop="web_title_wap">
+        <el-switch v-model="sysConfigItem.phone_number_show" />
+      </el-form-item>
       <el-form-item label="公告:" prop="web_gonggao_wap">
         <el-input v-model="sysConfigItem.web_gonggao_wap" />
       </el-form-item>
@@ -51,20 +54,27 @@
 <script lang="ts" setup>
 import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
 const {dispatchUpdateTurnService} = systemStore();
 const props = defineProps<{ sysConfigItem: Array<any> }>();
 const { sysConfigItem } = toRefs(props);
 const updateMobileSetting = async () => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchUpdateTurnService(sysConfigItem.value);
-  successResult();
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    sysConfigItem.value.phone_number_show = sysConfigItem.value.phone_number_show == true ? 1 : 0;
+    await dispatchUpdateTurnService(sysConfigItem.value);
+    successResult();
+    loading.close();
+  })
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());

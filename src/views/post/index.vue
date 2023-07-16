@@ -1,6 +1,6 @@
 <template>
-    <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
-        <el-row style="margin: 20px; justify-content: center;">
+    <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left; margin: 1rem;">
+        <el-row style="margin: 20px; justify-content: start;">
             <el-form-item>
                 <el-form-item label="日期区间:">
                     <el-date-picker type="daterange" style="width: 200px" v-model="dateRange" value-format="YYYY-MM-DD"></el-date-picker>
@@ -89,7 +89,7 @@ import { ref, computed, onMounted } from 'vue';
 import moment from 'moment-timezone';
 import { postStore } from "@/pinia/modules/post";
 import { storeToRefs } from "pinia";
-import { ElNotification } from "element-plus";
+import { ElNotification, ElMessageBox } from "element-plus";
 import { ElLoading } from "element-plus";
 import { useRouter } from 'vue-router';
 
@@ -180,22 +180,22 @@ const bulkPostDelete = async () => {
     deleteDialogVisible.value = true;
 }
 
-const confirmBulkDelete = async () => {    
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  selectedItems.value.map(async item => {
-    await dispatchDeletePost({id: item.id});
-  })
-  deleteDialogVisible.value = false;
-  await dispatchPosts({
-    start_date: dateRange.value[0],
-    end_date: dateRange.value[1],
-    page_no: page.value
-  });  
-  loading.close();
+const confirmBulkDelete = async () => {
+      const loading = ElLoading.service({
+        lock: true,
+        text: "加载中...",
+        background: "rgba(0, 0, 0, 0.7)",
+      });
+      selectedItems.value.map(async item => {
+        await dispatchDeletePost({id: item.id});
+      })
+      deleteDialogVisible.value = false;
+      await dispatchPosts({
+        start_date: dateRange.value[0],
+        end_date: dateRange.value[1],
+        page_no: page.value
+      });  
+      loading.close();
 }
 
 const updatePost = async () => {
@@ -212,6 +212,12 @@ const updatePost = async () => {
 }
 
 const deletePost = async (id) => {
+
+  ElMessageBox.confirm('确认删除已选中的数据项?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
     loading.value = true;
     await dispatchDeletePost({id});
     successResult();
@@ -221,6 +227,7 @@ const deletePost = async (id) => {
         page_no: page.value
       });
     loading.value = false;    
+  })
 }
 
 const getPostsByFilter = async () => {

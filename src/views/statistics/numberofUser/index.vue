@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: center;">
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin: 1rem; text-align: left;">
     <h3>{{ $t('menu.numberofUserOnline') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>

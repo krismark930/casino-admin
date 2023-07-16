@@ -145,6 +145,7 @@
 import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { storeToRefs } from "pinia";
 import { paymentStore } from "@/pinia/modules/payment.js";
+import { ElNotification, ElMessageBox } from "element-plus";
 import AddMethod from './AddMethod.vue'
 import OnlineBanking from './OnlineBanking.vue'
 import WeChat from './WeChat.vue'
@@ -284,47 +285,71 @@ const paymentList = computed(() => {
 })
 
 const updatePaymentMethod = async (item) => {
-  loading.value = true
-  await dispatchAddPaymentMethod(item);
-  let formData = {
-    lv: "M",
-    pay_type: pay_type.value
-  }
-  await dispatchPaymentMethod(formData);
-  loading.value = false;
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true
+    await dispatchAddPaymentMethod(item);
+    let formData = {
+      lv: "M",
+      pay_type: pay_type.value
+    }
+    await dispatchPaymentMethod(formData);
+    loading.value = false;
+  })
 }
 
 const usePaymentMethod = async (ID) => {
-  loading.value = true;
-  await dispatchUsePaymentMethod({"ID": ID, "Switch": 1});
-  let formData = {
-    lv: "M",
-    pay_type: pay_type.value
-  }
-  await dispatchPaymentMethod(formData);
-  loading.value = false
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true;
+    await dispatchUsePaymentMethod({"ID": ID, "Switch": 1});
+    let formData = {
+      lv: "M",
+      pay_type: pay_type.value
+    }
+    await dispatchPaymentMethod(formData);
+    loading.value = false
+  })
 }
 
 const stopPaymentMethod = async (ID) => {
-  loading.value = true;
-  await dispatchUsePaymentMethod({"ID": ID, "Switch": 0});
-  let formData = {
-    lv: "M",
-    pay_type: pay_type.value
-  }
-  await dispatchPaymentMethod(formData);
-  loading.value = false
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true;
+    await dispatchUsePaymentMethod({"ID": ID, "Switch": 0});
+    let formData = {
+      lv: "M",
+      pay_type: pay_type.value
+    }
+    await dispatchPaymentMethod(formData);
+    loading.value = false
+  })
 }
 
 const deletePaymentMethod = async (ID) => {
-  loading.value = true;
-  await dispatchDeletePaymentMethod({"ID": ID});
-  let formData = {
-    lv: "M",
-    pay_type: pay_type.value
-  }
-  await dispatchPaymentMethod(formData);
-  loading.value = false
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    loading.value = true;
+    await dispatchDeletePaymentMethod({"ID": ID});
+    let formData = {
+      lv: "M",
+      pay_type: pay_type.value
+    }
+    await dispatchPaymentMethod(formData);
+    loading.value = false
+  })
 }
 onMounted(async () => {
   loading.value = true;

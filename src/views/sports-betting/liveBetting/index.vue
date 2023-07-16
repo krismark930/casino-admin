@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: center; margin: 1rem;">
+  <div style="border: 1px solid #eee; padding: 0.75rem; margin-top: 0.75rem; text-align: left; margin: 1rem;">
     <h3>{{ $t('menu.liveBetting') }}</h3>
     <el-form :inline="true" :model="formData">
       <div>

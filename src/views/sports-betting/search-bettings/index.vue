@@ -4,7 +4,7 @@
       border: 1px solid #eee;
       padding: 0.75rem;
       margin-top: 0.75rem;
-      text-align: center;
+      text-align: left;
       margin: 1rem;
     "
   >

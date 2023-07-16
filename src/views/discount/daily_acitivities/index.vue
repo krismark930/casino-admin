@@ -54,9 +54,9 @@
 import { ref, computed, onMounted } from 'vue';
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
-import { ElNotification } from "element-plus";
 import moment from "moment-timezone";
 import { ElLoading } from "element-plus";
+import { ElNotification, ElMessageBox } from "element-plus";
 import {discountStore} from "@/pinia/modules/discount";
 import {storeToRefs} from "pinia";
 
@@ -146,11 +146,17 @@ const editItem = (item) => {
 }
 
 const deleteItem = async (id) => {
-	loading.value = true;
-	await dispatchDeleteDiscount({id});
-	await dispatchDiscounts({type: 3});
-	successResult();
-	loading.value = false
+  ElMessageBox.confirm('确认删除已选中的数据项?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+		loading.value = true;
+		await dispatchDeleteDiscount({id});
+		await dispatchDiscounts({type: 3});
+		successResult();
+		loading.value = false   
+  })
 }
 
 const resetItem = () => {

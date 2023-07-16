@@ -1,9 +1,6 @@
 <template>
   <el-card shadow="never" v-if="mainTableShow">
     <el-row :gutter="10">
-      <el-col :span="3"> </el-col>
-      <el-col :span="3"> </el-col>
-      <el-col :span="3"> </el-col>
       <el-col :span="6">
         <el-row :gutter="4">
           <el-col :span="16">

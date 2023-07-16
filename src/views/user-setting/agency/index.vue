@@ -21,7 +21,7 @@
         </el-row>
         <el-row justify="space-between">
             <el-col :lg="16" :xs="24" style="display: flex">
-                <el-form label-width="150px">
+                <el-form>
                     <el-form-item label="选择管理:">
                         <el-select placeholder="全部" v-model="formData.parents_id" @change="getCompnayByFilter">
                             <el-option v-for="(item, index) in parentsList" :key="index" :label="item.label" :value="item.value"></el-option>
@@ -808,7 +808,7 @@
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading,ElMessageBox } from "element-plus";
 import {storeToRefs} from "pinia";
 import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
@@ -1949,6 +1949,11 @@ const updateCompany = async () => {
     loading.value = false;
 }
 const handleEditType = async (ID, UserName, activeType) => {
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
     formData.value.active = activeType;
     formData.value.active_id = ID;
     formData.value.name = UserName;
@@ -1956,6 +1961,7 @@ const handleEditType = async (ID, UserName, activeType) => {
     await dispatchCompanyData(formData.value);
     await dispatchCompanyInfoData(formData.value);    
     loading.value = false;
+  })
 }
 const addCompany = async () => {
     const regex = /^(?=.*[a-zA-Z])(?=.*\d).*$/;

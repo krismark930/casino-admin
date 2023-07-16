@@ -1,8 +1,8 @@
 <template>
-  <div style="border: 1px solid #eee; padding: 0.75rem; text-align: center; margin: 1rem;">
-    <div style="text-align: center;">
+  <div style="border: 1px solid #eee; padding: 0.75rem; text-align: left; margin: 1rem;">
+    <div style="text-align: left;">
       <h3>{{ $t('menu.systemNotifications') }}</h3>
-      <el-form :model="systemNoticeItem" label-width="100px" inline="true">
+      <el-form :model="systemNoticeItem" inline="true">
         <el-form-item label="内容">
           <el-form-item>
             <el-input clearable v-model="noticeFormData.Msg_System" placeholder="简体"></el-input>
@@ -31,7 +31,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div style="text-align: center;">
+    <div style="text-align: left;">
       <el-form :inline="true" :model="formData">
         <el-form-item label="线上数据－公告管理"></el-form-item>
         <el-form-item>

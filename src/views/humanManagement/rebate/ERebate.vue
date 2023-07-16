@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center;">
+  <div style="text-align: left;">
     <h3>一键返水（电子游戏）</h3>
     <el-form :model="formData" inline="true">
       <el-form-item label="开始日期">
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import { ElNotification } from "element-plus";
+import { ElNotification,ElMessageBox } from "element-plus";
 import moment from "moment-timezone";
 import { ElLoading } from "element-plus";
 import { humanManagementStore } from "@/pinia/modules/human_management.js";
@@ -66,14 +66,20 @@ export default {
       }
     },
     discountDz: async function() {
-      const loading = ElLoading.service({
-        lock: true,
-        text: "加载中...",
-        background: "rgba(0, 0, 0, 0.7)",
-      });
-      await this.dispatchDiscountDz(this.formData)
-      loading.close();
-      this.successResult();
+      ElMessageBox.confirm('你确认了吗?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(async () => {
+        const loading = ElLoading.service({
+          lock: true,
+          text: "加载中...",
+          background: "rgba(0, 0, 0, 0.7)",
+        });
+        await this.dispatchDiscountDz(this.formData)
+        loading.close();
+        this.successResult();
+      })
     }
   }
 }

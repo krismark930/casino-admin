@@ -91,6 +91,7 @@ const sysConfigItem = computed(() => {
       status: getSysConfigItem.value.KY_Repair == 1 ? true : false,
     },
   ]
+  getSysConfigItem.value.phone_number_show = getSysConfigItem.value.phone_number_show == 1 ? true : false;
   console.log(turnServiceList.value);
   return getSysConfigItem.value
 })

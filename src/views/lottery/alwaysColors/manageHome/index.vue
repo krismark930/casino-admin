@@ -4,7 +4,7 @@
       border: 1px solid #eee;
       padding: 0.75rem;
       margin-top: 0.75rem;
-      text-align: center;
+      text-align: left;
     "
   >
     <h3>彩票注单查询</h3>

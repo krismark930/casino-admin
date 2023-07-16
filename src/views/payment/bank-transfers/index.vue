@@ -150,7 +150,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { paymentStore } from "@/pinia/modules/payment.js";
-import { ElNotification, ElLoading } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 
 const { dispatchWebBankData } = paymentStore();
 const { dispatchAddWebBankData } = paymentStore();
@@ -250,37 +250,55 @@ const resetWebBankData = () => {
 }
 
 const updateWebBankData = async (item) => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchAddWebBankData(item);
-  await dispatchWebBankData({ lv: "M" });
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    await dispatchAddWebBankData(item);
+    await dispatchWebBankData({ lv: "M" });
+    loading.close();
+  })
 }
 
 const useWebBankData = async (ID, open) => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchUseWebBankData({ ID, open });
-  await dispatchWebBankData({ lv: "M" });
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    await dispatchUseWebBankData({ ID, open });
+    await dispatchWebBankData({ lv: "M" });
+    loading.close();
+  })
 }
 
 const updateUSDTRate = async () => {
-  usdtList.value.tjck = usdtList.value.tjck ? 1 : 0
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchUpdateUSDTRate(usdtList.value);
-  successResult();
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    usdtList.value.tjck = usdtList.value.tjck ? 1 : 0
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    await dispatchUpdateUSDTRate(usdtList.value);
+    successResult();
+    loading.close();
+  })
 }
 
 const successResult = () => {
@@ -299,14 +317,20 @@ const successResult = () => {
   }
 }
 const deleteWebBankData = async (ID) => {
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  });
-  await dispatchDeleteWebBankData({ ID });
-  await dispatchWebBankData({ lv: "M" });
-  loading.close();
+  ElMessageBox.confirm('你确认了吗?', '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const loading = ElLoading.service({
+      lock: true,
+      text: "加载中...",
+      background: "rgba(0, 0, 0, 0.7)",
+    });
+    await dispatchDeleteWebBankData({ ID });
+    await dispatchWebBankData({ lv: "M" });
+    loading.close();
+  })
 }
 
 const handleAddBank = () => {
