@@ -87,13 +87,13 @@ addBackToTop({
   textColor: '#409eff',
 })
 
-import { quillEditor } from 'vue3-quill'
+// import { quillEditor } from 'vue3-quill'
 
 app
   .use(i18n)
   .use(addBackToTop)
   .use(ElementPlus)
-  .use(quillEditor)
+  // .use(quillEditor)
   .use(pinia)
   .use(socket)
   .use(router)

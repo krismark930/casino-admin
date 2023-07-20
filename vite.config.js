@@ -97,7 +97,7 @@ export default env => {
       brotliSize: false,
       rollupOptions: {
         external: [             
-          'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
+          //'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
         ],
         output: {
           // 拆分单独模块
