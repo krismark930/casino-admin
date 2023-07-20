@@ -25,12 +25,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import viteSvgIcons from 'vite-plugin-svg-icons'
 import viteESLint from '@ehutch79/vite-eslint'
 
 // https://vitejs.dev/config/
 export default env => {
-  // console.log(111, env);
 
   return defineConfig({
     // base: '/vue3-element-admin-site/',
@@ -47,23 +46,16 @@ export default env => {
           setupProdMockServer();
         `,
       }),
-      createSvgIconsPlugin({
+      viteSvgIcons({
         // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
-        svgsDir: 'src/svgs',
+        iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
-      // viteESLint({
-      //   // include: ['src/**/*.vue', 'src/**/*.js'],
-      // }),
     ],
     css: {
       preprocessorOptions: {
         scss: {
-          // 全局变量
-          // additionalData: '@import "./src/assets/style/global-variables.scss";',
-          // element-plus升级到v2需要改成以下写法
           additionalData: `@use "./src/assets/style/global-variables.scss" as *;`,
         },
       },
@@ -83,6 +75,9 @@ export default env => {
           rewrite: path => path.replace(/^\/api/, ''),
         },
       },
+    },
+    optimizeDeps: {
+      include: ['quill']
     },
     esbuild: false,
     build: {

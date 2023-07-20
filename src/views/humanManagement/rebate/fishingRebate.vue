@@ -3,18 +3,10 @@
     <h3>一键返水（捕鱼王）</h3>
     <el-form :model="formData" inline="true">
       <el-form-item label="开始日期">
-        <el-date-picker
-          v-model="formData.s_time"
-          placeholder=""
-          value-format="YYYY-MM-DD"
-        ></el-date-picker>
+        <el-date-picker v-model="formData.s_time" placeholder="" value-format="YYYY-MM-DD"></el-date-picker>
       </el-form-item>
       <el-form-item label="结束日期">
-        <el-date-picker
-          v-model="formData.e_time"
-          placeholder=""
-          value-format="YYYY-MM-DD"
-        ></el-date-picker>
+        <el-date-picker v-model="formData.e_time" placeholder="" value-format="YYYY-MM-DD"></el-date-picker>
       </el-form-item>
       <el-form-item label="">
         <el-button type="primary" @click="discountHtr">开始返水</el-button>
@@ -24,13 +16,13 @@
   </div>
 </template>
 <script>
-import { ElNotification,ElMessageBox } from "element-plus";
+import { ElNotification, ElMessageBox } from "element-plus";
 import moment from "moment-timezone";
 import { ElLoading } from "element-plus";
 import { humanManagementStore } from "@/pinia/modules/human_management.js";
 export default {
   setup() {
-    const {dispatchDiscountHtr} = humanManagementStore();
+    const { dispatchDiscountHtr } = humanManagementStore();
     return {
       dispatchDiscountHtr
     }
@@ -47,7 +39,7 @@ export default {
     success: function () {
       let { getSuccess } = humanManagementStore();
       return getSuccess;
-    },    
+    },
   },
   methods: {
     successResult: function () {
@@ -65,7 +57,7 @@ export default {
         });
       }
     },
-    discountHtr: async function() {
+    discountHtr: async function () {
       ElMessageBox.confirm('你确认了吗?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -79,7 +71,7 @@ export default {
         await this.dispatchDiscountHtr(this.formData)
         loading.close();
         this.successResult();
-      })
+      }).catch(() => { });
     }
   }
 }

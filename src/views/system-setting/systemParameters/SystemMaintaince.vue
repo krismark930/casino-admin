@@ -26,7 +26,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateNotification} = systemStore();
+const { dispatchUpdateNotification } = systemStore();
 const props = defineProps<{ systemMaintainceList: Array<any> }>();
 const { systemMaintainceList } = toRefs(props);
 const updateSystemMaintance = async (item: any) => {
@@ -40,10 +40,10 @@ const updateSystemMaintance = async (item: any) => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    await dispatchUpdateNotification({website: item.website ? 1 : 0, systime: item.systime});
+    await dispatchUpdateNotification({ website: item.website ? 1 : 0, systime: item.systime });
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -70,6 +70,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .sysmaintain-table {
   width: 100%;
 }

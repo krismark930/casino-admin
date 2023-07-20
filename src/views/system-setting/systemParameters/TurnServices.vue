@@ -9,10 +9,7 @@
       </el-table-column>
       <el-table-column label="功能" width="200">
         <template #default="scope">
-          <el-button
-            size="small"
-            @click="updateTurnService(scope.row)"
-          >
+          <el-button size="small" @click="updateTurnService(scope.row)">
             确定
           </el-button>
         </template>
@@ -26,7 +23,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateTurnService} = systemStore();
+const { dispatchUpdateTurnService } = systemStore();
 const props = defineProps<{ turnServiceList: Array<any> }>();
 const { turnServiceList } = toRefs(props);
 const updateTurnService = async (item: any) => {
@@ -36,37 +33,37 @@ const updateTurnService = async (item: any) => {
       formData = {
         isReg: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "AG平台":
       formData = {
         AG_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "OG平台":
       formData = {
         OG_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "BBIN平台":
       formData = {
         BBIN_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "MG平台":
       formData = {
         MG_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "PT平台":
       formData = {
         PT_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     case "开元棋牌":
       formData = {
         KY_Repair: item.status ? 1 : 0
       }
-      break;  
+      break;
     default:
       break;
   }
@@ -83,7 +80,7 @@ const updateTurnService = async (item: any) => {
     await dispatchUpdateTurnService(formData);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -111,6 +108,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .turnservice-table {
   width: 100%;
 }

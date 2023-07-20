@@ -11,10 +11,7 @@
       </el-table-column>
       <el-table-column label="" width="100">
         <template #default="scope">
-          <el-button
-            type="primary"
-            @click="updateMonitorMember(scope.row)"
-          >
+          <el-button type="primary" @click="updateMonitorMember(scope.row)">
             确定
           </el-button>
         </template>
@@ -27,7 +24,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateNotification} = systemStore();
+const { dispatchUpdateNotification } = systemStore();
 const props = defineProps<{ monitorMemberList: Array<any> }>();
 const { monitorMemberList } = toRefs(props);
 const updateMonitorMember = async (item: any) => {
@@ -44,7 +41,7 @@ const updateMonitorMember = async (item: any) => {
     await dispatchUpdateNotification(item);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -71,6 +68,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .monitormember-table {
   width: 100%;
 }
