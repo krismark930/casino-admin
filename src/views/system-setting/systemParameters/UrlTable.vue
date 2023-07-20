@@ -50,7 +50,7 @@
 import { reactive, ref, toRefs, computed } from 'vue'
 import {systemStore} from "@/pinia/modules/system";
 import { storeToRefs } from 'pinia';
-import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
+import { ElNotification, ElLoading, ElMessageBox,ElMessage } from "element-plus";
 const {dispatchUpdateUrl} = systemStore();
 const props = defineProps<{ urlList: Array<any> }>();
 const { urlList } = toRefs(props);
@@ -77,6 +77,7 @@ const updateUrl = async (item: any) => {
     successResult();
     loading.close();
   })
+  .catch(() => {});
 }
 
 const success = computed(() => {

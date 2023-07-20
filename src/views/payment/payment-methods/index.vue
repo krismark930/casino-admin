@@ -234,7 +234,7 @@ const typeOptions = ref([
 
 ])
 watch(activeType, async (newValue) => {
-  switch(newValue) {
+  switch (newValue) {
     case "网银":
       pay_type.value = 1;
       break;
@@ -269,7 +269,7 @@ watch(activeType, async (newValue) => {
       pay_type.value = '';
       break;
   }
-  
+
   let formData = {
     lv: "M",
     pay_type: pay_type.value
@@ -298,7 +298,7 @@ const updatePaymentMethod = async (item) => {
     }
     await dispatchPaymentMethod(formData);
     loading.value = false;
-  })
+  }).catch(() => { });
 }
 
 const usePaymentMethod = async (ID) => {
@@ -308,14 +308,14 @@ const usePaymentMethod = async (ID) => {
     type: 'warning',
   }).then(async () => {
     loading.value = true;
-    await dispatchUsePaymentMethod({"ID": ID, "Switch": 1});
+    await dispatchUsePaymentMethod({ "ID": ID, "Switch": 1 });
     let formData = {
       lv: "M",
       pay_type: pay_type.value
     }
     await dispatchPaymentMethod(formData);
     loading.value = false
-  })
+  }).catch(() => { });
 }
 
 const stopPaymentMethod = async (ID) => {
@@ -325,14 +325,14 @@ const stopPaymentMethod = async (ID) => {
     type: 'warning',
   }).then(async () => {
     loading.value = true;
-    await dispatchUsePaymentMethod({"ID": ID, "Switch": 0});
+    await dispatchUsePaymentMethod({ "ID": ID, "Switch": 0 });
     let formData = {
       lv: "M",
       pay_type: pay_type.value
     }
     await dispatchPaymentMethod(formData);
     loading.value = false
-  })
+  }).catch(() => { });
 }
 
 const deletePaymentMethod = async (ID) => {
@@ -342,14 +342,14 @@ const deletePaymentMethod = async (ID) => {
     type: 'warning',
   }).then(async () => {
     loading.value = true;
-    await dispatchDeletePaymentMethod({"ID": ID});
+    await dispatchDeletePaymentMethod({ "ID": ID });
     let formData = {
       lv: "M",
       pay_type: pay_type.value
     }
     await dispatchPaymentMethod(formData);
     loading.value = false
-  })
+  }).catch(() => { });
 }
 onMounted(async () => {
   loading.value = true;

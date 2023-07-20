@@ -3,19 +3,12 @@
     <el-table :data="simpleVersionList" class="simpleversion-table">
       <el-table-column prop="simpleVersion" label="简易版公告">
         <template #default="scope">
-          <el-input
-            v-model="scope.row.simpleVersion"
-            type="textarea"
-            :rows="15"
-          />
+          <el-input v-model="scope.row.simpleVersion" type="textarea" :rows="15" />
         </template>
       </el-table-column>
       <el-table-column label="" width="100">
         <template #default="scope">
-          <el-button
-            type="primary"
-            @click="updateSimpleVersion(scope.row)"
-          >
+          <el-button type="primary" @click="updateSimpleVersion(scope.row)">
             确定
           </el-button>
         </template>
@@ -28,7 +21,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateNotification} = systemStore();
+const { dispatchUpdateNotification } = systemStore();
 const props = defineProps<{ simpleVersionList: Array<any> }>();
 const { simpleVersionList } = toRefs(props);
 const updateSimpleVersion = async (item: any) => {
@@ -42,10 +35,10 @@ const updateSimpleVersion = async (item: any) => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    await dispatchUpdateNotification({systimee: item.simpleVersion});
+    await dispatchUpdateNotification({ systimee: item.simpleVersion });
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -72,6 +65,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .simpleversion-table {
   width: 100%;
 }

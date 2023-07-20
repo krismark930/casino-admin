@@ -263,7 +263,7 @@ const updateWebBankData = async (item) => {
     await dispatchAddWebBankData(item);
     await dispatchWebBankData({ lv: "M" });
     loading.close();
-  })
+  }).catch(() => { });
 }
 
 const useWebBankData = async (ID, open) => {
@@ -280,7 +280,7 @@ const useWebBankData = async (ID, open) => {
     await dispatchUseWebBankData({ ID, open });
     await dispatchWebBankData({ lv: "M" });
     loading.close();
-  })
+  }).catch(() => { });
 }
 
 const updateUSDTRate = async () => {
@@ -298,7 +298,7 @@ const updateUSDTRate = async () => {
     await dispatchUpdateUSDTRate(usdtList.value);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 
 const successResult = () => {
@@ -330,7 +330,7 @@ const deleteWebBankData = async (ID) => {
     await dispatchDeleteWebBankData({ ID });
     await dispatchWebBankData({ lv: "M" });
     loading.close();
-  })
+  }).catch(() => { });
 }
 
 const handleAddBank = () => {

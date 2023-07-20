@@ -1,11 +1,6 @@
 <template>
   <div class="mobilesetting-form-wrapper">
-    <el-form
-      :model="sysConfigItem"
-      class="mobilesetting-form"
-      :size="formSize"
-      label-width="150px"
-    >
+    <el-form :model="sysConfigItem" class="mobilesetting-form" :size="formSize" label-width="150px">
       <el-form-item label="网站标题:" prop="web_name_wap">
         <el-input v-model="sysConfigItem.web_name_wap" />
       </el-form-item>
@@ -35,10 +30,7 @@
         <el-input v-model="sysConfigItem.web_banner_wap" type="textarea" />
       </el-form-item>
       <el-form-item label="轮播时间:" prop="web_slider_time_wap">
-        <el-input
-          v-model="sysConfigItem.web_slider_time_wap"
-          class="carouseltime"
-        />
+        <el-input v-model="sysConfigItem.web_slider_time_wap" class="carouseltime" />
         <h5>毫秒</h5>
       </el-form-item>
       <el-form-item label="刷新时间:" prop="web_refreshtime_wap">
@@ -56,7 +48,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateTurnService} = systemStore();
+const { dispatchUpdateTurnService } = systemStore();
 const props = defineProps<{ sysConfigItem: Array<any> }>();
 const { sysConfigItem } = toRefs(props);
 const updateMobileSetting = async () => {
@@ -74,7 +66,7 @@ const updateMobileSetting = async () => {
     await dispatchUpdateTurnService(sysConfigItem.value);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -101,18 +93,23 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 h5 {
   margin-top: 0;
 }
+
 .mobilesetting-form {
   width: 100%;
 }
+
 .author {
   width: 50%;
 }
+
 .refreshtime {
   width: 30%;
 }
+
 .carouseltime {
   width: 25%;
 }

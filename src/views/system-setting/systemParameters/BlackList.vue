@@ -29,7 +29,7 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateUrl} = systemStore();
+const { dispatchUpdateUrl } = systemStore();
 const props = defineProps<{ badMemberList: Array<any> }>();
 const { badMemberList } = toRefs(props);
 const updateBadMember = async () => {
@@ -51,7 +51,7 @@ const updateBadMember = async () => {
     await dispatchUpdateUrl(formData);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -78,6 +78,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .blacklist-table {
   width: 100%;
 }
