@@ -103,7 +103,6 @@ export default env => {
           // 拆分单独模块
           manualChunks: {
             'element-plus': ['element-plus'],
-            'vue3-quill': ['vue3-quill'],
             mockjs: ['mockjs'],
           },
         },
