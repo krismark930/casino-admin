@@ -96,16 +96,18 @@ export default env => {
       // 禁用该功能可能会提高大型项目的构建性能
       brotliSize: false,
       rollupOptions: {
+        external: [             
+          'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
+        ],
         output: {
           // 拆分单独模块
           manualChunks: {
             'element-plus': ['element-plus'],
+            'vue3-quill': ['vue3-quill'],
             mockjs: ['mockjs'],
           },
         },
-        external: [             
-          'vite:rollup' // i.e. this syntax does not work, is there something similar that would work?
-        ],
+
       },
       outDir: "dist"
     },
