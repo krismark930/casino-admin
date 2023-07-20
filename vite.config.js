@@ -104,9 +104,10 @@ export default env => {
           },
         },
         external: [             
-          'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
+          'vite:rollup' // i.e. this syntax does not work, is there something similar that would work?
         ],
       },
+      outDir: "dist"
     },
   })
 }
