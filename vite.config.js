@@ -104,7 +104,7 @@ export default env => {
           },
         },
         external: [             
-          'vue3-quill:*' // i.e. this syntax does not work, is there something similar that would work?
+          'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
         ],
       },
     },
