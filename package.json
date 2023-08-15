@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@vueup/vue-quill": "^1.2.0",
     "axios": "^0.21.1",
     "moment-timezone": "^0.5.43",
     "pinia": "^2.0.33",
