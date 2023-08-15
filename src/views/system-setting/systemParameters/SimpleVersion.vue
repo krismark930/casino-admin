@@ -35,7 +35,7 @@ const updateSimpleVersion = async (item: any) => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    await dispatchUpdateNotification({ systimee: item.simpleVersion });
+    await dispatchUpdateNotification({ systimee: item.simpleVersion, update_type: "systimee" });
     successResult();
     loading.close();
   }).catch(() => { });

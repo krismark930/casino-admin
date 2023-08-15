@@ -43,6 +43,7 @@ const { dispatchUpdateUrl } = systemStore();
 const props = defineProps<{ customerserviceList: Array<any> }>();
 const { customerserviceList } = toRefs(props);
 const updateCustomserService = async (item: any) => {
+  item.update_type = "customer_service";
   ElMessageBox.confirm('你确认了吗?', '警告', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',

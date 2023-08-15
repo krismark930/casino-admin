@@ -64,7 +64,7 @@
       <el-table-column property="AG_Money" label="AG额度" align="center">
           <template #default="scope">
               <div style="display: flex;">
-                {{ scope.row.BBIN_Money }}
+                {{ scope.row.AG_Money }}
                 <img width="16" height="16" id="re_credit" @click="updateAGMoney(scope.row.UserName)">
               </div>
           </template>

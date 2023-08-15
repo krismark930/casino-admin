@@ -35,7 +35,7 @@ const updateNotification = async (item: any) => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    await dispatchUpdateNotification({ GongGao: item.notification });
+    await dispatchUpdateNotification({ GongGao: item.notification, update_type: "gong_gao" });
     successResult();
     loading.close();
   }).catch(() => { });

@@ -40,7 +40,7 @@ const updateSystemMaintance = async (item: any) => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    await dispatchUpdateNotification({ website: item.website ? 1 : 0, systime: item.systime });
+    await dispatchUpdateNotification({ website: item.website ? 1 : 0, systime: item.systime, update_type: "systime" });
     successResult();
     loading.close();
   }).catch(() => { });

@@ -43,7 +43,8 @@ const updateBadMember = async () => {
       text: "加载中...",
       background: "rgba(0, 0, 0, 0.7)",
     });
-    let formData = {
+    let formData = {      
+      update_type: "black_list",
       BadMember: badMemberList.value[0].BadMember,
       BadMember2: badMemberList.value[0].BadMember2,
       BadMember_JQ: badMemberList.value[0].BadMember_JQ

@@ -28,6 +28,7 @@ const { dispatchUpdateNotification } = systemStore();
 const props = defineProps<{ monitorMemberList: Array<any> }>();
 const { monitorMemberList } = toRefs(props);
 const updateMonitorMember = async (item: any) => {
+  item.update_type = "monitor";
   ElMessageBox.confirm('你确认了吗?', '警告', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',

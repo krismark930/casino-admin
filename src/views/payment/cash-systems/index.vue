@@ -103,13 +103,6 @@
                 >
                   拒绝
                 </el-button>
-                <el-button
-                  type="danger"
-                  link
-                  @click="deleteCash(scope.row.ID)"
-                >
-                  删除
-                </el-button>
               </el-button-group>              
             </div>
             <div v-else>

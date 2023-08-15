@@ -81,7 +81,7 @@
                 </template>
             </el-table-column>
             <el-table-column prop="Money" label="可用額度" width="150" />
-            <el-table-column prop="Credit" label="信用额度" width="120" />
+            <!--<el-table-column prop="Credit" label="信用额度" width="120" />-->
             <el-table-column prop="Count" label="下级总计" width="150" />
             <el-table-column prop="AddDate" label="新增日期" width="200" />
             <el-table-column prop="Status" label="帐号状况" width="130">
@@ -204,15 +204,21 @@
                     {{ editCompanyData.LoginName }}
                 </el-form-item>
                 <el-form-item label="會員名稱:">
-                    {{ editCompanyData.UserName }}
+                    <el-input style="width: 200px" v-model="editCompanyData.UserName"></el-input>
                 </el-form-item>
                 <el-form-item label="可用額度:">
-                    <el-input style="width: 200px" v-model="editCompanyData.Money"></el-input>
+                    {{editCompanyData.Money}}
                 </el-form-item>
-                <el-form-item label="信用额度:">
-                    <el-input style="width: 200px" v-model="editCompanyData.Credit"></el-input>
+                <el-form-item label="操作类型:">
+                    <el-radio-group v-model="editCompanyData.operation_type" class="ml-4">
+                      <el-radio label="1" size="large">人工加款</el-radio>
+                      <el-radio label="2" size="large">人工扣款</el-radio>
+                    </el-radio-group>
                 </el-form-item>
-                <el-form-item label="开放盘口 :">
+                <el-form-item label="金额:">
+                    <el-input v-model="editCompanyData.more_money" style="width: 200px"/>
+                </el-form-item>
+                <el-form-item label="开放盘口:">
                     <el-select v-model="editCompanyData.Type">
                         <el-option v-for="(item, index) in typeOptions" :key="index" :label="item.label"
                             :value="item.value"></el-option>
@@ -239,7 +245,7 @@
                 <el-form-item label="开元返水:">
                     <el-input style="width: 200px" v-model="editCompanyData.fanshui_ky"></el-input>
                 </el-form-item>
-                <el-form-item label="密码:">
+                <el-form-item label="登录密码:">
                     <el-input type="password" style="width: 200px" v-model="editCompanyData.password"></el-input>
                 </el-form-item>
                 <el-form-item label="取款密码:">
@@ -882,7 +888,6 @@ const updateRealPersonData = async () => {
     selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
     selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
     selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
-
     sysConfigItem.value.AG = sysConfigItem.value.AG ? 1 : 0;
     sysConfigItem.value.OG = sysConfigItem.value.OG ? 1 : 0;
     sysConfigItem.value.BBIN = sysConfigItem.value.BBIN ? 1 : 0;
@@ -895,7 +900,6 @@ const updateRealPersonData = async () => {
         text: "加载中...",
         background: "rgba(0, 0, 0, 0.7)",
     });
-
     await dispatchUpdateRealPersonData(selectedUser.value);
     await dispatchUpdateSysconfigData(sysConfigItem.value);
     successResult();
@@ -1978,8 +1982,11 @@ const detailCompany = (item) => {
 }
 const editCompany = (item) => {
     item.Type = item.Type == "" || item.Type == null ? "C" : item.Type;
+    item.password = "";
     editCompanyData.value = item;
-    console.log(editCompanyData.value.password);
+    editCompanyData.value.operation_type = "1";
+    editCompanyData.value.more_money = "";
+    // console.log(editCompanyData.value.password);
     editCompanyDialogVisible.value = true;
 }
 const handleMoneyAgency = (item) => {
@@ -2021,6 +2028,12 @@ const updateCompany = async () => {
     //        return;
     //    }
     //}
+    if (editCompanyData.value.more_money != "") {
+        if (editCompanyData.value.operation_type == "2" && Number(editCompanyData.value.Money) < Number(editCompanyData.value.more_money)) {
+            alert("扣款金额不能超过可用額度。");
+            return;
+        }
+    }
     loading.value = true;
     await dispatchUpdateMember(editCompanyData.value);
     successResult();

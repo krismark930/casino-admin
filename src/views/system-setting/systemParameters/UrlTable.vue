@@ -63,6 +63,7 @@ const form = reactive({
 const formLabelWidth = '90px'
 
 const updateUrl = async (item: any) => {
+  item.update_type = "url";
   ElMessageBox.confirm('你确认了吗?', '警告', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
