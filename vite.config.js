@@ -48,7 +48,8 @@ export default env => {
       }),
       viteSvgIcons({
         // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
+        // iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
+        iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
