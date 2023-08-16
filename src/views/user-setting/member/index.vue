@@ -888,7 +888,6 @@ const updateRealPersonData = async () => {
     selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
     selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
     selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
-
     sysConfigItem.value.AG = sysConfigItem.value.AG ? 1 : 0;
     sysConfigItem.value.OG = sysConfigItem.value.OG ? 1 : 0;
     sysConfigItem.value.BBIN = sysConfigItem.value.BBIN ? 1 : 0;
@@ -901,7 +900,6 @@ const updateRealPersonData = async () => {
         text: "加载中...",
         background: "rgba(0, 0, 0, 0.7)",
     });
-
     await dispatchUpdateRealPersonData(selectedUser.value);
     await dispatchUpdateSysconfigData(sysConfigItem.value);
     successResult();

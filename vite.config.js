@@ -25,7 +25,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
-import viteSvgIcons from 'vite-plugin-svg-icons'
+// import viteSvgIcons from 'vite-plugin-svg-icons'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import viteESLint from '@ehutch79/vite-eslint'
 
 // https://vitejs.dev/config/
@@ -50,6 +51,10 @@ export default env => {
         // 指定需要缓存的图标文件夹
         // iconDirs: [path.resolve(__dirname, 'src/assets/svg')],
         iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
+<<<<<<< HEAD
+=======
+        svgsDir: 'src/svgs',
+>>>>>>> 7d7a0b907c051219d23dfb98136515ba75f70a59
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
@@ -92,6 +97,9 @@ export default env => {
       // 禁用该功能可能会提高大型项目的构建性能
       brotliSize: false,
       rollupOptions: {
+        external: [             
+          //'vue3-quill' // i.e. this syntax does not work, is there something similar that would work?
+        ],
         output: {
           // 拆分单独模块
           manualChunks: {
@@ -99,7 +107,9 @@ export default env => {
             mockjs: ['mockjs'],
           },
         },
+
       },
+      outDir: "dist"
     },
   })
 }
