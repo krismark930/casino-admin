@@ -41,6 +41,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "autoprefixer": "^10.2.5",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.0.0",
     "element-plus": "^2.2.32",
     "eslint": "^6.7.2",
