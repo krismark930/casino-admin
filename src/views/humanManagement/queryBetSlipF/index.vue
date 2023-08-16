@@ -64,7 +64,7 @@
       <el-table-column property="Type" label="类型" align="center" />
       <el-table-column property="Cost" label="投注金额" align="center" />
       <el-table-column
-        property="transferAmount"
+        property="Earn"
         label="派彩金额"
         align="center"
       />
@@ -84,7 +84,10 @@
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="100" />
+      <el-pagination background layout="prev, pager, next" :total="totalCount" 
+        :page-size="20"
+        @current-change="onPageChange"
+        v-model:current-page="formData.page_no" />
     </div>
   </div>
 </template>

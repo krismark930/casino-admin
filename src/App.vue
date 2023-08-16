@@ -43,7 +43,9 @@ import localeZH from 'element-plus/lib/locale/lang/zh-cn'
 import localeEN from 'element-plus/lib/locale/lang/en'
 import useLang from '@/i18n/useLang'
 import socket from "@/utils/socket";
-import zhudanFile from '@/assets/zhudan.wav';
+import zhudanFile from '@/assets/audio/zhudan.wav';
+import depositFile from '@/assets/audio/deposit.mp3';
+import withdrawFile from '@/assets/audio/withdraw.mp3';
 
 export default defineComponent({
   components: {
@@ -60,7 +62,11 @@ export default defineComponent({
     }
   },
   data() {
-    interval: null
+    return {
+      interval: null,
+      depositInterval: null,
+      withdrawInterval: null      
+    }
   },
   sockets: {
     monitorUser() {
@@ -73,6 +79,36 @@ export default defineComponent({
 
           })
           .catch(error => {
+          });
+        }
+      }, 5000)
+    },
+    submitWithdrawAlert() {
+      clearInterval(this.withdrawInterval);
+      this.withdrawInterval = setInterval(() => {
+        const audio = new Audio(withdrawFile);
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(()=> {
+
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+      }, 5000)
+    },
+    submitDepositAlert() {
+      clearInterval(this.depositInterval);
+      this.depositInterval = setInterval(() => {
+        const audio = new Audio(depositFile);
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(()=> {
+
+          })
+          .catch(error => {
+            console.log(error);
           });
         }
       }, 5000)

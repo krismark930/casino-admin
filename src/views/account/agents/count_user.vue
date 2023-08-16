@@ -78,39 +78,39 @@
         <el-row>
             <el-col :span="8">
                 <el-form-item label="账户余额:">
-                    <font color="blue"><b>{{ userInfo.money }}0元</b></font>
+                    <font color="blue"><b>{{ userInfo.money }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
                 <el-form-item label="AG余额:">
-                    <font color="blue" @click="agDialogShow" style="cursor: pointer;"><b>00元</b></font>
+                    <font color="blue" @click="agDialogShow" style="cursor: pointer;"><b>{{ userInfo.AG_Money }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
                 <el-form-item label="BBIN余额:">
-                    <font color="blue" @click="bbinDialogShow" style="cursor: pointer;"><b>0元</b></font>
+                    <font color="blue" @click="bbinDialogShow" style="cursor: pointer;"><b>{{ userInfo.BBIN_Money }}元</b></font>
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row>
             <el-col :span="6">
                 <el-form-item label="OG余额:">
-                    <font color="blue" @click="ogDialogShow" style="cursor: pointer;"><b>0元</b></font>
+                    <font color="blue" @click="ogDialogShow" style="cursor: pointer;"><b>{{ userInfo.OG_Money }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="MG余额:">
-                    <font color="blue" @click="mgDialogShow" style="cursor: pointer;"><b>0元</b></font>
+                    <font color="blue" @click="mgDialogShow" style="cursor: pointer;"><b>{{ userInfo.MG_Money }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="PT余额:">
-                    <font color="blue" @click="ptDialogShow" style="cursor: pointer;"><b>0元</b></font>
+                    <font color="blue" @click="ptDialogShow" style="cursor: pointer;"><b>{{ userInfo.PT_Money }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="开元余额:">
-                    <font color="blue" @click="kyDialogShow" style="cursor: pointer;"><b>0元</b></font>
+                    <font color="blue" @click="kyDialogShow" style="cursor: pointer;"><b>{{ userInfo.KY_Money }}元</b></font>
                 </el-form-item>
             </el-col>
         </el-row>
@@ -366,7 +366,8 @@ export default defineComponent({
             kyTransactionDialogVisible: false,
             formData: {
                 date: "",
-                user: '',
+                user: "",
+                player_name: '',
                 platformType: '',
                 type: '',
                 page_no: 1,
@@ -401,6 +402,7 @@ export default defineComponent({
             this.loading = true;
             this.ogTransactionDialogVisible = true;
             this.formData.platformType = "OG";
+            this.formData.player_name = this.userInfo.OG_User;
             await this.dispatchQuery(this.formData);
             this.loading = false;
         },
@@ -408,6 +410,7 @@ export default defineComponent({
             this.loading = true;
             this.ogTransactionDialogVisible = true;
             this.formData.platformType = "AGIN";
+            this.formData.player_name = this.userInfo.AG_User;
             await this.dispatchQuery(this.formData);
             this.loading = false;
         },
@@ -415,6 +418,7 @@ export default defineComponent({
             this.loading = true;
             this.ogTransactionDialogVisible = true;
             this.formData.platformType = "BBIN";
+            this.formData.player_name = this.userInfo.BBIN_User;
             await this.dispatchQuery(this.formData);
             this.loading = false;
         },
@@ -422,6 +426,7 @@ export default defineComponent({
             this.loading = true;
             this.ogTransactionDialogVisible = true;
             this.formData.platformType = "MG";
+            this.formData.player_name = this.userInfo.MG_User;
             await this.dispatchQuery(this.formData);
             this.loading = false;
         },
@@ -429,12 +434,14 @@ export default defineComponent({
             this.loading = true;
             this.ogTransactionDialogVisible = true;
             this.formData.platformType = "PT";
+            this.formData.player_name = this.userInfo.PT_User;
             await this.dispatchQuery(this.formData);
             this.loading = false;
         },
         kyDialogShow: async function() {
             this.loading = true;
             this.kyTransactionDialogVisible = true;
+            this.formData.player_name = this.userInfo.KY_User;
             await this.dispatchQueryKy(this.formData);
             this.loading = false;
         }

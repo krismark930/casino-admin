@@ -1,10 +1,6 @@
 <template>
   <div class="customerservice-wrapper">
-    <el-table
-      :data="customerserviceList"
-      class="customerservice-table"
-      :cell-style="{ verticalAlign: 'top' }"
-    >
+    <el-table :data="customerserviceList" class="customerservice-table" :cell-style="{ verticalAlign: 'top' }">
       <el-table-column prop="kf1" label="客服网址1">
         <template #default="scope">
           <el-input v-model="scope.row.kf1" autocomplete="off" />
@@ -30,10 +26,7 @@
       </el-table-column>
       <el-table-column label="" width="100">
         <template #default="scope">
-          <el-button
-            type="primary"
-            @click="updateCustomserService(scope.row)"
-          >
+          <el-button type="primary" @click="updateCustomserService(scope.row)">
             确定
           </el-button>
         </template>
@@ -46,10 +39,11 @@ import { ref, reactive, toRefs, computed } from 'vue'
 import { systemStore } from '@/pinia/modules/system';
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
 import { storeToRefs } from 'pinia';
-const {dispatchUpdateUrl} = systemStore();
+const { dispatchUpdateUrl } = systemStore();
 const props = defineProps<{ customerserviceList: Array<any> }>();
 const { customerserviceList } = toRefs(props);
 const updateCustomserService = async (item: any) => {
+  item.update_type = "customer_service";
   ElMessageBox.confirm('你确认了吗?', '警告', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
@@ -63,7 +57,7 @@ const updateCustomserService = async (item: any) => {
     await dispatchUpdateUrl(item);
     successResult();
     loading.close();
-  })
+  }).catch(() => { });
 }
 const success = computed(() => {
   const { getSuccess } = storeToRefs(systemStore());
@@ -90,6 +84,7 @@ const successResult = () => {
   padding-left: 50px;
   padding-right: 80px;
 }
+
 .customerservice-table {
   width: 100%;
 }

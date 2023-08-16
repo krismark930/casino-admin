@@ -14,7 +14,7 @@
 			</el-table-column>
 			<el-table-column property="image" label="图像" align="center">
 				<template #default="scope">
-					<img :src="scope.row.image"  width="100"/>
+					<img :src="scope.row.image" width="100" />
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" align="center">
@@ -32,7 +32,7 @@
 				<el-form-item label="图像:">
 					<el-upload class="avatar-uploader" action="#" :show-file-list="false" :on-change="handleUploadChange"
 						:auto-upload="false">
-						<img v-if="formData.image != '' && formData.image != null" :src="formData.image" class="avatar"/>
+						<img v-if="formData.image != '' && formData.image != null" :src="formData.image" class="avatar" />
 						<el-icon v-else class="avatar-uploader-icon">
 							<Plus />
 						</el-icon>
@@ -40,7 +40,7 @@
 				</el-form-item>
 				<el-form-item label="内容:">
 				</el-form-item>
-			    <quill-editor v-model:value="formData.content" style="height: 200px; overflow-y: auto;"/>
+				<quill-editor v-model:value="formData.content" style="height: 200px; overflow-y: auto;" />
 			</el-form>
 			<template #footer>
 				<el-button @click="resetItem">关闭</el-button>
@@ -52,18 +52,18 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { ElMessage,ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { ElNotification } from "element-plus";
 import moment from "moment-timezone";
 import { ElLoading } from "element-plus";
-import {discountStore} from "@/pinia/modules/discount";
-import {storeToRefs} from "pinia";
+import { discountStore } from "@/pinia/modules/discount";
+import { storeToRefs } from "pinia";
 
-const {dispatchDiscounts} = discountStore();
-const {dispatchAddDiscount} = discountStore();
-const {dispatchUpdateDiscount} = discountStore();
-const {dispatchDeleteDiscount} = discountStore();
+const { dispatchDiscounts } = discountStore();
+const { dispatchAddDiscount } = discountStore();
+const { dispatchUpdateDiscount } = discountStore();
+const { dispatchDeleteDiscount } = discountStore();
 
 const newItemVisible = ref(false);
 const loading = ref(false);
@@ -117,17 +117,17 @@ const addItem = async () => {
 	submitFormData.append("image", formData.value.image);
 	submitFormData.append("file", formData.value.file);
 	submitFormData.append("type", formData.value.type);
-  	const loading = ElLoading.service({
-    	lock: true,
-    	text: "加载中...",
-    	background: "rgba(0, 0, 0, 0.7)",
-  	});
-  	if (formData.value.id != null) {
-  		await dispatchUpdateDiscount(submitFormData);
+	const loading = ElLoading.service({
+		lock: true,
+		text: "加载中...",
+		background: "rgba(0, 0, 0, 0.7)",
+	});
+	if (formData.value.id != null) {
+		await dispatchUpdateDiscount(submitFormData);
 	} else {
-  		await dispatchAddDiscount(submitFormData);
+		await dispatchAddDiscount(submitFormData);
 	}
-	await dispatchDiscounts({type: 4});
+	await dispatchDiscounts({ type: 4 });
 	formData.value = {
 		title: "",
 		content: "",
@@ -146,17 +146,17 @@ const editItem = (item) => {
 }
 
 const deleteItem = async (id) => {
-  ElMessageBox.confirm('确认删除已选中的数据项?', '警告', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning',
-  }).then(async () => {
+	ElMessageBox.confirm('确认删除已选中的数据项?', '警告', {
+		confirmButtonText: '确定',
+		cancelButtonText: '取消',
+		type: 'warning',
+	}).then(async () => {
 		loading.value = true;
-		await dispatchDeleteDiscount({id});
-		await dispatchDiscounts({type: 4});
+		await dispatchDeleteDiscount({ id });
+		await dispatchDiscounts({ type: 4 });
 		successResult();
 		loading.value = false
-  })
+	}).catch(() => { });
 }
 
 const resetItem = () => {
@@ -171,7 +171,7 @@ const resetItem = () => {
 }
 
 const success = computed(() => {
-	const {getSuccess} = storeToRefs(discountStore());
+	const { getSuccess } = storeToRefs(discountStore());
 	return getSuccess.value;
 });
 
@@ -180,25 +180,25 @@ const discountList = computed(() => {
 	return getDiscountList.value;
 })
 
-const successResult = () => {	
-  if (success.value) {
-    ElNotification({
-      title: "成功",
-      message: "操作成功。",
-      type: "success",
-    });
-  } else {
-    ElNotification({
-      title: "错误",
-      message: "操作失败。",
-      type: "error",
-    });
-  }
+const successResult = () => {
+	if (success.value) {
+		ElNotification({
+			title: "成功",
+			message: "操作成功。",
+			type: "success",
+		});
+	} else {
+		ElNotification({
+			title: "错误",
+			message: "操作失败。",
+			type: "error",
+		});
+	}
 }
 
 onMounted(async () => {
 	loading.value = true;
-	await dispatchDiscounts({type: 4});
+	await dispatchDiscounts({ type: 4 });
 	loading.value = false;
 })
 </script>

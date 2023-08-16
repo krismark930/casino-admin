@@ -280,7 +280,7 @@ const success = computed(() => {
   return getSuccess.value;
 })
 const errMessage = computed(() => {
-  const {getErrMessage} = storeToRefs(subUserStore());
+  const { getErrMessage } = storeToRefs(subUserStore());
   return getErrMessage.value;
 })
 //const subUserList = computed(() => {
@@ -341,7 +341,7 @@ const updateSubUser = async (item) => {
     })
     subUserList.value = getSubUserList.value;
     loading.value = false;
-  })
+  }).catch(() => { });
 }
 const handleChangeSort = async () => {
   loading.value = true;
@@ -364,7 +364,7 @@ const suspendSubUser = async (id, Status) => {
     })
     subUserList.value = getSubUserList.value;
     loading.value = false;
-  })
+  }).catch(() => { });
 }
 const deleteSubUser = async (id) => {
   ElMessageBox.confirm('你确认了吗?', '警告', {
@@ -381,7 +381,7 @@ const deleteSubUser = async (id) => {
     })
     subUserList.value = getSubUserList.value;
     loading.value = false
-  })
+  }).catch(() => { });
 }
 const onPageChange = async () => {
   loading.value = true;
@@ -410,6 +410,7 @@ onMounted(async () => {
   justify-content: center;
   margin-top: 10px;
 }
+
 .cell {
   display: flex;
   align-items: center;

@@ -3,18 +3,10 @@
     <h3>一键返水（开元棋牌）</h3>
     <el-form :model="formData" inline="true">
       <el-form-item label="开始日期">
-        <el-date-picker
-          v-model="formData.s_time"
-          placeholder=""
-          value-format="YYYY-MM-DD"
-        ></el-date-picker>
+        <el-date-picker v-model="formData.s_time" placeholder="" value-format="YYYY-MM-DD"></el-date-picker>
       </el-form-item>
       <el-form-item label="结束日期">
-        <el-date-picker
-          v-model="formData.e_time"
-          placeholder=""
-          value-format="YYYY-MM-DD"
-        ></el-date-picker>
+        <el-date-picker v-model="formData.e_time" placeholder="" value-format="YYYY-MM-DD"></el-date-picker>
       </el-form-item>
       <el-form-item label="">
         <el-button type="primary" @click="discountKy">开始返水</el-button>
@@ -30,7 +22,7 @@ import { ElLoading } from "element-plus";
 import { humanManagementStore } from "@/pinia/modules/human_management.js";
 export default {
   setup() {
-    const {dispatchDiscountKy} = humanManagementStore();
+    const { dispatchDiscountKy } = humanManagementStore();
     return {
       dispatchDiscountKy
     }
@@ -47,7 +39,7 @@ export default {
     success: function () {
       let { getSuccess } = humanManagementStore();
       return getSuccess;
-    },    
+    },
   },
   methods: {
     successResult: function () {
@@ -65,7 +57,7 @@ export default {
         });
       }
     },
-    discountKy: async function() {
+    discountKy: async function () {
       ElMessageBox.confirm('你确认了吗?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -79,7 +71,7 @@ export default {
         await this.dispatchDiscountKy(this.formData)
         loading.close();
         this.successResult();
-      })
+      }).catch(() => { });
     }
   }
 }

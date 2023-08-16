@@ -24,7 +24,8 @@
                 <el-form>
                     <el-form-item label="选择管理:">
                         <el-select placeholder="全部" v-model="formData.parents_id" @change="getCompnayByFilter">
-                            <el-option v-for="(item, index) in parentsList" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in parentsList" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                         <el-select placeholder="升冥(由小到大)" v-model="formData.orderby" @change="getCompnayByFilter">
                             <el-option label="升冥(由小到大)" value="ASC" />
@@ -47,10 +48,10 @@
                         </el-select>
                     </el-form-item>
                 </el-form>
-                    <el-form-item style="margin-left: 20px">
-                        <el-button type="danger" @click="searchDialogShow">快速查找</el-button>
-                        <el-button type="primary" @click="addCompanyDialogShow">新增</el-button>
-                    </el-form-item>
+                <el-form-item style="margin-left: 20px">
+                    <el-button type="danger" @click="searchDialogShow">快速查找</el-button>
+                    <el-button type="primary" @click="addCompanyDialogShow">新增</el-button>
+                </el-form-item>
             </el-col>
             <el-col :lg="8" class="hidden-md-and-down">
                 <el-descriptions border :column="1">
@@ -69,30 +70,30 @@
             <el-table-column prop="Agents" label="管理 帐号" width="180" />
             <el-table-column prop="LoginName" label="登陆 帐号" width="125">
                 <template #default="scope">
-                    {{scope.row.LoginName}}<br>
-                    {{scope.row.Alias}}
+                    {{ scope.row.LoginName }}<br>
+                    {{ scope.row.Alias }}
                 </template>
             </el-table-column>
             <el-table-column prop="UserName" label="会员 帐号" width="140">
                 <template #default="scope">
-                    <div>{{scope.row.UserName}}</div>
+                    <div>{{ scope.row.UserName }}</div>
                     <!-- <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div> -->
                 </template>
             </el-table-column>
             <el-table-column prop="Money" label="可用額度" width="150" />
-            <el-table-column prop="Credit" label="信用额度" width="120" />
+            <!--<el-table-column prop="Credit" label="信用额度" width="120" />-->
             <el-table-column prop="Count" label="下级总计" width="150" />
             <el-table-column prop="AddDate" label="新增日期" width="200" />
             <el-table-column prop="Status" label="帐号状况" width="130">
                 <template #default="scope">
                     <span v-if="scope.row.Status == 0">启用</span>
                     <span style="background-color: yellow" v-else-if="scope.row.Status == 1">冻结</span>
-                    <span style="background-color: red" v-else-if="scope.row.Status==2">停用</span>
+                    <span style="background-color: red" v-else-if="scope.row.Status == 2">停用</span>
                 </template>
             </el-table-column>
             <el-table-column prop="EditType" label="在线" width="120">
                 <template #default="scope">
-                    <span v-if="scope.row.Online == 1" >在线</span>
+                    <span v-if="scope.row.Online == 1">在线</span>
                     <span v-else>离线</span>
                 </template>
             </el-table-column>
@@ -106,21 +107,26 @@
                         详细设定
                     </el-button>
                     <br />
-                    <el-button link type="warning" size="small" v-if="scope.row.Status == 0" @click="handleEditType(scope.row.id, scope.row.UserName, 'disable')">
+                    <el-button link type="warning" size="small" v-if="scope.row.Status == 0"
+                        @click="handleEditType(scope.row.id, scope.row.UserName, 'disable')">
                         停用
                     </el-button>
-                    <el-button link type="warning" size="small" v-else @click="handleEditType(scope.row.id, scope.row.UserName, 'enable')">
+                    <el-button link type="warning" size="small" v-else
+                        @click="handleEditType(scope.row.id, scope.row.UserName, 'enable')">
                         启用
                     </el-button>
                     <br />
-                    <el-button link type="success" size="small" :disabled="scope.row.Status == 1 || scope.row.Status == 2" @click="handleEditType(scope.row.id, scope.row.UserName, 'suspend')">
+                    <el-button link type="success" size="small" :disabled="scope.row.Status == 1 || scope.row.Status == 2"
+                        @click="handleEditType(scope.row.id, scope.row.UserName, 'suspend')">
                         冻结
                     </el-button>
                     <br />
-                    <el-button link type="danger" size="small" @click="handleEditType(scope.row.id, scope.row.UserName, 'logout')">踢线</el-button>
+                    <el-button link type="danger" size="small"
+                        @click="handleEditType(scope.row.id, scope.row.UserName, 'logout')">踢线</el-button>
                     <br />
-                    <el-button link type="primary" size="small" @click="handleTransferAgency(scope.row.UserName)">转移</el-button>
-                    <br /> 
+                    <el-button link type="primary" size="small"
+                        @click="handleTransferAgency(scope.row.UserName)">转移</el-button>
+                    <br />
                     <el-button link type="danger" size="small" @click="goCountUserPage(scope.row.UserName)">统计</el-button>
                     <br />
                     <el-button link type="danger" size="small" @click="goRecordIPPage(scope.row.UserName)">日志</el-button>
@@ -136,27 +142,27 @@
                 {{ transferAgencyItem.UserName }}
             </el-form-item>
             <el-form-item label="代理帐号：">
-                <el-input v-model="transferAgencyItem.agent"/>
+                <el-input v-model="transferAgencyItem.agent" />
             </el-form-item>
-            <el-form-item>                
+            <el-form-item>
                 <el-button type="primary" @click="updateAgency">确定</el-button>
             </el-form-item>
         </el-dialog>
         <el-dialog v-model="editMoneyDialogVisible">
-          <h2>代理商额度修改</h2>
-          <el-form-item label="代理 帳號 :">
-            {{ editMoneyAgencyData.agent }}
-          </el-form-item>
-          <el-form-item label="會員 名稱 :">
-            {{ editMoneyAgencyData.Alias }}
-          </el-form-item>
-          <el-form-item label="現金額度 :">
-            <el-input v-model="editMoneyAgencyData.Money"/>
-          </el-form-item>
-          <el-footer style="text-align: center;">
-              <el-button type="primary" @click="updateMoneyAgency">確定</el-button>
-              <el-button type="danger" @click="editMoneyDialogVisible == false">取消</el-button>
-          </el-footer>
+            <h2>代理商额度修改</h2>
+            <el-form-item label="代理 帳號 :">
+                {{ editMoneyAgencyData.agent }}
+            </el-form-item>
+            <el-form-item label="會員 名稱 :">
+                {{ editMoneyAgencyData.Alias }}
+            </el-form-item>
+            <el-form-item label="現金額度 :">
+                <el-input v-model="editMoneyAgencyData.Money" />
+            </el-form-item>
+            <el-footer style="text-align: center;">
+                <el-button type="primary" @click="updateMoneyAgency">確定</el-button>
+                <el-button type="danger" @click="editMoneyDialogVisible == false">取消</el-button>
+            </el-footer>
         </el-dialog>
         <el-dialog v-model="newCompanyDialogVisible">
             <h2>基本資料設定</h2>
@@ -168,18 +174,22 @@
                     <el-input style="width: 200px" v-model="newCompanyData.UserName"></el-input>
                 </el-form-item>
                 <el-form-item label="密碼: ">
-                    <el-input type="password" style="width: 200px" v-model="newCompanyData.password" maxlength="12"></el-input>
+                    <el-input type="password" style="width: 200px" v-model="newCompanyData.password"
+                        maxlength="12"></el-input>
                     ◎密碼規則：須為6~12碼英數字夾雜且符合0~9及a~z字。
                 </el-form-item>
                 <el-form-item label="確認密碼:">
-                    <el-input type="password" v-model="newCompanyData.confirmPassword" style="width: 200px;" maxlength="12"></el-input>
+                    <el-input type="password" v-model="newCompanyData.confirmPassword" style="width: 200px;"
+                        maxlength="12"></el-input>
                 </el-form-item>
                 <el-form-item label="提款密碼: ">
-                    <el-input type="password" style="width: 200px" v-model="newCompanyData.address" maxlength="12"></el-input>
+                    <el-input type="password" style="width: 200px" v-model="newCompanyData.address"
+                        maxlength="12"></el-input>
                     ◎密碼規則：須為6~12碼英數字夾雜且符合0~9及a~z字。
                 </el-form-item>
                 <el-form-item label="確認密碼:">
-                    <el-input type="password" v-model="newCompanyData.confirmAddress" style="width: 200px;" maxlength="12"></el-input>
+                    <el-input type="password" v-model="newCompanyData.confirmAddress" style="width: 200px;"
+                        maxlength="12"></el-input>
                 </el-form-item>
             </el-form>
             <el-footer style="text-align: center">
@@ -191,26 +201,34 @@
             <h2>基本資料設定</h2>
             <el-form label-width="150">
                 <el-form-item label="會員帳號:">
-                    {{editCompanyData.LoginName}}
+                    {{ editCompanyData.LoginName }}
                 </el-form-item>
                 <el-form-item label="會員名稱:">
-                    {{editCompanyData.UserName}}
+                    <el-input style="width: 200px" v-model="editCompanyData.UserName"></el-input>
                 </el-form-item>
                 <el-form-item label="可用額度:">
-                    <el-input style="width: 200px" v-model="editCompanyData.Money"></el-input>
+                    {{editCompanyData.Money}}
                 </el-form-item>
-                <el-form-item label="信用额度:">
-                    <el-input style="width: 200px" v-model="editCompanyData.Credit"></el-input>
+                <el-form-item label="操作类型:">
+                    <el-radio-group v-model="editCompanyData.operation_type" class="ml-4">
+                      <el-radio label="1" size="large">人工加款</el-radio>
+                      <el-radio label="2" size="large">人工扣款</el-radio>
+                    </el-radio-group>
                 </el-form-item>
-                <el-form-item label="开放盘口 :">
-                  <el-select v-model="editCompanyData.Type">
-                    <el-option v-for="(item, index) in typeOptions" :key="index" :label="item.label" :value="item.value"></el-option>
-                  </el-select>
+                <el-form-item label="金额:">
+                    <el-input v-model="editCompanyData.more_money" style="width: 200px"/>
+                </el-form-item>
+                <el-form-item label="开放盘口:">
+                    <el-select v-model="editCompanyData.Type">
+                        <el-option v-for="(item, index) in typeOptions" :key="index" :label="item.label"
+                            :value="item.value"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="VIP:">
-                  <el-select v-model="editCompanyData.VIP">
-                    <el-option v-for="(item, index) in vipOptions" :key="index" :label="item.label" :value="item.value"></el-option>
-                  </el-select>
+                    <el-select v-model="editCompanyData.VIP">
+                        <el-option v-for="(item, index) in vipOptions" :key="index" :label="item.label"
+                            :value="item.value"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="体育反水:">
                     <el-input style="width: 200px" v-model="editCompanyData.fanshui"></el-input>
@@ -227,7 +245,7 @@
                 <el-form-item label="开元返水:">
                     <el-input style="width: 200px" v-model="editCompanyData.fanshui_ky"></el-input>
                 </el-form-item>
-                <el-form-item label="密码:">
+                <el-form-item label="登录密码:">
                     <el-input type="password" style="width: 200px" v-model="editCompanyData.password"></el-input>
                 </el-form-item>
                 <el-form-item label="取款密码:">
@@ -263,10 +281,11 @@
         </el-dialog>
         <el-dialog v-model="detailCompanyDialogVisible" width="90%">
             <div style="display: flex;">
-                会员 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{detailCompanyData.name}} -- 名稱:{{detailCompanyData.Alias}} 
+                会员 -- 詳細設定&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帳號:{{ detailCompanyData.name }} --
+                名稱:{{ detailCompanyData.Alias }}
             </div>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
-                <tr class="m_title_edit" >
+                <tr class="m_title_edit">
                     <td width="100">足球</td>
                     <td width="100">C</td>
                     <td width="100">大賠率</td>
@@ -277,200 +296,215 @@
                     <td align="center">快速<br>選單</td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_LINE_3">
-                            <el-option v-for="(item, index) in ft_line_3_options" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in ft_line_3_options" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_LINE_BIG">
-                            <el-option v-for="(item, index) in ft_line_big_options" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in ft_line_big_options" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
-                        <el-input type="text" v-model="detailCompanyData.FT_SC" maxlength="8"/>
+                        <el-input type="text" v-model="detailCompanyData.FT_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input type="text" v-model="detailCompanyData.FT_SO" maxlength="8"/>
+                        <el-input type="text" v-model="detailCompanyData.FT_SO" maxlength="8" />
                     </td>
                 </tr>
             </table>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
-                <tr class="m_title_edit" >
-                  <td width="100">足球</td>
-                  <td width="100">讓球</td>
-                  <td width="100">大小</td>
-                  <td width="100">滾球讓球</td>
-                  <td width="100">滾球大小</td>
-                  <td width="100">單雙</td>
-                  <td width="100">独赢</td>
-                  <td width="100">滾球独赢</td>
-                  <td width="100">波膽</td>
-                  <td width="100">總入球</td>
-                  <td width="100">半全場</td>
-                  <td width="100">标准過關</td>
-                  <td width="100">让球過關</td>
-                  <td width="100">混合過關</td>
+                <tr class="m_title_edit">
+                    <td width="100">足球</td>
+                    <td width="100">讓球</td>
+                    <td width="100">大小</td>
+                    <td width="100">滾球讓球</td>
+                    <td width="100">滾球大小</td>
+                    <td width="100">單雙</td>
+                    <td width="100">独赢</td>
+                    <td width="100">滾球独赢</td>
+                    <td width="100">波膽</td>
+                    <td width="100">總入球</td>
+                    <td width="100">半全場</td>
+                    <td width="100">标准過關</td>
+                    <td width="100">让球過關</td>
+                    <td width="100">混合過關</td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">C</td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_Turn_R">
-                            <el-option v-for="(item, index) in FT_Turn_R_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_R_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_Turn_OU">
-                            <el-option v-for="(item, index) in FT_Turn_OU_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_OU_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_Turn_RE">
-                            <el-option v-for="(item, index) in FT_Turn_RE_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_RE_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_Turn_ROU">
-                            <el-option v-for="(item, index) in FT_Turn_ROU_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_ROU_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.FT_Turn_EO">
-                            <el-option v-for="(item, index) in FT_Turn_EO_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_EO_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_M">
-                            <el-option v-for="(item, index) in FT_Turn_M_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_M_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_RM">
-                            <el-option v-for="(item, index) in FT_Turn_RM_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_RM_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_PD">
-                            <el-option v-for="(item, index) in FT_Turn_PD_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_PD_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_T">
-                            <el-option v-for="(item, index) in FT_Turn_T_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_T_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_F">
-                            <el-option v-for="(item, index) in FT_Turn_F_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_F_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_P">
-                            <el-option v-for="(item, index) in FT_Turn_P_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_P_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_PR">
-                            <el-option v-for="(item, index) in FT_Turn_PR_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_PR_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FT_Turn_P3">
-                            <el-option v-for="(item, index) in FT_Turn_P3_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FT_Turn_P3_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">單場限額</td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_R_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_R_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_OU_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_OU_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_RE_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_RE_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_ROU_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_ROU_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_EO_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_EO_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_M_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_M_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_RM_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_RM_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_PD_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_PD_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_T_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_T_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_F_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_F_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_P_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_P_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_PR_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_PR_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_P3_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_P3_SC" maxlength="8" />
                     </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">單注限額</td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_R_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_R_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_OU_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_OU_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_RE_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_RE_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_ROU_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_ROU_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_EO_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_EO_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_M_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_M_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_RM_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_RM_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_PD_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_PD_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_T_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_T_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_F_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_F_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_P_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_P_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_PR_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FT_PR_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FT_P3_SO" maxlength="8"/>
-                    </td>   
+                        <el-input v-model="detailCompanyData.FT_P3_SO" maxlength="8" />
+                    </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">&nbsp;</td>
                     <td colspan="13">
                         <el-button type="primary" @click="updateDetailCompany('FT')">確定</el-button>
-                    </td> 
+                    </td>
                 </tr>
             </table>
             <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
-                <tr class="m_title_edit" >
+                <tr class="m_title_edit">
                     <td width="100">篮球</td>
                     <td width="100">C</td>
                     <td width="100">大賠率</td>
@@ -481,225 +515,239 @@
                     <td align="center">快速<br>選單</td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_LINE_3">
-                            <el-option v-for="(item, index) in bk_line_3_options" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in bk_line_3_options" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_LINE_BIG">
-                            <el-option v-for="(item, index) in bk_line_big_options" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in bk_line_big_options" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
-                        <el-input type="text" v-model="detailCompanyData.BK_SC" maxlength="8"/>
+                        <el-input type="text" v-model="detailCompanyData.BK_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input type="text" v-model="detailCompanyData.BK_SO" maxlength="8"/>
+                        <el-input type="text" v-model="detailCompanyData.BK_SO" maxlength="8" />
                     </td>
                 </tr>
             </table>
-            <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed"> 
-                <tr class="m_title_edit" >
-                  <td width="100">篮球</td>
-                  <td width="100">讓球</td>
-                  <td width="100">大小</td>
-                  <td width="100">滾球讓球</td>
-                  <td width="100">滾球大小</td>
-                  <td width="100">單雙</td>
-                  <td width="100">讓球過關</td>
-                  <td width="100">混合過關</td>
-                  <td width="100">冠军</td>
+            <table border="0" cellpadding="0" cellspacing="1" class="m_tab_ed">
+                <tr class="m_title_edit">
+                    <td width="100">篮球</td>
+                    <td width="100">讓球</td>
+                    <td width="100">大小</td>
+                    <td width="100">滾球讓球</td>
+                    <td width="100">滾球大小</td>
+                    <td width="100">單雙</td>
+                    <td width="100">讓球過關</td>
+                    <td width="100">混合過關</td>
+                    <td width="100">冠军</td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">C</td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_Turn_R">
-                            <el-option v-for="(item, index) in BK_Turn_R_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_R_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_Turn_OU">
-                            <el-option v-for="(item, index) in BK_Turn_OU_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_OU_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_Turn_RE">
-                            <el-option v-for="(item, index) in BK_Turn_RE_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_RE_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_Turn_ROU">
-                            <el-option v-for="(item, index) in BK_Turn_ROU_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_ROU_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                     <td>
                         <el-select v-model="detailCompanyData.BK_Turn_EO">
-                            <el-option v-for="(item, index) in BK_Turn_EO_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_EO_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.BK_Turn_PR">
-                            <el-option v-for="(item, index) in BK_Turn_PR_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_PR_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.BK_Turn_P3">
-                            <el-option v-for="(item, index) in BK_Turn_P3_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in BK_Turn_P3_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
-                    <td >
+                    <td>
                         <el-select v-model="detailCompanyData.FS_Turn_FS">
-                            <el-option v-for="(item, index) in FS_Turn_FS_OPTIONS" :key="index" :label="item.label" :value="item.value"></el-option>
+                            <el-option v-for="(item, index) in FS_Turn_FS_OPTIONS" :key="index" :label="item.label"
+                                :value="item.value"></el-option>
                         </el-select>
                     </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">單場限額</td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_R_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_R_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_OU_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_OU_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_RE_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_RE_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_ROU_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_ROU_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_EO_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_EO_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_PR_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_PR_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_P3_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_P3_SC" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FS_FS_SC" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FS_FS_SC" maxlength="8" />
                     </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">單注限額</td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_R_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_R_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_OU_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_OU_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_RE_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_RE_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_ROU_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_ROU_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_EO_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_EO_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_PR_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_PR_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.BK_P3_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.BK_P3_SO" maxlength="8" />
                     </td>
                     <td>
-                        <el-input v-model="detailCompanyData.FS_FS_SO" maxlength="8"/>
+                        <el-input v-model="detailCompanyData.FS_FS_SO" maxlength="8" />
                     </td>
                 </tr>
-                <tr class="m_cen" >
+                <tr class="m_cen">
                     <td align="right" class="m_ag_ed">&nbsp;</td>
                     <td colspan="13">
                         <el-button type="primary" @click="updateDetailCompany('BK')">確定</el-button>
-                    </td> 
+                    </td>
                 </tr>
             </table>
         </el-dialog>
         <el-dialog v-model="realPersonDialogVisible" title="會員真人盘口管理">
-          <el-form label-width="150">
-            <el-form-item label="會員帳號 :">
-              <p>{{ selectedUser.UserName }}</p>
-            </el-form-item>
-            <el-form-item label="會員 名稱 :">
-              <p>{{ selectedUser.Alias }}</p>
-            </el-form-item>
-            <el-form-item label="會員 额度 :">
-              体育余额: {{ selectedUser.Money }}元 &nbsp;&nbsp;&nbsp;&nbsp; AG余额:{{ selectedUser.AG_Money }}元 &nbsp;&nbsp;&nbsp;
-              OG余额:{{ selectedUser.OG_Money }}元 &nbsp;&nbsp;&nbsp; BBIN余额:{{ selectedUser.BBIN_Money }}元 &nbsp;&nbsp;&nbsp;
-              MG余额:{{ selectedUser.MG_Money }}元 &nbsp;&nbsp;&nbsp; PT余额:{{ selectedUser.PT_Money }}元 &nbsp;&nbsp;&nbsp;
-              开元余额:{{ selectedUser.KY_Money }}元
-            </el-form-item>
-            <el-form-item label="真人 控制 :">
-              <el-checkbox v-model="sysConfigItem.AG" label="AG" size="large" />
-              <el-checkbox v-model="sysConfigItem.OG" label="OG" size="large" />
-              <el-checkbox v-model="sysConfigItem.BBIN" label="BBIN" size="large" />
-              <el-checkbox v-model="sysConfigItem.MG" label="MG" size="large" />
-              <el-checkbox v-model="sysConfigItem.PT" label="PT" size="large" />
-              <el-checkbox v-model="sysConfigItem.KY" label=" 开元棋牌" size="large" />
-            </el-form-item>
-            <el-form-item label="额度 转换 :">
-              <el-checkbox v-model="selectedUser.AG_TR" label="AG" size="large" />
-              <el-checkbox v-model="selectedUser.OG_TR" label="OG" size="large" />
-              <el-checkbox v-model="selectedUser.BBIN_TR" label="BBIN" size="large" />
-              <el-checkbox v-model="selectedUser.MG_TR" label="MG" size="large" />
-              <el-checkbox v-model="selectedUser.PT_TR" label="PT" size="large" />
-              <el-checkbox v-model="selectedUser.KY_TR" label=" 开元棋牌" size="large" />
-            </el-form-item>
-            <el-form-item label="AG真人账号 :">
-              <el-input v-model="selectedUser.AG_User" />
-            </el-form-item>
-            <el-form-item label="AG真人密码 :">
-              <el-input v-model="selectedUser.AG_Pass" />
-            </el-form-item>
-            <el-form-item label="AG真人盘口 :">
-              <el-select v-model="selectedUser.AG_Type">
-                <el-option v-for="(item, index) in AG_TypeOptions" :key="index" :label="item.label"
-                  :value="item.value"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="BBIN真人账号 :">
-              <el-input v-model="selectedUser.BBIN_User" />
-            </el-form-item>
-            <el-form-item label="BBIN真人密码 :">
-              <el-input v-model="selectedUser.BBIN_Pass" />
-            </el-form-item>
-            <el-form-item label="MG真人账号 :">
-              <el-input v-model="selectedUser.MG_User" />
-            </el-form-item>
-            <el-form-item label="MG真人密码 :">
-              <el-input v-model="selectedUser.MG_Pass" />
-            </el-form-item>
-            <el-form-item label="PT真人账号 :">
-              <el-input v-model="selectedUser.PT_User" />
-            </el-form-item>
-            <el-form-item label="PT真人密码 :">
-              <el-input v-model="selectedUser.PT_Pass" />
-            </el-form-item>
-            <el-form-item label="OG真人账号 :">
-              <el-input v-model="selectedUser.OG_User" />
-            </el-form-item>
-            <el-form-item label="OG视讯限红 :">
-              <div style="display: flex">
-                <el-input v-model="selectedUser.OG_Limit1" /> - <el-input v-model="selectedUser.OG_Limit2" />
-              </div>
-            </el-form-item>
-            <el-form-item label="开元棋牌账号 :">
-              <el-input v-model="selectedUser.KY_User" />
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="updateRealPersonData">確定</el-button>
-              <el-button type="danger" @click="realPersonDialogVisible = false">取消</el-button>
-            </el-form-item>
-          </el-form>
+            <el-form label-width="150">
+                <el-form-item label="會員帳號 :">
+                    <p>{{ selectedUser.UserName }}</p>
+                </el-form-item>
+                <el-form-item label="會員 名稱 :">
+                    <p>{{ selectedUser.Alias }}</p>
+                </el-form-item>
+                <el-form-item label="會員 额度 :">
+                    体育余额: {{ selectedUser.Money }}元 &nbsp;&nbsp;&nbsp;&nbsp; AG余额:{{ selectedUser.AG_Money }}元
+                    &nbsp;&nbsp;&nbsp;
+                    OG余额:{{ selectedUser.OG_Money }}元 &nbsp;&nbsp;&nbsp; BBIN余额:{{ selectedUser.BBIN_Money }}元
+                    &nbsp;&nbsp;&nbsp;
+                    MG余额:{{ selectedUser.MG_Money }}元 &nbsp;&nbsp;&nbsp; PT余额:{{ selectedUser.PT_Money }}元
+                    &nbsp;&nbsp;&nbsp;
+                    开元余额:{{ selectedUser.KY_Money }}元
+                </el-form-item>
+                <el-form-item label="真人 控制 :">
+                    <el-checkbox v-model="sysConfigItem.AG" label="AG" size="large" />
+                    <el-checkbox v-model="sysConfigItem.OG" label="OG" size="large" />
+                    <el-checkbox v-model="sysConfigItem.BBIN" label="BBIN" size="large" />
+                    <el-checkbox v-model="sysConfigItem.MG" label="MG" size="large" />
+                    <el-checkbox v-model="sysConfigItem.PT" label="PT" size="large" />
+                    <el-checkbox v-model="sysConfigItem.KY" label=" 开元棋牌" size="large" />
+                </el-form-item>
+                <el-form-item label="额度 转换 :">
+                    <el-checkbox v-model="selectedUser.AG_TR" label="AG" size="large" />
+                    <el-checkbox v-model="selectedUser.OG_TR" label="OG" size="large" />
+                    <el-checkbox v-model="selectedUser.BBIN_TR" label="BBIN" size="large" />
+                    <el-checkbox v-model="selectedUser.MG_TR" label="MG" size="large" />
+                    <el-checkbox v-model="selectedUser.PT_TR" label="PT" size="large" />
+                    <el-checkbox v-model="selectedUser.KY_TR" label=" 开元棋牌" size="large" />
+                </el-form-item>
+                <el-form-item label="AG真人账号 :">
+                    <el-input v-model="selectedUser.AG_User" />
+                </el-form-item>
+                <el-form-item label="AG真人密码 :">
+                    <el-input v-model="selectedUser.AG_Pass" />
+                </el-form-item>
+                <el-form-item label="AG真人盘口 :">
+                    <el-select v-model="selectedUser.AG_Type">
+                        <el-option v-for="(item, index) in AG_TypeOptions" :key="index" :label="item.label"
+                            :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="BBIN真人账号 :">
+                    <el-input v-model="selectedUser.BBIN_User" />
+                </el-form-item>
+                <el-form-item label="BBIN真人密码 :">
+                    <el-input v-model="selectedUser.BBIN_Pass" />
+                </el-form-item>
+                <el-form-item label="MG真人账号 :">
+                    <el-input v-model="selectedUser.MG_User" />
+                </el-form-item>
+                <el-form-item label="MG真人密码 :">
+                    <el-input v-model="selectedUser.MG_Pass" />
+                </el-form-item>
+                <el-form-item label="PT真人账号 :">
+                    <el-input v-model="selectedUser.PT_User" />
+                </el-form-item>
+                <el-form-item label="PT真人密码 :">
+                    <el-input v-model="selectedUser.PT_Pass" />
+                </el-form-item>
+                <el-form-item label="OG真人账号 :">
+                    <el-input v-model="selectedUser.OG_User" />
+                </el-form-item>
+                <el-form-item label="OG视讯限红 :">
+                    <div style="display: flex">
+                        <el-input v-model="selectedUser.OG_Limit1" /> - <el-input v-model="selectedUser.OG_Limit2" />
+                    </div>
+                </el-form-item>
+                <el-form-item label="开元棋牌账号 :">
+                    <el-input v-model="selectedUser.KY_User" />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="updateRealPersonData">確定</el-button>
+                    <el-button type="danger" @click="realPersonDialogVisible = false">取消</el-button>
+                </el-form-item>
+            </el-form>
         </el-dialog>
         <el-dialog v-model="searchDialogVisible" width="30%" title="快速查找">
             <el-form label-width="150">
                 <el-form-item label="查询条件">
                     <el-select v-model="formData.search_type">
-                        <el-option v-for="(item, index) in searchOptions" :key="index" :label="item.label" :value="item.value"></el-option>
+                        <el-option v-for="(item, index) in searchOptions" :key="index" :label="item.label"
+                            :value="item.value"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="关键字">
-                    <el-input v-model="formData.search"/>
+                    <el-input v-model="formData.search" />
                 </el-form-item>
             </el-form>
             <el-footer>
@@ -710,9 +758,9 @@
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import {useRouter} from "vue-router";
+import { useRouter } from "vue-router";
 import { ElNotification, ElLoading, ElMessageBox } from "element-plus";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
 import { statisticsStore } from "@/pinia/modules/statistics";
@@ -757,42 +805,42 @@ const realPersonDialogVisible = ref(false);
 const searchDialogVisible = ref(false);
 const selectedUser = ref({});
 const AG_TypeOptions = ref([
-  {
-    label: "A盘 限红20－50000元",
-    value: "A"
-  },
-  {
-    label: "B盘 限红50－5000元",
-    value: "B"
-  },
-  {
-    label: "C盘 限红20－10000元",
-    value: "C"
-  },
-  {
-    label: "D盘 限红200－20000元",
-    value: "D"
-  },
-  {
-    label: "E盘 限红300－30000元",
-    value: "E"
-  },
-  {
-    label: "F盘 限红400－40000元",
-    value: "F"
-  },
-  {
-    label: "G盘 限红500－50000元",
-    value: "G"
-  },
-  {
-    label: "H盘 限红1000－100000元",
-    value: "H"
-  },
-  {
-    label: "I盘 限红2000－200000元",
-    value: "I"
-  },
+    {
+        label: "A盘 限红20－50000元",
+        value: "A"
+    },
+    {
+        label: "B盘 限红50－5000元",
+        value: "B"
+    },
+    {
+        label: "C盘 限红20－10000元",
+        value: "C"
+    },
+    {
+        label: "D盘 限红200－20000元",
+        value: "D"
+    },
+    {
+        label: "E盘 限红300－30000元",
+        value: "E"
+    },
+    {
+        label: "F盘 限红400－40000元",
+        value: "F"
+    },
+    {
+        label: "G盘 限红500－50000元",
+        value: "G"
+    },
+    {
+        label: "H盘 限红1000－100000元",
+        value: "H"
+    },
+    {
+        label: "I盘 限红2000－200000元",
+        value: "I"
+    },
 ])
 const searchOptions = ref([
     {
@@ -815,7 +863,7 @@ const searchOptions = ref([
 const searchDialogShow = () => {
     searchDialogVisible.value = true;
 }
-const getDataByFilter = async () => {    
+const getDataByFilter = async () => {
     searchDialogVisible.value = false;
     loading.value = true;
     await dispatchCompanyData(formData.value);
@@ -823,54 +871,54 @@ const getDataByFilter = async () => {
     loading.value = false;
 }
 const realPersonSetting = () => {
-  selectedUser.value = editCompanyData.value;
+    selectedUser.value = editCompanyData.value;
     editCompanyDialogVisible.value = false;
-  realPersonDialogVisible.value = true;
-  selectedUser.value.AG_TR = selectedUser.value.AG_TR == 0 ? true : false;
-  selectedUser.value.OG_TR = selectedUser.value.OG_TR == 0 ? true : false;
-  selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR == 0 ? true : false;
-  selectedUser.value.MG_TR = selectedUser.value.MG_TR == 0 ? true : false;
-  selectedUser.value.PT_TR = selectedUser.value.PT_TR == 0 ? true : false;
-  selectedUser.value.KY_TR = selectedUser.value.KY_TR == 0 ? true : false;
+    realPersonDialogVisible.value = true;
+    selectedUser.value.AG_TR = selectedUser.value.AG_TR == 0 ? true : false;
+    selectedUser.value.OG_TR = selectedUser.value.OG_TR == 0 ? true : false;
+    selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR == 0 ? true : false;
+    selectedUser.value.MG_TR = selectedUser.value.MG_TR == 0 ? true : false;
+    selectedUser.value.PT_TR = selectedUser.value.PT_TR == 0 ? true : false;
+    selectedUser.value.KY_TR = selectedUser.value.KY_TR == 0 ? true : false;
 }
 const updateRealPersonData = async () => {
-  selectedUser.value.AG_TR = selectedUser.value.AG_TR ? 0 : 1;
-  selectedUser.value.OG_TR = selectedUser.value.OG_TR ? 0 : 1;
-  selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR ? 0 : 1;
-  selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
-  selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
-  selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
-  
-  sysConfigItem.value.AG = sysConfigItem.value.AG  ? 1 : 0;
-  sysConfigItem.value.OG = sysConfigItem.value.OG  ? 1 : 0;
-  sysConfigItem.value.BBIN = sysConfigItem.value.BBIN  ? 1 : 0;
-  sysConfigItem.value.MG = sysConfigItem.value.MG  ? 1 : 0;
-  sysConfigItem.value.PT = sysConfigItem.value.PT  ? 1 : 0;
-  sysConfigItem.value.KY = sysConfigItem.value.KY  ? 1 : 0;
+    selectedUser.value.AG_TR = selectedUser.value.AG_TR ? 0 : 1;
+    selectedUser.value.OG_TR = selectedUser.value.OG_TR ? 0 : 1;
+    selectedUser.value.BBIN_TR = selectedUser.value.BBIN_TR ? 0 : 1;
+    selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
+    selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
+    selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
 
-  const loading = ElLoading.service({
-    lock: true,
-    text: "加载中...",
-    background: "rgba(0, 0, 0, 0.7)",
-  }); 
+    sysConfigItem.value.AG = sysConfigItem.value.AG ? 1 : 0;
+    sysConfigItem.value.OG = sysConfigItem.value.OG ? 1 : 0;
+    sysConfigItem.value.BBIN = sysConfigItem.value.BBIN ? 1 : 0;
+    sysConfigItem.value.MG = sysConfigItem.value.MG ? 1 : 0;
+    sysConfigItem.value.PT = sysConfigItem.value.PT ? 1 : 0;
+    sysConfigItem.value.KY = sysConfigItem.value.KY ? 1 : 0;
 
-  await dispatchUpdateRealPersonData(selectedUser.value);
-  await dispatchUpdateSysconfigData(sysConfigItem.value);
-  successResult();
-  await dispatchCompanyData(formData.value);
-  realPersonDialogVisible.value = false;
-  loading.close();
+    const loading = ElLoading.service({
+        lock: true,
+        text: "加载中...",
+        background: "rgba(0, 0, 0, 0.7)",
+    });
+
+    await dispatchUpdateRealPersonData(selectedUser.value);
+    await dispatchUpdateSysconfigData(sysConfigItem.value);
+    successResult();
+    await dispatchCompanyData(formData.value);
+    realPersonDialogVisible.value = false;
+    loading.close();
 }
 
 const sysConfigItem = computed(() => {
-  const { getSysConfigItem } = storeToRefs(systemStore());
-  getSysConfigItem.value.AG = getSysConfigItem.value.AG == 1 ? true : false;
-  getSysConfigItem.value.OG = getSysConfigItem.value.OG == 1 ? true : false;
-  getSysConfigItem.value.BBIN = getSysConfigItem.value.BBIN == 1 ? true : false;
-  getSysConfigItem.value.MG = getSysConfigItem.value.MG == 1 ? true : false;
-  getSysConfigItem.value.PT = getSysConfigItem.value.PT == 1 ? true : false;
-  getSysConfigItem.value.KY = getSysConfigItem.value.KY == 1 ? true : false;
-  return getSysConfigItem.value
+    const { getSysConfigItem } = storeToRefs(systemStore());
+    getSysConfigItem.value.AG = getSysConfigItem.value.AG == 1 ? true : false;
+    getSysConfigItem.value.OG = getSysConfigItem.value.OG == 1 ? true : false;
+    getSysConfigItem.value.BBIN = getSysConfigItem.value.BBIN == 1 ? true : false;
+    getSysConfigItem.value.MG = getSysConfigItem.value.MG == 1 ? true : false;
+    getSysConfigItem.value.PT = getSysConfigItem.value.PT == 1 ? true : false;
+    getSysConfigItem.value.KY = getSysConfigItem.value.KY == 1 ? true : false;
+    return getSysConfigItem.value
 })
 const numberOptions = [
     {
@@ -1151,54 +1199,54 @@ const BK_Turn_ROU_D_OPTIONS = ref([]);
 const BK_Turn_EO_D_OPTIONS = ref([]);
 
 const typeOptions = ref([
-  {
-    label: "A盘",
-    value: "A"
-  },
-  {
-    label: "B盘",
-    value: "B"
-  },
-  {
-    label: "C盘",
-    value: "C"
-  },
-  {
-    label: "D盘",
-    value: "D"
-  },
+    {
+        label: "A盘",
+        value: "A"
+    },
+    {
+        label: "B盘",
+        value: "B"
+    },
+    {
+        label: "C盘",
+        value: "C"
+    },
+    {
+        label: "D盘",
+        value: "D"
+    },
 ])
 
 const vipOptions = ref([
-  {
-    label: "是",
-    value: 1
-  },
-  {
-    label: "否",
-    value: 0
-  }
+    {
+        label: "是",
+        value: 1
+    },
+    {
+        label: "否",
+        value: 0
+    }
 ])
 
 
 const editMoneyAgencyData = ref({
-  agent: "",
-  Money: "",
-  Alias: "",
-  admin : ""
+    agent: "",
+    Money: "",
+    Alias: "",
+    admin: ""
 })
 const goCountUserPage = (userName) => {
     window.open(import.meta.env.VITE_BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
-  // router.push({ name: "agents.count_user", query: { userName: userName } });
+    // router.push({ name: "agents.count_user", query: { userName: userName } });
 }
 const goRecordIPPage = (userName) => {
     window.open(import.meta.env.VITE_BASE_URL + "/#/agents/record-ip?username=" + userName, '_blank');
-  // router.push({ name: "agents.record_ip", query: { username: userName } });
+    // router.push({ name: "agents.record_ip", query: { username: userName } });
 }
 
 const handleTransferAgency = (userName) => {
     editTransferAgency.value = true;
-    transferAgencyItem.value.UserName =  userName;
+    transferAgencyItem.value.UserName = userName;
 }
 
 const updateAgency = async () => {
@@ -1222,18 +1270,18 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_LINE_1 = 1.25;
     }
     ft_line_1_options.value = [];
-    for (let i = detailCompanyData.value.FT_LINE_1; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_LINE_1; i >= 0; i -= 0.25) {
         ft_line_1_options.value.push({
             label: i,
             value: i
         })
     }
-    detailCompanyData.value.FT_LINE_2 = item.FT_Turn_R_B || item.FT_Turn_OU_B|| item.FT_Turn_RE_B || item.FT_Turn_ROU_B || item.FT_Turn_EO_B;
+    detailCompanyData.value.FT_LINE_2 = item.FT_Turn_R_B || item.FT_Turn_OU_B || item.FT_Turn_RE_B || item.FT_Turn_ROU_B || item.FT_Turn_EO_B;
     if (isNaN(Number(detailCompanyData.value.FT_LINE_2)) || Number(detailCompanyData.value.FT_LINE_2) == 0) {
         detailCompanyData.value.FT_LINE_2 = 1.25;
     }
     ft_line_2_options.value = [];
-    for (let i = detailCompanyData.value.FT_LINE_2; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_LINE_2; i >= 0; i -= 0.25) {
         ft_line_2_options.value.push({
             label: i,
             value: i
@@ -1244,7 +1292,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_LINE_3 = 1.25;
     }
     ft_line_3_options.value = [];
-    for (let i = detailCompanyData.value.FT_LINE_3; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_LINE_3; i >= 0; i -= 0.25) {
         ft_line_3_options.value.push({
             label: i,
             value: i
@@ -1255,7 +1303,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_LINE_4 = 1.25;
     }
     ft_line_4_options.value = [];
-    for (let i = detailCompanyData.value.FT_LINE_4; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_LINE_4; i >= 0; i -= 0.25) {
         ft_line_4_options.value.push({
             label: i,
             value: i
@@ -1266,7 +1314,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_LINE_BIG = 1.25;
     }
     ft_line_big_options.value = [];
-    for (let i = detailCompanyData.value.FT_LINE_BIG; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_LINE_BIG; i >= 0; i -= 1) {
         ft_line_big_options.value.push({
             label: i,
             value: i
@@ -1277,7 +1325,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_R_A = 1.25;
     }
     FT_Turn_R_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_R_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_R_A; i >= 0; i -= 0.25) {
         FT_Turn_R_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1288,7 +1336,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_OU_A = 1.25;
     }
     FT_Turn_OU_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_OU_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_OU_A; i >= 0; i -= 0.25) {
         FT_Turn_OU_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1299,7 +1347,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_RE_A = 1.25;
     }
     FT_Turn_RE_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_RE_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_RE_A; i >= 0; i -= 0.25) {
         FT_Turn_RE_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1310,7 +1358,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_ROU_A = 1.25;
     }
     FT_Turn_ROU_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_ROU_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_ROU_A; i >= 0; i -= 0.25) {
         FT_Turn_ROU_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1321,7 +1369,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_EO_A = 1.25;
     }
     FT_Turn_EO_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_EO_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_EO_A; i >= 0; i -= 0.25) {
         FT_Turn_EO_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1332,7 +1380,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_M = 1.25;
     }
     FT_Turn_M_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_M; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_M; i >= 0; i -= 1) {
         FT_Turn_M_OPTIONS.value.push({
             label: i,
             value: i
@@ -1343,7 +1391,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_RM = 1.25;
     }
     FT_Turn_RM_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_RM; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_RM; i >= 0; i -= 1) {
         FT_Turn_RM_OPTIONS.value.push({
             label: i,
             value: i
@@ -1354,7 +1402,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_PD = 1.25;
     }
     FT_Turn_PD_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_PD; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_PD; i >= 0; i -= 1) {
         FT_Turn_PD_OPTIONS.value.push({
             label: i,
             value: i
@@ -1365,7 +1413,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_T = 1.25;
     }
     FT_Turn_T_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_T; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_T; i >= 0; i -= 1) {
         FT_Turn_T_OPTIONS.value.push({
             label: i,
             value: i
@@ -1376,7 +1424,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_F = 1.25;
     }
     FT_Turn_F_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_F; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_F; i >= 0; i -= 1) {
         FT_Turn_F_OPTIONS.value.push({
             label: i,
             value: i
@@ -1387,7 +1435,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_P = 1.25;
     }
     FT_Turn_P_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_P; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_P; i >= 0; i -= 1) {
         FT_Turn_P_OPTIONS.value.push({
             label: i,
             value: i
@@ -1398,7 +1446,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_PR = 1.25;
     }
     FT_Turn_PR_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_PR; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_PR; i >= 0; i -= 1) {
         FT_Turn_PR_OPTIONS.value.push({
             label: i,
             value: i
@@ -1409,7 +1457,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_P3 = 1.25;
     }
     FT_Turn_P3_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_P3; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FT_Turn_P3; i >= 0; i -= 1) {
         FT_Turn_P3_OPTIONS.value.push({
             label: i,
             value: i
@@ -1420,7 +1468,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_R_B = 1.25;
     }
     FT_Turn_R_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_R_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_R_B; i >= 0; i -= 0.25) {
         FT_Turn_R_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1431,7 +1479,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_OU_B = 1.25;
     }
     FT_Turn_OU_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_OU_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_OU_B; i >= 0; i -= 0.25) {
         FT_Turn_OU_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1442,7 +1490,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_RE_B = 1.25;
     }
     FT_Turn_RE_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_RE_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_RE_B; i >= 0; i -= 0.25) {
         FT_Turn_RE_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1453,7 +1501,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_ROU_B = 1.25;
     }
     FT_Turn_ROU_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_ROU_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_ROU_B; i >= 0; i -= 0.25) {
         FT_Turn_ROU_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1464,7 +1512,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_EO_B = 1.25;
     }
     FT_Turn_EO_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_EO_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_EO_B; i >= 0; i -= 0.25) {
         FT_Turn_EO_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1475,7 +1523,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_R = 1.25;
     }
     FT_Turn_R_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_R; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_R; i >= 0; i -= 0.25) {
         FT_Turn_R_OPTIONS.value.push({
             label: i,
             value: i
@@ -1486,7 +1534,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_OU = 1.25;
     }
     FT_Turn_OU_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_OU; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_OU; i >= 0; i -= 0.25) {
         FT_Turn_OU_OPTIONS.value.push({
             label: i,
             value: i
@@ -1497,7 +1545,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_RE = 1.25;
     }
     FT_Turn_RE_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_RE; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_RE; i >= 0; i -= 0.25) {
         FT_Turn_RE_OPTIONS.value.push({
             label: i,
             value: i
@@ -1508,7 +1556,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_ROU = 1.25;
     }
     FT_Turn_ROU_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_ROU; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_ROU; i >= 0; i -= 0.25) {
         FT_Turn_ROU_OPTIONS.value.push({
             label: i,
             value: i
@@ -1519,7 +1567,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_EO = 1.25;
     }
     FT_Turn_EO_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_EO; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_EO; i >= 0; i -= 0.25) {
         FT_Turn_EO_OPTIONS.value.push({
             label: i,
             value: i
@@ -1530,7 +1578,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_R_D = 1.25;
     }
     FT_Turn_R_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_R_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_R_D; i >= 0; i -= 0.25) {
         FT_Turn_R_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1541,7 +1589,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_OU_D = 1.25;
     }
     FT_Turn_OU_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_OU_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_OU_D; i >= 0; i -= 0.25) {
         FT_Turn_OU_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1552,7 +1600,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_RE_D = 1.25;
     }
     FT_Turn_RE_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_RE_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_RE_D; i >= 0; i -= 0.25) {
         FT_Turn_RE_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1563,7 +1611,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_ROU_D = 1.25;
     }
     FT_Turn_ROU_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_ROU_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_ROU_D; i >= 0; i -= 0.25) {
         FT_Turn_ROU_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1574,7 +1622,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FT_Turn_EO_D = 1.25;
     }
     FT_Turn_EO_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FT_Turn_EO_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.FT_Turn_EO_D; i >= 0; i -= 0.25) {
         FT_Turn_EO_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1613,18 +1661,18 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_LINE_1 = 1.25;
     }
     bk_line_1_options.value = [];
-    for (let i = detailCompanyData.value.BK_LINE_1; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_LINE_1; i >= 0; i -= 0.25) {
         bk_line_1_options.value.push({
             label: i,
             value: i
         })
     }
-    detailCompanyData.value.BK_LINE_2 = item.BK_Turn_R_B || item.BK_Turn_OU_B|| item.BK_Turn_RE_B || item.BK_Turn_ROU_B || item.BK_Turn_EO_B;
+    detailCompanyData.value.BK_LINE_2 = item.BK_Turn_R_B || item.BK_Turn_OU_B || item.BK_Turn_RE_B || item.BK_Turn_ROU_B || item.BK_Turn_EO_B;
     if (isNaN(Number(detailCompanyData.value.BK_LINE_2)) || Number(detailCompanyData.value.BK_LINE_2) == 0) {
         detailCompanyData.value.BK_LINE_2 = 1.25;
     }
     bk_line_2_options.value = [];
-    for (let i = detailCompanyData.value.BK_LINE_2; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_LINE_2; i >= 0; i -= 0.25) {
         bk_line_2_options.value.push({
             label: i,
             value: i
@@ -1635,7 +1683,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_LINE_3 = 1.25;
     }
     bk_line_3_options.value = [];
-    for (let i = detailCompanyData.value.BK_LINE_3; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_LINE_3; i >= 0; i -= 0.25) {
         bk_line_3_options.value.push({
             label: i,
             value: i
@@ -1646,7 +1694,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_LINE_4 = 1.25;
     }
     bk_line_4_options.value = [];
-    for (let i = detailCompanyData.value.BK_LINE_4; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_LINE_4; i >= 0; i -= 0.25) {
         bk_line_4_options.value.push({
             label: i,
             value: i
@@ -1657,7 +1705,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_LINE_BIG = 1.25;
     }
     bk_line_big_options.value = [];
-    for (let i = detailCompanyData.value.BK_LINE_BIG; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.BK_LINE_BIG; i >= 0; i -= 1) {
         bk_line_big_options.value.push({
             label: i,
             value: i
@@ -1668,7 +1716,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_R_A = 1.25;
     }
     BK_Turn_R_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_R_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_R_A; i >= 0; i -= 0.25) {
         BK_Turn_R_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1679,7 +1727,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_OU_A = 1.25;
     }
     BK_Turn_OU_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_OU_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_OU_A; i >= 0; i -= 0.25) {
         BK_Turn_OU_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1690,7 +1738,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_RE_A = 1.25;
     }
     BK_Turn_RE_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_RE_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_RE_A; i >= 0; i -= 0.25) {
         BK_Turn_RE_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1701,7 +1749,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_ROU_A = 1.25;
     }
     BK_Turn_ROU_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_ROU_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_ROU_A; i >= 0; i -= 0.25) {
         BK_Turn_ROU_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1712,7 +1760,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_EO_A = 1.25;
     }
     BK_Turn_EO_A_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_EO_A; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_EO_A; i >= 0; i -= 0.25) {
         BK_Turn_EO_A_OPTIONS.value.push({
             label: i,
             value: i
@@ -1723,7 +1771,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.FS_Turn_FS = 1.25;
     }
     FS_Turn_FS_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.FS_Turn_FS; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.FS_Turn_FS; i >= 0; i -= 1) {
         FS_Turn_FS_OPTIONS.value.push({
             label: i,
             value: i
@@ -1734,7 +1782,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_PR = 1.25;
     }
     BK_Turn_PR_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_PR; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.BK_Turn_PR; i >= 0; i -= 1) {
         BK_Turn_PR_OPTIONS.value.push({
             label: i,
             value: i
@@ -1745,7 +1793,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_P3 = 1.25;
     }
     BK_Turn_P3_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_P3; i >= 0; i -= 1 ) {
+    for (let i = detailCompanyData.value.BK_Turn_P3; i >= 0; i -= 1) {
         BK_Turn_P3_OPTIONS.value.push({
             label: i,
             value: i
@@ -1756,7 +1804,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_R_B = 1.25;
     }
     BK_Turn_R_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_R_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_R_B; i >= 0; i -= 0.25) {
         BK_Turn_R_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1767,7 +1815,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_OU_B = 1.25;
     }
     BK_Turn_OU_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_OU_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_OU_B; i >= 0; i -= 0.25) {
         BK_Turn_OU_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1778,7 +1826,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_RE_B = 1.25;
     }
     BK_Turn_RE_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_RE_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_RE_B; i >= 0; i -= 0.25) {
         BK_Turn_RE_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1789,7 +1837,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_ROU_B = 1.25;
     }
     BK_Turn_ROU_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_ROU_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_ROU_B; i >= 0; i -= 0.25) {
         BK_Turn_ROU_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1800,7 +1848,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_EO_B = 1.25;
     }
     BK_Turn_EO_B_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_EO_B; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_EO_B; i >= 0; i -= 0.25) {
         BK_Turn_EO_B_OPTIONS.value.push({
             label: i,
             value: i
@@ -1811,7 +1859,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_R = 1.25;
     }
     BK_Turn_R_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_R; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_R; i >= 0; i -= 0.25) {
         BK_Turn_R_OPTIONS.value.push({
             label: i,
             value: i
@@ -1822,7 +1870,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_OU = 1.25;
     }
     BK_Turn_OU_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_OU; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_OU; i >= 0; i -= 0.25) {
         BK_Turn_OU_OPTIONS.value.push({
             label: i,
             value: i
@@ -1833,7 +1881,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_RE = 1.25;
     }
     BK_Turn_RE_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_RE; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_RE; i >= 0; i -= 0.25) {
         BK_Turn_RE_OPTIONS.value.push({
             label: i,
             value: i
@@ -1844,7 +1892,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_ROU = 1.25;
     }
     BK_Turn_ROU_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_ROU; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_ROU; i >= 0; i -= 0.25) {
         BK_Turn_ROU_OPTIONS.value.push({
             label: i,
             value: i
@@ -1855,7 +1903,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_EO = 1.25;
     }
     BK_Turn_EO_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_EO; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_EO; i >= 0; i -= 0.25) {
         BK_Turn_EO_OPTIONS.value.push({
             label: i,
             value: i
@@ -1866,7 +1914,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_R_D = 1.25;
     }
     BK_Turn_R_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_R_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_R_D; i >= 0; i -= 0.25) {
         BK_Turn_R_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1877,7 +1925,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_OU_D = 1.25;
     }
     BK_Turn_OU_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_OU_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_OU_D; i >= 0; i -= 0.25) {
         BK_Turn_OU_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1888,7 +1936,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_RE_D = 1.25;
     }
     BK_Turn_RE_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_RE_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_RE_D; i >= 0; i -= 0.25) {
         BK_Turn_RE_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1899,7 +1947,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_ROU_D = 1.25;
     }
     BK_Turn_ROU_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_ROU_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_ROU_D; i >= 0; i -= 0.25) {
         BK_Turn_ROU_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1910,7 +1958,7 @@ const detailCompany = (item) => {
         detailCompanyData.value.BK_Turn_EO_D = 1.25;
     }
     BK_Turn_EO_D_OPTIONS.value = [];
-    for (let i = detailCompanyData.value.BK_Turn_EO_D; i >= 0; i -= 0.25 ) {
+    for (let i = detailCompanyData.value.BK_Turn_EO_D; i >= 0; i -= 0.25) {
         BK_Turn_EO_D_OPTIONS.value.push({
             label: i,
             value: i
@@ -1936,20 +1984,23 @@ const detailCompany = (item) => {
 }
 const editCompany = (item) => {
     item.Type = item.Type == "" || item.Type == null ? "C" : item.Type;
+    item.password = "";
     editCompanyData.value = item;
-    console.log(editCompanyData.value.password);
+    editCompanyData.value.operation_type = "1";
+    editCompanyData.value.more_money = "";
+    // console.log(editCompanyData.value.password);
     editCompanyDialogVisible.value = true;
 }
 const handleMoneyAgency = (item) => {
-  editMoneyAgencyData.value.agent = item.UserName;
-  editMoneyAgencyData.value.Money = item.Money;
-  editMoneyAgencyData.value.Alias = item.Alias;
-  editMoneyAgencyData.value.admin = item.Admin;
-  editMoneyDialogVisible.value = true;
+    editMoneyAgencyData.value.agent = item.UserName;
+    editMoneyAgencyData.value.Money = item.Money;
+    editMoneyAgencyData.value.Alias = item.Alias;
+    editMoneyAgencyData.value.admin = item.Admin;
+    editMoneyDialogVisible.value = true;
 }
 const updateMoneyAgency = async () => {
-  loading.value = true;
-  await dispatchUpdateMoneyAgency(editMoneyAgencyData.value);
+    loading.value = true;
+    await dispatchUpdateMoneyAgency(editMoneyAgencyData.value);
     successResult();
     editMoneyDialogVisible.value = false;
     await dispatchCompanyData(formData.value);
@@ -1979,6 +2030,12 @@ const updateCompany = async () => {
     //        return;
     //    }
     //}
+    if (editCompanyData.value.more_money != "") {
+        if (editCompanyData.value.operation_type == "2" && Number(editCompanyData.value.Money) < Number(editCompanyData.value.more_money)) {
+            alert("扣款金额不能超过可用額度。");
+            return;
+        }
+    }
     loading.value = true;
     await dispatchUpdateMember(editCompanyData.value);
     successResult();
@@ -1987,22 +2044,22 @@ const updateCompany = async () => {
     loading.value = false;
 }
 const handleEditType = async (ID, UserName, activeType) => {
-  ElMessageBox.confirm('你确认了吗?', '警告', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning',
-  }).then(async () => {
-    console.log(ID);
-    formData.value.active = activeType;
-    formData.value.active_id = ID;
-    formData.value.name = UserName;
-    loading.value = true;
-    await dispatchCompanyData(formData.value);
-    if (activeType == "disable" || activeType == "logout") {
-        socket.io.emit("logout", UserName);
-    }
-    loading.value = false;
-  })
+    ElMessageBox.confirm('你确认了吗?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+    }).then(async () => {
+        console.log(ID);
+        formData.value.active = activeType;
+        formData.value.active_id = ID;
+        formData.value.name = UserName;
+        loading.value = true;
+        await dispatchCompanyData(formData.value);
+        if (activeType == "disable" || activeType == "logout") {
+            socket.io.emit("logout", UserName);
+        }
+        loading.value = false;
+    }).catch(() => { });
 }
 const addCompany = async () => {
     const regex = /^(?=.*[a-zA-Z])(?=.*\d).*$/;
@@ -2043,21 +2100,21 @@ const addCompany = async () => {
     newCompanyDialogVisible.value = false;
     await dispatchCompanyData(formData.value);
     newCompanyData.value = {
-      lv: "MEM",
-      num_1: 0,
-      num_2: 0,
-      num_3: 0,
-      UserName: "",
-      LoginName: "",
-      passWord: "",
-      confirmPassword: "",
-      Alias: "",
-      wager: 0,
-      maxcredit: "0",
-      winloss_c: 0,
-      winloss_d: 0,
-      parents_id: ""
-  }
+        lv: "MEM",
+        num_1: 0,
+        num_2: 0,
+        num_3: 0,
+        UserName: "",
+        LoginName: "",
+        passWord: "",
+        confirmPassword: "",
+        Alias: "",
+        wager: 0,
+        maxcredit: "0",
+        winloss_c: 0,
+        winloss_d: 0,
+        parents_id: ""
+    }
     loading.value = false;
 }
 const cancelNewCompany = () => {
@@ -2083,42 +2140,42 @@ const handleChangeNumber = () => {
 }
 
 const successResult = () => {
-  if (success.value) {
-    ElNotification({
-      title: "成功",
-      message: "操作成功。",
-      type: "success",
-    });
-  } else {
-    ElNotification({
-      title: "错误",
-      message: errMessage.value,
-      type: "error",
-    });
-  }
+    if (success.value) {
+        ElNotification({
+            title: "成功",
+            message: "操作成功。",
+            type: "success",
+        });
+    } else {
+        ElNotification({
+            title: "错误",
+            message: errMessage.value,
+            type: "error",
+        });
+    }
 }
 const errMessage = computed(() => {
-  const {getErrMessage} = storeToRefs(companyStore());
-  return getErrMessage.value;
+    const { getErrMessage } = storeToRefs(companyStore());
+    return getErrMessage.value;
 })
 const totalCount = computed(() => {
-    const { getTotalCount } =storeToRefs(companyStore());
+    const { getTotalCount } = storeToRefs(companyStore());
     return getTotalCount.value;
 })
 const success = computed(() => {
-  const { getSuccess } = storeToRefs(companyStore());
-  return getSuccess.value;
+    const { getSuccess } = storeToRefs(companyStore());
+    return getSuccess.value;
 })
 const parentsList = computed(() => {
-    const {getParentsList} = storeToRefs(companyStore());
+    const { getParentsList } = storeToRefs(companyStore());
     return getParentsList.value;
 })
 const companyList = computed(() => {
-    const {getCompanyList} = storeToRefs(companyStore());
+    const { getCompanyList } = storeToRefs(companyStore());
     return getCompanyList.value
 })
 const web = computed(() => {
-    const {getWeb} = storeToRefs(companyStore());
+    const { getWeb } = storeToRefs(companyStore());
     return getWeb.value
 })
 const addCompanyDialogShow = () => {
@@ -2127,12 +2184,12 @@ const addCompanyDialogShow = () => {
 const getCompnayByFilter = async () => {
     loading.value = true;
     await dispatchCompanyData(formData.value);
-    loading.value = false;    
+    loading.value = false;
 }
 const onPageChange = async () => {
     loading.value = true;
     await dispatchCompanyData(formData.value);
-    loading.value = false;    
+    loading.value = false;
 }
 onMounted(async () => {
     loading.value = true;
@@ -2141,12 +2198,12 @@ onMounted(async () => {
     loading.value = false;
 })
 </script>
-<style lang="scss" scoped>
-.pagination {
+<style lang="scss" scoped>.pagination {
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
+
 .m_tab_ed {
     padding-right: 2px;
     padding-top: 3px;
@@ -2155,17 +2212,19 @@ onMounted(async () => {
     border: 1px #000000 solid;
     padding-left: 2px;
 }
+
 .m_title_edit {
     background-color: #84968b;
     text-align: center;
 }
+
 .m_cen {
     background-color: #FFFFFF;
     text-align: center;
 }
+
 .m_ag_ed {
     background-color: #bdd1de;
     text-align: right;
-}
-</style>
+}</style>
   

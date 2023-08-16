@@ -69,7 +69,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column property="GameName" label="投注类型" align="center" />
+      <!-- <el-table-column property="GameName" label="投注类型" align="center" /> -->
       <el-table-column
         property="playType"
         label="投注内容"
