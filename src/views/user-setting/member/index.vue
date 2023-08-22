@@ -218,6 +218,21 @@
                 <el-form-item label="金额:">
                     <el-input v-model="editCompanyData.more_money" style="width: 200px"/>
                 </el-form-item>
+                <el-form-item label="洗码量:">
+                    <el-input v-model="editCompanyData.condition_multiplier" style="width: 200px"/>
+                </el-form-item>
+                <el-form-item label="洗码金额:">
+                    {{editCompanyData.withdrawal_condition}}
+                </el-form-item>
+                <el-form-item label="操作类型:">
+                    <el-radio-group v-model="editCompanyData.withdraw_condition_type" class="ml-4">
+                      <el-radio label="1" size="large">人工加款</el-radio>
+                      <el-radio label="2" size="large">人工扣款</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item label="金额:">
+                    <el-input v-model="editCompanyData.withdraw_more_money" style="width: 200px"/>
+                </el-form-item>
                 <el-form-item label="开放盘口:">
                     <el-select v-model="editCompanyData.Type">
                         <el-option v-for="(item, index) in typeOptions" :key="index" :label="item.label"
@@ -888,6 +903,7 @@ const updateRealPersonData = async () => {
     selectedUser.value.MG_TR = selectedUser.value.MG_TR ? 0 : 1;
     selectedUser.value.PT_TR = selectedUser.value.PT_TR ? 0 : 1;
     selectedUser.value.KY_TR = selectedUser.value.KY_TR ? 0 : 1;
+
     sysConfigItem.value.AG = sysConfigItem.value.AG ? 1 : 0;
     sysConfigItem.value.OG = sysConfigItem.value.OG ? 1 : 0;
     sysConfigItem.value.BBIN = sysConfigItem.value.BBIN ? 1 : 0;
@@ -900,6 +916,7 @@ const updateRealPersonData = async () => {
         text: "加载中...",
         background: "rgba(0, 0, 0, 0.7)",
     });
+
     await dispatchUpdateRealPersonData(selectedUser.value);
     await dispatchUpdateSysconfigData(sysConfigItem.value);
     successResult();
@@ -1986,6 +2003,8 @@ const editCompany = (item) => {
     editCompanyData.value = item;
     editCompanyData.value.operation_type = "1";
     editCompanyData.value.more_money = "";
+    editCompanyData.value.withdraw_condition_type = "1";
+    editCompanyData.value.withdraw_more_money = "";
     // console.log(editCompanyData.value.password);
     editCompanyDialogVisible.value = true;
 }
