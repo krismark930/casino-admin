@@ -101,7 +101,7 @@ export default env => {
           // 拆分单独模块
           manualChunks: {
             'element-plus': ['element-plus'],
-            mockjs: ['mockjs'],
+            // mockjs: ['mockjs'],
           },
         },
 
