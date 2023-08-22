@@ -11,7 +11,7 @@
     "dev": "vite",
     "dev:mock": "vite --mode mock",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=81920 vite build",
-    "build2": "vite build",
+    "build2": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vite build",
     "build:mock": "vite --mode mock",
     "serve": "vite preview",
     "lint": "eslint --fix --ext .js,.vue src"
