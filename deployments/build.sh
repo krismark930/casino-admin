@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ls 
+rm -rf core.*
 pwd
 npm install
 

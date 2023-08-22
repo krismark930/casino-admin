@@ -124,15 +124,15 @@ export default defineComponent({
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  :::deep(a),
-  :::deep(.is-link) {
+  :deep(a),
+  :deep(.is-link) {
     font-weight: normal;
   }
   // :::deep(.el-breadcrumb__item) {
   //   float: none;
   // }
   .no_link {
-    :::deep(.el-breadcrumb__inner) {
+    :deep(.el-breadcrumb__inner) {
       color: #97a8be !important;
     }
   }
