@@ -84,6 +84,8 @@ export default env => {
     // },
     // esbuild: false,
     build: {
+      target: ['chrome52'],
+      cssTarget: ["chrome52"],
       // minify:'terser',
       // terserOptions: {
       //   compress: {
