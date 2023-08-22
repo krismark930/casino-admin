@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import W2 from './W2.vue'
+import W2 from './w2.vue'
 import D2MC from './D2MC.vue';
 import D2CU from './D2CU.vue'
 import D2MU from './D2MU.vue'
