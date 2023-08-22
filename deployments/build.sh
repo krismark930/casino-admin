@@ -2,7 +2,7 @@
 
 ls 
 pwd
-npm install --legacy-peer-deps
+npm install
 
 if [ "${EVN}" = "pre" ];then
     echo "pre"
