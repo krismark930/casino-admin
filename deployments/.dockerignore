@@ -1,0 +1,2 @@
+# cat .dockerignore
+../node_modules
