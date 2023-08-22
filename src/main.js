@@ -62,8 +62,7 @@ import pinia from './pinia'
 import './permission'
 
 // 引入svg图标注册脚本
-// import 'vite-plugin-svg-icons/register'
-import 'virtual:svg-icons-register'
+import 'vite-plugin-svg-icons/register'
 
 // 注册全局组件
 import * as Components from './global-components'
@@ -87,13 +86,13 @@ addBackToTop({
   textColor: '#409eff',
 })
 
-// import { quillEditor } from 'vue3-quill'
+import { quillEditor } from 'vue3-quill'
 
 app
   .use(i18n)
   .use(addBackToTop)
   .use(ElementPlus)
-  // .use(quillEditor)
+  .use(quillEditor)
   .use(pinia)
   .use(socket)
   .use(router)

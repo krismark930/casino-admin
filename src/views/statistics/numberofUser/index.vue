@@ -4,7 +4,7 @@
     <el-form :inline="true" :model="formData">
       <div>
         <el-form-item label="在线人数">
-          <el-select v-model="formData.level" placeholder=" " style="width: 80px;">
+          <el-select v-model="formData.level" placeholder="">
             <el-option v-for="item in agentOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
