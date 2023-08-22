@@ -372,7 +372,7 @@ const addKazong = async () => {
     rs: rs.value,
     tmb: tmb.value,
     other_data: JSON.stringify(kazongOtherList.value),
-  };
+  }
   const loading = ElLoading.service({
     lock: true,
     text: "加载中...",

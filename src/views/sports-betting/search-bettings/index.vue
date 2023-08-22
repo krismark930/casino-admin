@@ -321,7 +321,7 @@ export default {
     const router = useRouter();
     return {
       router,
-    };
+    }
   },
   data() {
     return {
@@ -580,7 +580,7 @@ export default {
       timer: null,
       totalCount: 0,
       page: 1,
-    };
+    }
   },
   watch: {
     timerCount: {

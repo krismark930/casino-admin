@@ -90,7 +90,7 @@ onMounted(async () => {
   let formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
-  };
+  }
   await dispatchGetOdds1(formData);
   const { getB5OddsItem1 } = storeToRefs(b5OddsStore());
   odds1.value = getB5OddsItem1.value;

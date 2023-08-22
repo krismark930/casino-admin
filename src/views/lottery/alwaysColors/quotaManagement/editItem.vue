@@ -940,7 +940,7 @@ export default {
     return {
       dispatchUserConfigItem,
       dispatchUpdateConfigItem,
-    };
+    }
   },
   data() {
     return {};

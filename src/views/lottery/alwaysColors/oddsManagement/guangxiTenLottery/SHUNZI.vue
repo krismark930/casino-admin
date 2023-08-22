@@ -173,21 +173,21 @@ onMounted(async () => {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_1"
-  };
+  }
   await dispatchGetOdds(formData);
   odds1.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_2"
-  };
+  }
   await dispatchGetOdds(formData);
   odds2.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_3"
-  };
+  }
   await dispatchGetOdds(formData);
   odds3.value = gdsfOddsStore().getOddsItem;
   loading.close();

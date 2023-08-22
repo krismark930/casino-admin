@@ -49,14 +49,14 @@ lesshat-selector {
 @-webkit-keyframes rotate-clock-border{ 0%{ -webkit-transform: rotate( 45deg); } 100%{ -webkit-transform: rotate( 315deg); }}
 @-moz-keyframes rotate-clock-border{ 0%{ -moz-transform: rotate( 45deg); } 100%{ -moz-transform: rotate( 315deg); }}
 @-o-keyframes rotate-clock-border{ 0%{ -o-transform: rotate( 45deg); } 100%{ -o-transform: rotate( 315deg); }}
-@keyframes rotate-clock-border{ 0%{-webkit-transform: rotate( 45deg);-moz-transform: rotate( 45deg);-ms-transform: rotate( 45deg);transform: rotate( 45deg); } 100%{-webkit-transform: rotate( 315deg);-moz-transform: rotate( 315deg);-ms-transform: rotate( 315deg);transform: rotate( 315deg); };
+@keyframes rotate-clock-border{ 0%{-webkit-transform: rotate( 45deg);-moz-transform: rotate( 45deg);-ms-transform: rotate( 45deg);transform: rotate( 45deg); } 100%{-webkit-transform: rotate( 315deg);-moz-transform: rotate( 315deg);-ms-transform: rotate( 315deg);transform: rotate( 315deg); }
 }
 lesshat-selector {
   -lh-property: 0; } 
 @-webkit-keyframes counterrotate-clock{ 0%{ -webkit-transform: rotate(-45deg); } 100%{ -webkit-transform: rotate(-315deg); }}
 @-moz-keyframes counterrotate-clock{ 0%{ -moz-transform: rotate(-45deg); } 100%{ -moz-transform: rotate(-315deg); }}
 @-o-keyframes counterrotate-clock{ 0%{ -o-transform: rotate(-45deg); } 100%{ -o-transform: rotate(-315deg); }}
-@keyframes counterrotate-clock{ 0%{-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-ms-transform: rotate(-45deg);transform: rotate(-45deg); } 100%{-webkit-transform: rotate(-315deg);-moz-transform: rotate(-315deg);-ms-transform: rotate(-315deg);transform: rotate(-315deg); };
+@keyframes counterrotate-clock{ 0%{-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-ms-transform: rotate(-45deg);transform: rotate(-45deg); } 100%{-webkit-transform: rotate(-315deg);-moz-transform: rotate(-315deg);-ms-transform: rotate(-315deg);transform: rotate(-315deg); }
 }
 .hour {
   position: absolute;
@@ -146,7 +146,7 @@ lesshat-selector {
 @-webkit-keyframes hour-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 120px; top: -120px; }}
 @-moz-keyframes hour-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 120px; top: -120px; }}
 @-o-keyframes hour-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 120px; top: -120px; }}
-@keyframes hour-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 120px; top: -120px; };
+@keyframes hour-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 120px; top: -120px; }
 }
 .hour .hand:after {
   -webkit-animation: hour-grow-after 0.4s cubic-bezier(0.69, 0, 0.49, 1) 1.35s 1 forwards;
@@ -163,7 +163,7 @@ lesshat-selector {
 @-webkit-keyframes hour-grow-after{ 0%{ top: 0; } 100%{ top: -254px; }}
 @-moz-keyframes hour-grow-after{ 0%{ top: 0; } 100%{ top: -254px; }}
 @-o-keyframes hour-grow-after{ 0%{ top: 0; } 100%{ top: -254px; }}
-@keyframes hour-grow-after{ 0%{ top: 0; } 100%{ top: -254px; };
+@keyframes hour-grow-after{ 0%{ top: 0; } 100%{ top: -254px; }
 }
 .minute {
   position: absolute;
@@ -253,7 +253,7 @@ lesshat-selector {
 @-webkit-keyframes minute-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 168px; top: -168px; }}
 @-moz-keyframes minute-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 168px; top: -168px; }}
 @-o-keyframes minute-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 168px; top: -168px; }}
-@keyframes minute-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 168px; top: -168px; };
+@keyframes minute-grow-before{ 0%{ height: 0; top: 0; } 100%{ height: 168px; top: -168px; }
 }
 .minute .hand:after {
   -webkit-animation: minute-grow-after 0.4s cubic-bezier(0.69, 0, 0.49, 1) 1.6s 1 forwards;
@@ -270,7 +270,7 @@ lesshat-selector {
 @-webkit-keyframes minute-grow-after{ 0%{ top: 0; } 100%{ top: -346px; }}
 @-moz-keyframes minute-grow-after{ 0%{ top: 0; } 100%{ top: -346px; }}
 @-o-keyframes minute-grow-after{ 0%{ top: 0; } 100%{ top: -346px; }}
-@keyframes minute-grow-after{ 0%{ top: 0; } 100%{ top: -346px; };
+@keyframes minute-grow-after{ 0%{ top: 0; } 100%{ top: -346px; }
 }
 .second {
   position: absolute;
@@ -330,7 +330,7 @@ lesshat-selector {
 @-webkit-keyframes second-grow{ from { top: 0; height: 0; } 100%{ top: -120px; height: 240px; }}
 @-moz-keyframes second-grow{ from { top: 0; height: 0; } 100%{ top: -120px; height: 240px; }}
 @-o-keyframes second-grow{ from { top: 0; height: 0; } 100%{ top: -120px; height: 240px; }}
-@keyframes second-grow{ from { top: 0; height: 0; } 100%{ top: -120px; height: 240px; };
+@keyframes second-grow{ from { top: 0; height: 0; } 100%{ top: -120px; height: 240px; }
 }
 .second .hand:after {
   content: '';
@@ -356,7 +356,7 @@ lesshat-selector {
 @-webkit-keyframes tick{ 0%{ -webkit-transform: rotate(0deg); } 100%{ -webkit-transform: rotate(360deg); }}
 @-moz-keyframes tick{ 0%{ -moz-transform: rotate(0deg); } 100%{ -moz-transform: rotate(360deg); }}
 @-o-keyframes tick{ 0%{ -o-transform: rotate(0deg); } 100%{ -o-transform: rotate(360deg); }}
-@keyframes tick{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 100%{-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-ms-transform: rotate(360deg);transform: rotate(360deg); };
+@keyframes tick{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 100%{-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-ms-transform: rotate(360deg);transform: rotate(360deg); }
 }
 lesshat-selector {
   -lh-property: 0; } 
@@ -370,7 +370,7 @@ lesshat-selector {
 @-webkit-keyframes tick-second{ 0%{ -webkit-transform: rotate(0deg); } 21%{ -webkit-transform: rotate(4deg); } 26%{ -webkit-transform: rotate(8deg); } 33%{ -webkit-transform: rotate(4deg); } 37%{ -webkit-transform: rotate(6deg); } 100%{ -webkit-transform: rotate(6deg); }}
 @-moz-keyframes tick-second{ 0%{ -moz-transform: rotate(0deg); } 21%{ -moz-transform: rotate(4deg); } 26%{ -moz-transform: rotate(8deg); } 33%{ -moz-transform: rotate(4deg); } 37%{ -moz-transform: rotate(6deg); } 100%{ -moz-transform: rotate(6deg); }}
 @-o-keyframes tick-second{ 0%{ -o-transform: rotate(0deg); } 21%{ -o-transform: rotate(4deg); } 26%{ -o-transform: rotate(8deg); } 33%{ -o-transform: rotate(4deg); } 37%{ -o-transform: rotate(6deg); } 100%{ -o-transform: rotate(6deg); }}
-@keyframes tick-second{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 21%{-webkit-transform: rotate(4deg);-moz-transform: rotate(4deg);-ms-transform: rotate(4deg);transform: rotate(4deg); } 26%{-webkit-transform: rotate(8deg);-moz-transform: rotate(8deg);-ms-transform: rotate(8deg);transform: rotate(8deg); } 33%{-webkit-transform: rotate(4deg);-moz-transform: rotate(4deg);-ms-transform: rotate(4deg);transform: rotate(4deg); } 37%{-webkit-transform: rotate(6deg);-moz-transform: rotate(6deg);-ms-transform: rotate(6deg);transform: rotate(6deg); } 100%{-webkit-transform: rotate(6deg);-moz-transform: rotate(6deg);-ms-transform: rotate(6deg);transform: rotate(6deg); };
+@keyframes tick-second{ 0%{-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-ms-transform: rotate(0deg);transform: rotate(0deg); } 21%{-webkit-transform: rotate(4deg);-moz-transform: rotate(4deg);-ms-transform: rotate(4deg);transform: rotate(4deg); } 26%{-webkit-transform: rotate(8deg);-moz-transform: rotate(8deg);-ms-transform: rotate(8deg);transform: rotate(8deg); } 33%{-webkit-transform: rotate(4deg);-moz-transform: rotate(4deg);-ms-transform: rotate(4deg);transform: rotate(4deg); } 37%{-webkit-transform: rotate(6deg);-moz-transform: rotate(6deg);-ms-transform: rotate(6deg);transform: rotate(6deg); } 100%{-webkit-transform: rotate(6deg);-moz-transform: rotate(6deg);-ms-transform: rotate(6deg);transform: rotate(6deg); }
 }
 .minute-marks {
   display: inline-block;
@@ -426,7 +426,7 @@ lesshat-selector {
 @-webkit-keyframes fade-in{ from{ -webkit-opacity: 0; -moz-opacity: 0; -o-opacity: 0; opacity: 0; } to{ -webkit-opacity: 1; -moz-opacity: 1; -o-opacity: 1; opacity: 1; }}
 @-moz-keyframes fade-in{ from{ -webkit-opacity: 0; -moz-opacity: 0; -o-opacity: 0; opacity: 0; } to{ -webkit-opacity: 1; -moz-opacity: 1; -o-opacity: 1; opacity: 1; }}
 @-o-keyframes fade-in{ from{ -webkit-opacity: 0; -moz-opacity: 0; -o-opacity: 0; opacity: 0; } to{ -webkit-opacity: 1; -moz-opacity: 1; -o-opacity: 1; opacity: 1; }}
-@keyframes fade-in{ from{ -webkit-opacity: 0; -moz-opacity: 0; -o-opacity: 0; opacity: 0; } to{ -webkit-opacity: 1; -moz-opacity: 1; -o-opacity: 1; opacity: 1; };
+@keyframes fade-in{ from{ -webkit-opacity: 0; -moz-opacity: 0; -o-opacity: 0; opacity: 0; } to{ -webkit-opacity: 1; -moz-opacity: 1; -o-opacity: 1; opacity: 1; }
 }
 .minute-marks li:before {
   top: -380px;

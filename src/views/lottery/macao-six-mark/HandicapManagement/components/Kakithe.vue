@@ -250,12 +250,12 @@ export default defineComponent({
       dispatchHandicap,
       dispatchKitheBest,
       dispatchKakitheUpdate,
-    };
+    }
   },
   data() {
     return {
       gameStatus: {},
-    };
+    }
   },
   computed: {
     success: function () {
@@ -318,7 +318,7 @@ export default defineComponent({
         n6: this.gameStatus.n6,
         na: this.gameStatus.na,
         id: this.gameStatus.id,
-      };
+      }
       await this.dispatchGameResult(data);
       await this.dispatchGameStatus({});
       this.$emit("updateYaKitheList");

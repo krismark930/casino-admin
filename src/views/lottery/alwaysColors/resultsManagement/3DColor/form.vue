@@ -86,13 +86,13 @@ export default {
       dispatchGetResultById,
       dispatchSaveLotteryResult,
       dispatchResultItemInitial,
-    };
+    }
   },
   data() {
     return {
       numberOptions: [],
       g_type: "d3",
-    };
+    }
   },
   computed: {
     lotteryResultItem: function () {

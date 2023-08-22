@@ -181,7 +181,7 @@ export default {
       dispatchCancelOrderAll,
       dispatchAllChecked,
       tableRowClassName
-    };
+    }
   },
   data() {
     return {
@@ -301,7 +301,7 @@ export default {
           label: "全部注单",
         },
       ],
-    };
+    }
   },
   computed: {
     orderList: function () {
@@ -341,7 +341,7 @@ export default {
         zf: 1,
         id: id,
         cancel_reason: sResult,
-      };
+      }
       await this.dispatchOrderList(data);
       this.loading = false;
     },

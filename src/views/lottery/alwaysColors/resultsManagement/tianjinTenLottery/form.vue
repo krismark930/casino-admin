@@ -146,13 +146,13 @@ export default {
       dispatchGetResultById,
       dispatchSaveLotteryResult,
       dispatchResultItemInitial,
-    };
+    }
   },
   data() {
     return {
       numberOptions: [],
       g_type: "TJSF",
-    };
+    }
   },
   computed: {
     lotteryResultItem: function () {

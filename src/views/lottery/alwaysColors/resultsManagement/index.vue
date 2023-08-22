@@ -118,7 +118,7 @@ export default {
           label: "澳洲幸运10",
         },
       ],
-    };
+    }
   },
   methods: {},
   components: {

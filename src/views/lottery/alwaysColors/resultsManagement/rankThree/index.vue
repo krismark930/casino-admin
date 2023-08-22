@@ -14,7 +14,7 @@ export default {
     return {
       resultId: 0,
       refresh: false,
-    };
+    }
   },
   methods: {
     editLotteryResult: function (data) {

@@ -895,7 +895,7 @@ onMounted(async () => {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: part1.value,
-  };
+  }
   await dispatchGetOdds1(formData);
   const { getB5OddsItem1 } = storeToRefs(b5OddsStore());
   odds1.value = getB5OddsItem1.value;
@@ -903,7 +903,7 @@ onMounted(async () => {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: part2.value,
-  };
+  }
   await dispatchGetOdds2(formData);
   const { getB5OddsItem2 } = storeToRefs(b5OddsStore());
   odds2.value = getB5OddsItem2.value;

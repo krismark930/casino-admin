@@ -85,7 +85,7 @@ export const useCheckScore = defineStore('check_score', {
                 if (response.status === 200) {
                     this.setSuccess(true);
                     let tempLeagueList = [];
-                    let data = { label: "全部", value: "" };
+                    let data = { label: "全部", value: "" }
                     tempLeagueList.push(data);
                     response.data.map(item => {
                         let data = {

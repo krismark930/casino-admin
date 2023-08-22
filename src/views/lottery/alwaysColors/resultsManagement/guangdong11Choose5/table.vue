@@ -172,7 +172,7 @@ export default {
     return {
       dispatchGD11ResultList,
       dispatchCheckoutGD11Result,
-    };
+    }
   },
   data() {
     return {
@@ -233,7 +233,7 @@ export default {
         qishu_query: "",
         query_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
       },
-    };
+    }
   },
   methods: {
     editResult(id) {
@@ -260,7 +260,7 @@ export default {
         type: lottery_type,
         g_type: "GD11",
         title: "重新结算",
-      };
+      }
       this.loading = true;
       await this.dispatchCheckoutGD11Result(formData);
       await this.dispatchGD11ResultList(this.formData);
@@ -274,7 +274,7 @@ export default {
         type: lottery_type,
         g_type: "GD11",
         title: "点击结算",
-      };
+      }
       this.loading = true;
       await this.dispatchCheckoutGD11Result(formData);
       await this.dispatchGD11ResultList(this.formData);

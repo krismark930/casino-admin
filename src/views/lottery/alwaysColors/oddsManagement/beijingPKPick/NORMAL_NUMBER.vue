@@ -709,70 +709,70 @@ onMounted(async () => {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_1"
-  };
+  }
   await dispatchGetOdds(formData);
   odds1.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_2"
-  };
+  }
   await dispatchGetOdds(formData);
   odds2.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_3"
-  };
+  }
   await dispatchGetOdds(formData);
   odds3.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_4"
-  };
+  }
   await dispatchGetOdds(formData);
   odds4.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_5"
-  };
+  }
   await dispatchGetOdds(formData);
   odds5.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_6"
-  };
+  }
   await dispatchGetOdds(formData);
   odds6.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_7"
-  };
+  }
   await dispatchGetOdds(formData);
   odds7.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_8"
-  };
+  }
   await dispatchGetOdds(formData);
   odds8.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_9"
-  };
+  }
   await dispatchGetOdds(formData);
   odds9.value = gdsfOddsStore().getOddsItem;
   formData = {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_10"
-  };
+  }
   await dispatchGetOdds(formData);
   odds10.value = gdsfOddsStore().getOddsItem;
   loading.close();

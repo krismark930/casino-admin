@@ -374,7 +374,7 @@ const addKamem = async () => {
     xy: xy.value,
     abcd: memberHandicap.value,
     tmb: tmb.value,
-  };
+  }
   const loading = ElLoading.service({
     lock: true,
     text: "加载中...",

@@ -206,7 +206,7 @@ export default {
       dispatchLotteryHistoryAll,
       dispatchUserLottery,
       dispatchDetailLottery,
-    };
+    }
   },
   data() {
     return {
@@ -273,7 +273,7 @@ export default {
           label: "12月",
         },
       ],
-    };
+    }
   },
   computed: {
     lotteryHistoryAllList: function () {
@@ -305,7 +305,7 @@ export default {
           "s+": this.getSeconds(), //秒
           "q+": Math.floor((this.getMonth() + 3) / 3), //季度
           S: this.getMilliseconds(), //毫秒
-        };
+        }
         if (/(y+)/.test(fmt))
           fmt = fmt.replace(
             RegExp.$1,
@@ -318,21 +318,21 @@ export default {
               RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
             );
         return fmt;
-      };
+      }
       Date.prototype.addDays = function (d) {
         this.setDate(this.getDate() + d);
-      };
+      }
 
       Date.prototype.addWeeks = function (w) {
         this.addDays(w * 7);
-      };
+      }
 
       Date.prototype.addMonths = function (m) {
         var d = this.getDate();
         this.setMonth(this.getMonth() + m);
 
         if (this.getDate() < d) this.setDate(0);
-      };
+      }
 
       Date.prototype.addYears = function (y) {
         var m = this.getMonth();
@@ -341,7 +341,7 @@ export default {
         if (m < this.getMonth()) {
           this.setDate(0);
         }
-      };
+      }
       //测试 var now = new Date(); now.addDays(1);//加减日期操作 alert(now.Format("yyyy-MM-dd"));
 
       Date.prototype.dateDiff = function (interval, endTime) {
@@ -369,7 +369,7 @@ export default {
             //輸入有誤
             return undefined;
         }
-      };
+      }
       if (newValue == "") {
         return;
       }
@@ -433,7 +433,7 @@ export default {
           "s+": this.getSeconds(), //秒
           "q+": Math.floor((this.getMonth() + 3) / 3), //季度
           S: this.getMilliseconds(), //毫秒
-        };
+        }
         if (/(y+)/.test(fmt))
           fmt = fmt.replace(
             RegExp.$1,
@@ -446,10 +446,10 @@ export default {
               RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
             );
         return fmt;
-      };
+      }
       Date.prototype.addDays = function (d) {
         this.setDate(this.getDate() + d);
-      };
+      }
       var dateNow = new Date();
       var dateStart;
       var dateEnd;
