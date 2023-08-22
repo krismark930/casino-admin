@@ -84,6 +84,7 @@ export default env => {
     },
     esbuild: false,
     build: {
+      minify:'terser',
       terserOptions: {
         compress: {
           keep_infinity: true,
