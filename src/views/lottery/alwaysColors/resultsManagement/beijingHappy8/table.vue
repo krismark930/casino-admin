@@ -283,7 +283,7 @@ export default {
     return {
       dispatchBJKNResultList,
       dispatchCheckoutBJKNResult,
-    }
+    };
   },
   data() {
     return {
@@ -375,7 +375,7 @@ export default {
         qishu_query: "",
         query_time: moment().tz("Asia/Hong_Kong").format("YYYY-MM-DD"),
       },
-    }
+    };
   },
   methods: {
     editResult(id) {
@@ -402,7 +402,7 @@ export default {
         type: lottery_type,
         g_type: "BJKN",
         title: "重新结算",
-      }
+      };
       this.loading = true;
       await this.dispatchCheckoutBJKNResult(formData);
       await this.dispatchBJKNResultList(this.formData);
@@ -416,7 +416,7 @@ export default {
         type: lottery_type,
         g_type: "BJKN",
         title: "点击结算",
-      }
+      };
       this.loading = true;
       await this.dispatchCheckoutBJKNResult(formData);
       await this.dispatchBJKNResultList(this.formData);

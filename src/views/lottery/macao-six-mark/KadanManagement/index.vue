@@ -383,7 +383,7 @@ const addKadan = async () => {
     rs: rs.value,
     tmb: tmb.value,
     other_data: JSON.stringify(kadanOtherList.value),
-  }
+  };
   const loading = ElLoading.service({
     lock: true,
     text: "加载中...",

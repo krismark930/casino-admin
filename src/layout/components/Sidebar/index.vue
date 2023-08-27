@@ -84,7 +84,7 @@ export default defineComponent({
   flex-direction: column;
   &.collapse {
     width: 64px;
-    :deep(.brand .title) {
+    ::v-deep(.brand .title) {
       display: none;
     }
   }

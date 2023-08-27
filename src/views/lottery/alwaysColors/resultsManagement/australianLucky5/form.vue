@@ -110,13 +110,13 @@ export default {
       dispatchGetResultById,
       dispatchSaveLotteryResult,
       dispatchResultItemInitial,
-    }
+    };
   },
   data() {
     return {
       numberOptions: [],
       g_type: "azxy5",
-    }
+    };
   },
   computed: {
     lotteryResultItem: function () {

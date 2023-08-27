@@ -401,7 +401,7 @@ export default {
     return {
       dispatchGetLotteryConfig,
       dispatchUpdateLotteryConfig,
-    }
+    };
   },
   data() {
     return {};
@@ -511,7 +511,7 @@ export default {
         twssc: {},
         txssc: {},
         xyft: {},
-      }
+      };
       tempLotteryConfig["cq"]["close"] = this.lotteryConfig["cq"]["close"] ? 1 : 0;
       tempLotteryConfig["cq"]["hide"] = this.lotteryConfig["cq"]["hide"] ? 1 : 0;
       tempLotteryConfig["cq"]["des"] = this.lotteryConfig["cq"]["des"];

@@ -8,6 +8,8 @@ import { DETAIL_COMPANY } from "@/api";
 import { UPDATE_MONEY_AGENCY } from "@/api";
 import { UPDATE_MEMBER } from "@/api";
 import { UPDATE_AGENCY } from "@/api";
+import { USER_BANK_ACCOUNT } from "@/api";
+import { USER_BANK_UPDATE } from "@/api";
 
 export const companyStore = defineStore('company', {
     state: () => ({
@@ -20,7 +22,8 @@ export const companyStore = defineStore('company', {
         credit1: 0,
         credit2: 0,
         credit3: 0,
-        web: ""
+        web: "",
+        userBankAccount: {}
     }),
     getters: {
         getSuccess: (state) => state.success,
@@ -32,7 +35,8 @@ export const companyStore = defineStore('company', {
         getCredit1: (state) => state.credit1,
         getCredit2: (state) => state.credit2,
         getCredit3: (state) => state.credit3,
-        getWeb: (state) => state.web
+        getWeb: (state) => state.web,
+        getUserBankAccount: (state) => state.userBankAccount
     },
     actions: {
         setSuccess(success) {
@@ -65,6 +69,9 @@ export const companyStore = defineStore('company', {
         setWeb(web) {
             this.web = web
         },
+        setUserBankAccount(userBankAccount) {
+            this.userBankAccount = userBankAccount;
+        },
         async dispatchCompanyData(data) {
             try {
                 this.setSuccess(false);
@@ -96,7 +103,7 @@ export const companyStore = defineStore('company', {
                 console.log(e.response);
                 this.setErrorMsg(e.response.data.message);
             }
-        },        
+        },
         async dispatchAddCompanyData(data) {
             try {
                 this.setSuccess(false);
@@ -153,7 +160,6 @@ export const companyStore = defineStore('company', {
                     this.setSuccess(true);
                 }
             } catch (e) {
-                console.log(e.response);
                 this.setErrorMsg(e.response.data.message);
             }
         },
@@ -165,7 +171,29 @@ export const companyStore = defineStore('company', {
                     this.setSuccess(true);
                 }
             } catch (e) {
-                console.log(e.response);
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchUserBankAccount(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: USER_BANK_ACCOUNT, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                    this.setUserBankAccount(response.data);
+                }
+            } catch (e) {
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchUpdateUserBank(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: USER_BANK_UPDATE, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
                 this.setErrorMsg(e.response.data.message);
             }
         },

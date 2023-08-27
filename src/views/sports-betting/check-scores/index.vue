@@ -244,7 +244,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
       this.successResult();
@@ -258,7 +258,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
       await this.dispatchLeagueByDate(formData)
@@ -273,7 +273,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
       await this.dispatchLeagueByDate(formData)
@@ -288,7 +288,7 @@ export default defineComponent({
         league: newValue,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData);
       this.successResult();
@@ -304,7 +304,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData)
       await this.dispatchLeagueByDate(formData)
@@ -354,7 +354,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       await this.dispatchSportOpen({ m_date: this.m_date, g_type: this.type, open: this.open, mid: this.mid });
       await this.dispatchTodaySportListByOrder(formData)
       this.successResult();
@@ -385,7 +385,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       await this.dispatchSportOpen({ m_date: this.m_date, g_type: this.type, open: open });
       await this.dispatchTodaySportListByOrder(formData)
       this.successResult();
@@ -399,7 +399,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       this.loading = true;
       await this.dispatchTodaySportListByOrder(formData);
       this.successResult();
@@ -416,7 +416,7 @@ export default defineComponent({
         league: this.league,
         score: this.score,
         page: this.page
-      }
+      };
       await this.dispatchTodaySportListByOrder(formData)
       this.successResult();
     },
@@ -436,7 +436,7 @@ export default defineComponent({
       league: this.league,
       score: this.score,
       page: this.page
-    }
+    };
     this.loading = true;
     await this.dispatchTodaySportListByOrder(formData)
     await this.dispatchLeagueByDate(formData)

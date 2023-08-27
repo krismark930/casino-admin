@@ -333,6 +333,8 @@ export const DETAIL_COMPANY = 'api/admin/user-management/detail-company';
 export const UPDATE_MONEY_AGENCY = 'api/admin/user-management/update-money-agency';
 export const UPDATE_MEMBER = 'api/admin/user-management/update-member';
 export const UPDATE_AGENCY = 'api/admin/user-management/update-agency';
+export const USER_BANK_ACCOUNT = 'api/admin/user-management/user-bank';
+export const USER_BANK_UPDATE = 'api/admin/user-management/user-bank/update';
 
 export const DIVIDEND_DETAILS = 'api/admin/statistics/dividend-details';
 export const DAILY_ACCOUNTS = 'api/admin/statistics/daily-accounts';
