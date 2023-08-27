@@ -118,7 +118,7 @@ export default defineComponent({
   .scroll-container {
     white-space: nowrap;
     overflow: hidden;
-    ::v-deep(.el-scrollbar__bar) {
+    :deep(.el-scrollbar__bar) {
       bottom: 0px;
     }
   }
