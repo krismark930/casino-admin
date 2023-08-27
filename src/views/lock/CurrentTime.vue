@@ -71,7 +71,7 @@ export default defineComponent({
 .current-time {
   color: #fff;
   text-align: center;
-  ::v-deep {
+  :deep {
     .time {
       font-family: Arial;
       font-size: 48px;
