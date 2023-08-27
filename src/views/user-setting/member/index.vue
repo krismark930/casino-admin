@@ -207,31 +207,31 @@
                     <el-input style="width: 200px" v-model="editCompanyData.UserName"></el-input>
                 </el-form-item>
                 <el-form-item label="可用額度:">
-                    {{editCompanyData.Money}}
+                    {{ editCompanyData.Money }}
                 </el-form-item>
                 <el-form-item label="操作类型:">
                     <el-radio-group v-model="editCompanyData.operation_type" class="ml-4">
-                      <el-radio label="1" size="large">人工加款</el-radio>
-                      <el-radio label="2" size="large">人工扣款</el-radio>
+                        <el-radio label="1" size="large">人工加款</el-radio>
+                        <el-radio label="2" size="large">人工扣款</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="金额:">
-                    <el-input v-model="editCompanyData.more_money" style="width: 200px"/>
+                    <el-input v-model="editCompanyData.more_money" style="width: 200px" />
                 </el-form-item>
                 <el-form-item label="洗码量:">
-                    <el-input v-model="editCompanyData.condition_multiplier" style="width: 200px"/>
+                    <el-input v-model="editCompanyData.condition_multiplier" style="width: 200px" />
                 </el-form-item>
                 <el-form-item label="洗码金额:">
-                    {{editCompanyData.withdrawal_condition}}
+                    {{ editCompanyData.withdrawal_condition }}
                 </el-form-item>
                 <el-form-item label="操作类型:">
                     <el-radio-group v-model="editCompanyData.withdraw_condition_type" class="ml-4">
-                      <el-radio label="1" size="large">人工加款</el-radio>
-                      <el-radio label="2" size="large">人工扣款</el-radio>
+                        <el-radio label="1" size="large">人工加款</el-radio>
+                        <el-radio label="2" size="large">人工扣款</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="金额:">
-                    <el-input v-model="editCompanyData.withdraw_more_money" style="width: 200px"/>
+                    <el-input v-model="editCompanyData.withdraw_more_money" style="width: 200px" />
                 </el-form-item>
                 <el-form-item label="开放盘口:">
                     <el-select v-model="editCompanyData.Type">
@@ -269,8 +269,13 @@
                 <el-form-item label="开户地址:">
                     <el-input style="width: 200px" v-model="editCompanyData.Bank_Address"></el-input>
                 </el-form-item>
+                <el-form-item label="USDT:">
+                    {{ userBankAccount.crypto_account.bank_account }} <el-input style="width: 200px"
+                        v-model="userBankAccount.crypto_account.bank_address"></el-input>
+                </el-form-item>
                 <el-form-item label="银行账号:">
-                    <el-input style="width: 200px" v-model="editCompanyData.Bank_Account"></el-input>
+                    {{ userBankAccount.bank_account.bank_type }} <el-input style="width: 200px"
+                        v-model="userBankAccount.bank_account.bank_account"></el-input>
                 </el-form-item>
                 <el-form-item label="手机号码:">
                     <el-input style="width: 200px" v-model="editCompanyData.Phone"></el-input>
@@ -787,6 +792,8 @@ const { dispatchUpdateMember } = companyStore();
 const { dispatchUpdateDetailCompany } = companyStore();
 const { dispatchUpdateMoneyAgency } = companyStore();
 const { dispatchUpdateAgency } = companyStore();
+const { dispatchUserBankAccount } = companyStore();
+const { dispatchUpdateUserBank } = companyStore();
 const { dispatchUpdateRealPersonData } = statisticsStore();
 const { dispatchUpdateSysconfigData } = statisticsStore();
 const { dispatchSystemData } = systemStore();
@@ -1997,7 +2004,14 @@ const detailCompany = (item) => {
     detailCompanyData.value.BK_P3_SO = item.BK_P3_Bet;
     detailCompanyDialogVisible.value = true;
 }
-const editCompany = (item) => {
+const userBankAccount = computed(() => {
+    const { getUserBankAccount } = storeToRefs(companyStore());
+    return getUserBankAccount.value
+})
+const editCompany = async (item) => {
+    console.log(item.id)
+    await dispatchUserBankAccount({ id: item.id });
+    console.log(userBankAccount.value);
     item.Type = item.Type == "" || item.Type == null ? "C" : item.Type;
     item.password = "";
     editCompanyData.value = item;
@@ -2054,6 +2068,7 @@ const updateCompany = async () => {
         }
     }
     loading.value = true;
+    await dispatchUpdateUserBank(userBankAccount.value);
     await dispatchUpdateMember(editCompanyData.value);
     successResult();
     editCompanyDialogVisible.value = false;
@@ -2215,7 +2230,8 @@ onMounted(async () => {
     loading.value = false;
 })
 </script>
-<style lang="scss" scoped>.pagination {
+<style lang="scss" scoped>
+.pagination {
     display: flex;
     justify-content: center;
     margin-top: 10px;
@@ -2243,5 +2259,6 @@ onMounted(async () => {
 .m_ag_ed {
     background-color: #bdd1de;
     text-align: right;
-}</style>
+}
+</style>
   

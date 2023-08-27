@@ -292,13 +292,13 @@ export default {
       dispatchGetResultById,
       dispatchSaveLotteryResult,
       dispatchResultItemInitial,
-    }
+    };
   },
   data() {
     return {
       numberOptions: [],
       g_type: "BJKN",
-    }
+    };
   },
   computed: {
     lotteryResultItem: function () {

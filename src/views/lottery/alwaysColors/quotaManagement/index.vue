@@ -61,7 +61,7 @@ export default {
     const { dispatchUserConfigList } = userConfigStore();
     return {
       dispatchUserConfigList,
-    }
+    };
   },
   data() {
     return {
@@ -72,7 +72,7 @@ export default {
         user_name: "",
         page_no: 1,
       },
-    }
+    };
   },
   methods: {
     getUserConfigByFilter: async function () {

@@ -235,7 +235,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
 
-  :deep(.el-input-group__append) {
+  ::v-deep(.el-input-group__append) {
     background: $mainColor !important;
     border-color: $mainColor !important;
   }
@@ -243,14 +243,14 @@ export default defineComponent({
   .btn-unlock {
     background: $mainColor !important;
     color: #fff !important;
-    :deep(i) {
+    ::v-deep(i) {
       transform: scale(1.5);
     }
   }
 }
 .userinfo-unlock {
   margin-bottom: 16px;
-  :deep(h3) {
+  ::v-deep(h3) {
     color: #fff;
   }
 }

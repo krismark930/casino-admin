@@ -352,7 +352,7 @@ onMounted(async () => {
     lottery_type: lottery_type.value,
     sub_type: sub_type.value,
     ball_type: "ball_5"
-  }
+  };
   await dispatchGetOdds(formData);
   odds5.value = gdsfOddsStore().getOddsItem;
   loading.close();

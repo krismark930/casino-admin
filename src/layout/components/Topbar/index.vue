@@ -133,16 +133,16 @@ export default defineComponent({
 }
 .mobile {
   padding-right: 0;
-  :deep(.logo) {
+  ::v-deep(.logo) {
     max-width: 24px;
     max-height: 24px;
   }
-  :deep(.title) {
+  ::v-deep(.title) {
     display: none;
   }
 }
 .show-title {
-  :deep(.title) {
+  ::v-deep(.title) {
     display: block;
     color: #333;
   }

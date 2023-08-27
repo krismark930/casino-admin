@@ -414,7 +414,7 @@ const addKaguan = async () => {
     rs: rs.value,
     tmb: tmb.value,
     other_data: JSON.stringify(kaguanOtherList.value),
-  }
+  };
   const loading = ElLoading.service({
     lock: true,
     text: "加载中...",
