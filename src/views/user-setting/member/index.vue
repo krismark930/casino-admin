@@ -209,10 +209,15 @@
                 <el-form-item label="可用額度:">
                     {{ editCompanyData.Money }}
                 </el-form-item>
+                <el-form-item label="彩金:">
+                    {{ editCompanyData.bonus_amount }}
+                </el-form-item>
                 <el-form-item label="操作类型:">
                     <el-radio-group v-model="editCompanyData.operation_type" class="ml-4">
                         <el-radio label="1" size="large">人工加款</el-radio>
                         <el-radio label="2" size="large">人工扣款</el-radio>
+                        <el-radio label="3" size="large">彩金加款</el-radio>
+                        <el-radio label="4" size="large">彩金扣款</el-radio>
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="金额:">
@@ -2063,6 +2068,10 @@ const updateCompany = async () => {
     //}
     if (editCompanyData.value.more_money != "") {
         if (editCompanyData.value.operation_type == "2" && Number(editCompanyData.value.Money) < Number(editCompanyData.value.more_money)) {
+            alert("扣款金额不能超过可用額度。");
+            return;
+        }
+        if (editCompanyData.value.operation_type == "4" && Number(editCompanyData.value.bonus_amount) < Number(editCompanyData.value.more_money)) {
             alert("扣款金额不能超过可用額度。");
             return;
         }
