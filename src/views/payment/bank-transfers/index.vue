@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 0.75rem;">
     <el-card>
-      <el-row :gutter="20">
+      <!-- <el-row :gutter="20">
         <el-col :span="4">
           <el-button link type="primary" style="padding-top:7px" @click="handleAddBank">
             新增银行账号
@@ -24,7 +24,7 @@
         <el-col :span="4">
           <el-button type="primary" @click="updateUSDTRate">提交</el-button>
         </el-col>
-      </el-row>
+      </el-row> -->
       <el-dialog v-model="dialogVisible" title="新增银行账号">
         <el-scrollbar>
           <el-row class="scrollbar-flex-content">
@@ -35,9 +35,9 @@
                   <th>银行名称</th>
                   <th>银行账号</th>
                   <th>开户行</th>
-                  <th>VIP</th>
+                  <!-- <th>VIP</th>
                   <th>最低</th>
-                  <th>最高</th>
+                  <th>最高</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -54,7 +54,7 @@
                   <td>
                     <el-input v-model="webBankItem.bankaddress" />
                   </td>
-                  <td>
+                  <!-- <td>
                     <el-select placeholder="否" v-model="webBankItem.vip">
                       <el-option v-for="optionItem in vipOptions" :key="optionItem.value" :label="optionItem.label"
                         :value="optionItem.value"></el-option>
@@ -65,7 +65,7 @@
                   </td>
                   <td>
                     <el-input v-model="webBankItem.max_amount" />
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>
@@ -91,9 +91,9 @@
                 <th>开户人姓名</th>
                 <th>银行账号</th>
                 <th>开户行</th>
-                <th>VIP专用</th>
+                <!-- <th>VIP专用</th>
                 <th>最低</th>
-                <th>最高</th>
+                <th>最高</th> -->
                 <th></th>
               </tr>
             </thead>
@@ -118,7 +118,7 @@
                 <td>
                   <el-input v-model="item.bankaddress" />
                 </td>
-                <td>
+                <!-- <td>
                   <el-select placeholder="否" v-model="item.vip">
                     <el-option v-for="optionItem in vipOptions" :key="optionItem.value" :label="optionItem.label"
                       :value="optionItem.value"></el-option>
@@ -129,7 +129,7 @@
                 </td>
                 <td>
                   <el-input v-model="item.max_amount" />
-                </td>
+                </td> -->
                 <td>
                   <div style="display: flex;">
                     <el-button type="primary" size="small" @click="updateWebBankData(item)">修改</el-button>
