@@ -1,6 +1,5 @@
 import VueSocketIO from 'vue-3-socket.io';
-
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+import { SOCKET_URL } from '@/config';
 
 const socket = new VueSocketIO({
   debug: true,
