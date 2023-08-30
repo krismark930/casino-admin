@@ -33,10 +33,10 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 import { useApp } from '@/pinia/modules/app'
+import { BASE_API } from '@/config'
 
-const API_URL = import.meta.env.VITE_BASE_API
 const service = axios.create({
-  baseURL: API_URL,
+  baseURL: BASE_API,
   // timeout: 10000,
   // withCredentials: true,
 })

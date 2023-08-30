@@ -213,6 +213,7 @@ import { statisticsStore } from "@/pinia/modules/statistics";
 import { realGameStore } from "@/pinia/modules/real_game";
 import { systemStore } from "@/pinia/modules/system";
 import { storeToRefs } from "pinia";
+import {BASE_URL} from "@/config"
 import { useRouter } from "vue-router";
 const { dispatchOnlineData } = statisticsStore();
 const { dispatchSystemData } = systemStore();
@@ -420,7 +421,7 @@ const totalCount = computed(() => {
 })
 const goCountUserPage = (userName) => {
   // router.push({ name: "agents.count_user", query: { userName: userName } });
-  window.open(import.meta.env.VITE_BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
+  window.open(BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
 }
 const successResult = () => {
   if (success.value) {

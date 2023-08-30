@@ -790,6 +790,7 @@ import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
 import { statisticsStore } from "@/pinia/modules/statistics";
 import { systemStore } from "@/pinia/modules/system";
+import {BASE_URL} from "@/config";
 import socket from "@/utils/socket";
 const { dispatchCompanyData } = companyStore();
 const { dispatchAddCompanyData } = companyStore();
@@ -1263,11 +1264,11 @@ const editMoneyAgencyData = ref({
     admin: ""
 })
 const goCountUserPage = (userName) => {
-    window.open(import.meta.env.VITE_BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
+    window.open(BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
     // router.push({ name: "agents.count_user", query: { userName: userName } });
 }
 const goRecordIPPage = (userName) => {
-    window.open(import.meta.env.VITE_BASE_URL + "/#/agents/record-ip?username=" + userName, '_blank');
+    window.open(BASE_URL + "/#/agents/record-ip?username=" + userName, '_blank');
     // router.push({ name: "agents.record_ip", query: { username: userName } });
 }
 
