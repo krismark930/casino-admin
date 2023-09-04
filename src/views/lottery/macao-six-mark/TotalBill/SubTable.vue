@@ -106,7 +106,7 @@
 </template>
 <script setup>
 import { ref, onMounted, computed, defineProps, toRefs } from 'vue';
-import { reportStore } from "@/pinia/modules/macao_six_mark/report.js";
+import { macaoReportStore } from "@/pinia/modules/macao_six_mark/report.js";
 import { storeToRefs } from "pinia";
 import { ElLoading } from 'element-plus'
 
@@ -118,15 +118,15 @@ const props = defineProps({
 
 const { selectedPeriod } = toRefs(props);
 
-const { dispatchSubBill } = reportStore();
+const { dispatchMacaoSubBill } = macaoReportStore();
 
 const subBillList = computed(() => {
-  const { getSubBillList } = storeToRefs(reportStore());
+  const { getSubBillList } = storeToRefs(macaoReportStore());
   return getSubBillList.value;
 })
 
 const subBillItem = computed(() => {
-  const { getSubBillItem } = storeToRefs(reportStore());
+  const { getSubBillItem } = storeToRefs(macaoReportStore());
   return getSubBillItem.value;
 })
 
@@ -140,7 +140,7 @@ onMounted(async () => {
     text: '加载中...',
     background: 'rgba(0, 0, 0, 0.7)',
   })
-  await dispatchSubBill({ period: selectedPeriod.value });
+  await dispatchMacaoSubBill({ period: selectedPeriod.value });
   loading.close();
 })
 </script>

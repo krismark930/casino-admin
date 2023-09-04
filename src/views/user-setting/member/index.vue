@@ -74,7 +74,7 @@
                     {{ scope.row.Alias }}
                 </template>
             </el-table-column>
-            <el-table-column prop="UserName" label="会员 帐号" width="140">
+            <el-table-column prop="UserName" label="会员名字" width="140">
                 <template #default="scope">
                     <div>{{ scope.row.UserName }}</div>
                     <!-- <div style="background-color: yellow;" v-if="web == 'web_system_data'">{{scope.row.password}}</div> -->
@@ -142,7 +142,7 @@
                 :page-size="pageSize" v-model:current-page="formData.page_no" />
         </div>
         <el-dialog v-model="editTransferAgency" title="--会员转移设置--">
-            <el-form-item label="会员帐号：">
+            <el-form-item label="会员名字：">
                 {{ transferAgencyItem.UserName }}
             </el-form-item>
             <el-form-item label="代理帐号：">
