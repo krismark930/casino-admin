@@ -8,7 +8,7 @@ import { MACAO_KAUSER_REPORT } from "@/api";
 import { MACAO_TOTAL_BILL } from "@/api";
 import { MACAO_SUB_BILL } from "@/api";
 
-export const reportStore = defineStore('macao_report', {
+export const macaoReportStore = defineStore('macao_report', {
     state: () => ({
         success: false,
         kaguanReportList: [],
@@ -167,7 +167,7 @@ export const reportStore = defineStore('macao_report', {
                 console.log(e.response);
             }
         },
-        async dispatchSubBill(data) {
+        async dispatchMacaoSubBill(data) {
             try {
                 this.setSuccess(false);
                 let response = await request({ url: MACAO_SUB_BILL, method: 'POST', data })

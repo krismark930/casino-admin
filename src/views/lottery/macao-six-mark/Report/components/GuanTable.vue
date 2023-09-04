@@ -138,7 +138,7 @@
 </template>
 <script setup>
 import { ref, onMounted, computed, defineProps, toRefs } from 'vue';
-import { reportStore } from "@/pinia/modules/macao_six_mark/report.js";
+import { macaoReportStore } from "@/pinia/modules/macao_six_mark/report.js";
 import { storeToRefs } from "pinia";
 import { ElLoading } from 'element-plus'
 import moment from 'moment-timezone';
@@ -154,19 +154,19 @@ const props = defineProps({
 
 const { selectedPeriod, class2, fromDate, endDate, guanName } = toRefs(props);
 
-const { dispatchKaguanReport } = reportStore();
+const { dispatchKaguanReport } = macaoReportStore();
 
 const showZongReport = (zongName) => {
   emit("showZongTable", zongName);
 }
 
 const kaguanReportList = computed(() => {
-  const { getKaguanReportList } = storeToRefs(reportStore());
+  const { getKaguanReportList } = storeToRefs(macaoReportStore());
   return getKaguanReportList.value;
 })
 
 const sumKaguanReport = computed(() => {
-  const { getSumKaguanReport } = storeToRefs(reportStore());
+  const { getSumKaguanReport } = storeToRefs(macaoReportStore());
   return getSumKaguanReport.value;
 })
 

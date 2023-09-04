@@ -108,7 +108,7 @@
 </template>
 <script setup>
 import { ref, onMounted, computed, defineProps, toRefs } from 'vue';
-import { reportStore } from "@/pinia/modules/macao_six_mark/report.js";
+import { macaoReportStore } from "@/pinia/modules/macao_six_mark/report.js";
 import { ElNotification } from 'element-plus';
 import { ElLoading } from 'element-plus'
 import { storeToRefs } from "pinia";
@@ -125,7 +125,7 @@ const loading = ref(false);
 
 const { selectedPeriod, class2, fromDate, endDate } = toRefs(props);
 
-const { dispatchAllReport } = reportStore();
+const { dispatchAllReport } = macaoReportStore();
 
 const showGuanReport = (guanName) => {
   console.log(guanName);
@@ -133,12 +133,12 @@ const showGuanReport = (guanName) => {
 }
 
 const allReportList = computed(() => {
-  const { getAllReportList } = storeToRefs(reportStore());
+  const { getAllReportList } = storeToRefs(macaoReportStore());
   return getAllReportList.value;
 })
 
 const sumAllReport = computed(() => {
-  const { getSumAllReport } = storeToRefs(reportStore());
+  const { getSumAllReport } = storeToRefs(macaoReportStore());
   return getSumAllReport.value;
 })
 

@@ -74,19 +74,19 @@
 </template>
 <script setup>
 import { ref, onMounted, computed, defineProps, toRefs } from 'vue';
-import { reportStore } from "@/pinia/modules/macao_six_mark/report.js";
+import { macaoReportStore } from "@/pinia/modules/macao_six_mark/report.js";
 import { storeToRefs } from "pinia";
 import { ElLoading } from 'element-plus'
 const emit = defineEmits(['showSubTable']);
-const { dispatchTotalBill } = reportStore();
+const { dispatchTotalBill } = macaoReportStore();
 
 const totalBillList = computed(() => {
-  const { getTotalBillList } = storeToRefs(reportStore());
+  const { getTotalBillList } = storeToRefs(macaoReportStore());
   return getTotalBillList.value;
 })
 
 const totalBillItem = computed(() => {
-  const { getTotalBillItem } = storeToRefs(reportStore());
+  const { getTotalBillItem } = storeToRefs(macaoReportStore());
   return getTotalBillItem.value;
 })
 
