@@ -145,7 +145,7 @@
         <el-row>
             <el-col :span="8">
                 <el-form-item label="存款总数:">
-                    <font color="blue"><b>{{ userInfo.ckzs2 }}元</b></font>
+                    <font color="blue"><b>{{ userInfo.deposit_amount }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
@@ -162,7 +162,7 @@
         <el-row>
             <el-col :span="8">
                 <el-form-item label="取款总数:">
-                    <font color="blue"><b>{{ userInfo.qkzs2 }}元</b></font>
+                    <font color="blue"><b>{{ userInfo.withdraw_amount }}元</b></font>
                 </el-form-item>
             </el-col>
             <el-col :span="8">
