@@ -62,8 +62,8 @@ import pinia from './pinia'
 import './permission'
 
 // 引入svg图标注册脚本
-// import 'vite-plugin-svg-icons/register'
-import 'virtual:svg-icons-register'
+import 'vite-plugin-svg-icons/register'
+// import 'virtual:svg-icons-register'
 
 // 注册全局组件
 import * as Components from './global-components'
