@@ -46,6 +46,7 @@ import socket from "@/utils/socket";
 import zhudanFile from '@/assets/audio/zhudan.wav';
 import depositFile from '@/assets/audio/deposit.mp3';
 import withdrawFile from '@/assets/audio/withdraw.mp3';
+import { ElNotification, ElMessageBox } from "element-plus";
 
 export default defineComponent({
   components: {
@@ -65,21 +66,28 @@ export default defineComponent({
     return {
       interval: null,
       depositInterval: null,
-      withdrawInterval: null      
+      withdrawInterval: null
     }
   },
   sockets: {
+    accountInitialize() {
+      ElNotification({
+        title: "错误",
+        message: "请初始化体育帐户。",
+        type: "error",
+      });
+    },
     monitorUser() {
       clearInterval(this.interval);
       this.interval = setInterval(() => {
         const audio = new Audio(zhudanFile);
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-          playPromise.then(()=> {
+          playPromise.then(() => {
 
           })
-          .catch(error => {
-          });
+            .catch(error => {
+            });
         }
       }, 5000)
     },
@@ -89,12 +97,12 @@ export default defineComponent({
         const audio = new Audio(withdrawFile);
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-          playPromise.then(()=> {
+          playPromise.then(() => {
 
           })
-          .catch(error => {
-            console.log(error);
-          });
+            .catch(error => {
+              console.log(error);
+            });
         }
       }, 5000)
     },
@@ -104,12 +112,12 @@ export default defineComponent({
         const audio = new Audio(depositFile);
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-          playPromise.then(()=> {
+          playPromise.then(() => {
 
           })
-          .catch(error => {
-            console.log(error);
-          });
+            .catch(error => {
+              console.log(error);
+            });
         }
       }, 5000)
     },
@@ -127,6 +135,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+
   * {
     outline: none;
   }
