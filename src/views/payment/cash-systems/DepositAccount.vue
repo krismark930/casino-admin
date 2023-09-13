@@ -43,16 +43,21 @@
               <el-col :span="6">
                 <el-input v-model="formData.memo"/>
               </el-col>
-              <el-button link type="danger" @click="setMemo('银行汇款')">银行汇款</el-button>
-              <el-button link type="danger" @click="setMemo('微信')">微信</el-button>
+              <el-button link type="danger" @click="setMemo('KKpay')">KKpay</el-button>
+              <el-button link type="danger" @click="setMemo('GOpay')">GOpay</el-button>
+              <el-button link type="danger" @click="setMemo('USDT')">USDT</el-button>
               <el-button link type="danger" @click="setMemo('支付宝')">支付宝</el-button>
-              <el-button link type="danger" @click="setMemo('彩金')">彩金</el-button>
+              <el-button link type="danger" @click="setMemo('充值彩金')">充值彩金</el-button>
               <el-button link type="danger" @click="setMemo('返水')">返水</el-button>
               <el-button link type="danger" @click="setMemo('扣款')">扣款</el-button>
-              <el-button link type="danger" @click="setMemo('误差')">误差</el-button>
-              <el-button link type="danger" @click="setMemo('工行')">工行</el-button>
-              <el-button link type="danger" @click="setMemo('建行')">建行</el-button>
-              <el-button link type="danger" @click="setMemo('农行')">农行</el-button>
+              <el-button link type="danger" @click="setMemo('贵安')">贵安</el-button>
+              <el-button link type="danger" @click="setMemo('黑龙江')">黑龙江</el-button>
+              <el-button link type="danger" @click="setMemo('每周亏损金')">每周亏损金</el-button>
+              <el-button link type="danger" @click="setMemo('额度误差')">额度误差</el-button>
+              <el-button link type="danger" @click="setMemo('周多重返水')">周多重返水</el-button>
+              <el-button link type="danger" @click="setMemo('尾号彩金')">尾号彩金</el-button>
+              <el-button link type="danger" @click="setMemo('真人彩金')">真人彩金</el-button>
+              <el-button link type="danger" @click="setMemo('逢 8 彩金')">逢 8 彩金</el-button>
             </el-row>
           </td>
         </tr>
