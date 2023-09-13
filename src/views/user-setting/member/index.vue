@@ -85,7 +85,7 @@
                     {{ (Number(scope.row.Money) + Number(scope.row.bonus_amount)).toFixed(2) }}
                 </template>
             </el-table-column>
-            <!--<el-table-column prop="Credit" label="信用额度" width="120" />-->
+            <el-table-column prop="Credit" label="信用额度" width="120" />
             <el-table-column prop="Count" label="下级总计" width="150" />
             <el-table-column prop="AddDate" label="新增日期" width="200" />
             <el-table-column prop="Status" label="帐号状况" width="130">
