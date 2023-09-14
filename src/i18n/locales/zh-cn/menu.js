@@ -50,6 +50,7 @@ export default {
   lotterys: '彩票管理',
   markSixs: '香港六合彩管理',
   macaoSixMark: '澳门六合彩管理',
+  newMacaoSixMark: '新澳门六合彩管理',
   alwaysColor2: '时时彩2管理',
 
   //account

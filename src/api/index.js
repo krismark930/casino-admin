@@ -168,6 +168,85 @@ export const UPDATE_MACAO_SINGLE_QUOTA = '/api/admin/macao-six-mark/single-quota
 export const GET_MACAO_WATER_SETTING = '/api/admin/macao-six-mark/water-setting/get';
 export const UPDATE_MACAO_WATER_SETTING = '/api/admin/macao-six-mark/water-setting/update';
 
+/* =================== new macao six mark ================================ */
+
+export const NEW_MACAO_GAME_STATUS = '/api/admin/new-macao-ka-kithe/lottery-status';
+export const SAVE_NEW_MACAO_GAME_RESULT = '/api/admin/new-macao-ka-kithe/game-result/save';
+export const NEW_MACAO_HANDICAP_UPDATE = '/api/admin/new-macao-ka-kithe/handicap/update';
+export const NEW_MACAO_KA_KITHE_ALL = '/api/admin/new-macao-ka-kithe/all';
+export const NEW_MACAO_BEST_UPDATE = '/api/admin/new-macao-ka-kithe/best/update';
+export const NEW_MACAO_KAKITHE_UPDATE = '/api/admin/new-macao-ka-kithe/update';
+export const NEW_MACAO_KAKITHE_STATUS_UPDATE = '/api/admin/new-macao-ka-kithe/status/update';
+export const NEW_MACAO_KAKITHE_DELETE = '/api/admin/new-macao-ka-kithe/delete';
+export const NEW_MACAO_KAKITHE_RESTORE = '/api/admin/new-macao-ka-kithe/restore';
+export const NEW_MACAO_KAKITHE_EDIT = '/api/admin/new-macao-ka-kithe/edit';
+export const NEW_MACAO_KAKITHE_WIN = '/api/admin/new-macao-ka-kithe/win';
+
+export const NEW_MACAO_YA_KITHE_ALL = '/api/admin/new-macao-ya-kithe/all';
+export const NEW_MACAO_YAKITHE_UPDATE = '/api/admin/new-macao-ya-kithe/update';
+export const NEW_MACAO_YAKITHE_ITEM = '/api/admin/new-macao-ya-kithe/item';
+
+export const GET_NEW_MACAO_PERIOD = '/api/admin/macao-ka-bl/period';
+export const GET_NEW_MACAO_SPECIAL_CODE = '/api/admin/macao-ka-bl/special';
+export const GET_NEW_MACAO_POSITIVE_CODE = '/api/admin/macao-ka-bl/positive';
+export const GET_NEW_MACAO_POSITIVE_CODE_1_6 = '/api/admin/macao-ka-bl/positive16';
+export const GET_NEW_MACAO_REGULAR_CODE = '/api/admin/macao-ka-bl/regular';
+export const GET_NEW_MACAO_PASS = '/api/admin/macao-ka-bl/pass';
+export const GET_NEW_MACAO_EVEN_CODE = '/api/admin/macao-ka-bl/even-code';
+export const GET_NEW_MACAO_ONE_XIAO = '/api/admin/macao-ka-bl/one-xiao';
+
+export const GET_NEW_MACAO_KAMEM_ALL = '/api/admin/macao-ka-mem/all';
+export const GET_NEW_MACAO_KAGUAN_ALL = '/api/admin/macao-ka-mem/guan/all';
+export const UPDATE_NEW_MACAO_MEMBER_STATUS = '/api/admin/macao-ka-mem/status/update';
+export const GET_NEW_MACAO_KAMEM_SUPERIOR = '/api/admin/macao-ka-mem/superior';
+export const SAVE_NEW_MACAO_KAMEM = '/api/admin/macao-ka-mem/add';
+
+export const GET_NEW_MACAO_KADAN_SUPERIOR = '/api/admin/new-macao-ka-dan/superior';
+export const SAVE_NEW_MACAO_KADAN = '/api/admin/new-macao-ka-dan/add';
+
+export const GET_NEW_MACAO_KAZONG_SUPERIOR = '/api/admin/macao-ka-zong/superior';
+export const SAVE_NEW_MACAO_KAZONG = '/api/admin/macao-ka-zong/add';
+
+export const GET_NEW_MACAO_KAGUAN_SUPERIOR = '/api/admin/macao-ka-guan/superior';
+export const SAVE_NEW_MACAO_KAGUAN = '/api/admin/macao-ka-guan/add';
+export const NEW_MACAO_KAGUAN_ALL = '/api/admin/macao-ka-guan/all';
+export const UPDATE_NEW_MACAO_KAGUAN_STATUS = '/api/admin/macao-ka-guan/status/update';
+
+export const NEW_MACAO_KAGUAN_REPORT = '/api/admin/macao-report/kaguan';
+export const NEW_MACAO_KAZONG_REPORT = '/api/admin/macao-report/kazong';
+export const NEW_MACAO_KADAI_REPORT = '/api/admin/macao-report/kadai';
+export const NEW_MACAO_KAUSER_REPORT = '/api/admin/macao-report/kauser';
+export const NEW_MACAO_ALL_REPORT = '/api/admin/macao-report/all';
+export const NEW_MACAO_TOTAL_BILL = '/api/admin/macao-report/total-bill';
+export const NEW_MACAO_SUB_BILL = '/api/admin/macao-report/sub-bill';
+
+export const NEW_MACAO_MEMBER_QUERY = '/api/admin/macao-query/member';
+export const NEW_MACAO_MAIN_QUERY = '/api/admin/macao-query/main';
+export const NEW_MACAO_KATAN_DELETE = '/api/admin/macao-query/delete';
+export const NEW_MACAO_KATAN_UPDATE = '/api/admin/macao-query/update';
+
+export const GET_NEW_MACAO_SPECIAL_CODE_RATE = '/api/admin/macao-rate-setting/special-code/get';
+export const GET_NEW_MACAO_POSITIVE1_6_RATE = '/api/admin/macao-rate-setting/positive1-6/get';
+export const GET_NEW_MACAO_CONSECUTIVE_CODE_RATE = '/api/admin/macao-rate-setting/consecutive-code/get';
+export const GET_NEW_MACAO_HALF_WAVE_RATE = '/api/admin/macao-rate-setting/half-wave/get';
+export const GET_NEW_MACAO_SPECIAL_RATE = '/api/admin/macao-rate-setting/special/get';
+export const GET_NEW_MACAO_ONE_XIAO_RATE = '/api/admin/macao-rate-setting/one-xiao/get';
+export const UPDATE_NEW_MACAO_PLUS_RATE = '/api/admin/macao-rate-setting/plus-update';
+export const UPDATE_NEW_MACAO_OTHER_RATE = '/api/admin/macao-rate-setting/other-update';
+export const UPDATE_NEW_MACAO_MAIN_RATE = '/api/admin/macao-rate-setting/main-update';
+export const RESTORE_NEW_MACAO_ODDS = '/api/admin/macao-rate-setting/restore-odds';
+
+export const GET_NEW_MACAO_WEBSITE_SETTING = '/api/admin/macao-six-mark/website-setting/get';
+export const UPDATE_NEW_MACAO_WEBSITE_SETTING = '/api/admin/macao-six-mark/website-setting/update';
+export const GET_NEW_MACAO_ODD_DIFF_SETTING = '/api/admin/macao-six-mark/odd-diff-setting/get';
+export const UPDATE_NEW_MACAO_ODD_DIFF_SETTING = '/api/admin/macao-six-mark/odd-diff-setting/update';
+export const GET_NEW_MACAO_AUTO_PRECIPITATION = '/api/admin/macao-six-mark/auto-precipitation/get';
+export const UPDATE_NEW_MACAO_AUTO_PRECIPITATION = '/api/admin/macao-six-mark/auto-precipitation/update';
+export const GET_NEW_MACAO_SINGLE_QUOTA = '/api/admin/macao-six-mark/single-quota/get';
+export const UPDATE_NEW_MACAO_SINGLE_QUOTA = '/api/admin/macao-six-mark/single-quota/update';
+export const GET_NEW_MACAO_WATER_SETTING = '/api/admin/macao-six-mark/water-setting/get';
+export const UPDATE_NEW_MACAO_WATER_SETTING = '/api/admin/macao-six-mark/water-setting/update';
+
 
 /* ======================== always color ============================== */
 
