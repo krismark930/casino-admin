@@ -1,6 +1,7 @@
 const Layout = () => import('@/layout/index.vue')
 const MarkSixs = () => import('@/views/lottery/mark-sixs/index.vue')
 const MacaoSixMark = () => import('@/views/lottery/macao-six-mark/index.vue')
+const NewMacaoSixMark = () => import('@/views/lottery/new-macao-six-mark/index.vue')
 const AlwaysColors = () => import('@/views/lottery/alwaysColors/index.vue')
 export default [
   {
@@ -27,6 +28,15 @@ export default [
         name: 'macaoSixMark',
         meta: {
           title: 'menu.macaoSixMark',
+          affix: true,
+        },
+      },
+      {
+        path: '/new-macao-six-mark',
+        component: NewMacaoSixMark,
+        name: 'newMacaoSixMark',
+        meta: {
+          title: 'menu.newMacaoSixMark',
           affix: true,
         },
       },
