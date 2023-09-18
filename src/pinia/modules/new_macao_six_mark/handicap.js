@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { defineStore } from "pinia";
 import { NEW_MACAO_GAME_STATUS } from "@/api";
-import { NEW_SAVE_MACAO_GAME_RESULT } from "@/api";
+import { SAVE_NEW_MACAO_GAME_RESULT } from "@/api";
 import { NEW_MACAO_HANDICAP_UPDATE } from "@/api";
 import { NEW_MACAO_BEST_UPDATE } from "@/api";
 import { NEW_MACAO_KAKITHE_UPDATE } from "@/api";
@@ -74,7 +74,7 @@ export const handicapStore = defineStore('new_macao_handicap', {
         async dispatchGameResult(data) {
             try {
                 this.setSuccess(false);
-                let response = await request({ url: NEW_SAVE_MACAO_GAME_RESULT, method: 'POST', data })
+                let response = await request({ url: SAVE_NEW_MACAO_GAME_RESULT, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
                 }
