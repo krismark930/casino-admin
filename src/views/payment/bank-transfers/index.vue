@@ -1,30 +1,30 @@
 <template>
   <div style="padding: 0.75rem;">
     <el-card>
-      <!-- <el-row :gutter="20">
+      <el-row :gutter="20">
         <el-col :span="4">
           <el-button link type="primary" style="padding-top:7px" @click="handleAddBank">
             新增银行账号
           </el-button>
         </el-col>
-        <el-col :span="4">
+        <!-- <el-col :span="4">
           <el-switch v-model="usdtList.tjck" class="ml-2" width="150" inline-prompt active-text="允许提交汇款"
             inactive-text="允许提交汇款" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949" />
-        </el-col>
+        </el-col> -->
         <el-col :span="6">
           <el-form-item label="汇款返利:">
             <el-input placeholder="1%" v-model="usdtList.ckfanli"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <!-- <el-col :span="6">
           <el-form-item label="USDT汇率:">
             <el-input placeholder="1%" v-model="usdtList.USDT"></el-input>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <el-col :span="4">
           <el-button type="primary" @click="updateUSDTRate">提交</el-button>
         </el-col>
-      </el-row> -->
+      </el-row>
       <el-dialog v-model="dialogVisible" title="新增银行账号">
         <el-scrollbar>
           <el-row class="scrollbar-flex-content">
