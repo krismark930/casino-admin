@@ -20,10 +20,10 @@
           <el-date-picker v-model="m_date" placeholder="" value-format="YYYY-MM-DD"></el-date-picker>
         </el-form-item>
 
-        <el-form-item>
+        <!-- <el-form-item>
           <el-button type="primary" @click="updateSportOpen(1)">全部显示</el-button>
           <el-button type="danger" @click="updateSportOpen(0)">全部关闭</el-button>
-        </el-form-item>
+        </el-form-item> -->
       </div>
 
       <div>
