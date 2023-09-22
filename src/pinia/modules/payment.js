@@ -33,6 +33,7 @@ export const paymentStore = defineStore('payment', {
         user: {
         },
         currentAmount: 0,
+        reviewType: "",
     }),
     getters: {
         getSuccess: (state) => state.success,
@@ -43,7 +44,8 @@ export const paymentStore = defineStore('payment', {
         getWebBankList: (state) => state.webBankList,
         getUSDTList: (state) => state.usdtList,
         getUser: (state) => state.user,
-        getCurrentAmount: (state) => state.currentAmount
+        getCurrentAmount: (state) => state.currentAmount,
+        getReviewType: (state) => state.reviewType,
     },
     actions: {
         setSuccess(success) {
@@ -73,6 +75,9 @@ export const paymentStore = defineStore('payment', {
         setCurrentAmount(currentAmount) {
             this.currentAmount = currentAmount;
         },
+        setReviewType(reviewType) {
+            this.reviewType = reviewType;
+        },
         async dispatchCashSystem(data) {
             try {
                 this.setSuccess(false);
@@ -93,6 +98,7 @@ export const paymentStore = defineStore('payment', {
                 if (response.status === 200) {
                     this.setSuccess(true);
                     this.setCurrentAmount(response.data);
+                    this.setReviewType(response.type);
                 }
             } catch (e) {
                 console.log(e.response);

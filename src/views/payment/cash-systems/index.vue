@@ -52,7 +52,7 @@
         stripe
       >
         <el-table-column property="UserName" label="會員帳號" align="center" />
-        <el-table-column property="Alias" label="姓名-电话" align="center" />
+        <el-table-column property="LoginName" label="姓名-电话" align="center" />
         <el-table-column property="BankInfo" label="银行资料" align="center">
           <template #default="scope">
             <div v-html="scope.row.BankInfo"></div>
@@ -153,10 +153,10 @@ const typeOptions = ref([
     label: "全部",
     value: ""
   },
-  {
-    label: "全部(含转换)",
-    value: "ALL"
-  },
+  // {
+  //   label: "全部(含转换)",
+  //   value: "ALL"
+  // },
   {
     label: "存入",
     value: "S"
