@@ -85,7 +85,7 @@
                     {{ (Number(scope.row.Money) + Number(scope.row.bonus_amount)).toFixed(2) }}
                 </template>
             </el-table-column>
-            <el-table-column prop="Credit" label="信用额度" width="120" />
+            <!-- <el-table-column prop="Credit" label="信用额度" width="120" /> -->
             <el-table-column prop="Count" label="下级总计" width="150" />
             <el-table-column prop="AddDate" label="新增日期" width="200" />
             <el-table-column prop="Status" label="帐号状况" width="130">
@@ -210,7 +210,7 @@
                 <el-form-item label="會員名稱:">
                     <el-input style="width: 200px" v-model="editCompanyData.UserName"></el-input>
                 </el-form-item>
-                <el-form-item label="可用額度:">
+                <el-form-item label="存款金额:">
                     {{ editCompanyData.Money }}
                 </el-form-item>
                 <el-form-item label="彩金:">
