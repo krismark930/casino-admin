@@ -103,37 +103,47 @@
             </el-table-column>
             <el-table-column label="功能">
                 <template #default="scope">
-                    <el-button link type="primary" size="small" @click="editCompany(scope.row)">
-                        修改
-                    </el-button>
-                    <br />
-                    <el-button link type="info" size="small" @click="detailCompany(scope.row)">
-                        详细设定
-                    </el-button>
-                    <br />
-                    <el-button link type="warning" size="small" v-if="scope.row.Status == 0"
-                        @click="handleEditType(scope.row.id, scope.row.UserName, 'disable')">
-                        停用
-                    </el-button>
-                    <el-button link type="warning" size="small" v-else
-                        @click="handleEditType(scope.row.id, scope.row.UserName, 'enable')">
-                        启用
-                    </el-button>
-                    <br />
-                    <el-button link type="success" size="small" :disabled="scope.row.Status == 1 || scope.row.Status == 2"
-                        @click="handleEditType(scope.row.id, scope.row.UserName, 'suspend')">
-                        冻结
-                    </el-button>
-                    <br />
-                    <el-button link type="danger" size="small"
-                        @click="handleEditType(scope.row.id, scope.row.UserName, 'logout')">踢线</el-button>
-                    <br />
-                    <el-button link type="primary" size="small"
-                        @click="handleTransferAgency(scope.row.UserName)">转移</el-button>
-                    <br />
-                    <el-button link type="danger" size="small" @click="goCountUserPage(scope.row.UserName)">统计</el-button>
-                    <br />
-                    <el-button link type="danger" size="small" @click="goRecordIPPage(scope.row.UserName)">日志</el-button>
+                    <el-row>
+                        <el-col :span="24">
+                            <el-button link type="primary" size="small" @click="editCompany(scope.row)">
+                                修改
+                            </el-button>
+                            <el-button link type="info" size="small" @click="detailCompany(scope.row)">
+                                详细设定
+                            </el-button>
+                            <el-button link type="warning" size="small" v-if="scope.row.Status == 0"
+                                @click="handleEditType(scope.row.id, scope.row.UserName, 'disable')">
+                                停用
+                            </el-button>
+                            <el-button link type="warning" size="small" v-else
+                                @click="handleEditType(scope.row.id, scope.row.UserName, 'enable')">
+                                启用
+                            </el-button>
+                            <el-button link type="success" size="small"
+                                :disabled="scope.row.Status == 1 || scope.row.Status == 2"
+                                @click="handleEditType(scope.row.id, scope.row.UserName, 'suspend')">
+                                冻结
+                            </el-button>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="24">
+                            <el-button link type="danger" size="small"
+                                @click="handleEditType(scope.row.id, scope.row.UserName, 'logout')">
+                                踢线
+                            </el-button>
+                            <el-button link type="primary" size="small" @click="handleTransferAgency(scope.row.UserName)">
+                                转移
+                            </el-button>
+                            <el-button link type="danger" size="small" @click="goCountUserPage(scope.row.UserName)">
+                                统计
+                            </el-button>
+                            <el-button link type="danger" size="small" @click="goRecordIPPage(scope.row.UserName)">
+                                日志
+                            </el-button>
+                            <el-button link @click="editDomainUrl(scope.row.id, scope.row.domain_url)">设置域名</el-button>
+                        </el-col>
+                    </el-row>
                 </template>
             </el-table-column>
         </el-table>
@@ -141,6 +151,15 @@
             <el-pagination background layout="prev, pager, next" :total="totalCount" @current-change="onPageChange"
                 :page-size="pageSize" v-model:current-page="formData.page_no" />
         </div>
+        <el-dialog v-model="domainUrlDialogVisible" title="设置域名">
+            <el-form-item label="域名：">
+                <el-input v-model="domainUrl"></el-input>
+            </el-form-item>
+            <el-footer style="text-align: right">
+                <el-button type="primary" @click="updateDomainUrl">确定</el-button>
+                <el-button type="danger" @click="domainUrlDialogVisible = false">取消</el-button>
+            </el-footer>
+        </el-dialog>
         <el-dialog v-model="editTransferAgency" title="--会员转移设置--">
             <el-form-item label="会员名字：">
                 {{ transferAgencyItem.UserName }}
@@ -794,7 +813,7 @@ import 'element-plus/theme-chalk/display.css'
 import { companyStore } from "@/pinia/modules/company";
 import { statisticsStore } from "@/pinia/modules/statistics";
 import { systemStore } from "@/pinia/modules/system";
-import {BASE_URL} from "@/config";
+import { BASE_URL } from "@/config";
 import socket from "@/utils/socket";
 const { dispatchCompanyData } = companyStore();
 const { dispatchAddCompanyData } = companyStore();
@@ -804,6 +823,7 @@ const { dispatchUpdateMoneyAgency } = companyStore();
 const { dispatchUpdateAgency } = companyStore();
 const { dispatchUserBankAccount } = companyStore();
 const { dispatchUpdateUserBank } = companyStore();
+const { dispatchUpdateDomainUrl } = companyStore();
 const { dispatchUpdateRealPersonData } = statisticsStore();
 const { dispatchUpdateSysconfigData } = statisticsStore();
 const { dispatchSystemData } = systemStore();
@@ -835,6 +855,9 @@ const editMoneyDialogVisible = ref(false);
 const editTransferAgency = ref(false);
 const realPersonDialogVisible = ref(false);
 const searchDialogVisible = ref(false);
+const domainUrlDialogVisible = ref(false);
+const domainUrl = ref("");
+const selectedUserID = ref(0);
 const selectedUser = ref({});
 const AG_TypeOptions = ref([
     {
@@ -1267,6 +1290,31 @@ const editMoneyAgencyData = ref({
     Alias: "",
     admin: ""
 })
+const editDomainUrl = (id, domain_url) => {
+    domainUrlDialogVisible.value = true;
+    selectedUserID.value = id;
+    domainUrl.value = domain_url;
+}
+const updateDomainUrl = async () => {
+    await dispatchUpdateDomainUrl({
+        id: selectedUserID.value,
+        domain_url: domainUrl.value,
+    })
+    domainUrlDialogVisible.value = false;
+    if (success.value) {
+        ElNotification({
+            title: "成功",
+            message: "操作成功。",
+            type: "success",
+        });
+    } else {
+        ElNotification({
+            title: "错误",
+            message: errMessage.value,
+            type: "error",
+        });
+    }
+}
 const goCountUserPage = (userName) => {
     window.open(BASE_URL + "/#/agents/count-user?userName=" + userName, '_blank');
     // router.push({ name: "agents.count_user", query: { userName: userName } });

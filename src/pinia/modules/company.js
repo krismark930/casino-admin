@@ -10,6 +10,7 @@ import { UPDATE_MEMBER } from "@/api";
 import { UPDATE_AGENCY } from "@/api";
 import { USER_BANK_ACCOUNT } from "@/api";
 import { USER_BANK_UPDATE } from "@/api";
+import { UPDATE_DOMAIN_URL } from "@/api";
 
 export const companyStore = defineStore('company', {
     state: () => ({
@@ -190,6 +191,17 @@ export const companyStore = defineStore('company', {
             try {
                 this.setSuccess(false);
                 let response = await request({ url: USER_BANK_UPDATE, method: 'POST', data })
+                if (response.status === 200) {
+                    this.setSuccess(true);
+                }
+            } catch (e) {
+                this.setErrorMsg(e.response.data.message);
+            }
+        },
+        async dispatchUpdateDomainUrl(data) {
+            try {
+                this.setSuccess(false);
+                let response = await request({ url: UPDATE_DOMAIN_URL, method: 'POST', data })
                 if (response.status === 200) {
                     this.setSuccess(true);
                 }
